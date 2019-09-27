@@ -1,6 +1,3 @@
-[submodule "Assets/3D"]
-	path = Assets/3D
-	url = https://gitlab.com/alessandro.pantano/groupname_mobileproject_3d.git
 [submodule "Assets/2D"]
 	path = Assets/2D
 	url = https://gitlab.com/alessandro.pantano/groupname_mobileproject_2d.git
