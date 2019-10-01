@@ -2,13 +2,13 @@
 
 public class TouchManager : MonoBehaviour
 {
-    private bool m_isHolding;
+	#region Variables
+
+	private bool m_isHolding;
 
 	private Block m_holdBlock;
 
 	private Vector3 m_holdOffset;
-
-	private float m_lastTapTime;
 
 	[SerializeField]
 	private Camera m_gameCamera = null;
@@ -18,6 +18,10 @@ public class TouchManager : MonoBehaviour
 
 	[SerializeField]
 	private float m_gameZ = 0f;
+
+	#endregion
+
+	#region Core loop
 
 	private void Start()
 	{
@@ -36,8 +40,7 @@ public class TouchManager : MonoBehaviour
 				Block testBlock = testHit.collider.gameObject.GetComponent<Block>();
 				if (testBlock)
 				{
-					m_holdBlock = testBlock;
-					StartDrag();
+					StartDrag(testBlock);
 				}
 				else
 				{
@@ -57,16 +60,28 @@ public class TouchManager : MonoBehaviour
 		}
 	}
 
+	#endregion
+
+	#region Dragging
+
 	private void Tap()
 	{
 
 	}
 
-	private void StartDrag()
+	private void StartDrag(Block holdBlock)
 	{
+		// Holding state
 		m_isHolding = true;
-		m_lastTapTime = Time.time;
+		m_holdBlock = holdBlock;
 
+		// Disable rigidbody
+		m_holdBlock.SetPhysicsActive(false);
+
+		// Reset rotation
+		m_holdBlock.transform.rotation = Quaternion.identity;
+
+		// Save grab point offset
 		Vector3 dragPosition = m_gameCamera.ScreenToWorldPoint(Input.mousePosition);
 		dragPosition.z = m_holdBlock.transform.position.z;
 		m_holdOffset = dragPosition - m_holdBlock.transform.position;
@@ -74,6 +89,7 @@ public class TouchManager : MonoBehaviour
 
 	private void Move()
 	{
+		// Follow touch position maintaining grab point offset
 		Vector3 dragPosition = m_gameCamera.ScreenToWorldPoint(Input.mousePosition);
 		dragPosition.z = m_dragZ;
 		m_holdBlock.transform.position = dragPosition - m_holdOffset;
@@ -81,11 +97,20 @@ public class TouchManager : MonoBehaviour
 
 	private void Release()
 	{
+		// Snap to grid based on block size
 		Vector3 releasePosition = m_holdBlock.transform.position;
 		releasePosition.z = m_gameZ;
+		float halfXSize = m_holdBlock.Size / 2f;
+		releasePosition.x = Mathf.Round(releasePosition.x - halfXSize) + halfXSize;
 		m_holdBlock.transform.position = releasePosition;
 
+		// Enable rigidbody
+		m_holdBlock.SetPhysicsActive(true);
+
+		// Free state
 		m_holdBlock = null;
 		m_isHolding = false;
 	}
+
+	#endregion
 }
