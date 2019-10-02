@@ -169,14 +169,15 @@ public class TouchManager : MonoBehaviour
 		releasePosition.x = Mathf.Round(releasePosition.x - halfXSize) + halfXSize;
 		m_holdBlock.transform.position = releasePosition;
 
+		// Check out of grid
 		if (releasePosition.x - halfXSize < -4f || releasePosition.x + halfXSize > 4f)
 		{
 			ResetBlock(m_holdBlock);
 		}
+		// Check collisions
 		else
 		{
-			Collider[] testHits = Physics.OverlapBox(m_holdBlock.transform.position, new Vector3(m_holdBlock.Size, 1f, 3f) / 2f);
-			//RaycastHit[] testHits = Physics.RaycastAll(m_gameCamera.ScreenPointToRay(Input.mousePosition));
+			Collider[] testHits = Physics.OverlapBox(m_holdBlock.transform.position, new Vector3(m_holdBlock.Size * 0.95f, 1f, 3f) / 2f);
 			if (testHits.Length > 0)
 			{
 				for (int i = 0; i < testHits.Length; i++)
