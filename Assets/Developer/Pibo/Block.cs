@@ -4,10 +4,14 @@ public class Block : MonoBehaviour
 {
 	#region Variables
 
+	//@TEMP
+	[SerializeField]
+	private TouchManager m_touchManager = null;
+
 	[SerializeField]
 	private Rigidbody m_rigidbody = null;
 
-	private readonly RigidbodyConstraints m_moveConstraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+	private readonly RigidbodyConstraints m_moveConstraints = RigidbodyConstraints.FreezeAll;
 
 	private readonly RigidbodyConstraints m_dropConstraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
 
@@ -17,11 +21,37 @@ public class Block : MonoBehaviour
 
 	#region Core loop
 
+	private void OnEnable()
+	{
+		m_touchManager.AddBlock(this);
+		m_touchManager.OnGrab += SetPhysicsInactive;
+	}
+
 	private void Start()
 	{
-		if (m_rigidbody)
+#if UNITY_EDITOR
+		NullChecks();
+#endif
+	}
+
+	private void OnDisable()
+	{
+		m_touchManager.RemoveBlock(this);
+		m_touchManager.OnGrab -= SetPhysicsInactive;
+	}
+
+	/// <summary>
+	/// Editor only
+	/// </summary>
+	private void NullChecks()
+	{
+		if (!m_rigidbody)
 		{
-			Debug.LogError(name + " has no rigidbody reference!"); 
+			Debug.LogError(name + " has no rigidbody reference!", this);
+		}
+		if (!m_touchManager)
+		{
+			Debug.LogError(name + " has no touch manager reference!", this);
 		}
 	}
 
@@ -29,10 +59,10 @@ public class Block : MonoBehaviour
 
 	#region Physics
 
-	public void SetPhysicsActive(bool bActive)
+	public void SetPhysicsInactive(bool bInactive)
 	{
-		m_rigidbody.useGravity = bActive;
-		m_rigidbody.constraints = bActive ? m_dropConstraints : m_moveConstraints;
+		m_rigidbody.useGravity = !bInactive;
+		m_rigidbody.constraints = !bInactive ? m_dropConstraints : m_moveConstraints;
 	}
 
 	#endregion
