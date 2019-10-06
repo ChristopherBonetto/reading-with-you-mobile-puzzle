@@ -3,7 +3,10 @@ using UnityEngine;
 
 public class UIManager : SingletonBehaviour<UIManager>
 {
-    private Dictionary<string, UIControl> m_controls = new Dictionary<string, UIControl>();
+    /// <summary>
+    /// All controls stored.
+    /// </summary>
+    public Dictionary<string, UIControl> Controls = new Dictionary<string, UIControl>();
 
     /// <summary>
     /// Register a ui control
@@ -11,10 +14,10 @@ public class UIManager : SingletonBehaviour<UIManager>
     /// <param name="uiControl"></param>
     public void Register(UIControl uiControl)
     {
-        if (uiControl != null && !m_controls.ContainsKey(uiControl.Name))
+        if (uiControl != null && !Controls.ContainsKey(uiControl.Name))
         {
             Debug.Log("Register: " + uiControl.Name);
-            m_controls.Add(uiControl.Name, uiControl);
+            Controls.Add(uiControl.Name, uiControl);
         }
     }
 
@@ -24,9 +27,9 @@ public class UIManager : SingletonBehaviour<UIManager>
     /// <param name="uiControl"></param>
     public void Unregister(UIControl uiControl)
     {
-        if (uiControl != null && !m_controls.ContainsKey(uiControl.Name))
+        if (uiControl != null && !Controls.ContainsKey(uiControl.Name))
         {
-            m_controls.Remove(uiControl.Name);
+            Controls.Remove(uiControl.Name);
         }
     }
 
@@ -36,7 +39,7 @@ public class UIManager : SingletonBehaviour<UIManager>
     /// <param name="uiControlName"></param>
     public void Show(string uiControlName)
     {
-        if (m_controls.TryGetValue(uiControlName, out UIControl control))
+        if (Controls.TryGetValue(uiControlName, out UIControl control))
         {
             control.OnShow();
         }
@@ -48,7 +51,7 @@ public class UIManager : SingletonBehaviour<UIManager>
     /// <param name="uiControlName"></param>
     public void Hide(string uiControlName)
     {
-        if (m_controls.TryGetValue(uiControlName, out UIControl control))
+        if (Controls.TryGetValue(uiControlName, out UIControl control))
         {
             control.OnHide();
         }
@@ -67,7 +70,7 @@ public class UIManager : SingletonBehaviour<UIManager>
             return;
         }
 
-        if (m_controls.TryGetValue(uiControlName, out UIControl control))
+        if (Controls.TryGetValue(uiControlName, out UIControl control))
         {
             if (!control.gameObject.activeSelf) control.OnShow();
             if (cToHide.gameObject.activeSelf) cToHide.OnHide();
