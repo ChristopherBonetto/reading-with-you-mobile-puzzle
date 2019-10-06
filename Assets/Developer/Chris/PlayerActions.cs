@@ -25,25 +25,35 @@ public class PlayerActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (CheckFrontPlayer() && CheckGroundPLayer())
+        if (!m_isOnTheBack)
         {
-            MovePlayer();
+            if (CheckFrontPlayer() && CheckGroundPLayer())
+            {
+                MovementForwards();
+            }
         }
+        else
+        {
+            if (CheckWallWhenSlip() && CheckGroundWhenSlips())
+            {
+                Slips();
+            }
+        }
+        
         Debug.Log("is climbing :" + m_isClimbing);
         Debug.Log("is on the back :" + m_isClimbing);
     }
     
-    public void MovePlayer()
+    public void MovementForwards()
     {
-        if (!m_isOnTheBack)
-        {
-            direction = transform.right;
-        }
-        else
-        {
-            direction = -transform.up;
-        }
+        direction = transform.right;        
+        m_movement = m_playerSpeed * direction * Time.deltaTime;
+        transform.position = gameObject.transform.position + m_movement;
+    }
+
+    public void Slips()
+    {
+        direction = -transform.up;
         m_movement = m_playerSpeed * direction * Time.deltaTime;
         transform.position = gameObject.transform.position + m_movement;
     }
@@ -101,7 +111,7 @@ public class PlayerActions : MonoBehaviour
                 {
                     m_isClimbing = true;
                     m_isOnTheBack = true;
-                    transform.position = new Vector3(hit.point.x - 0.1f, hit.point.y + 1f, hit.point.z);
+                    transform.position = new Vector3(hit.point.x, hit.point.y + 0.9f, hit.point.z);
                     transform.right = hit.normal;
                     return true;
                 }
@@ -109,7 +119,48 @@ public class PlayerActions : MonoBehaviour
         }
         
         return false;
+    }
 
+    public bool CheckWallWhenSlip()
+    {
+        RaycastHit hit;
+        m_playerFeet = transform.position + new Vector3(0f, -0.8f, 0f);
+
+        if (Physics.Raycast(m_playerFeet, Vector3.left, out hit, m_raycastFrontDistance, m_obstacleLayer))
+        {
+            Debug.Log("wall" + hit.transform.name);
+            return true;
+        }
+        return false;
+    }
+
+    public bool CheckGroundWhenSlips()
+    {
+        RaycastHit hit;
+        Vector3 blockNormal;
+
+        if (!Physics.Raycast(gameObject.transform.position, -transform.up, out hit, m_raycastDownDistance, m_obstacleLayer))
+        {
+            return true;
+        }
+        else
+        {
+            if (Vector3.Distance(gameObject.transform.position, hit.point) <= 1.3f)
+            {
+                float dot = Vector3.Dot(Vector3.down, hit.normal);
+                blockNormal = hit.normal;
+
+                if (m_isClimbing && dot == -1)
+                {
+                    transform.position = new Vector3(hit.point.x - 0.5f, hit.point.y + 1f, hit.point.z);
+                    transform.rotation = Quaternion.FromToRotation(Vector3.up, blockNormal);
+                    m_isOnTheBack = false;
+                    m_isClimbing = false;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 
