@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class takes care of panels for UI.
+/// </summary>
 public abstract class UIControl : MonoBehaviour
 {
     public abstract string Name { get; }
 
+
+    #region Monobehaviour
     protected virtual void Awake()
     {
         UIManager.Instance.Register(this);
@@ -20,7 +25,9 @@ public abstract class UIControl : MonoBehaviour
     {
         UIManager.Instance.Unregister(this);
     }
+    #endregion
 
+    #region Control method
     public virtual void OnShow()
     {
         this.gameObject.SetActive(true);
@@ -30,4 +37,5 @@ public abstract class UIControl : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
+    #endregion
 }
