@@ -16,8 +16,7 @@ public class Block : MonoBehaviour
 	private readonly RigidbodyConstraints m_dropConstraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
 
 	public float Size = 1f;
-
-    private float m_startinZRotation;
+    
 	#endregion
 
 	#region Core loop
@@ -32,17 +31,17 @@ public class Block : MonoBehaviour
 	{
 #if UNITY_EDITOR
 		NullChecks();
-        m_startinZRotation = gameObject.transform.localEulerAngles.z;
+        
 #endif
 	}
     private void Update()
     {
-        
-        if(gameObject.transform.localEulerAngles.z > m_startinZRotation + 30 || gameObject.transform.localEulerAngles.z < m_startinZRotation - 30)
-        {
-            transform.rotation = Quaternion.FromToRotation(Vector3.up, Vector3.zero);
-            TouchManager.Instance.ResetBlock(this);
-        }
+
+        //if (gameObject.transform.localEulerAngles.z > + 30 || gameObject.transform.localEulerAngles.z < - 30)
+        //{
+        //    transform.rotation = Quaternion.FromToRotation(Vector3.up, Vector3.zero);
+        //    TouchManager.Instance.ResetBlock(this);
+        //}
     }
 
     private void OnDisable()
