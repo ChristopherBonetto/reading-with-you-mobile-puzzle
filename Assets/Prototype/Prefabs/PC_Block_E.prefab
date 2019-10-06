@@ -10,8 +10,18 @@ PrefabInstance:
     - target: {fileID: 632242626708085552, guid: 87815dea77ad1984b998f2903b526410,
         type: 3}
       propertyPath: m_Name
-      value: PC_Block_Cube
+      value: PC_Block_E
       objectReference: {fileID: 0}
+    - target: {fileID: 632242626708085552, guid: 87815dea77ad1984b998f2903b526410,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1178640046635723021, guid: 87815dea77ad1984b998f2903b526410,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a811f721087a1245bb406998017de9e, type: 2}
     - target: {fileID: 632242626708085559, guid: 87815dea77ad1984b998f2903b526410,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -73,11 +83,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -6749068419927212370, guid: 36d62b91ca85abf44948da6ed9472322,
         type: 3}
-    - target: {fileID: 1178640046635723021, guid: 87815dea77ad1984b998f2903b526410,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2a811f721087a1245bb406998017de9e, type: 2}
     - target: {fileID: 5683570918399480933, guid: 87815dea77ad1984b998f2903b526410,
         type: 3}
       propertyPath: m_Mesh
