@@ -17,6 +17,7 @@ public class Block : MonoBehaviour
 
 	public float Size = 1f;
 
+    private float m_startinZRotation;
 	#endregion
 
 	#region Core loop
@@ -31,10 +32,20 @@ public class Block : MonoBehaviour
 	{
 #if UNITY_EDITOR
 		NullChecks();
+        m_startinZRotation = gameObject.transform.localEulerAngles.z;
 #endif
 	}
+    private void Update()
+    {
+        
+        if(gameObject.transform.localEulerAngles.z > m_startinZRotation + 30 || gameObject.transform.localEulerAngles.z < m_startinZRotation - 30)
+        {
+            transform.rotation = Quaternion.FromToRotation(Vector3.up, Vector3.zero);
+            TouchManager.Instance.ResetBlock(this);
+        }
+    }
 
-	private void OnDisable()
+    private void OnDisable()
 	{
 		m_touchManager.RemoveBlock(this);
 		m_touchManager.OnGrab -= SetPhysicsInactive;

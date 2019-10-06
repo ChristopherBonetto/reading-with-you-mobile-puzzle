@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TouchManager : MonoBehaviour
 {
-	#region Variables
+    #region Variables
+
+    public static TouchManager Instance;
 
 	private bool m_isHolding;
 
@@ -28,11 +30,14 @@ public class TouchManager : MonoBehaviour
 
 	private List<Block> m_levelBlocks = new List<Block>();
 
-	#endregion
+    #endregion
 
-	#region Core loop
-
-	private void Start()
+    #region Core loop
+    private void Awake()
+    {
+        Instance = this;
+    }
+    private void Start()
 	{
 #if UNITY_EDITOR
 		NullChecks();
@@ -103,7 +108,7 @@ public class TouchManager : MonoBehaviour
 		m_levelBlocks.Remove(oldBlock);
 	}
 
-	private void ResetBlock(Block block)
+	public void ResetBlock(Block block)
 	{
 		block.transform.position = new Vector3(Mathf.Round(UnityEngine.Random.Range(-4.5f, 4.5f)), -1.5f, m_dragZ);
 		block.transform.localScale *= 0.8f;

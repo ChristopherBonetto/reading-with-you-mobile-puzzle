@@ -16,6 +16,15 @@ public class PlayerActions : MonoBehaviour
     private bool m_isOnTheBack = false;
     private bool m_isClimbing = false;
 
+    private bool m_CanMove = false;
+
+    
+
+
+    private void Awake()
+    {
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +33,24 @@ public class PlayerActions : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        if (m_CanMove)
+        {
+            MovementManagement();
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            SetCanMove(true);
+        }
+    }
+    
+    public void SetCanMove(bool newValue)
+    {
+        m_CanMove = newValue;
+    }
+
+    public void MovementManagement()
     {
         if (!m_isOnTheBack)
         {
@@ -39,11 +66,8 @@ public class PlayerActions : MonoBehaviour
                 Slips();
             }
         }
-        
-        Debug.Log("is climbing :" + m_isClimbing);
-        Debug.Log("is on the back :" + m_isClimbing);
     }
-    
+
     public void MovementForwards()
     {
         direction = transform.right;        
@@ -87,8 +111,10 @@ public class PlayerActions : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 blockNormal;
+        m_playerFeet = transform.position + new Vector3(0f, -0.8f, 0f);
 
-        if (Physics.Raycast(gameObject.transform.position, -transform.up, out hit, m_raycastDownDistance, m_obstacleLayer))
+        
+        if (Physics.Raycast(gameObject.transform.position, -transform.up, out hit, m_raycastDownDistance, m_obstacleLayer) || Physics.CheckSphere(m_playerFeet, 0.3f, m_obstacleLayer))
         {
             return true;
         }
@@ -169,5 +195,7 @@ public class PlayerActions : MonoBehaviour
         Debug.DrawRay(m_playerFeet, Vector3.right * m_raycastFrontDistance, Color.red);
 
         Debug.DrawRay(gameObject.transform.position, -transform.up * m_raycastDownDistance, Color.red);
+
+        Gizmos.DrawWireSphere(m_playerFeet, 0.5f);
     }
 }
