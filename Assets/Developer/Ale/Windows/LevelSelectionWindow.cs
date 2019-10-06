@@ -8,4 +8,8 @@ public class LevelSelectionWindow : UIControl
     public override string Name => "LevelSelection";
 
     // On load game scene disable this window.
+    public void OnLoadLevel()
+    {
+        UIManager.Instance.ShowAndHide("Fade", this);
+    }
 }
