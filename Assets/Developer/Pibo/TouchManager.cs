@@ -57,8 +57,9 @@ public class TouchManager : MonoBehaviour
 				{
 					StartDrag(testBlock);
 				}
-				else
+				else if(testHit.transform.GetComponent<PlayerActions>())
 				{
+                    testHit.transform.GetComponent<PlayerActions>().SetCanMove(true);
 					Tap();
 				}
 			}
