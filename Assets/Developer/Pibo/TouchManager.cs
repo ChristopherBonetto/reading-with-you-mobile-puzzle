@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TouchManager : MonoBehaviour
+public class TouchManager : SingletonBehaviour<TouchManager>
 {
     #region Variables
-
-    public static TouchManager Instance;
 
 	private bool m_isHolding;
 
@@ -22,35 +20,41 @@ public class TouchManager : MonoBehaviour
 
 	[SerializeField]
 	private float m_gameZ = 0f;
-
-
-    private bool m_canStartTheGame = false;
+	
 	/// <summary>
 	/// Event on grabbing (true) and releasing (false)
 	/// </summary>
 	public Action<bool> OnGrab;
 
+	/// <summary>
+	/// Event on hit unstable (true) and stable (false)
+	/// </summary>
+	public Action<bool> OnHit;
+
+	/// <summary>
+	/// Event on player movement start
+	/// </summary>
+	public Action OnMovement;
+
 	private List<Block> m_levelBlocks = new List<Block>();
 
-    
-    private List<Block> m_levelBlocksCopy;
+	private bool m_isMoving;
+
+	public int UnstableBlocks;
+
     #endregion
 
-
     #region Core loop
-    private void Awake()
-    {
-        Instance = this;
-    }
+
     private void Start()
 	{
 #if UNITY_EDITOR
 		NullChecks();
 #endif
         
-        m_levelBlocksCopy = new List<Block>(m_levelBlocks);
-
 		ResetAllBlocks();
+
+		m_isMoving = false;
 	}
 
 	void Update()
@@ -62,8 +66,6 @@ public class TouchManager : MonoBehaviour
 				Block testBlock = testHit.collider.gameObject.GetComponent<Block>();
 				if (testBlock)
 				{
-                    testBlock.SetBoolRightPosition(false);
-                    testBlock.GetComponent<Rigidbody>().isKinematic = false;
                     StartDrag(testBlock);
 				}
 				else
@@ -82,8 +84,6 @@ public class TouchManager : MonoBehaviour
 		{
 			Release();
 		}
-
-
 	}
 
 	/// <summary>
@@ -122,6 +122,7 @@ public class TouchManager : MonoBehaviour
 	public void ResetBlock(Block block)
 	{
 		block.transform.position = new Vector3(Mathf.Round(UnityEngine.Random.Range(-4.5f, 4.5f)), -1.5f, m_dragZ);
+		block.transform.rotation = Quaternion.identity;
 		block.transform.localScale *= 0.8f;
 		block.SetPhysicsInactive(true);
 		block.enabled = false;
@@ -142,37 +143,20 @@ public class TouchManager : MonoBehaviour
 
 	private void Tap(RaycastHit hitted)
 	{
-
         if(hitted.transform.GetComponent<PlayerActions>() || hitted.transform.GetComponent<FinalObjectActions>())
         {
-            m_canStartTheGame = CheckStartGame();
-
-            if (m_canStartTheGame)
+            if (CanStart())
             {
                 hitted.transform.GetComponent<PlayerActions>().SetCanMove(true);
+				m_isMoving = true;
             }
-            
         }
 	}
-    
-    public bool CheckStartGame()
-    {
-        int rightPositionedBlock = 0;
 
-        foreach(Block block in m_levelBlocksCopy)
-        {
-            if (block.m_isInTheRightPosition)
-            {
-                rightPositionedBlock++;
-                
-                if(rightPositionedBlock == m_levelBlocksCopy.Count)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+	private bool CanStart()
+	{
+		return (!m_isHolding && !m_isMoving && UnstableBlocks == 0);
+	}
 
 	private void StartDrag(Block holdBlock)
 	{
@@ -184,10 +168,6 @@ public class TouchManager : MonoBehaviour
 			m_holdBlock.transform.localScale *= 1.25f;
 			m_holdBlock.enabled = true;
 		}
-
-        
-
-
 
         // Disable all rigidbodies
         OnGrab?.Invoke(true);
@@ -242,14 +222,9 @@ public class TouchManager : MonoBehaviour
 
 		// Enable all rigidbodies
 		OnGrab?.Invoke(false);
+		OnHit?.Invoke(true);
 
         // Free state
-        //CHRIS
-        if (m_holdBlock.GetComponent<Rigidbody>().isKinematic)
-        {
-            m_holdBlock.GetComponent<Rigidbody>().isKinematic = false;
-        }
-        m_holdBlock.SetIsDropped(true);
 		m_holdBlock = null;
 		m_isHolding = false;
 	}
