@@ -17,6 +17,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 2905150840462939210, guid: 87815dea77ad1984b998f2903b526410,
+        type: 3}
+      propertyPath: GroundMask.m_Bits
+      value: 1536
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905150840462939210, guid: 87815dea77ad1984b998f2903b526410,
+        type: 3}
+      propertyPath: checkRotationTimer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1178640046635723021, guid: 87815dea77ad1984b998f2903b526410,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

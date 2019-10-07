@@ -210,7 +210,7 @@ Transform:
   m_LocalScale: {x: 4, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &539830255
 GameObject:
@@ -637,6 +637,7 @@ MonoBehaviour:
   m_touchManager: {fileID: 0}
   m_rigidbody: {fileID: 0}
   Size: 2
+  m_checkRotationTimer: 0
 --- !u!65 &848371906
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -989,7 +990,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-22402
+  m_Name: pb_Mesh27834
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1196,7 +1197,7 @@ PrefabInstance:
     - target: {fileID: 8415867389406793362, guid: b04a062de2455cc4f87a3d55f5c6cebf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8415867389406793362, guid: b04a062de2455cc4f87a3d55f5c6cebf,
         type: 3}
@@ -1366,6 +1367,16 @@ PrefabInstance:
       propertyPath: m_touchManager
       value: 
       objectReference: {fileID: 1752851855}
+    - target: {fileID: 8717158484001068390, guid: ed98c8a5fd3d17140aede19bc263a0a2,
+        type: 3}
+      propertyPath: checkRotationTimer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8717158484001068390, guid: ed98c8a5fd3d17140aede19bc263a0a2,
+        type: 3}
+      propertyPath: m_checkRotationTimer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8717158484001068415, guid: ed98c8a5fd3d17140aede19bc263a0a2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ed98c8a5fd3d17140aede19bc263a0a2, type: 3}

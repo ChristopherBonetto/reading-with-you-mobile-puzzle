@@ -96,6 +96,8 @@ MonoBehaviour:
   m_touchManager: {fileID: 0}
   m_rigidbody: {fileID: 8048591572183019471}
   Size: 1
+  isDropped: 0
+  checkRotationTimer: 2
 --- !u!54 &8048591572183019471
 Rigidbody:
   m_ObjectHideFlags: 0

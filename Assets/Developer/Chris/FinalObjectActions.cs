@@ -11,7 +11,7 @@ public class FinalObjectActions : MonoBehaviour
     void Start()
     {
         m_IndexScene = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log(m_IndexScene);
+
     }
 
     private void OnTriggerEnter(Collider other)

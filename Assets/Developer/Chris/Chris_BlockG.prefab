@@ -428,3 +428,7 @@ MonoBehaviour:
   m_touchManager: {fileID: 0}
   m_rigidbody: {fileID: 8717158484001068412}
   Size: 1
+  isDropped: 0
+  GroundMask:
+    serializedVersion: 2
+    m_Bits: 1536

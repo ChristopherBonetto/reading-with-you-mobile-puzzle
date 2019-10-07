@@ -993,6 +993,7 @@ MonoBehaviour:
   m_touchManager: {fileID: 0}
   m_rigidbody: {fileID: 0}
   Size: 2
+  m_checkRotationTimer: 0
 --- !u!65 &848371906
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1525,6 +1526,7 @@ MonoBehaviour:
   m_touchManager: {fileID: 1752851855}
   m_rigidbody: {fileID: 1676807605}
   Size: 1
+  m_checkRotationTimer: 2
 --- !u!54 &1676807605
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1613,6 +1615,11 @@ PrefabInstance:
       propertyPath: m_touchManager
       value: 
       objectReference: {fileID: 1752851855}
+    - target: {fileID: 1725501755881567582, guid: 0db00f67764e22b49bcee3c702cbd8ea,
+        type: 3}
+      propertyPath: m_checkRotationTimer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0db00f67764e22b49bcee3c702cbd8ea, type: 3}
 --- !u!1 &1747863808
@@ -1796,6 +1803,7 @@ MonoBehaviour:
   m_touchManager: {fileID: 1752851855}
   m_rigidbody: {fileID: 2109772694}
   Size: 2
+  m_checkRotationTimer: 2
 --- !u!65 &2109772696
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -23,6 +23,8 @@ public class TouchManager : MonoBehaviour
 	[SerializeField]
 	private float m_gameZ = 0f;
 
+
+    private bool m_canStartTheGame = false;
 	/// <summary>
 	/// Event on grabbing (true) and releasing (false)
 	/// </summary>
@@ -30,7 +32,10 @@ public class TouchManager : MonoBehaviour
 
 	private List<Block> m_levelBlocks = new List<Block>();
 
+    
+    private List<Block> m_levelBlocksCopy;
     #endregion
+
 
     #region Core loop
     private void Awake()
@@ -42,6 +47,8 @@ public class TouchManager : MonoBehaviour
 #if UNITY_EDITOR
 		NullChecks();
 #endif
+        
+        m_levelBlocksCopy = new List<Block>(m_levelBlocks);
 
 		ResetAllBlocks();
 	}
@@ -55,12 +62,13 @@ public class TouchManager : MonoBehaviour
 				Block testBlock = testHit.collider.gameObject.GetComponent<Block>();
 				if (testBlock)
 				{
-					StartDrag(testBlock);
+                    testBlock.SetBoolRightPosition(false);
+                    testBlock.GetComponent<Rigidbody>().isKinematic = false;
+                    StartDrag(testBlock);
 				}
-				else if(testHit.transform.GetComponent<PlayerActions>())
+				else
 				{
-                    testHit.transform.GetComponent<PlayerActions>().SetCanMove(true);
-					Tap();
+					Tap(testHit);
 				}
 			}
 		}
@@ -74,6 +82,8 @@ public class TouchManager : MonoBehaviour
 		{
 			Release();
 		}
+
+
 	}
 
 	/// <summary>
@@ -130,10 +140,39 @@ public class TouchManager : MonoBehaviour
 
 	#region Dragging
 
-	private void Tap()
+	private void Tap(RaycastHit hitted)
 	{
 
+        if(hitted.transform.GetComponent<PlayerActions>() || hitted.transform.GetComponent<FinalObjectActions>())
+        {
+            m_canStartTheGame = CheckStartGame();
+
+            if (m_canStartTheGame)
+            {
+                hitted.transform.GetComponent<PlayerActions>().SetCanMove(true);
+            }
+            
+        }
 	}
+    
+    public bool CheckStartGame()
+    {
+        int rightPositionedBlock = 0;
+
+        foreach(Block block in m_levelBlocksCopy)
+        {
+            if (block.m_isInTheRightPosition)
+            {
+                rightPositionedBlock++;
+                
+                if(rightPositionedBlock == m_levelBlocksCopy.Count)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 	private void StartDrag(Block holdBlock)
 	{
@@ -146,8 +185,12 @@ public class TouchManager : MonoBehaviour
 			m_holdBlock.enabled = true;
 		}
 
-		// Disable all rigidbodies
-		OnGrab?.Invoke(true);
+        
+
+
+
+        // Disable all rigidbodies
+        OnGrab?.Invoke(true);
 
 		// Reset rotation
 		m_holdBlock.transform.rotation = Quaternion.identity;
@@ -200,7 +243,13 @@ public class TouchManager : MonoBehaviour
 		// Enable all rigidbodies
 		OnGrab?.Invoke(false);
 
-		// Free state
+        // Free state
+        //CHRIS
+        if (m_holdBlock.GetComponent<Rigidbody>().isKinematic)
+        {
+            m_holdBlock.GetComponent<Rigidbody>().isKinematic = false;
+        }
+        m_holdBlock.SetIsDropped(true);
 		m_holdBlock = null;
 		m_isHolding = false;
 	}

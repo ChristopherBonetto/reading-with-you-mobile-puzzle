@@ -16,6 +16,14 @@ public class Block : MonoBehaviour
 	private readonly RigidbodyConstraints m_dropConstraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
 
 	public float Size = 1f;
+
+    private bool m_isDropped = false;
+    private bool m_hasCollided = false;
+    [SerializeField] private float m_checkRotationTimer;
+    private float m_timer = 0;
+    private Quaternion m_startingRotation;
+
+    public bool m_isInTheRightPosition { get; private set; } = false;
     
 	#endregion
 
@@ -31,17 +39,48 @@ public class Block : MonoBehaviour
 	{
 #if UNITY_EDITOR
 		NullChecks();
-        
+        m_startingRotation = gameObject.transform.rotation;
 #endif
 	}
     private void Update()
     {
+        CheckRotation();
 
-        //if (gameObject.transform.localEulerAngles.z > + 30 || gameObject.transform.localEulerAngles.z < - 30)
-        //{
-        //    transform.rotation = Quaternion.FromToRotation(Vector3.up, Vector3.zero);
-        //    TouchManager.Instance.ResetBlock(this);
-        //}
+    }
+
+    public void CheckRotation()
+    {
+        if (!m_hasCollided) return;
+
+        m_timer += Time.deltaTime;
+        if (m_timer > m_checkRotationTimer)
+        {
+            if (gameObject.transform.rotation != m_startingRotation)
+            {
+                gameObject.transform.rotation = m_startingRotation;
+                TouchManager.Instance.ResetBlock(this);
+                m_timer = 0;
+                m_hasCollided = false;
+            }
+            else
+            {
+                m_rigidbody.isKinematic = true;
+                m_timer = 0;
+                m_isInTheRightPosition = true;
+                m_hasCollided = false;
+
+            }
+        }
+    }
+
+    public void SetBoolRightPosition(bool newValue)
+    {
+        m_isInTheRightPosition = newValue;
+    }
+
+    public void SetIsDropped(bool newValue)
+    {
+        m_isDropped = newValue;
     }
 
     private void OnDisable()
@@ -75,5 +114,13 @@ public class Block : MonoBehaviour
 		m_rigidbody.constraints = !bInactive ? m_dropConstraints : m_moveConstraints;
 	}
 
-	#endregion
+    #endregion
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!m_isDropped) return;
+
+        m_hasCollided = true;
+        m_isDropped = false;
+    }
 }
