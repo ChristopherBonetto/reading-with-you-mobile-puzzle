@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public abstract class UIControl : MonoBehaviour
 {
-    public abstract string Name { get; }
+    public abstract UIControlName Name { get; }
 
 
     #region Monobehaviour

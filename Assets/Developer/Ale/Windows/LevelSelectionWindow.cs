@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class LevelSelectionWindow : UIControl
 {
     // it is equal to write: string Name { get { return "..." } }
-    public override string Name => "LevelSelection";
+    public override UIControlName Name => UIControlName.LevelSelection;
 
     // Scriptable
     public World[] Worlds;
@@ -34,7 +34,7 @@ public class LevelSelectionWindow : UIControl
     // On load game scene disable this window.
     public void OnLoadLevel()
     {
-        UIManager.Instance.ShowAndHide("Fade", this);
+        UIManager.Instance.ShowAndHide(UIControlName.Fade, this);
     }
 
     #region Switch level (OnClick)

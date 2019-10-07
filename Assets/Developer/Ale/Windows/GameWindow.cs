@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class GameWindow : UIControl
 {
-    public override string Name => "Game";
+    public override UIControlName Name => UIControlName.InGame;
 }

@@ -1,12 +1,23 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+// All names of ui controls
+public enum UIControlName
+{
+    MainMenu,
+    MainElements,
+    CreditsElements,
+    LevelSelection,
+    InGame,
+    Fade,
+}
+
 public class UIManager : SingletonBehaviour<UIManager>
 {
     /// <summary>
     /// All controls stored.
     /// </summary>
-    public Dictionary<string, UIControl> Controls = new Dictionary<string, UIControl>();
+    public Dictionary<UIControlName, UIControl> Controls = new Dictionary<UIControlName, UIControl>();
 
     /// <summary>
     /// Register a ui control
@@ -37,7 +48,7 @@ public class UIManager : SingletonBehaviour<UIManager>
     /// Show a ui control
     /// </summary>
     /// <param name="uiControlName"></param>
-    public void Show(string uiControlName)
+    public void Show(UIControlName uiControlName)
     {
         if (Controls.TryGetValue(uiControlName, out UIControl control))
         {
@@ -49,7 +60,7 @@ public class UIManager : SingletonBehaviour<UIManager>
     /// Hide a ui control
     /// </summary>
     /// <param name="uiControlName"></param>
-    public void Hide(string uiControlName)
+    public void Hide(UIControlName uiControlName)
     {
         if (Controls.TryGetValue(uiControlName, out UIControl control))
         {
@@ -63,7 +74,7 @@ public class UIManager : SingletonBehaviour<UIManager>
     /// </summary>
     /// <param name="uiControlName"></param>
     /// <param name="cToHide"></param>
-    public void ShowAndHide(string uiControlName, UIControl cToHide)
+    public void ShowAndHide(UIControlName uiControlName, UIControl cToHide)
     {
         if (uiControlName == cToHide.Name)
         {

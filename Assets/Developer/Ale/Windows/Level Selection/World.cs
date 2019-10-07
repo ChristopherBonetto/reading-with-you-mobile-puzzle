@@ -6,7 +6,7 @@ public class Level
 {
     public Sprite Icon;
 
-    private LevelSelectionWindow m_levelSelection => UIManager.Instance.Controls["LevelSelection"] as LevelSelectionWindow;
+    private LevelSelectionWindow m_levelSelection => UIManager.Instance.Controls[UIControlName.LevelSelection] as LevelSelectionWindow;
 
     public int Index { get; set; }
 }
