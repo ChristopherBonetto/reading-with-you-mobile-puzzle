@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum PlayerStates
+{
+    Idle,
+    Forwards,
+    Climb,
+    Slide,
+    Finish
+}
+
 public class PlayerActions : MonoBehaviour
 {
     [SerializeField] private float m_raycastFrontDistance;
@@ -20,6 +29,7 @@ public class PlayerActions : MonoBehaviour
 
     private float m_xPlayerPosition;
 
+    private PlayerStates m_currentMovementType;
 
     private void Awake()
     {
@@ -28,52 +38,79 @@ public class PlayerActions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_currentMovementType = PlayerStates.Idle;
         m_xPlayerPosition = gameObject.transform.position.x;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_CanMove)
-        {
-            MovementManagement();
-        }
+        MovementManagement();
+        
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            SetCanMove(true);
+            SetNewPlayerState(PlayerStates.Forwards);
         }
-        
+        Debug.Log(m_currentMovementType);
     }
     
-    public void SetCanMove(bool newValue)
+    public void SetNewPlayerState(PlayerStates newPlayerState)
     {
-        m_CanMove = newValue;
+        m_currentMovementType = newPlayerState;
     }
 
     public void MovementManagement()
     {
-        if (CheckNextCell())
+        switch (m_currentMovementType)
         {
-            if (!m_isOnTheBack)
-            {
-                if ((CheckFrontPlayer() && CheckGroundPLayer()))
+            case PlayerStates.Idle:
+                break;
+            case PlayerStates.Forwards:
+                if (CheckNextCell())
                 {
-                    MovementForwards();
+                    if ((CheckFrontPlayer(Vector3.right) && CheckGroundPLayer()))
+                    {
+                        PlayerMovements(m_currentMovementType);
+                    }
                 }
-                else
+                break;
+            case PlayerStates.Climb:
+                if (CheckNextCell())
                 {
-                    Debug.Log("lose");
+                    if (CheckFrontPlayer(Vector3.right))
+                    {
+                        PlayerMovements(m_currentMovementType);
+                    }
+                    else
+                    {
+                        SetNewPlayerState(PlayerStates.Forwards);
+                    }
                 }
-            }
+                break;
+            case PlayerStates.Slide:
+                break;
+
+            case PlayerStates.Finish:
+                break;
         }
-        else
-        {
-            if (CheckWallWhenSlip() && CheckGroundWhenSlips())
-            {
-                Slips();
-            }
-        }
+
+        //if (CheckNextCell())
+        //{
+        //    if (m_currentMovementType != MovementType.Slide)
+        //    {
+        //        if ((CheckFrontPlayer() && CheckGroundPLayer()))
+        //        {
+        //            PlayerMovements(m_currentMovementType);
+        //        }
+        //    }
+        //}
+
+        //if (CheckWallWhenSlip() && CheckGroundWhenSlips())
+        //{
+        //    Slips();
+        //}
+
     }
 
     public void EnableCollider(bool bEnable)
@@ -84,7 +121,7 @@ public class PlayerActions : MonoBehaviour
 
     private bool CheckNextCell()
     {
-        if (gameObject.transform.position.x <= m_xPlayerPosition + 0.75)
+        if (gameObject.transform.position.x <= m_xPlayerPosition + 0.75f)
         {
             return true;
         }
@@ -92,44 +129,61 @@ public class PlayerActions : MonoBehaviour
         return false;
     }
 
-    public void MovementForwards()
+    public void PlayerMovements(PlayerStates InMovementType)
     {
-        direction = transform.right;        
+        switch (InMovementType)
+        {
+            case PlayerStates.Forwards:
+                direction = Vector3.right;
+                break;
+            case PlayerStates.Climb:
+                
+                direction = (Vector3.right + Vector3.up).normalized;
+                break;
+            case PlayerStates.Slide:
+                direction = (Vector3.right + Vector3.down).normalized;
+                break;
+        }
+
+        m_playerFeet = transform.position + new Vector3(0f, -0.8f, 0f);
+        Debug.Log(direction);
         m_movement = m_playerSpeed * direction * Time.deltaTime;
         transform.position = gameObject.transform.position + m_movement;
     }
 
-    public void Slips()
-    {
-        direction = -transform.up;
-        m_movement = m_playerSpeed * direction * Time.deltaTime;
-        transform.position = gameObject.transform.position + m_movement;
-    }
+    //public void Slips()
+    //{
+    //    direction = -transform.up;
+    //    m_movement = m_playerSpeed * direction * Time.deltaTime;
+    //    transform.position = gameObject.transform.position + m_movement;
+    //}
 
-    public bool CheckFrontPlayer()
+    public bool CheckFrontPlayer(Vector3 checkDirection)
     {
         RaycastHit hit;
         Vector3 blockNormal;
-        m_playerFeet = transform.position + new Vector3(0f, -0.8f, 0f);
                 
-        if (!Physics.Raycast(m_playerFeet, Vector3.right, out hit, m_raycastFrontDistance))
-        {
-            
+        if (!Physics.Raycast(m_playerFeet, checkDirection, out hit, m_raycastFrontDistance))
+        {            
             return true;
         }
         else
         {
             if(hit.transform.name != "FinalObject")
             {
-                float dot = Vector3.Dot(Vector3.right, hit.normal);
+                float dot = Vector3.Dot(checkDirection, hit.normal);
                 blockNormal = hit.normal;
 
                 if (dot > -1 && dot < 0)
                 {
-                    m_isClimbing = true;
-                    transform.rotation = Quaternion.FromToRotation(Vector3.down, -blockNormal);
+                    SetNewPlayerState(PlayerStates.Climb);
+
                     return true;
                 }
+            }
+            else
+            {
+                SetNewPlayerState(PlayerStates.Finish);
             }
                  
         }
@@ -140,7 +194,6 @@ public class PlayerActions : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 blockNormal;
-        m_playerFeet = transform.position + new Vector3(0f, -0.8f, 0f);
 
         
         if (Physics.Raycast(gameObject.transform.position, -transform.up, out hit, m_raycastDownDistance) || Physics.CheckSphere(m_playerFeet, 0.3f))
@@ -157,17 +210,19 @@ public class PlayerActions : MonoBehaviour
                 
                 if (m_isClimbing && dot == -1)
                 {
-                    transform.position = new Vector3(hit.point.x - 0.5f, hit.point.y + 1f, hit.point.z);
-                    transform.rotation = Quaternion.FromToRotation(Vector3.up, blockNormal);
-                    m_isClimbing = false;
+                    SetNewPlayerState(PlayerStates.Forwards);
+                    //transform.position = new Vector3(hit.point.x - 0.5f, hit.point.y + 1f, hit.point.z);
+                    //transform.rotation = Quaternion.FromToRotation(Vector3.up, blockNormal);
+                    //m_isClimbing = false;
                     return true;
                 }
                 else if(!m_isClimbing && dot > -1 && dot < 0)
                 {
-                    m_isClimbing = true;
-                    m_isOnTheBack = true;
-                    transform.position = new Vector3(hit.point.x, hit.point.y + 0.9f, hit.point.z);
-                    transform.right = hit.normal;
+                    //m_isClimbing = true;
+                    //m_isOnTheBack = true;
+                    //transform.position = new Vector3(hit.point.x, hit.point.y + 0.9f, hit.point.z);
+                    //transform.right = hit.normal;
+                    SetNewPlayerState(PlayerStates.Slide);
                     return true;
                 }
                 
@@ -180,7 +235,7 @@ public class PlayerActions : MonoBehaviour
     public bool CheckWallWhenSlip()
     {
         RaycastHit hit;
-        m_playerFeet = transform.position + new Vector3(0f, -0.8f, 0f);
+        
 
         if (Physics.Raycast(m_playerFeet, Vector3.left, out hit, m_raycastFrontDistance))
         {
