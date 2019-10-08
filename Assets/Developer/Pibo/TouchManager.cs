@@ -30,8 +30,6 @@ public class TouchManager : Singleton<TouchManager>
 
 	private List<Block> m_levelBlocks = new List<Block>();
 
-	private bool m_isMoving;
-
 	public int UnstableBlocks;
 
     #endregion
@@ -41,8 +39,6 @@ public class TouchManager : Singleton<TouchManager>
     private void Start()
 	{
         ResetAllBlocks();
-
-		m_isMoving = false;
 	}
 
 	void Update()
@@ -114,21 +110,21 @@ public class TouchManager : Singleton<TouchManager>
 
 	private void Tap(RaycastHit hitted)
 	{
-        if(hitted.transform.GetComponent<PlayerActions>())// || hitted.transform.GetComponent<FinalObjectActions>())
+        if(hitted.transform.GetComponent<PlayerActions>() || hitted.transform.GetComponent<FinalObjectActions>())
         {
             if (CanStart())
             {
-                hitted.transform.GetComponent<PlayerActions>().SetCanMove(true);
-                //hitted.transform.GetComponent<PlayerActions>().EnableCollider(false);
+                GameManager.Instance.StartWalkingPlayer();
                 OnMovement?.Invoke();
-				m_isMoving = true;
             }
         }
 	}
 
 	private bool CanStart()
 	{
-		return (!m_isHolding && !m_isMoving && UnstableBlocks == 0);
+		return (!m_isHolding &&
+				GameManager.Instance.CurrentState != GameState.Moving &&
+				UnstableBlocks == 0);
 	}
 
 	private void StartDrag(Block holdBlock)

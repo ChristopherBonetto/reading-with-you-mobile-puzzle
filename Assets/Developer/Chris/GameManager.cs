@@ -1,46 +1,49 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public enum GameState
 {
-    public static GameManager Instance;
+    Menu = 0,
+    Loading = 1,
+    Playing = 2,
+    Moving = 3
+}
 
+public class GameManager : Singleton<GameManager>
+{
     [SerializeField] private PlayerActions m_myPlayer;
 
-    private int m_IndexScene;
+    private GameState m_currentState;
 
-    private void Awake()
-    {
-        Instance = this;        
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        m_IndexScene = SceneManager.GetActiveScene().buildIndex;
-
-    }
+	public GameState CurrentState => m_currentState;
 
     public void AdvanceToNextScene()
     {
-        if (m_IndexScene < SceneManager.sceneCountInBuildSettings - 1)
-        {
+		int currentScene = SceneManager.GetActiveScene().buildIndex;
+		int nextScene = (currentScene < SceneManager.sceneCountInBuildSettings - 1 ?
             // Load next scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
-        else
-        {
+			currentScene + 1 :
             // Load first scene
-            SceneManager.LoadScene(0);
+			0);
+
+        SceneManager.LoadScene(nextScene);
+        SetGameState(GameState.Playing);
+    }
+
+    public void SetGameState(GameState inGameState)
+    {
+        if (m_currentState == inGameState)
+        {
+            return;
         }
 
+        m_currentState = inGameState;
     }
 
     public void StartWalkingPlayer()
     {
         m_myPlayer.EnableCollider(false);
         m_myPlayer.SetNewPlayerState(PlayerStates.Forwards);
-        
+        SetGameState(GameState.Moving);
     }
 }
