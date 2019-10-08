@@ -43,7 +43,7 @@ public class GameManager : Singleton<GameManager>
     public void StartWalkingPlayer()
     {
         m_myPlayer.EnableCollider(false);
-        m_myPlayer.SetNewPlayerState(PlayerStates.Forwards);
+        m_myPlayer.canMove = true;
         SetGameState(GameState.Moving);
     }
 }
