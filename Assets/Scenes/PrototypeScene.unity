@@ -992,8 +992,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_touchManager: {fileID: 0}
   m_rigidbody: {fileID: 0}
+  m_transform: {fileID: 0}
   Size: 2
-  m_checkRotationTimer: 0
 --- !u!65 &848371906
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1525,8 +1525,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_touchManager: {fileID: 1752851855}
   m_rigidbody: {fileID: 1676807605}
+  m_transform: {fileID: 1676807603}
   Size: 1
-  m_checkRotationTimer: 2
 --- !u!54 &1676807605
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1737,6 +1737,7 @@ MonoBehaviour:
   m_gameCamera: {fileID: 1747863810}
   m_dragZ: -2
   m_gameZ: 0
+  UnstableBlocks: 0
 --- !u!4 &1752851856
 Transform:
   m_ObjectHideFlags: 0
@@ -1802,8 +1803,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_touchManager: {fileID: 1752851855}
   m_rigidbody: {fileID: 2109772694}
+  m_transform: {fileID: 2109772699}
   Size: 2
-  m_checkRotationTimer: 2
 --- !u!65 &2109772696
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -11,19 +11,20 @@ public class Block : MonoBehaviour
 	[SerializeField]
 	private Rigidbody m_rigidbody = null;
 
+	[SerializeField]
+	private Transform m_transform = null;
+
 	private readonly RigidbodyConstraints m_moveConstraints = RigidbodyConstraints.FreezeAll;
 
 	private readonly RigidbodyConstraints m_dropConstraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
 
 	public float Size = 1f;
 
-    private bool m_isDropped = false;
-    private bool m_hasCollided = false;
-    [SerializeField] private float m_checkRotationTimer;
-    private float m_timer = 0;
-    private Quaternion m_startingRotation;
+	private float m_lastCollisionTime;
 
-    public bool m_isInTheRightPosition { get; private set; } = false;
+	private float m_collisionTimeout;
+
+    private bool m_isUnstable = false;
     
 	#endregion
 
@@ -33,60 +34,41 @@ public class Block : MonoBehaviour
 	{
 		m_touchManager.AddBlock(this);
 		m_touchManager.OnGrab += SetPhysicsInactive;
+		m_touchManager.OnMovement += FreezeBlocks;
+
+		m_collisionTimeout = Time.fixedDeltaTime * 3;
 	}
 
 	private void Start()
 	{
 #if UNITY_EDITOR
 		NullChecks();
-        m_startingRotation = gameObject.transform.rotation;
 #endif
 	}
+
     private void Update()
     {
-        CheckRotation();
-
+		if (m_isUnstable)
+		{
+			CheckStability(); 
+		}
     }
 
-    public void CheckRotation()
+    public void CheckStability()
     {
-        if (!m_hasCollided) return;
-
-        m_timer += Time.deltaTime;
-        if (m_timer > m_checkRotationTimer)
-        {
-            if (gameObject.transform.rotation != m_startingRotation)
-            {
-                gameObject.transform.rotation = m_startingRotation;
-                TouchManager.Instance.ResetBlock(this);
-                m_timer = 0;
-                m_hasCollided = false;
-            }
-            else
-            {
-                m_rigidbody.isKinematic = true;
-                m_timer = 0;
-                m_isInTheRightPosition = true;
-                m_hasCollided = false;
-
-            }
-        }
-    }
-
-    public void SetBoolRightPosition(bool newValue)
-    {
-        m_isInTheRightPosition = newValue;
-    }
-
-    public void SetIsDropped(bool newValue)
-    {
-        m_isDropped = newValue;
+        if (m_rigidbody.velocity.sqrMagnitude <= 0.1f &&
+			m_rigidbody.angularVelocity.sqrMagnitude <=0.1f &&
+			Time.time >= m_lastCollisionTime + m_collisionTimeout)
+		{
+			SetUnstable(false);
+		}
     }
 
     private void OnDisable()
 	{
 		m_touchManager.RemoveBlock(this);
 		m_touchManager.OnGrab -= SetPhysicsInactive;
+		m_touchManager.OnMovement -= FreezeBlocks;
 	}
 
 	/// <summary>
@@ -108,19 +90,59 @@ public class Block : MonoBehaviour
 
 	#region Physics
 
+	public void FreezeBlocks()
+	{
+		SetPhysicsInactive(true);
+	}
+
 	public void SetPhysicsInactive(bool bInactive)
 	{
 		m_rigidbody.useGravity = !bInactive;
 		m_rigidbody.constraints = !bInactive ? m_dropConstraints : m_moveConstraints;
 	}
 
-    #endregion
+	public void SetUnstable(bool bInIsUnstable)
+	{
+		if (m_isUnstable == bInIsUnstable)
+		{
+			return;
+		}
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!m_isDropped) return;
+		m_isUnstable = bInIsUnstable;
+		int blockCount = TouchManager.Instance.UnstableBlocks;
+		TouchManager.Instance.UnstableBlocks = bInIsUnstable ? blockCount + 1 : blockCount - 1;
+		// On start
+		if (m_isUnstable)
+		{
+			m_lastCollisionTime = Time.time;
+		}
+		// On stop
+		else
+		{
+			if (m_transform.rotation.eulerAngles.sqrMagnitude >= 10f)
+			//if (m_transform.rotation != Quaternion.identity)
+			{
+				TouchManager.Instance.ResetBlock(this);
+			}
+			else
+			{
+				// RE-SNAP
+			}
+		}
+	}
 
-        m_hasCollided = true;
-        m_isDropped = false;
-    }
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (m_rigidbody.useGravity)
+		{
+			SetUnstable(true);
+			Block otherBlock = collision.gameObject.GetComponent<Block>();
+			if (otherBlock)
+			{
+				otherBlock.SetUnstable(true);
+			} 
+		}
+	}
+
+	#endregion
 }
