@@ -29,6 +29,8 @@ public class Block : MonoBehaviour
 	private float m_collisionTimeout;
 
     private bool m_isUnstable = false;
+
+    private bool m_start = true;
     
 	#endregion
 
@@ -36,10 +38,10 @@ public class Block : MonoBehaviour
 
 	private void OnEnable()
     {
-        m_touchManager = TouchManager.Instance;
-        m_touchManager.AddBlock(this);
-        m_touchManager.OnGrab += SetPhysicsInactive;
-        m_touchManager.OnMovement += FreezeBlocks;
+        if (!m_start)
+        {
+            Register();
+        }
     }
 
 	private void Start()
@@ -47,8 +49,25 @@ public class Block : MonoBehaviour
 #if UNITY_EDITOR
 		NullChecks();
 #endif
+        Register();
+        m_start = false;
 
-        m_collisionTimeout = Time.fixedDeltaTime * 3;
+        m_collisionTimeout = 0.25f;//Time.fixedDeltaTime * 30;
+    }
+
+    private void Register()
+    {
+        m_touchManager = TouchManager.Instance;
+        m_touchManager.AddBlock(this);
+        m_touchManager.OnGrab += SetPhysicsInactive;
+        m_touchManager.OnMovement += FreezeBlocks;
+    }
+
+    private void UnRegister()
+    {
+        m_touchManager.RemoveBlock(this);
+        m_touchManager.OnGrab -= SetPhysicsInactive;
+        m_touchManager.OnMovement -= FreezeBlocks;
     }
 
     private void Update()
@@ -59,23 +78,9 @@ public class Block : MonoBehaviour
 		}
     }
 
-    public void CheckStability()
-    {
-        if (m_rigidbody.velocity.sqrMagnitude <= 0.1f &&
-			m_rigidbody.angularVelocity.sqrMagnitude <=0.1f &&
-			Time.time >= m_lastCollisionTime + m_collisionTimeout)
-		{
-            Debug.Log(this + " vel "+ m_rigidbody.velocity.sqrMagnitude.ToString());
-            Debug.Log(this + " ang "+ m_rigidbody.angularVelocity.sqrMagnitude.ToString());
-			SetUnstable(false);
-		}
-    }
-
     private void OnDisable()
 	{
-		m_touchManager.RemoveBlock(this);
-		m_touchManager.OnGrab -= SetPhysicsInactive;
-		m_touchManager.OnMovement -= FreezeBlocks;
+        UnRegister();
 	}
 
 	/// <summary>
@@ -93,6 +98,59 @@ public class Block : MonoBehaviour
 
 	#region Physics
 
+	private void FreezeBlocks()
+	{
+		SetPhysicsInactive(true);
+	}
+
+	private void SetPhysicsInactive(bool bInactive)
+	{
+		m_rigidbody.useGravity = !bInactive;
+		m_rigidbody.constraints = !bInactive ? m_dropConstraints : m_moveConstraints;
+	}
+
+    private void CheckStability()
+    {
+        if (m_rigidbody.velocity.sqrMagnitude <= 0.01f &&
+			m_rigidbody.angularVelocity.sqrMagnitude <=0.01f &&
+			Time.time >= m_lastCollisionTime + m_collisionTimeout)
+		{
+			SetUnstable(false);
+		}
+    }
+
+	private void SetUnstable(bool bInIsUnstable)
+	{
+		if (m_isUnstable == bInIsUnstable)
+		{
+			return;
+		}
+
+		m_isUnstable = bInIsUnstable;
+		int blockCount = TouchManager.Instance.UnstableBlocks;
+		TouchManager.Instance.UnstableBlocks = bInIsUnstable ? blockCount + 1 : blockCount - 1;
+
+		// On start
+		if (m_isUnstable)
+		{
+			m_lastCollisionTime = Time.time;
+            Resnap();
+		}
+		// On stop
+		else
+		{
+			if (m_transform.rotation.eulerAngles.sqrMagnitude >= 0.01f)
+			//if (m_transform.rotation != Quaternion.identity)
+			{
+				ResetBlock();
+			}
+			else
+			{
+                Resnap();
+			}
+		}
+    }
+
     public void ResetBlock()
     {
         m_transform.position = new Vector3(Mathf.Round(UnityEngine.Random.Range(-4.5f, 4.5f)), -1.5f, m_dragZ);
@@ -105,13 +163,13 @@ public class Block : MonoBehaviour
     private void Resnap()
     {
         Vector3 unstablePosition = m_transform.position;
-        
+
         Vector3 snapPosition = new Vector3();
         float halfXSize = Size / 2f;
         snapPosition.x = Mathf.Round(unstablePosition.x - halfXSize) + halfXSize;
         snapPosition.y = Mathf.Round(unstablePosition.y);
         snapPosition.z = m_gameZ;
-        Debug.Log("Resnap " + this + " from " + unstablePosition + " to " + snapPosition);
+
         m_transform.position = snapPosition;
         m_transform.rotation = Quaternion.identity;
 
@@ -119,50 +177,7 @@ public class Block : MonoBehaviour
         m_rigidbody.angularVelocity = new Vector3();
     }
 
-	public void FreezeBlocks()
-	{
-		SetPhysicsInactive(true);
-	}
-
-	public void SetPhysicsInactive(bool bInactive)
-	{
-		m_rigidbody.useGravity = !bInactive;
-		m_rigidbody.constraints = !bInactive ? m_dropConstraints : m_moveConstraints;
-	}
-
-	public void SetUnstable(bool bInIsUnstable)
-	{
-		if (m_isUnstable == bInIsUnstable)
-		{
-			return;
-		}
-
-		m_isUnstable = bInIsUnstable;
-		int blockCount = TouchManager.Instance.UnstableBlocks;
-		TouchManager.Instance.UnstableBlocks = bInIsUnstable ? blockCount + 1 : blockCount - 1;
-		// On start
-		if (m_isUnstable)
-		{
-			m_lastCollisionTime = Time.time;
-            Resnap();
-		}
-		// On stop
-		else
-		{
-            Debug.Log(this + " rotation " + m_transform.rotation.eulerAngles.sqrMagnitude);
-			if (m_transform.rotation.eulerAngles.sqrMagnitude >= 10f)
-			//if (m_transform.rotation != Quaternion.identity)
-			{
-				ResetBlock();
-			}
-			else
-			{
-                Resnap();
-			}
-		}
-	}
-
-	private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
 	{
 		if (m_rigidbody.useGravity)
 		{

@@ -39,7 +39,8 @@ public class TouchManager : Singleton<TouchManager>
     #region Core loop
 
     private void Start()
-	{ResetAllBlocks();
+	{
+        ResetAllBlocks();
 
 		m_isMoving = false;
 	}
@@ -50,7 +51,7 @@ public class TouchManager : Singleton<TouchManager>
 		{
 			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit testHit))
 			{
-				Block testBlock = testHit.collider.GetComponentInParent<Block>();
+				Block testBlock = testHit.collider.GetComponent<Block>();
 				if (testBlock)
 				{
                     StartDrag(testBlock);
@@ -95,21 +96,15 @@ public class TouchManager : Singleton<TouchManager>
 		m_levelBlocks.Remove(oldBlock);
 	}
 
-	public void ResetBlock(Block block)
-	{
-		block.transform.position = new Vector3(Mathf.Round(UnityEngine.Random.Range(-4.5f, 4.5f)), -1.5f, m_dragZ);
-		block.transform.rotation = Quaternion.identity;
-		block.transform.localScale *= 0.8f;
-		block.SetPhysicsInactive(true);
-		block.enabled = false;
-	}
-
+    /// <summary>
+    /// Reset level blocks to inventory
+    /// </summary>
 	private void ResetAllBlocks()
 	{
 		Block[] blocks = m_levelBlocks.ToArray();
 		for (int i = 0; i < blocks.Length; i++)
 		{
-			ResetBlock(blocks[i]);
+            blocks[i].ResetBlock();
 		}
 	}
 
@@ -179,7 +174,7 @@ public class TouchManager : Singleton<TouchManager>
 		// Check out of grid
 		if (releasePosition.x - halfXSize < -4f || releasePosition.x + halfXSize > 4f)
 		{
-			ResetBlock(m_holdBlock);
+            m_holdBlock.ResetBlock();
 		}
 		// Check collisions
 		else
@@ -191,7 +186,7 @@ public class TouchManager : Singleton<TouchManager>
 				{
 					if (testHits[i].gameObject != m_holdBlock.gameObject)
 					{
-						ResetBlock(m_holdBlock);
+                        m_holdBlock.ResetBlock();
 						break;
 					}
 				}
