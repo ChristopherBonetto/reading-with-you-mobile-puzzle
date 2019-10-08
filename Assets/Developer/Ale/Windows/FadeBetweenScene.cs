@@ -20,7 +20,6 @@ public class FadeBetweenScene : UIControl
         set { m_OnFadeOutComplete = value; }
     }
 
-
     private Animator m_anim;
 
     protected override void Awake()
@@ -29,17 +28,24 @@ public class FadeBetweenScene : UIControl
         m_anim = GetComponent<Animator>();
     }
 
+    /// <summary>
+    /// Called in animation event
+    /// </summary>
     public void OnFadeInCompleted()
     {
-        // delegate, store action
+        // execute a method putted in (when fade in is completed)
         OnFadeInComplete?.Invoke();
+        OnFadeInComplete = null;
 
         m_anim.SetBool("isSceneLoaded", true);
     }
 
-    // Change this with a delegate.
+    /// <summary>
+    /// Called in animation event
+    /// </summary>
     public void OnFadeOutCompleted()
     {
         OnFadeOutComplete?.Invoke();
+        OnFadeOutComplete = null;
     }
 }
