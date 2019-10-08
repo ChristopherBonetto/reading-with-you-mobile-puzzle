@@ -27,7 +27,7 @@ public class UIManager : SingletonBehaviour<UIManager>
     {
         if (uiControl != null && !Controls.ContainsKey(uiControl.Name))
         {
-            Debug.Log("Register: " + uiControl.Name);
+            //Debug.Log("Register: " + uiControl.Name);
             Controls.Add(uiControl.Name, uiControl);
         }
     }

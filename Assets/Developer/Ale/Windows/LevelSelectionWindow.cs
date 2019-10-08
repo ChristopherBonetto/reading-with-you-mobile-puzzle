@@ -119,7 +119,7 @@ public class LevelSelectionWindow : UIControl
                 // assign the index of the level "j", of the world "i".
                 Worlds[i].Levels[j].Index = index;
 
-                Debug.Log(Worlds[i].Levels[j].Index);
+                //Debug.Log(Worlds[i].Levels[j].Index);
 
                 index++;
             }
