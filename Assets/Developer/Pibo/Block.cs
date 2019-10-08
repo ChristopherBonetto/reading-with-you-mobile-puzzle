@@ -4,8 +4,6 @@ public class Block : MonoBehaviour
 {
 	#region Variables
 
-	//@TEMP
-	[SerializeField]
 	private TouchManager m_touchManager = null;
 
 	[SerializeField]
@@ -37,20 +35,21 @@ public class Block : MonoBehaviour
 	#region Core loop
 
 	private void OnEnable()
-	{
-		m_touchManager.AddBlock(this);
-		m_touchManager.OnGrab += SetPhysicsInactive;
-		m_touchManager.OnMovement += FreezeBlocks;
-
-		m_collisionTimeout = Time.fixedDeltaTime * 3;
-	}
+    {
+        m_touchManager = TouchManager.Instance;
+        m_touchManager.AddBlock(this);
+        m_touchManager.OnGrab += SetPhysicsInactive;
+        m_touchManager.OnMovement += FreezeBlocks;
+    }
 
 	private void Start()
 	{
 #if UNITY_EDITOR
 		NullChecks();
 #endif
-	}
+
+        m_collisionTimeout = Time.fixedDeltaTime * 3;
+    }
 
     private void Update()
     {
@@ -88,10 +87,6 @@ public class Block : MonoBehaviour
 		{
 			Debug.LogError(name + " has no rigidbody reference!", this);
 		}
-		if (!m_touchManager)
-		{
-			Debug.LogError(name + " has no touch manager reference!", this);
-		}
 	}
 
 	#endregion
@@ -110,15 +105,18 @@ public class Block : MonoBehaviour
     private void Resnap()
     {
         Vector3 unstablePosition = m_transform.position;
-
-        Vector3 snapPosition = new Vector3(0f, 0f, m_gameZ);
+        
+        Vector3 snapPosition = new Vector3();
         float halfXSize = Size / 2f;
-        float halfYSize = 1f / 2f;
         snapPosition.x = Mathf.Round(unstablePosition.x - halfXSize) + halfXSize;
-        snapPosition.y = Mathf.Round(unstablePosition.y - halfYSize) + halfYSize;
-
+        snapPosition.y = Mathf.Round(unstablePosition.y);
+        snapPosition.z = m_gameZ;
+        Debug.Log("Resnap " + this + " from " + unstablePosition + " to " + snapPosition);
         m_transform.position = snapPosition;
         m_transform.rotation = Quaternion.identity;
+
+        m_rigidbody.velocity = new Vector3();
+        m_rigidbody.angularVelocity = new Vector3();
     }
 
 	public void FreezeBlocks()
@@ -146,6 +144,7 @@ public class Block : MonoBehaviour
 		if (m_isUnstable)
 		{
 			m_lastCollisionTime = Time.time;
+            Resnap();
 		}
 		// On stop
 		else

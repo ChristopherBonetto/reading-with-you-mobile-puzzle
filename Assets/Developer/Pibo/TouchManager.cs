@@ -24,11 +24,6 @@ public class TouchManager : SingletonBehaviour<TouchManager>
 	public Action<bool> OnGrab;
 
 	/// <summary>
-	/// Event on hit unstable (true) and stable (false)
-	/// </summary>
-	public Action<bool> OnHit;
-
-	/// <summary>
 	/// Event on player movement start
 	/// </summary>
 	public Action OnMovement;
@@ -55,7 +50,7 @@ public class TouchManager : SingletonBehaviour<TouchManager>
 		{
 			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit testHit))
 			{
-				Block testBlock = testHit.collider.gameObject.GetComponent<Block>();
+				Block testBlock = testHit.collider.GetComponentInParent<Block>();
 				if (testBlock)
 				{
                     StartDrag(testBlock);
@@ -130,6 +125,7 @@ public class TouchManager : SingletonBehaviour<TouchManager>
             {
                 hitted.transform.GetComponent<PlayerActions>().SetCanMove(true);
                 //hitted.transform.GetComponent<PlayerActions>().EnableCollider(false);
+                OnMovement?.Invoke();
 				m_isMoving = true;
             }
         }
@@ -204,7 +200,6 @@ public class TouchManager : SingletonBehaviour<TouchManager>
 
 		// Enable all rigidbodies
 		OnGrab?.Invoke(false);
-		OnHit?.Invoke(true);
 
         // Free state
 		m_holdBlock = null;
