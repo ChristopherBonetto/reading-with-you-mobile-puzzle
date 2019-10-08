@@ -13,9 +13,6 @@ public class TouchManager : SingletonBehaviour<TouchManager>
 	private Vector3 m_holdOffset;
 
 	[SerializeField]
-	private Camera m_gameCamera = null;
-
-	[SerializeField]
 	private float m_dragZ = -2f;
 
 	[SerializeField]
@@ -47,12 +44,7 @@ public class TouchManager : SingletonBehaviour<TouchManager>
     #region Core loop
 
     private void Start()
-	{
-#if UNITY_EDITOR
-		NullChecks();
-#endif
-        
-		ResetAllBlocks();
+	{ResetAllBlocks();
 
 		m_isMoving = false;
 	}
@@ -61,7 +53,7 @@ public class TouchManager : SingletonBehaviour<TouchManager>
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			if (Physics.Raycast(m_gameCamera.ScreenPointToRay(Input.mousePosition), out RaycastHit testHit))
+			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit testHit))
 			{
 				Block testBlock = testHit.collider.gameObject.GetComponent<Block>();
 				if (testBlock)
@@ -83,17 +75,6 @@ public class TouchManager : SingletonBehaviour<TouchManager>
 		if (Input.GetMouseButtonUp(0) && m_isHolding)
 		{
 			Release();
-		}
-	}
-
-	/// <summary>
-	/// Editor only
-	/// </summary>
-	private void NullChecks()
-	{
-		if (!m_gameCamera)
-		{
-			Debug.LogError("No game camera!");
 		}
 	}
 
@@ -143,11 +124,12 @@ public class TouchManager : SingletonBehaviour<TouchManager>
 
 	private void Tap(RaycastHit hitted)
 	{
-        if(hitted.transform.GetComponent<PlayerActions>() || hitted.transform.GetComponent<FinalObjectActions>())
+        if(hitted.transform.GetComponent<PlayerActions>())// || hitted.transform.GetComponent<FinalObjectActions>())
         {
             if (CanStart())
             {
                 hitted.transform.GetComponent<PlayerActions>().SetCanMove(true);
+                //hitted.transform.GetComponent<PlayerActions>().EnableCollider(false);
 				m_isMoving = true;
             }
         }
@@ -176,7 +158,7 @@ public class TouchManager : SingletonBehaviour<TouchManager>
 		m_holdBlock.transform.rotation = Quaternion.identity;
 
 		// Save grab point offset
-		Vector3 dragPosition = m_gameCamera.ScreenToWorldPoint(Input.mousePosition);
+		Vector3 dragPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		dragPosition.z = m_holdBlock.transform.position.z;
 		m_holdOffset = dragPosition - m_holdBlock.transform.position;
 	}
@@ -184,7 +166,7 @@ public class TouchManager : SingletonBehaviour<TouchManager>
 	private void Move()
 	{
 		// Follow touch position maintaining grab point offset
-		Vector3 dragPosition = m_gameCamera.ScreenToWorldPoint(Input.mousePosition);
+		Vector3 dragPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		dragPosition.z = m_dragZ;
 		m_holdBlock.transform.position = dragPosition - m_holdOffset;
 	}

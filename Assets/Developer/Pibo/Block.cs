@@ -14,7 +14,13 @@ public class Block : MonoBehaviour
 	[SerializeField]
 	private Transform m_transform = null;
 
-	private readonly RigidbodyConstraints m_moveConstraints = RigidbodyConstraints.FreezeAll;
+    [SerializeField]
+    private float m_dragZ = -2f;
+
+    [SerializeField]
+    private float m_gameZ = 0f;
+
+    private readonly RigidbodyConstraints m_moveConstraints = RigidbodyConstraints.FreezeAll;
 
 	private readonly RigidbodyConstraints m_dropConstraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
 
@@ -60,6 +66,8 @@ public class Block : MonoBehaviour
 			m_rigidbody.angularVelocity.sqrMagnitude <=0.1f &&
 			Time.time >= m_lastCollisionTime + m_collisionTimeout)
 		{
+            Debug.Log(this + " vel "+ m_rigidbody.velocity.sqrMagnitude.ToString());
+            Debug.Log(this + " ang "+ m_rigidbody.angularVelocity.sqrMagnitude.ToString());
 			SetUnstable(false);
 		}
     }
@@ -90,6 +98,29 @@ public class Block : MonoBehaviour
 
 	#region Physics
 
+    public void ResetBlock()
+    {
+        m_transform.position = new Vector3(Mathf.Round(UnityEngine.Random.Range(-4.5f, 4.5f)), -1.5f, m_dragZ);
+        m_transform.rotation = Quaternion.identity;
+        m_transform.localScale *= 0.8f;
+        SetPhysicsInactive(true);
+        enabled = false;
+    }
+
+    private void Resnap()
+    {
+        Vector3 unstablePosition = m_transform.position;
+
+        Vector3 snapPosition = new Vector3(0f, 0f, m_gameZ);
+        float halfXSize = Size / 2f;
+        float halfYSize = 1f / 2f;
+        snapPosition.x = Mathf.Round(unstablePosition.x - halfXSize) + halfXSize;
+        snapPosition.y = Mathf.Round(unstablePosition.y - halfYSize) + halfYSize;
+
+        m_transform.position = snapPosition;
+        m_transform.rotation = Quaternion.identity;
+    }
+
 	public void FreezeBlocks()
 	{
 		SetPhysicsInactive(true);
@@ -119,14 +150,15 @@ public class Block : MonoBehaviour
 		// On stop
 		else
 		{
+            Debug.Log(this + " rotation " + m_transform.rotation.eulerAngles.sqrMagnitude);
 			if (m_transform.rotation.eulerAngles.sqrMagnitude >= 10f)
 			//if (m_transform.rotation != Quaternion.identity)
 			{
-				TouchManager.Instance.ResetBlock(this);
+				ResetBlock();
 			}
 			else
 			{
-				// RE-SNAP
+                Resnap();
 			}
 		}
 	}
