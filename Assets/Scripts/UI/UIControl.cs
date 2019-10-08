@@ -7,17 +7,14 @@ using UnityEngine;
 /// </summary>
 public abstract class UIControl : MonoBehaviour
 {
-    public abstract string Name { get; }
+    public abstract UIControlName Name { get; }
 
 
     #region Monobehaviour
-    protected virtual void Awake()
-    {
-        UIManager.Instance.Register(this);
-    }
 
     protected virtual void Start()
     {
+        UIManager.Instance.Register(this);
         this.gameObject.SetActive(false);
     }
 

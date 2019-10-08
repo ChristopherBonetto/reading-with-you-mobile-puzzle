@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TouchManager : SingletonBehaviour<TouchManager>
+public class TouchManager : Singleton<TouchManager>
 {
     #region Variables
 
@@ -24,11 +24,6 @@ public class TouchManager : SingletonBehaviour<TouchManager>
 	public Action<bool> OnGrab;
 
 	/// <summary>
-	/// Event on hit unstable (true) and stable (false)
-	/// </summary>
-	public Action<bool> OnHit;
-
-	/// <summary>
 	/// Event on player movement start
 	/// </summary>
 	public Action OnMovement;
@@ -44,7 +39,8 @@ public class TouchManager : SingletonBehaviour<TouchManager>
     #region Core loop
 
     private void Start()
-	{ResetAllBlocks();
+	{
+        ResetAllBlocks();
 
 		m_isMoving = false;
 	}
@@ -55,7 +51,7 @@ public class TouchManager : SingletonBehaviour<TouchManager>
 		{
 			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit testHit))
 			{
-				Block testBlock = testHit.collider.gameObject.GetComponent<Block>();
+				Block testBlock = testHit.collider.GetComponent<Block>();
 				if (testBlock)
 				{
                     StartDrag(testBlock);
@@ -100,21 +96,15 @@ public class TouchManager : SingletonBehaviour<TouchManager>
 		m_levelBlocks.Remove(oldBlock);
 	}
 
-	public void ResetBlock(Block block)
-	{
-		block.transform.position = new Vector3(Mathf.Round(UnityEngine.Random.Range(-4.5f, 4.5f)), -1.5f, m_dragZ);
-		block.transform.rotation = Quaternion.identity;
-		block.transform.localScale *= 0.8f;
-		block.SetPhysicsInactive(true);
-		block.enabled = false;
-	}
-
+    /// <summary>
+    /// Reset level blocks to inventory
+    /// </summary>
 	private void ResetAllBlocks()
 	{
 		Block[] blocks = m_levelBlocks.ToArray();
 		for (int i = 0; i < blocks.Length; i++)
 		{
-			ResetBlock(blocks[i]);
+            blocks[i].ResetBlock();
 		}
 	}
 
@@ -130,6 +120,7 @@ public class TouchManager : SingletonBehaviour<TouchManager>
             {
                 hitted.transform.GetComponent<PlayerActions>().SetCanMove(true);
                 //hitted.transform.GetComponent<PlayerActions>().EnableCollider(false);
+                OnMovement?.Invoke();
 				m_isMoving = true;
             }
         }
@@ -183,7 +174,7 @@ public class TouchManager : SingletonBehaviour<TouchManager>
 		// Check out of grid
 		if (releasePosition.x - halfXSize < -4f || releasePosition.x + halfXSize > 4f)
 		{
-			ResetBlock(m_holdBlock);
+            m_holdBlock.ResetBlock();
 		}
 		// Check collisions
 		else
@@ -195,7 +186,7 @@ public class TouchManager : SingletonBehaviour<TouchManager>
 				{
 					if (testHits[i].gameObject != m_holdBlock.gameObject)
 					{
-						ResetBlock(m_holdBlock);
+                        m_holdBlock.ResetBlock();
 						break;
 					}
 				}
@@ -204,7 +195,6 @@ public class TouchManager : SingletonBehaviour<TouchManager>
 
 		// Enable all rigidbodies
 		OnGrab?.Invoke(false);
-		OnHit?.Invoke(true);
 
         // Free state
 		m_holdBlock = null;

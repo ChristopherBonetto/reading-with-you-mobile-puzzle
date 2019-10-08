@@ -176,9 +176,17 @@ public class PlayerActions : MonoBehaviour
 
                 if (dot > -1 && dot < 0)
                 {
-                    SetNewPlayerState(PlayerStates.Climb);
+                    if(m_currentMovementType != PlayerStates.Climb)
+                    {
+                        SetNewPlayerState(PlayerStates.Climb);
 
-                    return true;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    
                 }
             }
             else
