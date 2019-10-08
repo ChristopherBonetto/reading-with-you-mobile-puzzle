@@ -11,13 +11,10 @@ public abstract class UIControl : MonoBehaviour
 
 
     #region Monobehaviour
-    protected virtual void Awake()
-    {
-        UIManager.Instance.Register(this);
-    }
 
     protected virtual void Start()
     {
+        UIManager.Instance.Register(this);
         this.gameObject.SetActive(false);
     }
 

@@ -12,7 +12,7 @@ public enum UIControlName
     Fade,
 }
 
-public class UIManager : SingletonBehaviour<UIManager>
+public class UIManager : Singleton<UIManager>
 {
     /// <summary>
     /// All controls stored.

@@ -22,9 +22,8 @@ public class FadeBetweenScene : UIControl
 
     private Animator m_anim;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
         m_anim = GetComponent<Animator>();
     }
 
