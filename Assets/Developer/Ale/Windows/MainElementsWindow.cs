@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MainElementsWindow : UIControl
 {
-    public override string Name => "MainElements";
+    public override UIControlName Name => UIControlName.MainElements;
 
     protected override void Start()
     {
@@ -13,6 +13,6 @@ public class MainElementsWindow : UIControl
 
     public void OnCreditsSelection()
     {
-        UIManager.Instance.ShowAndHide("CreditsElements", this);
+        UIManager.Instance.ShowAndHide(UIControlName.CreditsElements, this);
     }
 }

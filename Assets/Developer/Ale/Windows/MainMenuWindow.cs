@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainMenuWindow : UIControl
 {
     // it is equal to write: string Name { get { return "..." } }
-    public override string Name => "MainMenu";
+    public override UIControlName Name => UIControlName.MainMenu;
 
     protected override void Start()
     {
@@ -14,6 +14,6 @@ public class MainMenuWindow : UIControl
 
     public void OnShowLevelSelection() // button should execute this.
     {
-        UIManager.Instance.ShowAndHide("LevelSelection", this);
+        UIManager.Instance.ShowAndHide(UIControlName.LevelSelection, this);
     }
 }

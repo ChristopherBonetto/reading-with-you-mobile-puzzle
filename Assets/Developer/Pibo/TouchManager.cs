@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TouchManager : SingletonBehaviour<TouchManager>
+public class TouchManager : Singleton<TouchManager>
 {
     #region Variables
 

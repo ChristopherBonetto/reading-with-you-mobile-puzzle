@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CreditsElementWindow : UIControl
 {
-    public override string Name => "CreditsElements";
+    public override UIControlName Name => UIControlName.CreditsElements;
 
     public void OnBackToMainElements()
     {
-        UIManager.Instance.ShowAndHide("MainElements", this);
+        UIManager.Instance.ShowAndHide(UIControlName.MainElements, this);
     }
 }
