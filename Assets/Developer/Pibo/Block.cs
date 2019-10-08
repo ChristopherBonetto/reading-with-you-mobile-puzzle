@@ -52,7 +52,7 @@ public class Block : MonoBehaviour
         Register();
         m_start = false;
 
-        m_collisionTimeout = 0.25f;//Time.fixedDeltaTime * 30;
+        m_collisionTimeout = Time.fixedDeltaTime * 30;
     }
 
     private void Register()
