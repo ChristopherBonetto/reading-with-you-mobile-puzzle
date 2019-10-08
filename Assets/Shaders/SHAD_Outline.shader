@@ -28,6 +28,7 @@ Shader "Custom/Outline"
 
 	struct v2f {
 		half4 pos : POSITION;
+		half3 normal : NORMAL1;
 		half2 uv : TEXCOORD0;
 		fixed4 color : COLOR;
 	};
@@ -44,17 +45,19 @@ Shader "Custom/Outline"
 		Pass
 		{
 			Name "OUTLINE"
-
+			ZWrite off
 			Cull Front
-
+			
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
 
 			v2f vert(appdata v)
 			{
-				v.vertex.xyz *= _Outline;
+				//float3 normal = v.normal.xyz * _Outline;
 
+				v.vertex.xyz *= _Outline;
+				
 				v2f o;
 				o.pos = UnityObjectToClipPos(v.vertex);
 
