@@ -8,7 +8,8 @@ public class MainElementsWindow : UIControl
 
     protected override void Start()
     {
-        // do nothing
+        UIManager.Instance.Register(this);
+        gameObject.SetActive(true);
     }
 
     public void OnCreditsSelection()

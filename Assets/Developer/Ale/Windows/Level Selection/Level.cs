@@ -15,4 +15,6 @@ public class Level : ScriptableObject
     [Tooltip("All necessary block to complete the level")]
     public GameObject[] BlocksToPlace;
     #endregion
+
+    public int Index { get; set; }
 }
