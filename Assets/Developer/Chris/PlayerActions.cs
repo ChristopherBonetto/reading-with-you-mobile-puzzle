@@ -48,14 +48,36 @@ public class PlayerActions : MonoBehaviour
         m_direction = Vector3.right;
         m_movement = m_playerSpeed * m_direction * Time.deltaTime;
 
-        Debug.Log(m_movement);
+        Vector3 nextPointPosition;
 
         if (!Physics.Raycast(transform.position + Vector3.right * m_raycastFrontDistance, m_movement.normalized, m_movement.magnitude))
         {
             if (Physics.Raycast(gameObject.transform.position + m_movement, Vector3.down, out m_nextFrameCollisionPoint, m_raycastDownDistance))
             {
-                transform.position = m_nextFrameCollisionPoint.point + Vector3.up * 0.5f;
+                nextPointPosition = m_nextFrameCollisionPoint.point + Vector3.up * 0.5f;
+
+                if (nextPointPosition.y > transform.position.y)
+                {
+                    Debug.Log("climb");
+                }
+                else if(nextPointPosition.y == transform.position.y)
+                {
+                    Debug.Log("forward");
+                }
+                else if (nextPointPosition.y < transform.position.y)
+                {
+                    Debug.Log("slide");
+                }
+                transform.position = nextPointPosition;
             }
+            else
+            {
+                Debug.Log("no one block");
+            }
+        }
+        else
+        {
+            Debug.Log("block in front of the player");
         }
     }
     
