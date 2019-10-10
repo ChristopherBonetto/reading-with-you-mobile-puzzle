@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum GameState
@@ -13,7 +14,12 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private PlayerActions m_myPlayer;
 
-    private GameState m_currentState;
+	/// <summary>
+	/// Event on player movement start
+	/// </summary>
+	public Action OnMovement;
+
+	private GameState m_currentState;
 
 	public GameState CurrentState => m_currentState;
 
@@ -30,6 +36,11 @@ public class GameManager : Singleton<GameManager>
         SetGameState(GameState.Playing);
     }
 
+	public void ReceiveLevelLoaded()
+	{
+		BlockManager.Instance.ResetAllBlocks();
+	}
+
     public void SetGameState(GameState inGameState)
     {
         if (m_currentState == inGameState)
@@ -45,5 +56,6 @@ public class GameManager : Singleton<GameManager>
         m_myPlayer.EnableCollider(false);
         m_myPlayer.canMove = true;
         SetGameState(GameState.Moving);
-    }
+        OnMovement?.Invoke();
+	}
 }

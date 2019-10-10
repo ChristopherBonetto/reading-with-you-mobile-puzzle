@@ -58,6 +58,7 @@ public class LevelSelectionWindow : UIControl
 
         // Turn on fade panel
         UIManager.Instance.Show(UIControlName.Fade);
+		GameManager.Instance.ReceiveLevelLoaded();
     }
 
     #region Switch level (OnClick)

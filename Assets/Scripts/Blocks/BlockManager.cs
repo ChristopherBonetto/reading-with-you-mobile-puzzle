@@ -2,75 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TouchManager : Singleton<TouchManager>
+public class BlockManager : Singleton<BlockManager>
 {
     #region Variables
-
-	private bool m_isHolding;
 
 	private Block m_holdBlock;
 
 	private Vector3 m_holdOffset;
 
 	[SerializeField]
-	private float m_dragZ = -2f;
+	private float m_DragZ = -2f;
 
 	[SerializeField]
-	private float m_gameZ = 0f;
+	private float m_GameZ = 0f;
+
+	public float DragZ => m_DragZ;
+
+	public float GameZ => m_GameZ;
 	
 	/// <summary>
 	/// Event on grabbing (true) and releasing (false)
 	/// </summary>
 	public Action<bool> OnGrab;
 
-	/// <summary>
-	/// Event on player movement start
-	/// </summary>
-	public Action OnMovement;
-
 	private List<Block> m_levelBlocks = new List<Block>();
 
 	public int UnstableBlocks;
 
     #endregion
-
-    #region Core loop
-
-    private void Start()
-	{
-        ResetAllBlocks();
-	}
-
-	void Update()
-	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit testHit))
-			{
-				Block testBlock = testHit.collider.GetComponent<Block>();
-				if (testBlock)
-				{
-                    StartDrag(testBlock);
-				}
-				else
-				{
-					Tap(testHit);
-				}
-			}
-		}
-
-		if (Input.GetMouseButton(0) && m_isHolding)
-		{
-			Move();
-		}
-
-		if (Input.GetMouseButtonUp(0) && m_isHolding)
-		{
-			Release();
-		}
-	}
-
-	#endregion
 
 	#region Level
 
@@ -95,12 +54,12 @@ public class TouchManager : Singleton<TouchManager>
     /// <summary>
     /// Reset level blocks to inventory
     /// </summary>
-	private void ResetAllBlocks()
+	public void ResetAllBlocks()
 	{
 		Block[] blocks = m_levelBlocks.ToArray();
 		for (int i = 0; i < blocks.Length; i++)
 		{
-            blocks[i].ResetBlock();
+			blocks[i].ResetBlock();
 		}
 	}
 
@@ -108,29 +67,9 @@ public class TouchManager : Singleton<TouchManager>
 
 	#region Dragging
 
-	private void Tap(RaycastHit hitted)
-	{
-        if(hitted.transform.GetComponent<PlayerActions>() || hitted.transform.GetComponent<FinalObjectActions>())
-        {
-            if (CanStart())
-            {
-                GameManager.Instance.StartWalkingPlayer();
-                OnMovement?.Invoke();
-            }
-        }
-	}
-
-	private bool CanStart()
-	{
-		return (!m_isHolding &&
-				GameManager.Instance.CurrentState != GameState.Moving &&
-				UnstableBlocks == 0);
-	}
-
-	private void StartDrag(Block holdBlock)
+	public void StartDrag(Block holdBlock)
 	{
 		// Holding state
-		m_isHolding = true;
 		m_holdBlock = holdBlock;
 		if (!m_holdBlock.enabled)
 		{
@@ -150,19 +89,19 @@ public class TouchManager : Singleton<TouchManager>
 		m_holdOffset = dragPosition - m_holdBlock.transform.position;
 	}
 
-	private void Move()
+	public void Move()
 	{
 		// Follow touch position maintaining grab point offset
 		Vector3 dragPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		dragPosition.z = m_dragZ;
+		dragPosition.z = m_DragZ;
 		m_holdBlock.transform.position = dragPosition - m_holdOffset;
 	}
 
-	private void Release()
+	public void Release()
 	{
 		// Snap to grid based on block size
 		Vector3 releasePosition = m_holdBlock.transform.position;
-		releasePosition.z = m_gameZ;
+		releasePosition.z = m_GameZ;
 		float halfXSize = m_holdBlock.Size / 2f;
 		releasePosition.x = Mathf.Round(releasePosition.x - halfXSize) + halfXSize;
 		m_holdBlock.transform.position = releasePosition;
@@ -194,7 +133,6 @@ public class TouchManager : Singleton<TouchManager>
 
         // Free state
 		m_holdBlock = null;
-		m_isHolding = false;
 	}
 
 	#endregion

@@ -4,19 +4,13 @@ public class Block : MonoBehaviour
 {
 	#region Variables
 
-	private TouchManager m_touchManager = null;
+	private BlockManager m_blockManager = null;
 
 	[SerializeField]
 	private Rigidbody m_rigidbody = null;
 
 	[SerializeField]
 	private Transform m_transform = null;
-
-    [SerializeField]
-    private float m_dragZ = -2f;
-
-    [SerializeField]
-    private float m_gameZ = 0f;
 
     private readonly RigidbodyConstraints m_moveConstraints = RigidbodyConstraints.FreezeAll;
 
@@ -49,7 +43,8 @@ public class Block : MonoBehaviour
 #if UNITY_EDITOR
 		NullChecks();
 #endif
-        Register();
+		m_blockManager = BlockManager.Instance;
+		Register();
         m_start = false;
 
         m_collisionTimeout = Time.fixedDeltaTime * 30;
@@ -57,17 +52,16 @@ public class Block : MonoBehaviour
 
     private void Register()
     {
-        m_touchManager = TouchManager.Instance;
-        m_touchManager.AddBlock(this);
-        m_touchManager.OnGrab += SetPhysicsInactive;
-        m_touchManager.OnMovement += FreezeBlocks;
+		m_blockManager.AddBlock(this);
+		m_blockManager.OnGrab += SetPhysicsInactive;
+		GameManager.Instance.OnMovement += FreezeBlocks;
     }
 
     private void UnRegister()
     {
-        m_touchManager.RemoveBlock(this);
-        m_touchManager.OnGrab -= SetPhysicsInactive;
-        m_touchManager.OnMovement -= FreezeBlocks;
+		m_blockManager.RemoveBlock(this);
+		m_blockManager.OnGrab -= SetPhysicsInactive;
+		GameManager.Instance.OnMovement -= FreezeBlocks;
     }
 
     private void Update()
@@ -127,8 +121,8 @@ public class Block : MonoBehaviour
 		}
 
 		m_isUnstable = bInIsUnstable;
-		int blockCount = TouchManager.Instance.UnstableBlocks;
-		TouchManager.Instance.UnstableBlocks = bInIsUnstable ? blockCount + 1 : blockCount - 1;
+		int blockCount = BlockManager.Instance.UnstableBlocks;
+		BlockManager.Instance.UnstableBlocks = bInIsUnstable ? blockCount + 1 : blockCount - 1;
 
 		// On start
 		if (m_isUnstable)
@@ -152,11 +146,11 @@ public class Block : MonoBehaviour
     }
 
     public void ResetBlock()
-    {
-        m_transform.position = new Vector3(Mathf.Round(UnityEngine.Random.Range(-4.5f, 4.5f)), -1.5f, m_dragZ);
-        m_transform.rotation = Quaternion.identity;
-        m_transform.localScale *= 0.8f;
-        SetPhysicsInactive(true);
+	{
+		m_transform.position = new Vector3(Mathf.Round(UnityEngine.Random.Range(-4.5f, 4.5f)), -1.5f, BlockManager.Instance.DragZ);
+		m_transform.rotation = Quaternion.identity;
+		m_transform.localScale *= 0.8f;
+		SetPhysicsInactive(true);
         enabled = false;
     }
 
@@ -168,7 +162,7 @@ public class Block : MonoBehaviour
         float halfXSize = Size / 2f;
         snapPosition.x = Mathf.Round(unstablePosition.x - halfXSize) + halfXSize;
         snapPosition.y = Mathf.Round(unstablePosition.y);
-        snapPosition.z = m_gameZ;
+        snapPosition.z = BlockManager.Instance.GameZ;
 
         m_transform.position = snapPosition;
         m_transform.rotation = Quaternion.identity;
@@ -181,6 +175,11 @@ public class Block : MonoBehaviour
 	{
 		if (m_rigidbody.useGravity)
 		{
+			if (collision.gameObject.GetComponent<PlayerActions>() || collision.gameObject.GetComponent<FinalObjectActions>())
+			{
+				ResetBlock();
+				return;
+			}
 			SetUnstable(true);
 			Block otherBlock = collision.gameObject.GetComponent<Block>();
 			if (otherBlock)
