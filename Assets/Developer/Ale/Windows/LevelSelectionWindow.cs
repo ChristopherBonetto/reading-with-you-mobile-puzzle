@@ -60,6 +60,14 @@ public class LevelSelectionWindow : UIControl
         UIManager.Instance.Show(UIControlName.Fade);
     }
 
+    /// <summary>
+    /// Home button (from level selection to main menu)
+    /// </summary>
+    public void ReturnToMainMenu()
+    {
+        UIManager.Instance.ShowAndHide(UIControlName.MainMenu, this);
+    }
+
     #region Switch level (OnClick)
     public void SwitchRigth()
     {

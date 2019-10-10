@@ -9,7 +9,8 @@ public class MainMenuWindow : UIControl
 
     protected override void Start()
     {
-        // Do nothing
+        UIManager.Instance.Register(this);
+        gameObject.SetActive(true);
     }
 
     public void OnShowLevelSelection() // button should execute this.
