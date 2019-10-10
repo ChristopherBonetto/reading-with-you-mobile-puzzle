@@ -52,23 +52,19 @@ public class PlayerActions : MonoBehaviour
 
         if (!Physics.Raycast(transform.position + Vector3.right * m_raycastFrontDistance, m_movement.normalized, m_movement.magnitude))
         {
-            if (Physics.Raycast(gameObject.transform.position + m_movement, Vector3.down, out m_nextFrameCollisionPoint, m_raycastDownDistance))
+            if (Physics.Raycast(gameObject.transform.position + m_movement, Vector3.down, out m_nextFrameCollisionPoint, m_raycastDownDistance) || Physics.Raycast(gameObject.transform.position + m_movement + new Vector3(0.15f,0,0), Vector3.down, out m_nextFrameCollisionPoint, m_raycastDownDistance))
             {
                 nextPointPosition = m_nextFrameCollisionPoint.point + Vector3.up * 0.5f;
-
-                if (nextPointPosition.y > transform.position.y)
+                
+                if(nextPointPosition.y == transform.position.y)
                 {
-                    Debug.Log("climb");
+                    transform.position = gameObject.transform.position + m_movement;
                 }
-                else if(nextPointPosition.y == transform.position.y)
+                else
                 {
-                    Debug.Log("forward");
+                    transform.position = nextPointPosition;
                 }
-                else if (nextPointPosition.y < transform.position.y)
-                {
-                    Debug.Log("slide");
-                }
-                transform.position = nextPointPosition;
+                
             }
             else
             {
@@ -85,6 +81,5 @@ public class PlayerActions : MonoBehaviour
     {
         gameObject.GetComponent<Collider>().enabled = bEnable;
     }
-
     
 }
