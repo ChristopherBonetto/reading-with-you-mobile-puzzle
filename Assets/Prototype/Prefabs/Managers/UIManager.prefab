@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 4163244872768799111}
   - component: {fileID: 8397793526636080371}
   m_Layer: 0
-  m_Name: Button
+  m_Name: Home Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -411,8 +411,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3751518073284270888}
-        m_MethodName: OnFadeInCompleted
+      - m_Target: {fileID: 406768429346880766}
+        m_MethodName: OnHomeButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

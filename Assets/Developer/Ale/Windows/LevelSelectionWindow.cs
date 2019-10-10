@@ -31,10 +31,33 @@ public class LevelSelectionWindow : UIControl
         SetIndexOfTheLevel();
     }
 
-    // On load game scene disable this window.
+    /// <summary>
+    /// CAlled when click a level.
+    /// </summary>
     public void OnLoadLevel()
     {
-        UIManager.Instance.ShowAndHide(UIControlName.Fade, this);
+        FadeBetweenScene fade = UIManager.Instance.Controls[UIControlName.Fade] as FadeBetweenScene;
+
+        #region Local Method
+        // Show game panel and turn off level panel (or this).
+        void ShowAndHideGameAndThis()
+        {
+            UIManager.Instance.ShowAndHide(UIControlName.InGame, this);
+        }
+
+        // Turn off fade panel
+        void HideFade()
+        {
+            UIManager.Instance.Hide(UIControlName.Fade);
+        }
+        #endregion
+
+        //Store into delegate
+        fade.OnFadeInComplete = ShowAndHideGameAndThis;
+        fade.OnFadeOutComplete = HideFade;
+
+        // Turn on fade panel
+        UIManager.Instance.Show(UIControlName.Fade);
     }
 
     #region Switch level (OnClick)
@@ -96,7 +119,7 @@ public class LevelSelectionWindow : UIControl
                 // assign the index of the level "j", of the world "i".
                 Worlds[i].Levels[j].Index = index;
 
-                Debug.Log(Worlds[i].Levels[j].Index);
+                //Debug.Log(Worlds[i].Levels[j].Index);
 
                 index++;
             }
