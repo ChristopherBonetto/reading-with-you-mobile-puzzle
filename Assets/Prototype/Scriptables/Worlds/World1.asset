@@ -14,8 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Preview: {fileID: 21300000, guid: 942086b09aef3874c9a184950e2d91e9, type: 3}
   Levels:
-  - Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  - Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  - Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  - Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  - Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 11400000, guid: f5f43404455ed4043b16ae49fd0088b9, type: 2}

@@ -2506,8 +2506,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Worlds:
   - {fileID: 11400000, guid: a12d5203da19c344ab35fcb109bd6553, type: 2}
-  - {fileID: 11400000, guid: 8d8f8205b53278441b42cafb0e7a2efe, type: 2}
-  - {fileID: 11400000, guid: 0620e800e14a2eb41a528da57156fd29, type: 2}
   m_worldPreview: {fileID: 5433977582775834699}
   m_buttons:
   - {fileID: 2306472987675638162}
