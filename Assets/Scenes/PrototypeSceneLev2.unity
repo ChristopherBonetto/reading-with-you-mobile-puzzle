@@ -316,6 +316,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF_Block_Ramp
       objectReference: {fileID: 0}
+    - target: {fileID: 5520966209934901377, guid: 70eb4b4f240dbd84ea2f4a3db181c660,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 5520966209934901382, guid: 70eb4b4f240dbd84ea2f4a3db181c660,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -375,6 +380,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8390491616697534595, guid: 70eb4b4f240dbd84ea2f4a3db181c660,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70eb4b4f240dbd84ea2f4a3db181c660, type: 3}
@@ -1172,6 +1182,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5759551514271352032, guid: 74ab3c7bc43f9d644a2229f5fd749a45,
+        type: 3}
+      propertyPath: m_raycastDownDistance
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5759551514271352032, guid: 74ab3c7bc43f9d644a2229f5fd749a45,
+        type: 3}
+      propertyPath: m_playerSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2586564900840947087, guid: 74ab3c7bc43f9d644a2229f5fd749a45,
         type: 3}

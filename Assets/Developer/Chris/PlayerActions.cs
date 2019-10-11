@@ -3,12 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum PlayerState
+{
+    Idle,
+    Walk,
+    Climb,
+    Slide,
+    Lose,
+    Win
+}
 
 public class PlayerActions : MonoBehaviour
 {
 
 #region Variables
     [SerializeField] private float m_playerSpeed;
+    private float m_effectivePlayerSpeed;
+
     [SerializeField] private float m_raycastFrontDistance;
     [SerializeField] private float m_raycastDownDistance;
 
@@ -30,15 +41,29 @@ public class PlayerActions : MonoBehaviour
             m_canMove = value;
         }
     }
-#endregion
 
+    public PlayerState m_currentPlayerState { get; private set; }
+
+    #endregion
+
+    private void Start()
+    {
+        m_effectivePlayerSpeed = m_playerSpeed;
+    }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            canMove = !canMove;
+        }
+
         if (canMove)
         {
             PlayerMovement();
         }
+
+        
     }
 
     
@@ -46,7 +71,7 @@ public class PlayerActions : MonoBehaviour
     private void PlayerMovement()
     {
         m_direction = Vector3.right;
-        m_movement = m_playerSpeed * m_direction * Time.deltaTime;
+        m_movement = m_effectivePlayerSpeed * m_direction * Time.deltaTime;
 
         Vector3 nextPointPosition;
 
@@ -56,27 +81,50 @@ public class PlayerActions : MonoBehaviour
             {
                 nextPointPosition = m_nextFrameCollisionPoint.point + Vector3.up * 0.5f;
                 
-                if(nextPointPosition.y == transform.position.y)
+                if(m_nextFrameCollisionPoint.transform.gameObject.layer != LayerMask.NameToLayer("Ramp"))
                 {
+                    SetPlayerState(PlayerState.Walk);
                     transform.position = gameObject.transform.position + m_movement;
                 }
-                else
+                else if(nextPointPosition.y > transform.position.y)
                 {
+                    SetPlayerState(PlayerState.Climb);
                     transform.position = nextPointPosition;
                 }
-                
+                else if (nextPointPosition.y < transform.position.y)
+                {
+                    SetPlayerState(PlayerState.Slide);
+                    transform.position = nextPointPosition;
+                }
+
             }
             else
             {
-                Debug.Log("no one block");
+                SetPlayerState(PlayerState.Lose);
             }
         }
         else
         {
-            Debug.Log("block in front of the player");
+            SetPlayerState(PlayerState.Lose);
         }
     }
     
+    public void SetPlayerState(PlayerState inNewState)
+    {
+        if(inNewState != m_currentPlayerState)
+        {
+            m_currentPlayerState = inNewState;
+            if(inNewState == PlayerState.Climb || inNewState == PlayerState.Slide)
+            {
+                m_effectivePlayerSpeed = m_playerSpeed / 2;
+            }
+            else
+            {
+                m_effectivePlayerSpeed = m_playerSpeed;
+            }
+        }
+    }
+
     public void EnableCollider(bool bEnable)
     {
         gameObject.GetComponent<Collider>().enabled = bEnable;

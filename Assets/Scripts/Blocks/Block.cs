@@ -108,7 +108,7 @@ public class Block : MonoBehaviour
         if (m_rigidbody.velocity.sqrMagnitude <= 0.01f &&
 			m_rigidbody.angularVelocity.sqrMagnitude <=0.01f &&
 			Time.time >= m_lastCollisionTime + m_collisionTimeout)
-		{
+		{            
 			SetUnstable(false);
 		}
     }
