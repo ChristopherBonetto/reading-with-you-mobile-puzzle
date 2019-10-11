@@ -2,13 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PangoBlecks/Level", fileName = "Name Level")]
+[CreateAssetMenu(menuName = "PangoBlocks/Level", fileName = "Name Level")]
 public class Level : ScriptableObject
 {
+    [System.Serializable]
+    public struct Block
+    {
+        public int ID;
+        public float OffSetOnX;
+    }
+
+    [System.Serializable]
+    public struct Goal
+    {
+        public int ID;
+        public Vector3 Coord;
+    }
+
+    // *** UI *** \\
+    [Header("UI field")]
     public Sprite Icon;
     public Sprite IconLocked;
 
-    public GameObject LevelPrefab;
+    // *** Level *** \\
+    [Header("Level reference")]
+    public PoolableObject LevelToPool;
+    public GameObject LevelPrefab => LevelToPool.gameObject;
+    public int LevelID => LevelToPool.uniqueID.ID;
 
+    //// *** Player *** \\
+    //[Header("Player")]
+    //public Transform PlayerSpawnPoint;
+
+    // *** Blocks *** \\
+    [Header("Block")]
+    public Block[] Blocks;
+
+    // *** Goal *** \\
+    [Header("Goal")]
+    public Goal GoalObject;
+
+    // don't need anymore
     public int Index { get; set; }
 }

@@ -19,7 +19,7 @@ public class LevelSelectionWindow : UIControl
     private Image m_worldPreview;
 
     [SerializeField]
-    private Button[] m_buttons;
+    private LevelButton[] m_buttons;
 
 
     protected override void Start()
@@ -29,36 +29,6 @@ public class LevelSelectionWindow : UIControl
         UpdateWorldAndLevelInfo();
 
         SetIndexOfTheLevel();
-    }
-
-    /// <summary>
-    /// CAlled when click a level.
-    /// </summary>
-    public void OnLoadLevel()
-    {
-        FadeBetweenScene fade = UIManager.Instance.Controls[UIControlName.Fade] as FadeBetweenScene;
-
-        #region Local Method
-        // Show game panel and turn off level panel (or this).
-        void ShowAndHideGameAndThis()
-        {
-            UIManager.Instance.ShowAndHide(UIControlName.InGame, this);
-        }
-
-        // Turn off fade panel
-        void HideFade()
-        {
-            UIManager.Instance.Hide(UIControlName.Fade);
-        }
-        #endregion
-
-        //Store into delegate
-        fade.OnFadeInComplete = ShowAndHideGameAndThis;
-        fade.OnFadeOutComplete = HideFade;
-
-        // Turn on fade panel
-        UIManager.Instance.Show(UIControlName.Fade);
-		GameManager.Instance.ReceiveLevelLoaded();
     }
 
     public void ReturnToMainMenu()
@@ -105,7 +75,7 @@ public class LevelSelectionWindow : UIControl
             if (i < Worlds[CurrentWorld].Levels.Length && Worlds[CurrentWorld].Levels[i] != null)
             {
                 // Active and set icon
-                m_buttons[i].image.sprite = Worlds[CurrentWorld].Levels[i].Icon;
+                m_buttons[i].Image.sprite = Worlds[CurrentWorld].Levels[i].Icon;
                 m_buttons[i].gameObject.SetActive(true);
             }
         }

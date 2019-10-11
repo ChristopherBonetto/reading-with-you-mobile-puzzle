@@ -16,4 +16,34 @@ public class LevelButton : MonoBehaviour
         Button = GetComponent<Button>();
         Image = GetComponentInChildren<Image>();
     }
+
+    /// <summary>
+    /// Called when click a button
+    /// </summary>
+    public void OnLoadLevel()
+    {
+        FadeBetweenScene fade = UIManager.Instance.Controls[UIControlName.Fade] as FadeBetweenScene;
+
+        #region Local Method
+        // Show game panel and turn off level panel (or this).
+        void ShowAndHideGameAndThis()
+        {
+            UIManager.Instance.ShowAndHide(UIControlName.InGame, UIManager.Instance.Controls[UIControlName.LevelSelection]);
+        }
+
+        // Turn off fade panel
+        void HideFade()
+        {
+            UIManager.Instance.Hide(UIControlName.Fade);
+        }
+        #endregion
+
+        //Store into delegate
+        fade.OnFadeInComplete = ShowAndHideGameAndThis;
+        fade.OnFadeOutComplete = HideFade;
+
+        // Turn on fade panel
+        UIManager.Instance.Show(UIControlName.Fade);
+        GameManager.Instance.ReceiveLevelLoaded();
+    }
 }
