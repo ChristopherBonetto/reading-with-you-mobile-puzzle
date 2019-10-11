@@ -61,6 +61,11 @@ public class LevelSelectionWindow : UIControl
 		GameManager.Instance.ReceiveLevelLoaded();
     }
 
+    public void ReturnToMainMenu()
+    {
+        UIManager.Instance.ShowAndHide(UIControlName.MainMenu, this);
+    }
+
     #region Switch level (OnClick)
     public void SwitchRigth()
     {
