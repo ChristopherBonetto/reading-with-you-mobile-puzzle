@@ -43,6 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee09c5aa8072944f93c60ac73873709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DragZ: -2
+  m_DragZ: -1.7
   m_GameZ: 0
   UnstableBlocks: 0

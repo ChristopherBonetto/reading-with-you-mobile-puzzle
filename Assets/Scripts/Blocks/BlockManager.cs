@@ -11,7 +11,7 @@ public class BlockManager : Singleton<BlockManager>
 	private Vector3 m_holdOffset;
 
 	[SerializeField]
-	private float m_DragZ = -2f;
+	private float m_DragZ = -1.7f;
 
 	[SerializeField]
 	private float m_GameZ = 0f;

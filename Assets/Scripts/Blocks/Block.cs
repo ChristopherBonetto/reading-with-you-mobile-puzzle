@@ -133,8 +133,8 @@ public class Block : MonoBehaviour
 		// On stop
 		else
 		{
-			if (m_transform.rotation.eulerAngles.sqrMagnitude >= 0.01f)
-			//if (m_transform.rotation != Quaternion.identity)
+			transform.rotation.ToAngleAxis(out float angle, out Vector3 axis);
+			if (angle >= 0.1f)
 			{
 				ResetBlock();
 			}
