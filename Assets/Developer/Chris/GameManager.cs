@@ -41,7 +41,15 @@ public class GameManager : Singleton<GameManager>
 		BlockManager.Instance.ResetAllBlocks();
 	}
 
-    public void SetGameState(GameState inGameState)
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.R))
+		{
+			ReceiveLevelLoaded();
+		}
+	}
+
+	public void SetGameState(GameState inGameState)
     {
         if (m_currentState == inGameState)
         {

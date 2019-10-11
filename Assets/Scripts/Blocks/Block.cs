@@ -12,6 +12,9 @@ public class Block : MonoBehaviour
 	[SerializeField]
 	private Transform m_transform = null;
 
+	[SerializeField]
+	private LerpMover m_lerpMover = null;
+
     private readonly RigidbodyConstraints m_moveConstraints = RigidbodyConstraints.FreezeAll;
 
 	private readonly RigidbodyConstraints m_dropConstraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
@@ -25,6 +28,8 @@ public class Block : MonoBehaviour
     private bool m_isUnstable = false;
 
     private bool m_start = true;
+
+	public float InventoryX;
     
 	#endregion
 
@@ -86,6 +91,16 @@ public class Block : MonoBehaviour
 		{
 			Debug.LogError(name + " has no rigidbody reference!", this);
 		}
+
+		if (!m_transform)
+		{
+			Debug.LogError(name + " has no transform reference!", this);
+		}
+
+		if (!m_lerpMover)
+		{
+			Debug.LogError(name + " has no lerp mover reference!", this);
+		}
 	}
 
 	#endregion
@@ -144,11 +159,10 @@ public class Block : MonoBehaviour
 			}
 		}
     }
-
     public void ResetBlock()
 	{
-		m_transform.position = new Vector3(Mathf.Round(UnityEngine.Random.Range(-4.5f, 4.5f)), -1.5f, BlockManager.Instance.DragZ);
-		m_transform.rotation = Quaternion.identity;
+		m_transform.position = new Vector3(m_transform.position.x, m_transform.position.y, BlockManager.Instance.DragZ);
+		m_lerpMover.SetDestination(new Vector3(InventoryX, -1.5f, BlockManager.Instance.DragZ));
 		m_transform.localScale *= 0.8f;
 		SetPhysicsInactive(true);
         enabled = false;

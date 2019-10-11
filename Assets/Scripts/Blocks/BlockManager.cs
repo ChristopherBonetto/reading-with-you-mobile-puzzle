@@ -56,9 +56,12 @@ public class BlockManager : Singleton<BlockManager>
     /// </summary>
 	public void ResetAllBlocks()
 	{
+		float inventoryOffset = -2.5f;
 		Block[] blocks = m_levelBlocks.ToArray();
 		for (int i = 0; i < blocks.Length; i++)
 		{
+			blocks[i].InventoryX = inventoryOffset;
+			inventoryOffset += blocks[i].Size / 2f + 1f;
 			blocks[i].ResetBlock();
 		}
 	}
