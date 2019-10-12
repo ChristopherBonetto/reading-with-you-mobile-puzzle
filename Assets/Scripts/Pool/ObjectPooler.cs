@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooler : Singleton<ObjectPooler>
+public class ObjectPooler : MonoBehaviour
 {
 	/* Inner class */
 	[System.Serializable]
@@ -27,18 +27,19 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
 		[HideInInspector]
 		public int CurrentCount = 0;
+
+        
 	}
 
 	[SerializeField]
 	private List<ObjectPoolItem> m_poolItems = new List<ObjectPoolItem>();
 
 	private List<PoolableObject> m_objectPool = new List<PoolableObject>();
+        
 
-	protected override void Awake()
+    private void Awake()
 	{
-		base.Awake();
-
-		foreach (ObjectPoolItem item in m_poolItems)
+        foreach (ObjectPoolItem item in m_poolItems)
 		{
 			for (int i = 0; i < item.BasePoolSize; i++)
 			{
@@ -46,10 +47,10 @@ public class ObjectPooler : Singleton<ObjectPooler>
 			}
 		}
 	}
+    
+    /* Pooled objects might have an interface to Reset when they aren't needed any more */
 
-	/* Pooled objects might have an interface to Reset when they aren't needed any more */
-
-	public GameObject GetPooledObject(int poolID)
+    public GameObject GetPooledObject(int poolID)
 	{
 		for (int i = 0; i < m_objectPool.Count; i++)
 		{
@@ -62,6 +63,10 @@ public class ObjectPooler : Singleton<ObjectPooler>
 					return go; 
 				}
 			}
+            else
+            {
+                Debug.Log("Wrong ID searched");
+            }
 		}
 
 		for (int i = 0; i < m_poolItems.Count; i++)
@@ -99,6 +104,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
 		if (prefab)
 		{
 			PoolableObject obj = Instantiate(prefab);
+            obj.transform.parent = gameObject.transform;
 			obj.gameObject.SetActive(false);
 			item.CurrentCount++;
 			m_objectPool.Add(obj);

@@ -49,21 +49,16 @@ public class PlayerActions : MonoBehaviour
     private void Start()
     {
         m_effectivePlayerSpeed = m_playerSpeed;
+        Debug.Log(GameManager.Instance.CurrentState);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            canMove = !canMove;
-        }
-
+        
         if (canMove)
         {
             PlayerMovement();
         }
-
-        
     }
 
     
