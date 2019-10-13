@@ -77,9 +77,11 @@ public class LevelSelectionWindow : UIControl
                 // Active and set icon
                 m_buttons[i].Image.sprite = Worlds[CurrentWorld].Levels[i].Icon;
                 m_buttons[i].gameObject.SetActive(true);
+                m_buttons[i].LevelID = Worlds[CurrentWorld].Levels[i].LevelID;
             }
         }
     }
+
 
     /// <summary>
     /// Set the level's index.

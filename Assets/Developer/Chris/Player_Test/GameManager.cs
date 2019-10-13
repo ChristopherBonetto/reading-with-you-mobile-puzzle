@@ -44,7 +44,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private ObjectPooler m_blockPooler;
 
     [SerializeField] private GameObject[] m_worldsPooler;
-    private List<ObjectPooler> m_listOfWorlds = new List<ObjectPooler>();
+    public List<ObjectPooler> m_listOfWorlds = new List<ObjectPooler>();
 
     private GameObject m_currentLevel = null;
     private GameObject m_currentWorld = null;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
@@ -10,6 +11,7 @@ public class LevelButton : MonoBehaviour
     public Button Button { get; private set; }
     public Image Image { get; private set; }
 
+    public int LevelID { get; set; }
 
     private void Awake()
     {
@@ -29,6 +31,11 @@ public class LevelButton : MonoBehaviour
         void ShowAndHideGameAndThis()
         {
             UIManager.Instance.ShowAndHide(UIControlName.InGame, UIManager.Instance.Controls[UIControlName.LevelSelection]);
+
+            // pick level to enable.
+            LevelSelectionWindow levelSelection = UIManager.Instance.Controls[UIControlName.LevelSelection] as LevelSelectionWindow;
+            int currentWorld = levelSelection.CurrentWorld;
+            GameManager.Instance.m_listOfWorlds[currentWorld].GetPooledObject(LevelID);
         }
 
         // Turn off fade panel
