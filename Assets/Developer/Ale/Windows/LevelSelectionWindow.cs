@@ -11,10 +11,10 @@ public class LevelSelectionWindow : UIControl
     public override UIControlName Name => UIControlName.LevelSelection;
 
 
-    [Header("Worlds")]
-    public World[] Worlds;
-    public int WorldsLength => Worlds.Length;
-    public int CurrentWorld { get; private set; } = 0;
+    //[Header("Worlds")]
+	private World[] Worlds => GameManager.Instance.Worlds;
+	private int WorldsLength => Worlds.Length;
+	private int CurrentWorld;// { get; private set; } = 0;
 
     [Header("WorldPreview")]
     [SerializeField]
@@ -73,6 +73,13 @@ public class LevelSelectionWindow : UIControl
     /// </summary>
     private void UpdateWorldAndLevelInfo()
     {
+		//@TEMP Not enough worlds in the list
+		// Refactor world update
+		if (WorldsLength <= CurrentWorld)
+		{
+			return;
+		}
+
         m_worldPreview.sprite = Worlds[CurrentWorld].Preview;
 
         for (int i = 0; i < m_buttons.Length; i++)
@@ -84,9 +91,11 @@ public class LevelSelectionWindow : UIControl
 
             if (i < Worlds[CurrentWorld].Levels.Length && Worlds[CurrentWorld].Levels[i] != null)
             {
-                // Set a level for each button
-                m_buttons[i].Level = Worlds[CurrentWorld].Levels[i];
-                m_buttons[i].gameObject.SetActive(true);
+				// Set a level for each button
+				//m_buttons[i].Level = Worlds[CurrentWorld].Levels[i];
+				m_buttons[i].LevelNumber = i;
+				m_buttons[i].Image.sprite = Worlds[CurrentWorld].Levels[i].Icon;
+				m_buttons[i].gameObject.SetActive(true);
             }
         }
     }

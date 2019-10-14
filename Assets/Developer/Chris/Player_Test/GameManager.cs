@@ -1,7 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 
 public enum GameState
 {
@@ -43,11 +41,10 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private ObjectPooler m_blockPooler;
 
-    [SerializeField] private GameObject[] m_worldsPooler;
-    public List<World> m_listOfWorlds = new List<World>();
+	public World[] Worlds;
 
-	//private GameObject m_currentLevel = null;
-	//private GameObject m_currentWorld = null;
+	private int m_currentLevel;
+	private int m_currentWorld;
 
 	private Vector3 m_playerStartPosition;
 
@@ -62,32 +59,14 @@ public class GameManager : Singleton<GameManager>
 
 	public GameState CurrentState => m_currentState;
 
-    public void AdvanceToNextScene()
-    {
-        int currentScene = SceneManager.GetActiveScene().buildIndex;
-        int nextScene = (currentScene < SceneManager.sceneCountInBuildSettings - 1 ?
-            // Load next scene
-            currentScene + 1 :
-            // Load first scene
-            0);
-
-        SceneManager.LoadScene(nextScene);
-        SetGameState(GameState.Playing);
-    }
-
     public void ReceiveLevelLoaded()
 	{
 		BlockManager.Instance.ResetAllBlocks();
 	}
 
-    protected override void Awake()
-    {
-        base.Awake();
-        //StartWorldsInstantiate();
-    }
-
 	private void Start()
 	{
+		//@TEMP This will be loaded with level info
 		if (Player)
 		{
 			m_playerStartPosition = Player.transform.position; 
@@ -100,19 +79,6 @@ public class GameManager : Singleton<GameManager>
 		{
 			ReceiveLevelLoaded();
 		}
-
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //{
-        //    ChangeLevel(0, 1);
-        //}
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    ChangeLevel(0, 2);
-        //}
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    ChangeLevel(1, 1);
-        //}
 
     }
 
@@ -134,71 +100,75 @@ public class GameManager : Singleton<GameManager>
         OnMovement?.Invoke();
 	}
 
-	public void LoadLevel(int LevelID)
+	public void LoadLevel(int levelNo)
 	{
+		LoadLevel(m_currentWorld, levelNo);
+	}
+
+	private void LoadLevel(int worldNo, int levelNo)
+	{
+		// Unload current level
 		if (m_currentMap)
 		{
 			m_currentMap.SetActive(false);
+			//@TODO Disable blocks
+			//@TEMP
+			ReceiveLevelLoaded();
+			//@TODO Disable objective
 		}
-		m_currentMap = ObjectPooler.Instance.GetPooledObject(LevelID);
-		m_currentMap.SetActive(true);
 
-		Player.EnableCollider(true);
-		Player.canMove = false;
-		Player.transform.position = m_playerStartPosition;
-		SetGameState(GameState.Playing);
+		// Load level
+		m_currentWorld = worldNo;
+		m_currentLevel = levelNo;
+		int levelID = GetLevelID();
+		if (levelID >= 0)
+		{
+			//@TODO Handle load level animation
+			m_currentMap = ObjectPooler.Instance.GetPooledObject(levelID);
+			m_currentMap.SetActive(true);
+			Player.ResetLevel(m_playerStartPosition);
+			//@TODO Set objective
+			SetGameState(GameState.Playing);
+		}
+		else
+		{
+			Debug.Log("Level number out of bounds");
+		}
 	}
 
-	//private void StartWorldsInstantiate()
-	//{
-	//    for(int i = 0; i < m_worldsPooler.Length; i++)
-	//    {
-	//        GameObject world = Instantiate(m_worldsPooler[i].gameObject);
-	//        m_listOfWorlds.Add(world.GetComponent<ObjectPooler>());
-	//        world.transform.name = "World" + i;
-	//        world.SetActive(false);
-	//    }
-	//}
+	private int GetLevelID()
+	{
+		if (m_currentWorld < Worlds.Length && m_currentLevel < Worlds[m_currentWorld].Levels.Length)
+		{
+			return Worlds[m_currentWorld].Levels[m_currentLevel].LevelID;
+		}
+		else
+		{
+			return -1;
+		}
+	}
 
-	//public void ChangeLevel(int worldNumber, int levelNumber)
-	//{       
-
-	//    if(worldNumber <= m_listOfWorlds.Count)
-	//    {
-	//        if(m_currentLevel != null)
-	//        {
-	//            m_currentLevel.SetActive(false);
-	//            m_currentLevel = null;
-	//        }
-
-	//        if(m_currentWorld != m_listOfWorlds[worldNumber].transform.gameObject)
-	//        {
-	//            if(m_currentWorld != null)
-	//            {
-	//                m_currentWorld.SetActive(false);
-	//            }
-
-	//            m_currentWorld = m_listOfWorlds[worldNumber].transform.gameObject;
-	//            m_currentWorld.SetActive(true);
-
-	//            m_currentLevel = m_listOfWorlds[worldNumber].GetPooledObject(levelNumber);
-	//        }
-	//        else if(m_currentWorld == m_listOfWorlds[worldNumber].transform.gameObject)
-	//        {
-	//            m_currentLevel = m_listOfWorlds[worldNumber].GetPooledObject(levelNumber);
-	//        }
-
-	//        if(m_currentLevel != null)
-	//        {
-	//            m_currentLevel.SetActive(true);
-	//        }
-	//    }
-	//    else
-	//    {
-	//        Debug.Log("Not enought worlds");
-	//    }
-
-	//}
-
-
+	public void EndLevel(bool bWin)
+	{
+		if (bWin)
+		{
+			// Load next level
+			if (m_currentLevel < Worlds[m_currentWorld].Levels.Length - 1)
+			{
+				LoadLevel(m_currentLevel + 1);
+			}
+			else if (m_currentWorld < Worlds.Length - 1)
+			{
+				//@TODO Handle end world animations
+				LoadLevel(m_currentWorld + 1, 0);
+			}
+		}
+		else
+		{
+			// Reload animation
+			Player.ResetLevel(m_playerStartPosition);
+			//@TEMP this will be probably changed
+			SetGameState(GameState.Playing);
+		}
+	}
 }

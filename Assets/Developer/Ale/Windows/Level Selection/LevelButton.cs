@@ -12,9 +12,9 @@ public class LevelButton : MonoBehaviour
     /// </summary>
     public Level Level { get; set; }
     /// <summary>
-    /// Level's ID
+    /// Level's progressive number in current world
     /// </summary>
-    public int LevelID { get; set; }
+    public int LevelNumber { get; set; }
 
     /// <summary>
     /// Button component
@@ -32,11 +32,11 @@ public class LevelButton : MonoBehaviour
         Image = GetComponentInChildren<Image>();
     }
 
-    private void OnEnable()
-    {
-        Image.sprite = Level.Icon;
-        LevelID = Level.LevelID;
-    }
+    //private void OnEnable()
+    //{
+    //    Image.sprite = Level.Icon;
+    //    LevelNumber = Level.LevelID;
+    //}
     #endregion
 
     /// <summary>
@@ -52,8 +52,8 @@ public class LevelButton : MonoBehaviour
         {
             UIManager.Instance.ShowAndHide(UIControlName.InGame, UIManager.Instance.Controls[UIControlName.LevelSelection]);
 
-            // load level assigne to this button.
-            GameManager.Instance.LoadLevel(LevelID);
+            // load level assigned to this button.
+            GameManager.Instance.LoadLevel(LevelNumber);
         }
 
         // Turn off fade panel

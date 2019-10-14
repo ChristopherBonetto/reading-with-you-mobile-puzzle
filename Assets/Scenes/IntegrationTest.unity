@@ -1914,9 +1914,8 @@ MonoBehaviour:
   m_player: {fileID: 934272269}
   m_finalObject: {fileID: 2115932004}
   m_blockPooler: {fileID: 0}
-  m_worldsPooler: []
-  m_listOfWorlds:
-  - {fileID: 0}
+  Worlds:
+  - {fileID: 11400000, guid: a12d5203da19c344ab35fcb109bd6553, type: 2}
 --- !u!4 &1942291698
 Transform:
   m_ObjectHideFlags: 0
