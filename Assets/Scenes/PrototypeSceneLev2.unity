@@ -825,7 +825,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 568e7cfc835fa27439e59842193b4119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_myPlayer: {fileID: 4933133153775299406}
+  m_player: {fileID: 4933133153775299406}
+  m_finalObject: {fileID: 1781828447}
+  m_blockPooler: {fileID: 0}
+  m_worldsPooler: []
+  m_listOfWorlds: []
 --- !u!4 &1490365433
 Transform:
   m_ObjectHideFlags: 0
@@ -1032,6 +1036,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1781828447 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8415867389406793365, guid: b04a062de2455cc4f87a3d55f5c6cebf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1928407082}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51872f4714647144bf4445cce28e959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1928407082
 PrefabInstance:
   m_ObjectHideFlags: 0

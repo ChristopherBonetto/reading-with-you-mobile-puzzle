@@ -5,30 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class FinalObjectActions : MonoBehaviour
 {
-    private int m_IndexScene;
+    [SerializeField] private GameObject m_tutorialLevel;
+    private int currentLevel = 1;
 
-    // Start is called before the first frame update
-    void Start()
+    
+
+    public void NextLevel()
     {
-        m_IndexScene = SceneManager.GetActiveScene().buildIndex;
-
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<PlayerActions>())
-        {
-            Debug.Log("ciao");
-            if (m_IndexScene < SceneManager.sceneCountInBuildSettings - 1)
-            {
-                // Load next scene
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            }
-            else
-            {
-                // Load first scene
-                SceneManager.LoadScene(0);
-            }
-        }
+        m_tutorialLevel.SetActive(false);
+        GameManager.Instance.ChangeLevel(0, currentLevel);
+        GameManager.Instance.SetGameState(GameState.Playing);
+        currentLevel++;
     }
 }

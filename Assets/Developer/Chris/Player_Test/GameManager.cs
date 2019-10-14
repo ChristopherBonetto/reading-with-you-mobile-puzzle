@@ -98,11 +98,11 @@ public class GameManager : Singleton<GameManager>
         {
             ChangeLevel(0, 1);
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             ChangeLevel(0, 2);
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             ChangeLevel(1, 1);
         }

@@ -28,6 +28,9 @@ public class PlayerActions : MonoBehaviour
     private float m_xPlayerPosition;
 
     private RaycastHit m_nextFrameCollisionPoint;
+    private RaycastHit m_frontRaycastHit;
+
+    
 
     private bool m_canMove = false;
     public bool canMove
@@ -59,6 +62,8 @@ public class PlayerActions : MonoBehaviour
         {
             PlayerMovement();
         }
+
+
     }
 
     
@@ -70,7 +75,7 @@ public class PlayerActions : MonoBehaviour
 
         Vector3 nextPointPosition;
 
-        if (!Physics.Raycast(transform.position + Vector3.right * m_raycastFrontDistance, m_movement.normalized, m_movement.magnitude))
+        if (!Physics.Raycast(transform.position + Vector3.right * m_raycastFrontDistance, m_movement.normalized, out m_frontRaycastHit , m_movement.magnitude))
         {
             if (Physics.Raycast(gameObject.transform.position + m_movement, Vector3.down, out m_nextFrameCollisionPoint, m_raycastDownDistance) || Physics.Raycast(gameObject.transform.position + m_movement + new Vector3(0.15f,0,0), Vector3.down, out m_nextFrameCollisionPoint, m_raycastDownDistance))
             {
@@ -100,7 +105,18 @@ public class PlayerActions : MonoBehaviour
         }
         else
         {
-            SetPlayerState(PlayerState.Lose);
+            if(m_frontRaycastHit.transform.GetComponent<FinalObjectActions>())
+            {
+                m_frontRaycastHit.transform.GetComponent<FinalObjectActions>().NextLevel();
+                EnableCollider(true);
+                canMove = false;
+            }
+            else
+            {
+                SetPlayerState(PlayerState.Lose);
+                canMove = false;
+            }
+            
         }
     }
     
