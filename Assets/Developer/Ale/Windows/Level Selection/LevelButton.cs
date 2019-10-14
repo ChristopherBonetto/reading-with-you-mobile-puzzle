@@ -7,20 +7,40 @@ using UnityEngine.UI;
 /// </summary>
 public class LevelButton : MonoBehaviour
 {
-    // Button (Unity object) references.
-    public Button Button { get; private set; }
-    public Image Image { get; private set; }
-
+    /// <summary>
+    /// Level assigne to this button.
+    /// </summary>
+    public Level Level { get; set; }
+    /// <summary>
+    /// Level's ID
+    /// </summary>
     public int LevelID { get; set; }
 
+    /// <summary>
+    /// Button component
+    /// </summary>
+    public Button Button { get; private set; }
+    /// <summary>
+    /// Image component
+    /// </summary>
+    public Image Image { get; private set; }
+
+    #region Monobehaviour
     private void Awake()
     {
         Button = GetComponent<Button>();
         Image = GetComponentInChildren<Image>();
     }
 
+    private void OnEnable()
+    {
+        Image.sprite = Level.Icon;
+        LevelID = Level.LevelID;
+    }
+    #endregion
+
     /// <summary>
-    /// Called when click a button
+    /// Called when click a button in level selection.
     /// </summary>
     public void OnLoadLevel()
     {
@@ -32,9 +52,7 @@ public class LevelButton : MonoBehaviour
         {
             UIManager.Instance.ShowAndHide(UIControlName.InGame, UIManager.Instance.Controls[UIControlName.LevelSelection]);
 
-            // pick level to enable.
-            LevelSelectionWindow levelSelection = UIManager.Instance.Controls[UIControlName.LevelSelection] as LevelSelectionWindow;
-            int currentWorld = levelSelection.CurrentWorld;
+            // load level assigne to this button.
             GameManager.Instance.LoadLevel(LevelID);
         }
 

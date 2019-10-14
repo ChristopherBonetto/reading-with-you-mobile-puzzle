@@ -12,6 +12,9 @@ public enum UIControlName
     Fade,
 }
 
+/// <summary>
+/// It's a common point between UI controls.
+/// </summary>
 public class UIManager : Singleton<UIManager>
 {
     /// <summary>
@@ -19,10 +22,10 @@ public class UIManager : Singleton<UIManager>
     /// </summary>
     public Dictionary<UIControlName, UIControl> Controls = new Dictionary<UIControlName, UIControl>();
 
+    #region Methods
     /// <summary>
     /// Register a ui control
     /// </summary>
-    /// <param name="uiControl"></param>
     public void Register(UIControl uiControl)
     {
         if (uiControl != null && !Controls.ContainsKey(uiControl.Name))
@@ -35,7 +38,6 @@ public class UIManager : Singleton<UIManager>
     /// <summary>
     /// Unregister a ui control
     /// </summary>
-    /// <param name="uiControl"></param>
     public void Unregister(UIControl uiControl)
     {
         if (uiControl != null && !Controls.ContainsKey(uiControl.Name))
@@ -47,7 +49,6 @@ public class UIManager : Singleton<UIManager>
     /// <summary>
     /// Show a ui control
     /// </summary>
-    /// <param name="uiControlName"></param>
     public void Show(UIControlName uiControlName)
     {
         if (Controls.TryGetValue(uiControlName, out UIControl control))
@@ -59,7 +60,6 @@ public class UIManager : Singleton<UIManager>
     /// <summary>
     /// Hide a ui control
     /// </summary>
-    /// <param name="uiControlName"></param>
     public void Hide(UIControlName uiControlName)
     {
         if (Controls.TryGetValue(uiControlName, out UIControl control))
@@ -72,8 +72,6 @@ public class UIManager : Singleton<UIManager>
     /// Show the first ui control with the same name as the string,
     /// and hide the second put as parameter.
     /// </summary>
-    /// <param name="uiControlName"></param>
-    /// <param name="cToHide"></param>
     public void ShowAndHide(UIControlName uiControlName, UIControl cToHide)
     {
         if (uiControlName == cToHide.Name)
@@ -89,4 +87,5 @@ public class UIManager : Singleton<UIManager>
         else
             Debug.Log(uiControlName + " or " + control.Name + " panel doesn't exist");
     }
+    #endregion
 }

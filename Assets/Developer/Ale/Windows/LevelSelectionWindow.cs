@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manage the UI between level selectionand other control / panel
+/// </summary>
 public class LevelSelectionWindow : UIControl
 {
-    // it is equal to write: string Name { get { return "..." } }
     public override UIControlName Name => UIControlName.LevelSelection;
 
-    // Scriptable
-    public World[] Worlds;
 
+    [Header("Worlds")]
+    public World[] Worlds;
+    public int WorldsLength => Worlds.Length;
     public int CurrentWorld { get; private set; } = 0;
 
-    public int WorldsLength => Worlds.Length;
-
+    [Header("WorldPreview")]
     [SerializeField]
     private Image m_worldPreview;
 
+    [Header("Buttons")]
     [SerializeField]
     private LevelButton[] m_buttons;
 
@@ -27,16 +30,20 @@ public class LevelSelectionWindow : UIControl
         base.Start();
 
         UpdateWorldAndLevelInfo();
-
-        SetIndexOfTheLevel();
     }
 
+    /// <summary>
+    /// return to Main menu
+    /// </summary>
     public void ReturnToMainMenu()
     {
         UIManager.Instance.ShowAndHide(UIControlName.MainMenu, this);
     }
 
     #region Switch level (OnClick)
+    /// <summary>
+    /// Switch current world to the next one
+    /// </summary>
     public void SwitchRigth()
     {
         CurrentWorld++;
@@ -47,6 +54,9 @@ public class LevelSelectionWindow : UIControl
         UpdateWorldAndLevelInfo();
     }
 
+    /// <summary>
+    /// Switch current worldto the previus one
+    /// </summary>
     public void SwitchLeft()
     {
         CurrentWorld--;
@@ -74,32 +84,9 @@ public class LevelSelectionWindow : UIControl
 
             if (i < Worlds[CurrentWorld].Levels.Length && Worlds[CurrentWorld].Levels[i] != null)
             {
-                // Active and set icon
-                m_buttons[i].Image.sprite = Worlds[CurrentWorld].Levels[i].Icon;
+                // Set a level for each button
+                m_buttons[i].Level = Worlds[CurrentWorld].Levels[i];
                 m_buttons[i].gameObject.SetActive(true);
-                m_buttons[i].LevelID = Worlds[CurrentWorld].Levels[i].LevelID;
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// Set the level's index.
-    /// </summary>
-    public void SetIndexOfTheLevel()
-    {
-        int index = 0;
-
-        for (int i = 0; i < WorldsLength; i++)
-        {
-            for (int j = 0; j < Worlds[i].Levels.Length; j++)
-            {
-                // assign the index of the level "j", of the world "i".
-                Worlds[i].Levels[j].Index = index;
-
-                //Debug.Log(Worlds[i].Levels[j].Index);
-
-                index++;
             }
         }
     }

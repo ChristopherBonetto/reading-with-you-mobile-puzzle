@@ -13,7 +13,7 @@ public class FinalObjectActions : MonoBehaviour
     public void NextLevel()
     {
         m_tutorialLevel.SetActive(false);
-        GameManager.Instance.ChangeLevel(0, currentLevel);
+        //GameManager.Instance.ChangeLevel(0, currentLevel);
         GameManager.Instance.SetGameState(GameState.Playing);
         currentLevel++;
     }

@@ -1227,7 +1227,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6785157470584315972}
-        m_MethodName: OnBackToMainElements
+        m_MethodName: OnCreditsExitButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1438,7 +1438,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5502267998034522965}
-        m_MethodName: OnShowLevelSelection
+        m_MethodName: OnStartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2611,7 +2611,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7404190948325017249}
-        m_MethodName: OnCreditsSelection
+        m_MethodName: OnCreditsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
