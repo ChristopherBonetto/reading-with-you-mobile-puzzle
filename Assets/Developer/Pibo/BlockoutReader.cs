@@ -3,6 +3,7 @@ using UnityEditor;
 
 public class BlockoutReader : MonoBehaviour
 {
+#if UNITY_EDITOR
 	[SerializeField]
 	private Level m_levelPrototype = null;
 
@@ -49,4 +50,5 @@ public class BlockoutReader : MonoBehaviour
 		// Save
 		AssetDatabase.CreateAsset(poolLevel, poolLevelName);
 	}
+#endif
 }
