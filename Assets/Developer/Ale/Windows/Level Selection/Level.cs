@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "PangoBlocks/Level", fileName = "Name Level")]
 public class Level : ScriptableObject
@@ -26,8 +24,8 @@ public class Level : ScriptableObject
 
     // *** Level *** \\
     [Header("Level reference")]
-    public PoolableObject LevelToPool;
-    public GameObject LevelPrefab => LevelToPool.gameObject;
+	public GameObject LevelPrefab;
+    public PoolableObject LevelToPool => LevelPrefab.GetComponent<PoolableObject>();
     public int LevelID => LevelToPool.uniqueID.ID;
 
     //// *** Player *** \\

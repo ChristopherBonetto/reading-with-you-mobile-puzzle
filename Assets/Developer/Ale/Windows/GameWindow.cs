@@ -37,6 +37,15 @@ public class GameWindow : UIControl
         UIManager.Instance.ShowAndHide(UIControlName.Fade, this);
     }
 
+	//@TEMP
+	/// <summary>
+	/// Called when click reset block button
+	/// </summary>
+	public void OnResetBlockButton()
+	{
+		GameManager.Instance.ReceiveLevelLoaded();
+	}
+
     /// <summary>
     /// Called when a level is completed.
     /// </summary>

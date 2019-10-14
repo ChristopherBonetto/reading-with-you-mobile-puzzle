@@ -44,10 +44,14 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private ObjectPooler m_blockPooler;
 
     [SerializeField] private GameObject[] m_worldsPooler;
-    public List<ObjectPooler> m_listOfWorlds = new List<ObjectPooler>();
+    public List<World> m_listOfWorlds = new List<World>();
 
-    private GameObject m_currentLevel = null;
-    private GameObject m_currentWorld = null;
+	//private GameObject m_currentLevel = null;
+	//private GameObject m_currentWorld = null;
+
+	private Vector3 m_playerStartPosition;
+
+	private GameObject m_currentMap;
 
 	/// <summary>
 	/// Event on player movement start
@@ -79,33 +83,36 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        StartWorldsInstantiate();
+        //StartWorldsInstantiate();
     }
 
-    private void Start()
-    {
-        
-    }
+	private void Start()
+	{
+		if (Player)
+		{
+			m_playerStartPosition = Player.transform.position; 
+		}
+	}
 
-    private void Update()
+	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.R))
 		{
 			ReceiveLevelLoaded();
 		}
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            ChangeLevel(0, 1);
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            ChangeLevel(0, 2);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            ChangeLevel(1, 1);
-        }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    ChangeLevel(0, 1);
+        //}
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    ChangeLevel(0, 2);
+        //}
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    ChangeLevel(1, 1);
+        //}
 
     }
 
@@ -127,56 +134,71 @@ public class GameManager : Singleton<GameManager>
         OnMovement?.Invoke();
 	}
 
-    private void StartWorldsInstantiate()
-    {
-        for(int i = 0; i < m_worldsPooler.Length; i++)
-        {
-            GameObject world = Instantiate(m_worldsPooler[i].gameObject);
-            m_listOfWorlds.Add(world.GetComponent<ObjectPooler>());
-            world.transform.name = "World" + i;
-            world.SetActive(false);
-        }
-    }
+	public void LoadLevel(int LevelID)
+	{
+		if (m_currentMap)
+		{
+			m_currentMap.SetActive(false);
+		}
+		m_currentMap = ObjectPooler.Instance.GetPooledObject(LevelID);
+		m_currentMap.SetActive(true);
 
-    public void ChangeLevel(int worldNumber, int levelNumber)
-    {       
+		Player.EnableCollider(true);
+		Player.canMove = false;
+		Player.transform.position = m_playerStartPosition;
+		SetGameState(GameState.Playing);
+	}
 
-        if(worldNumber <= m_listOfWorlds.Count)
-        {
-            if(m_currentLevel != null)
-            {
-                m_currentLevel.SetActive(false);
-                m_currentLevel = null;
-            }
+	//private void StartWorldsInstantiate()
+	//{
+	//    for(int i = 0; i < m_worldsPooler.Length; i++)
+	//    {
+	//        GameObject world = Instantiate(m_worldsPooler[i].gameObject);
+	//        m_listOfWorlds.Add(world.GetComponent<ObjectPooler>());
+	//        world.transform.name = "World" + i;
+	//        world.SetActive(false);
+	//    }
+	//}
 
-            if(m_currentWorld != m_listOfWorlds[worldNumber].transform.gameObject)
-            {
-                if(m_currentWorld != null)
-                {
-                    m_currentWorld.SetActive(false);
-                }
+	//public void ChangeLevel(int worldNumber, int levelNumber)
+	//{       
 
-                m_currentWorld = m_listOfWorlds[worldNumber].transform.gameObject;
-                m_currentWorld.SetActive(true);
+	//    if(worldNumber <= m_listOfWorlds.Count)
+	//    {
+	//        if(m_currentLevel != null)
+	//        {
+	//            m_currentLevel.SetActive(false);
+	//            m_currentLevel = null;
+	//        }
 
-                m_currentLevel = m_listOfWorlds[worldNumber].GetPooledObject(levelNumber);
-            }
-            else if(m_currentWorld == m_listOfWorlds[worldNumber].transform.gameObject)
-            {
-                m_currentLevel = m_listOfWorlds[worldNumber].GetPooledObject(levelNumber);
-            }
+	//        if(m_currentWorld != m_listOfWorlds[worldNumber].transform.gameObject)
+	//        {
+	//            if(m_currentWorld != null)
+	//            {
+	//                m_currentWorld.SetActive(false);
+	//            }
 
-            if(m_currentLevel != null)
-            {
-                m_currentLevel.SetActive(true);
-            }
-        }
-        else
-        {
-            Debug.Log("Not enought worlds");
-        }
-        
-    }
+	//            m_currentWorld = m_listOfWorlds[worldNumber].transform.gameObject;
+	//            m_currentWorld.SetActive(true);
+
+	//            m_currentLevel = m_listOfWorlds[worldNumber].GetPooledObject(levelNumber);
+	//        }
+	//        else if(m_currentWorld == m_listOfWorlds[worldNumber].transform.gameObject)
+	//        {
+	//            m_currentLevel = m_listOfWorlds[worldNumber].GetPooledObject(levelNumber);
+	//        }
+
+	//        if(m_currentLevel != null)
+	//        {
+	//            m_currentLevel.SetActive(true);
+	//        }
+	//    }
+	//    else
+	//    {
+	//        Debug.Log("Not enought worlds");
+	//    }
+
+	//}
 
 
 }

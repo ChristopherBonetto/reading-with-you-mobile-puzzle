@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooler : MonoBehaviour
+public class ObjectPooler : Singleton<ObjectPooler>
 {
 	/* Inner class */
 	[System.Serializable]
@@ -37,8 +37,10 @@ public class ObjectPooler : MonoBehaviour
 	private List<PoolableObject> m_objectPool = new List<PoolableObject>();
         
 
-    private void Awake()
+    protected override void Awake()
 	{
+		base.Awake();
+
         foreach (ObjectPoolItem item in m_poolItems)
 		{
 			for (int i = 0; i < item.BasePoolSize; i++)
@@ -63,10 +65,6 @@ public class ObjectPooler : MonoBehaviour
 					return go; 
 				}
 			}
-            else
-            {
-                Debug.Log("Wrong ID searched");
-            }
 		}
 
 		for (int i = 0; i < m_poolItems.Count; i++)

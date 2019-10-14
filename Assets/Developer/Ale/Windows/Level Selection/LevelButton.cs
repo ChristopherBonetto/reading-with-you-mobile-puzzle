@@ -35,7 +35,7 @@ public class LevelButton : MonoBehaviour
             // pick level to enable.
             LevelSelectionWindow levelSelection = UIManager.Instance.Controls[UIControlName.LevelSelection] as LevelSelectionWindow;
             int currentWorld = levelSelection.CurrentWorld;
-            GameManager.Instance.m_listOfWorlds[currentWorld].GetPooledObject(LevelID);
+            GameManager.Instance.LoadLevel(LevelID);
         }
 
         // Turn off fade panel

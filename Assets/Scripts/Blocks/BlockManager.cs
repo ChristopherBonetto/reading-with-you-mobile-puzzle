@@ -56,7 +56,7 @@ public class BlockManager : Singleton<BlockManager>
     /// </summary>
 	public void ResetAllBlocks()
 	{
-		float inventoryOffset = -2.5f;
+		float inventoryOffset = -4f;
 		Block[] blocks = m_levelBlocks.ToArray();
 		for (int i = 0; i < blocks.Length; i++)
 		{
@@ -64,6 +64,7 @@ public class BlockManager : Singleton<BlockManager>
 			inventoryOffset += blocks[i].Size / 2f + 1f;
 			blocks[i].ResetBlock();
 		}
+		UnstableBlocks = 0;
 	}
 
 	#endregion

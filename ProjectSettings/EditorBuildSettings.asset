@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Developer/Chris/Player_Test/Chris_TestScene.unity
     guid: bfde5a52649e1a64eb8cfb683cd2458d
+  - enabled: 1
+    path: Assets/Scenes/IntegrationTest.unity
+    guid: 706c0b7481bdc0344b0bcccdf240da0d
   m_configObjects: {}
