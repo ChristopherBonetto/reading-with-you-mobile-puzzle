@@ -10,13 +10,8 @@ PrefabInstance:
     - target: {fileID: 632242626708085552, guid: 87815dea77ad1984b998f2903b526410,
         type: 3}
       propertyPath: m_Name
-      value: PF_MM_Trapezoid_A
+      value: PF_MM_Trapezoid_A Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 1178640046635723021, guid: 87815dea77ad1984b998f2903b526410,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: d27fd25cc2ca85b459dbb4065c2b6914, type: 2}
     - target: {fileID: 632242626708085559, guid: 87815dea77ad1984b998f2903b526410,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -72,6 +67,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 788940685986701606, guid: 87815dea77ad1984b998f2903b526410,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -7023484823658220814, guid: 2ccfd8ea6262d1a48ac8aa318f944d1b,
+        type: 3}
+    - target: {fileID: 2511931219966275735, guid: 87815dea77ad1984b998f2903b526410,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d27fd25cc2ca85b459dbb4065c2b6914, type: 2}
+    - target: {fileID: 1178640046635723021, guid: 87815dea77ad1984b998f2903b526410,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d27fd25cc2ca85b459dbb4065c2b6914, type: 2}
     - target: {fileID: 7247445760663090717, guid: 87815dea77ad1984b998f2903b526410,
         type: 3}
       propertyPath: m_Mesh
