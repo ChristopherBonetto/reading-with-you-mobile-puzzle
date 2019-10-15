@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 460872720174340330}
   - component: {fileID: 527906784990930786}
   m_Layer: 0
-  m_Name: LoadLevel
+  m_Name: LoadLevelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 527906784990930786}
         m_MethodName: OnLoadLevel
         m_Mode: 1
         m_Arguments:

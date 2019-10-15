@@ -7,11 +7,13 @@ using UnityEngine;
 /// </summary>
 public abstract class UIControl : MonoBehaviour
 {
+    /// <summary>
+    /// UI control name
+    /// </summary>
     public abstract UIControlName Name { get; }
 
 
     #region Monobehaviour
-
     protected virtual void Start()
     {
         UIManager.Instance.Register(this);
@@ -25,11 +27,17 @@ public abstract class UIControl : MonoBehaviour
     #endregion
 
     #region Control method
+    /// <summary>
+    /// SetActive(true)
+    /// </summary>
     public virtual void OnShow()
     {
         this.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// SetActive(false)
+    /// </summary>
     public virtual void OnHide()
     {
         this.gameObject.SetActive(false);

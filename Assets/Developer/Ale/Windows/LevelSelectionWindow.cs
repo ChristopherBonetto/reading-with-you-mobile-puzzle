@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manage the UI between level selectionand other control / panel
+/// </summary>
 public class LevelSelectionWindow : UIControl
 {
-    // it is equal to write: string Name { get { return "..." } }
     public override UIControlName Name => UIControlName.LevelSelection;
 
-    // Scriptable
-    public World[] Worlds;
 
-    public int CurrentWorld { get; private set; } = 0;
+    //[Header("Worlds")]
+	private World[] Worlds => GameManager.Instance.Worlds;
+	private int WorldsLength => Worlds.Length;
+	private int CurrentWorld;// { get; private set; } = 0;
 
-    public int WorldsLength => Worlds.Length;
-
+    [Header("WorldPreview")]
     [SerializeField]
     private Image m_worldPreview;
 
+    [Header("Buttons")]
     [SerializeField]
-    private Button[] m_buttons;
+    private LevelButton[] m_buttons;
 
 
     protected override void Start()
@@ -27,37 +30,14 @@ public class LevelSelectionWindow : UIControl
         base.Start();
 
         UpdateWorldAndLevelInfo();
-
-        SetIndexOfTheLevel();
     }
 
     /// <summary>
-    /// CAlled when click a level.
+    /// return to Main menu
     /// </summary>
-    public void OnLoadLevel()
+    public void ReturnToMainMenu()
     {
-        FadeBetweenScene fade = UIManager.Instance.Controls[UIControlName.Fade] as FadeBetweenScene;
-
-        #region Local Method
-        // Show game panel and turn off level panel (or this).
-        void ShowAndHideGameAndThis()
-        {
-            UIManager.Instance.ShowAndHide(UIControlName.InGame, this);
-        }
-
-        // Turn off fade panel
-        void HideFade()
-        {
-            UIManager.Instance.Hide(UIControlName.Fade);
-        }
-        #endregion
-
-        //Store into delegate
-        fade.OnFadeInComplete = ShowAndHideGameAndThis;
-        fade.OnFadeOutComplete = HideFade;
-
-        // Turn on fade panel
-        UIManager.Instance.Show(UIControlName.Fade);
+        UIManager.Instance.ShowAndHide(UIControlName.MainMenu, this);
     }
 
     /// <summary>
@@ -69,6 +49,9 @@ public class LevelSelectionWindow : UIControl
     }
 
     #region Switch level (OnClick)
+    /// <summary>
+    /// Switch current world to the next one
+    /// </summary>
     public void SwitchRigth()
     {
         CurrentWorld++;
@@ -79,6 +62,9 @@ public class LevelSelectionWindow : UIControl
         UpdateWorldAndLevelInfo();
     }
 
+    /// <summary>
+    /// Switch current worldto the previus one
+    /// </summary>
     public void SwitchLeft()
     {
         CurrentWorld--;
@@ -95,6 +81,13 @@ public class LevelSelectionWindow : UIControl
     /// </summary>
     private void UpdateWorldAndLevelInfo()
     {
+		//@TEMP Not enough worlds in the list
+		// Refactor world update
+		if (WorldsLength <= CurrentWorld)
+		{
+			return;
+		}
+
         m_worldPreview.sprite = Worlds[CurrentWorld].Preview;
 
         for (int i = 0; i < m_buttons.Length; i++)
@@ -106,30 +99,11 @@ public class LevelSelectionWindow : UIControl
 
             if (i < Worlds[CurrentWorld].Levels.Length && Worlds[CurrentWorld].Levels[i] != null)
             {
-                // Active and set icon
-                m_buttons[i].image.sprite = Worlds[CurrentWorld].Levels[i].Icon;
-                m_buttons[i].gameObject.SetActive(true);
-            }
-        }
-    }
-
-    /// <summary>
-    /// Set the level's index.
-    /// </summary>
-    public void SetIndexOfTheLevel()
-    {
-        int index = 0;
-
-        for (int i = 0; i < WorldsLength; i++)
-        {
-            for (int j = 0; j < Worlds[i].Levels.Length; j++)
-            {
-                // assign the index of the level "j", of the world "i".
-                Worlds[i].Levels[j].Index = index;
-
-                //Debug.Log(Worlds[i].Levels[j].Index);
-
-                index++;
+				// Set a level for each button
+				//m_buttons[i].Level = Worlds[CurrentWorld].Levels[i];
+				m_buttons[i].LevelNumber = i;
+				m_buttons[i].Image.sprite = Worlds[CurrentWorld].Levels[i].Icon;
+				m_buttons[i].gameObject.SetActive(true);
             }
         }
     }

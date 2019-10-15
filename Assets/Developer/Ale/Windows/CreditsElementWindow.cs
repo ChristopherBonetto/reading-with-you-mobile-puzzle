@@ -6,7 +6,11 @@ public class CreditsElementWindow : UIControl
 {
     public override UIControlName Name => UIControlName.CreditsElements;
 
-    public void OnBackToMainElements()
+
+    /// <summary>
+    /// Execute when credits window exitbutton is pressed.
+    /// </summary>
+    public void OnCreditsExitButton()
     {
         UIManager.Instance.ShowAndHide(UIControlName.MainElements, this);
     }

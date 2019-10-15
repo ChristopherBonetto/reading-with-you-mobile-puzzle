@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 632242626708085559}
   - component: {fileID: 2905150840462939210}
+  - component: {fileID: 117553253643735438}
+  - component: {fileID: -5558902718626111920}
   - component: {fileID: 3457331879823431451}
   - component: {fileID: 415431124952162979}
   m_Layer: 0
@@ -48,9 +50,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_rigidbody: {fileID: 415431124952162979}
   m_transform: {fileID: 632242626708085559}
-  m_dragZ: -2
-  m_gameZ: 0
+  m_lerpMover: {fileID: 117553253643735438}
   Size: 1
+  InventoryX: 0
+--- !u!114 &117553253643735438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632242626708085552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4609acf30aa9bf4d859cbbe30af9472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxSpeed: 20
+  m_rotationSpeed: 10
+--- !u!114 &-5558902718626111920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632242626708085552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14fa6c4b7ecf55247876c2aeba9a5c8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueID: {fileID: 0}
 --- !u!64 &3457331879823431451
 MeshCollider:
   m_ObjectHideFlags: 0

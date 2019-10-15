@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class MainMenuWindow : UIControl
 {
-    // it is equal to write: string Name { get { return "..." } }
     public override UIControlName Name => UIControlName.MainMenu;
+
 
     protected override void Start()
     {
-        UIManager.Instance.Register(this);
-        gameObject.SetActive(true);
+        base.Start();
+
+        // Show always at the start of the game
+        this.gameObject.SetActive(true);
     }
 
-    public void OnShowLevelSelection() // button should execute this.
+    /// <summary>
+    /// Executed when Start button is pressed
+    /// </summary>
+    public void OnStartButton()
     {
         UIManager.Instance.ShowAndHide(UIControlName.LevelSelection, this);
     }
