@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
@@ -14,15 +12,15 @@ public class LevelSelectionWindow : UIControl
     //[Header("Worlds")]
 	private World[] Worlds => GameManager.Instance.Worlds;
 	private int WorldsLength => Worlds.Length;
-	private int CurrentWorld;// { get; private set; } = 0;
+	private int CurrentWorld;
 
     [Header("WorldPreview")]
     [SerializeField]
-    private Image m_worldPreview;
+    private Image m_worldPreview = null;
 
     [Header("Buttons")]
     [SerializeField]
-    private LevelButton[] m_buttons;
+    private LevelButton[] m_buttons = new LevelButton[0];
 
 
     protected override void Start()
@@ -92,7 +90,6 @@ public class LevelSelectionWindow : UIControl
             if (i < Worlds[CurrentWorld].Levels.Length && Worlds[CurrentWorld].Levels[i] != null)
             {
 				// Set a level for each button
-				//m_buttons[i].Level = Worlds[CurrentWorld].Levels[i];
 				m_buttons[i].LevelNumber = i;
 				m_buttons[i].Image.sprite = Worlds[CurrentWorld].Levels[i].Icon;
 				m_buttons[i].gameObject.SetActive(true);

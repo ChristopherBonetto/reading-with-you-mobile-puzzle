@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GameWindow : UIControl
+﻿public class GameWindow : UIControl
 {
     public override UIControlName Name => UIControlName.InGame;
-
-
+	
     /// <summary>
     /// Called when click home button
     /// </summary>
@@ -36,15 +31,6 @@ public class GameWindow : UIControl
         // Turn on fade panel and disable this.
         UIManager.Instance.ShowAndHide(UIControlName.Fade, this);
     }
-
-	//@TEMP
-	/// <summary>
-	/// Called when click reset block button
-	/// </summary>
-	public void OnResetBlockButton()
-	{
-		GameManager.Instance.ReceiveLevelLoaded();
-	}
 
     /// <summary>
     /// Called when a level is completed.
