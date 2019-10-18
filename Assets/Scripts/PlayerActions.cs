@@ -14,11 +14,11 @@ public class PlayerActions : MonoBehaviour
 {
 
 	#region Variables
-	[SerializeField] private float m_playerSpeed;
+	[SerializeField] private float m_playerSpeed = 2f;
 	private float m_effectivePlayerSpeed;
 
-	[SerializeField] private float m_raycastFrontDistance;
-	[SerializeField] private float m_raycastDownDistance;
+	[SerializeField] private float m_raycastFrontDistance = 0.25f;
+	[SerializeField] private float m_raycastDownDistance = 0.7f;
 
 	private Vector3 m_movement;
 	private Vector3 m_direction;
@@ -27,20 +27,7 @@ public class PlayerActions : MonoBehaviour
 	private RaycastHit m_nextFrameCollisionPoint;
 	private RaycastHit m_frontRaycastHit;
 
-
-
-	private bool m_canMove = false;
-	public bool canMove
-	{
-		get
-		{
-			return m_canMove;
-		}
-		set
-		{
-			m_canMove = value;
-		}
-	}
+	private bool m_canMove;
 
 	public PlayerState m_currentPlayerState { get; private set; }
 
@@ -53,7 +40,7 @@ public class PlayerActions : MonoBehaviour
 
 	void Update()
 	{
-		if (canMove)
+		if (m_canMove)
 		{
 			PlayerMovement();
 		}
@@ -92,7 +79,7 @@ public class PlayerActions : MonoBehaviour
 			{
 				GameManager.Instance.EndLevel(false);
 				SetPlayerState(PlayerState.Lose);
-				canMove = false;
+				m_canMove = false;
 			}
 		}
 		else
@@ -107,14 +94,13 @@ public class PlayerActions : MonoBehaviour
 				GameManager.Instance.EndLevel(false);
 				SetPlayerState(PlayerState.Lose);
 			}
-			canMove = false;
+			m_canMove = false;
 		}
 	}
 
 	public void ResetLevel(Vector3 startPosition)
 	{
-		EnableCollider(true);
-		canMove = false;
+		EnableMovement(false);
 		transform.position = startPosition;
 	}
 
@@ -134,8 +120,9 @@ public class PlayerActions : MonoBehaviour
 		}
 	}
 
-	public void EnableCollider(bool bEnable)
+	public void EnableMovement(bool bEnable)
 	{
-		gameObject.GetComponent<Collider>().enabled = bEnable;
+		gameObject.GetComponent<Collider>().enabled = !bEnable;
+		m_canMove = bEnable;
 	}
 }

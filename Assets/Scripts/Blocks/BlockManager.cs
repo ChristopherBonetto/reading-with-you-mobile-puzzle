@@ -50,38 +50,39 @@ public class BlockManager : Singleton<BlockManager>
 
 	#region Level
 
-	/// <summary>
-	/// Subscribe to level block list
-	/// </summary>
-	/// <param name="newBlock">Block to add</param>
-	public void AddBlock(Block newBlock)
-	{
-		m_levelBlocks.Add(newBlock);
-	}
-
-	/// <summary>
-	/// Unsubscribe from level block list
-	/// </summary>
-	/// <param name="newBlock">Block to remove</param>
-	public void RemoveBlock(Block oldBlock)
-	{
-		m_levelBlocks.Remove(oldBlock);
-	}
-
     /// <summary>
     /// Reset level blocks to inventory
     /// </summary>
 	public void ResetAllBlocks()
 	{
-		float inventoryOffset = -4f;
-		Block[] blocks = m_levelBlocks.ToArray();
-		for (int i = 0; i < blocks.Length; i++)
+		foreach (Block block in m_levelBlocks)
 		{
-			blocks[i].InventoryX = inventoryOffset;
-			inventoryOffset += blocks[i].Size / 2f + 1f;
-			blocks[i].ResetBlock();
+			block.ResetBlock(true);
+		}
+	}
+
+	public void LoadBlocks(Level.BlockInfo[] blockInfo)
+	{
+		foreach (Level.BlockInfo block in blockInfo)
+		{
+			Block newBlock = ObjectPooler.Instance.GetPooledObject(block.ID).GetComponent<Block>();
+			if (newBlock)
+			{
+				newBlock.LoadBlock(block.XCoord, block.Scale);
+				newBlock.gameObject.SetActive(true);
+				m_levelBlocks.Add(newBlock);
+			}
 		}
 		UnstableBlocks = 0;
+	}
+
+	public void UnloadBlocks()
+	{
+		foreach (Block block in m_levelBlocks)
+		{
+			block.gameObject.SetActive(false);
+		}
+		m_levelBlocks.Clear();
 	}
 
 	#endregion

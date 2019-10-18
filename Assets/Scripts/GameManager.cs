@@ -11,43 +11,15 @@ public enum GameState
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private PlayerActions m_player;
+	public PlayerActions Player;
 
-    public PlayerActions Player
-    {
-        get
-        {
-            return m_player;
-        }
-        set
-        {
-            m_player = value;
-        }
-    }
-
-    [SerializeField] private FinalObjectActions m_finalObject;
-
-    public FinalObjectActions FinalObject
-    {
-        get
-        {
-            return m_finalObject;
-        }
-        set
-        {
-            m_finalObject = value;
-        }
-    }
-
-    [SerializeField] private ObjectPooler m_blockPooler;
+	public FinalObjectActions FinalObject;
 
 	public World[] Worlds;
 
+	private Level m_currentLevelInfo;
 	private int m_currentLevel;
 	private int m_currentWorld;
-
-	private Vector3 m_playerStartPosition;
-
 	private GameObject m_currentMap;
 
 	/// <summary>
@@ -59,28 +31,10 @@ public class GameManager : Singleton<GameManager>
 
 	public GameState CurrentState => m_currentState;
 
-    public void ReceiveLevelLoaded()
-	{
-		BlockManager.Instance.ResetAllBlocks();
-	}
-
 	private void Start()
 	{
-		//@TEMP This will be loaded with level info
-		if (Player)
-		{
-			m_playerStartPosition = Player.transform.position; 
-		}
+		ObjectPooler.Instance.StartPooling();
 	}
-
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.R))
-		{
-			ReceiveLevelLoaded();
-		}
-
-    }
 
 	public void SetGameState(GameState inGameState)
     {
@@ -94,8 +48,7 @@ public class GameManager : Singleton<GameManager>
 
     public void StartWalkingPlayer()
     {
-        Player.EnableCollider(false);
-        Player.canMove = true;
+        Player.EnableMovement(true);
         SetGameState(GameState.Moving);
         OnMovement?.Invoke();
 	}
@@ -111,10 +64,7 @@ public class GameManager : Singleton<GameManager>
 		if (m_currentMap)
 		{
 			m_currentMap.SetActive(false);
-			//@TODO Disable blocks
-			//@TEMP
-			ReceiveLevelLoaded();
-			//@TODO Disable objective
+			BlockManager.Instance.UnloadBlocks();
 		}
 
 		// Load level
@@ -133,7 +83,9 @@ public class GameManager : Singleton<GameManager>
 			{
 				Debug.LogWarning("Can't unpool map. ID " + levelID + " not found.");
 			}
-			Player.ResetLevel(m_playerStartPosition);
+			Player.ResetLevel(m_currentLevelInfo.PlayerCoords);
+			FinalObject.ResetLevel(m_currentLevelInfo.GoalObject.Coords);
+			BlockManager.Instance.LoadBlocks(m_currentLevelInfo.Blocks);
 			//@TODO Set objective
 			SetGameState(GameState.Playing);
 		}
@@ -147,7 +99,8 @@ public class GameManager : Singleton<GameManager>
 	{
 		if (m_currentWorld < Worlds.Length && m_currentLevel < Worlds[m_currentWorld].Levels.Length)
 		{
-			return Worlds[m_currentWorld].Levels[m_currentLevel].LevelID;
+			m_currentLevelInfo = Worlds[m_currentWorld].Levels[m_currentLevel];
+			return m_currentLevelInfo.LevelID;
 		}
 		else
 		{
@@ -172,9 +125,8 @@ public class GameManager : Singleton<GameManager>
 		}
 		else
 		{
-			// Reload animation
-			Player.ResetLevel(m_playerStartPosition);
-			//@TEMP this will be probably changed
+			//@TODO Handle reload animation
+			Player.ResetLevel(m_currentLevelInfo.PlayerCoords);
 			SetGameState(GameState.Playing);
 		}
 	}

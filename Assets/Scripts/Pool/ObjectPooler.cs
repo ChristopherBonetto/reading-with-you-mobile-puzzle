@@ -27,21 +27,16 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
 		[HideInInspector]
 		public int CurrentCount = 0;
-
-        
 	}
 
 	[SerializeField]
 	private List<ObjectPoolItem> m_poolItems = new List<ObjectPoolItem>();
 
 	private List<PoolableObject> m_objectPool = new List<PoolableObject>();
-        
 
-    protected override void Awake()
+	public void StartPooling()
 	{
-		base.Awake();
-
-        foreach (ObjectPoolItem item in m_poolItems)
+		foreach (ObjectPoolItem item in m_poolItems)
 		{
 			for (int i = 0; i < item.BasePoolSize; i++)
 			{
