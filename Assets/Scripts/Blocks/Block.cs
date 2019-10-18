@@ -21,6 +21,8 @@ public class Block : MonoBehaviour
 
 	public float Size = 1f;
 
+	public BlockShape Shape;
+
 	private float m_lastCollisionTime;
 
 	private float m_collisionTimeout;
@@ -161,8 +163,8 @@ public class Block : MonoBehaviour
     }
     public void ResetBlock()
 	{
-		m_transform.position = new Vector3(m_transform.position.x, m_transform.position.y, BlockManager.Instance.DragZ);
-		m_lerpMover.SetDestination(new Vector3(InventoryX, -1.5f, BlockManager.Instance.DragZ));
+		m_transform.position = new Vector3(m_transform.position.x, m_transform.position.y, BlockManager.Instance.InvZ);
+		m_lerpMover.SetDestination(new Vector3(InventoryX, BlockManager.Instance.InvY, BlockManager.Instance.InvZ));
 		m_transform.localScale *= 0.8f;
 		SetPhysicsInactive(true);
         enabled = false;

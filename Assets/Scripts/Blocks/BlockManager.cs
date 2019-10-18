@@ -2,6 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BlockShape
+{
+	Void = 0,
+	Cube = 1,
+	Ramp = 2,
+	Rectangle = 3,
+	TrapezoidA = 4,
+	TrapezoidB = 5,
+	TrapezoidAVar = 6,
+	TrapezoidBVar = 7
+}
+
 public class BlockManager : Singleton<BlockManager>
 {
     #region Variables
@@ -11,12 +23,17 @@ public class BlockManager : Singleton<BlockManager>
 	private Vector3 m_holdOffset;
 
 	[SerializeField]
-	private float m_DragZ = -1.7f;
+	private float m_InvY = -0.4f;
+
+	[SerializeField]
+	private float m_InvZ = -1.7f;
 
 	[SerializeField]
 	private float m_GameZ = 0f;
 
-	public float DragZ => m_DragZ;
+	public float InvY => m_InvY;
+
+	public float InvZ => m_InvZ;
 
 	public float GameZ => m_GameZ;
 	
@@ -97,7 +114,7 @@ public class BlockManager : Singleton<BlockManager>
 	{
 		// Follow touch position maintaining grab point offset
 		Vector3 dragPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		dragPosition.z = m_DragZ;
+		dragPosition.z = m_InvZ;
 		m_holdBlock.transform.position = dragPosition - m_holdOffset;
 	}
 
