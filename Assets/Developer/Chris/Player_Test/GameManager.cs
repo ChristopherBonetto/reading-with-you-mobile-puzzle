@@ -125,7 +125,14 @@ public class GameManager : Singleton<GameManager>
 		{
 			//@TODO Handle load level animation
 			m_currentMap = ObjectPooler.Instance.GetPooledObject(levelID);
-			m_currentMap.SetActive(true);
+			if (m_currentMap)
+			{
+				m_currentMap.SetActive(true);
+			}
+			else
+			{
+				Debug.LogWarning("Can't unpool map. ID " + levelID + " not found.");
+			}
 			Player.ResetLevel(m_playerStartPosition);
 			//@TODO Set objective
 			SetGameState(GameState.Playing);
