@@ -8,20 +8,21 @@ public class Level : ScriptableObject
     /// Store all blocks used to complete the level.
     /// </summary>
     [System.Serializable]
-    public struct Block
+    public struct BlockInfo
     {
         public int ID;
-        public float OffSetOnX;
+        public float XCoord;
+		public Vector3 Scale;
     }
 
     /// <summary>
     /// Store the coord of final object / goal.
     /// </summary>
     [System.Serializable]
-    public struct Goal
+    public struct GoalInfo
     {
         public int ID;
-        public Vector3 Coord;
+        public Vector3 Coords;
     }
     #endregion
 
@@ -35,11 +36,11 @@ public class Level : ScriptableObject
     public int LevelID => LevelToPool.uniqueID.ID;
 
     [Header("Player")]
-    public Vector3 PlayerSpawnPoint;
+    public Vector3 PlayerCoords;
 
     [Header("Block")]
-    public Block[] Blocks;
+    public BlockInfo[] Blocks;
 
     [Header("Goal")]
-    public Goal GoalObject;
+    public GoalInfo GoalObject;
 }
