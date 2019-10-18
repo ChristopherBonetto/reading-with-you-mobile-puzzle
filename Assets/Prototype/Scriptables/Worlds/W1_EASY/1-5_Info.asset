@@ -10,14 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52ab19795b6fcb446a6753130f17500c, type: 3}
-  m_Name: Level_One_W1
+  m_Name: 1-5_Info
   m_EditorClassIdentifier: 
-  Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  Icon: {fileID: 0}
   IconLocked: {fileID: 0}
-  LevelToPool: {fileID: 0}
+  LevelPrefab: {fileID: 5433715979194360502, guid: a9bd648f3e133d6499e0eb80f49bef7d,
+    type: 3}
+  PlayerCoords: {x: -2.5, y: 2, z: 0}
   Blocks:
-  - ID: 0
-    OffSetOnX: 0
+  - ID: 912
+    XCoord: -0.39
+    Scale: {x: -0.95, y: 1, z: 1}
+  - ID: 912
+    XCoord: 2.51
+    Scale: {x: 0.95, y: 1, z: 1}
   GoalObject:
     ID: 0
-    Coord: {x: 0, y: 0, z: 0}
+    Coords: {x: 3.5, y: 2, z: 0}

@@ -10,13 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52ab19795b6fcb446a6753130f17500c, type: 3}
-  m_Name: 4-1_Info
+  m_Name: 1-7_Info
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   IconLocked: {fileID: 0}
-  LevelPrefab: {fileID: 218978557005627861, guid: b3be13641dc9f1e4481ecba3d84616a7,
+  LevelPrefab: {fileID: 2394289983451043938, guid: 7860959abd4f0634882e82a0defce287,
     type: 3}
-  Blocks: []
+  PlayerCoords: {x: -3.5, y: 2, z: 0}
+  Blocks:
+  - ID: 696
+    XCoord: 1.26
+    Scale: {x: -0.95, y: 1, z: 1}
+  - ID: 696
+    XCoord: -1.08
+    Scale: {x: 0.95, y: 1, z: 1}
   GoalObject:
     ID: 0
-    Coord: {x: 0, y: 0, z: 0}
+    Coords: {x: 3.5, y: 2, z: 0}
