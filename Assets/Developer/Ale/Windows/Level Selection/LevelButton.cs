@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
@@ -26,17 +25,13 @@ public class LevelButton : MonoBehaviour
     public Image Image { get; private set; }
 
     #region Monobehaviour
+
     private void Awake()
     {
         Button = GetComponent<Button>();
         Image = GetComponentInChildren<Image>();
     }
-
-    //private void OnEnable()
-    //{
-    //    Image.sprite = Level.Icon;
-    //    LevelNumber = Level.LevelID;
-    //}
+	
     #endregion
 
     /// <summary>
@@ -69,6 +64,5 @@ public class LevelButton : MonoBehaviour
 
         // Turn on fade panel
         UIManager.Instance.Show(UIControlName.Fade);
-        GameManager.Instance.ReceiveLevelLoaded();
     }
 }

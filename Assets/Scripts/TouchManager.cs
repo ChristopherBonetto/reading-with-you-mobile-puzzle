@@ -58,7 +58,6 @@ public class TouchManager : Singleton<TouchManager>
 
 	private bool CanStart()
 	{
-		Debug.Log("Unstable " + BlockManager.Instance.UnstableBlocks);
 		return (!m_isHolding &&
 				GameManager.Instance.CurrentState != GameState.Moving &&
 				BlockManager.Instance.UnstableBlocks == 0);

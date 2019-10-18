@@ -4,8 +4,6 @@ public class Block : MonoBehaviour
 {
 	#region Variables
 
-	private BlockManager m_blockManager = null;
-
 	[SerializeField]
 	private Rigidbody m_rigidbody = null;
 
@@ -21,15 +19,15 @@ public class Block : MonoBehaviour
 
 	public float Size = 1f;
 
+	public BlockShape Shape;
+
 	private float m_lastCollisionTime;
 
 	private float m_collisionTimeout;
 
     private bool m_isUnstable = false;
 
-    private bool m_start = true;
-
-	public float InventoryX;
+	private float m_inventoryX;
     
 	#endregion
 
@@ -37,10 +35,7 @@ public class Block : MonoBehaviour
 
 	private void OnEnable()
     {
-        if (!m_start)
-        {
-            Register();
-        }
+        Register();
     }
 
 	private void Start()
@@ -48,24 +43,19 @@ public class Block : MonoBehaviour
 #if UNITY_EDITOR
 		NullChecks();
 #endif
-		m_blockManager = BlockManager.Instance;
-		Register();
-        m_start = false;
 
-        m_collisionTimeout = Time.fixedDeltaTime * 30;
+        m_collisionTimeout = Time.fixedDeltaTime * 20;
     }
 
     private void Register()
     {
-		m_blockManager.AddBlock(this);
-		m_blockManager.OnGrab += SetPhysicsInactive;
+		BlockManager.Instance.OnGrab += SetPhysicsInactive;
 		GameManager.Instance.OnMovement += FreezeBlocks;
     }
 
     private void UnRegister()
     {
-		m_blockManager.RemoveBlock(this);
-		m_blockManager.OnGrab -= SetPhysicsInactive;
+		BlockManager.Instance.OnGrab -= SetPhysicsInactive;
 		GameManager.Instance.OnMovement -= FreezeBlocks;
     }
 
@@ -106,6 +96,30 @@ public class Block : MonoBehaviour
 	#endregion
 
 	#region Physics
+
+	public void LoadBlock(float inInventoryX, Vector3 scale)
+	{
+		m_inventoryX = inInventoryX;
+		m_transform.localScale = scale;
+		ResetBlock(true);
+	}
+
+	public void ResetBlock(bool bFast = false)
+	{
+		m_transform.position = new Vector3(m_transform.position.x, m_transform.position.y, BlockManager.Instance.InvZ);
+		Vector3 destination = new Vector3(m_inventoryX, BlockManager.Instance.InvY, BlockManager.Instance.InvZ);
+		if (bFast)
+		{
+			m_transform.position = destination;
+		}
+		else
+		{
+			m_lerpMover.SetDestination(destination);
+		}
+		m_transform.localScale *= 0.8f;
+		SetPhysicsInactive(true);
+		enabled = false;
+	}
 
 	private void FreezeBlocks()
 	{
@@ -158,14 +172,6 @@ public class Block : MonoBehaviour
                 Resnap();
 			}
 		}
-    }
-    public void ResetBlock()
-	{
-		m_transform.position = new Vector3(m_transform.position.x, m_transform.position.y, BlockManager.Instance.DragZ);
-		m_lerpMover.SetDestination(new Vector3(InventoryX, -1.5f, BlockManager.Instance.DragZ));
-		m_transform.localScale *= 0.8f;
-		SetPhysicsInactive(true);
-        enabled = false;
     }
 
     private void Resnap()
