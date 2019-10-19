@@ -148,9 +148,16 @@ public class PlayerActions : MonoBehaviour
             }
 
 			m_currentPlayerState = inNewState;
-
 		}
 	}
+
+    public void CollectionableItemReached()
+    {
+        
+    }
+
+
+
 
 	public void EnableMovement(bool bEnable)
 	{

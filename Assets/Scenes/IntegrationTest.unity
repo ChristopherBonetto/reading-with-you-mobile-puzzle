@@ -981,6 +981,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74ab3c7bc43f9d644a2229f5fd749a45, type: 3}
+--- !u!114 &915840053 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7272656290745939394, guid: b04a062de2455cc4f87a3d55f5c6cebf,
+    type: 3}
+  m_PrefabInstance: {fileID: 8415867388772640729}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51872f4714647144bf4445cce28e959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &934272269 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5759551514271352032, guid: 74ab3c7bc43f9d644a2229f5fd749a45,
@@ -1371,7 +1383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 934272269}
-  FinalObject: {fileID: 2115932004}
+  FinalObject: {fileID: 915840053}
   Worlds:
   - {fileID: 11400000, guid: a12d5203da19c344ab35fcb109bd6553, type: 2}
 --- !u!4 &1942291698
@@ -1388,18 +1400,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2115932004 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8415867389406793365, guid: b04a062de2455cc4f87a3d55f5c6cebf,
-    type: 3}
-  m_PrefabInstance: {fileID: 8415867388772640729}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d51872f4714647144bf4445cce28e959, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2467390087310426351
 PrefabInstance:
   m_ObjectHideFlags: 0

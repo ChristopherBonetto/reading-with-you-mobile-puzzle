@@ -4,6 +4,6 @@ public class FinalObjectActions : MonoBehaviour
 {
 	public void ResetLevel(Vector3 startPosition)
 	{
-		transform.position = startPosition;
+        transform.parent.transform.position = startPosition;
 	}
 }
