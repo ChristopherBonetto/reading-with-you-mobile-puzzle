@@ -34,9 +34,12 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private ParticleSystem m_walkParticle;
     [SerializeField] private ParticleSystem m_slideParticle;
 
-	#endregion
+    [SerializeField] private float m_timeToResetChangeLevel;
+    private float m_timer;
 
-	private void Start()
+    #endregion
+
+    private void Start()
 	{
         SetPlayerState(PlayerState.Idle);
 		m_effectivePlayerSpeed = m_playerSpeed;
@@ -44,11 +47,25 @@ public class PlayerActions : MonoBehaviour
 
 	void Update()
 	{
-        Debug.Log(m_currentPlayerState);
 		if (m_canMove)
 		{
 			PlayerMovement();
 		}
+
+        if(m_currentPlayerState == PlayerState.Win)
+        {
+            if (Timer(m_timeToResetChangeLevel))
+            {
+                GameManager.Instance.EndLevel(true);
+            }
+        }
+        else if(m_currentPlayerState == PlayerState.Lose)
+        {
+            if (Timer(m_timeToResetChangeLevel))
+            {
+                GameManager.Instance.EndLevel(false);
+            }
+        }
 	}
 
 	private void PlayerMovement()
@@ -82,7 +99,6 @@ public class PlayerActions : MonoBehaviour
 			}
 			else
 			{
-				GameManager.Instance.EndLevel(false);
 				SetPlayerState(PlayerState.Lose);
 				m_canMove = false;
 			}
@@ -93,12 +109,11 @@ public class PlayerActions : MonoBehaviour
 			{
 				SetPlayerState(PlayerState.Win);
                 m_frontRaycastHit.transform.GetComponent<FinalObjectActions>().Collected();
-                //GameManager.Instance.EndLevel(true);
+                
             }
-			else
+            else
 			{
 				SetPlayerState(PlayerState.Lose);
-				GameManager.Instance.EndLevel(false);
 			}
 			m_canMove = false;
 		}
@@ -141,25 +156,16 @@ public class PlayerActions : MonoBehaviour
 
                 case PlayerState.Win:
                     StopParticles();
-                    CollectionableItemReached();
                     break;
 
                 case PlayerState.Lose:
-
+                    StopParticles();
                     break;
             }
 
 			m_currentPlayerState = inNewState;
 		}
 	}
-
-    public void CollectionableItemReached()
-    {
-        Debug.Log("wow");
-    }
-
-
-
 
 	public void EnableMovement(bool bEnable)
 	{
@@ -183,5 +189,23 @@ public class PlayerActions : MonoBehaviour
     {
         m_slideParticle.Pause(true);
         m_walkParticle.Play(true);
+    }
+
+    private bool Timer(float destinationTime)
+    {
+        m_timer += Time.deltaTime;
+
+        if (m_timer >= destinationTime)
+        {
+            m_timer = 0f;
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+
     }
 }
