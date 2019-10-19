@@ -56,14 +56,45 @@ public class PlayerActions : MonoBehaviour
         {
             if (Timer(m_timeToResetChangeLevel))
             {
-                GameManager.Instance.EndLevel(true);
+                //@TEMP
+                //@ALE
+                // Store UI controls ref
+                FadeBetweenScene fade = UIManager.Instance.Controls[UIControlName.Fade] as FadeBetweenScene;
+                GameWindow gameWindow = UIManager.Instance.Controls[UIControlName.InGame] as GameWindow;
+
+                 
+                // I need void method to store into delegate.
+                void Victory()
+                {
+                    GameManager.Instance.EndLevel(true);
+                }
+
+                // Store method into delegate
+                fade.OnFadeInComplete = Victory;
+                // Call levelCompleted.
+                gameWindow.OnLevelCompleted();
             }
         }
         else if(m_currentPlayerState == PlayerState.Lose)
         {
             if (Timer(m_timeToResetChangeLevel))
             {
-                GameManager.Instance.EndLevel(false);
+                //@TEMP
+                //@ALE
+                // Store Ui controls ref
+                FadeBetweenScene fade = UIManager.Instance.Controls[UIControlName.Fade] as FadeBetweenScene;
+                GameWindow gameWindow = UIManager.Instance.Controls[UIControlName.InGame] as GameWindow;
+
+                // I need a void method to store into delegate.
+                void Lose()
+                {
+                    GameManager.Instance.EndLevel(false);
+                }
+
+                // Store method into delegate
+                fade.OnFadeInComplete = Lose;
+                // Call levelCompleted.
+                gameWindow.OnLevelCompleted();
             }
         }
 	}

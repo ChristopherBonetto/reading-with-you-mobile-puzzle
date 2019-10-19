@@ -41,8 +41,6 @@
         FadeBetweenScene fade = UIManager.Instance.Controls[UIControlName.Fade] as FadeBetweenScene;
 
         #region Local Method
-        // Load new Level
-        // public void LoadLevel
   
         // Turn off fade and enable game window.
         void ShowAndHideGameAndFade()
@@ -52,7 +50,6 @@
         #endregion
 
         // Store into delegate.
-        //fade.OnFadeInComplete = LoadLevel;
         fade.OnFadeOutComplete = ShowAndHideGameAndFade;
 
         // Turn on fade panel and disable this.
