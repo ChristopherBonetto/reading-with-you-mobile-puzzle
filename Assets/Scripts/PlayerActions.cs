@@ -31,15 +31,20 @@ public class PlayerActions : MonoBehaviour
 
 	public PlayerState m_currentPlayerState { get; private set; }
 
+    [SerializeField] private ParticleSystem m_walkParticle;
+    [SerializeField] private ParticleSystem m_slideParticle;
+
 	#endregion
 
 	private void Start()
 	{
+        SetPlayerState(PlayerState.Idle);
 		m_effectivePlayerSpeed = m_playerSpeed;
 	}
 
 	void Update()
 	{
+        
 		if (m_canMove)
 		{
 			PlayerMovement();
@@ -100,8 +105,11 @@ public class PlayerActions : MonoBehaviour
 
 	public void ResetLevel(Vector3 startPosition)
 	{
+        StopParticles();
 		EnableMovement(false);
 		transform.position = startPosition;
+        SetPlayerState(PlayerState.Idle);
+        
 	}
 
 	private void SetPlayerState(PlayerState inNewState)
@@ -109,13 +117,25 @@ public class PlayerActions : MonoBehaviour
 		if (inNewState != m_currentPlayerState)
 		{
 			m_currentPlayerState = inNewState;
-			if (inNewState == PlayerState.Climb || inNewState == PlayerState.Slide)
+
+			if (inNewState == PlayerState.Climb)
 			{
+                StopParticles();
 				m_effectivePlayerSpeed = m_playerSpeed / 2;
 			}
-			else
+            else if (inNewState == PlayerState.Slide)
+            {
+                m_effectivePlayerSpeed = m_playerSpeed / 2;
+                PlaySlideParticle();
+            }
+            else if (inNewState == PlayerState.Walk)
+            {
+                m_effectivePlayerSpeed = m_playerSpeed;
+                PlayWalkParticle();
+            }
+            else if (inNewState == PlayerState.Idle)
 			{
-				m_effectivePlayerSpeed = m_playerSpeed;
+                StopParticles();
 			}
 		}
 	}
@@ -125,4 +145,22 @@ public class PlayerActions : MonoBehaviour
 		gameObject.GetComponent<Collider>().enabled = !bEnable;
 		m_canMove = bEnable;
 	}
+
+    public void StopParticles()
+    {
+        m_slideParticle.Stop(true);
+        m_walkParticle.Stop(true);
+    }
+
+    public void PlaySlideParticle()
+    {
+        m_walkParticle.Pause(true);
+        m_slideParticle.Play(true);
+    }
+
+    public void PlayWalkParticle()
+    {
+        m_slideParticle.Pause(true);
+        m_walkParticle.Play(true);
+    }
 }
