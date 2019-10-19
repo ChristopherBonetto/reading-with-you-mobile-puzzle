@@ -10,23 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52ab19795b6fcb446a6753130f17500c, type: 3}
-  m_Name: 1-6_Info
+  m_Name: 2-5_Info
   m_EditorClassIdentifier: 
-  Icon: {fileID: 21300000, guid: f2818b35eb36ea740a5858e2c725c6ca, type: 3}
+  Icon: {fileID: 21300000, guid: 8b7c56f51bb0ae743a9a63686f233e88, type: 3}
   IconLocked: {fileID: 0}
-  LevelPrefab: {fileID: 5339845901900832330, guid: 676a39bd671ed5942828f5d8070fd779,
+  LevelPrefab: {fileID: 3699885000743609941, guid: dbbc1131e49367747bab966f5f7db5bb,
     type: 3}
-  PlayerCoords: {x: -2.5, y: 3, z: 0}
+  PlayerCoords: {x: -3.5, y: 2, z: 0}
   Blocks:
-  - ID: 725
-    XCoord: 0.01
-    Scale: {x: 0.95, y: 1, z: 1}
-  - ID: 912
-    XCoord: 2.51
-    Scale: {x: 0.95, y: 1, z: 1}
-  - ID: 725
-    XCoord: -2.33
-    Scale: {x: 0.95, y: 1, z: 1}
+  - ID: 696
+    XCoord: -1.97
+    Scale: {x: -0.95, y: 1, z: 1}
+  - ID: 696
+    XCoord: 1.56
+    Scale: {x: -0.95, y: 1, z: 1}
   GoalObject:
     ID: 0
-    Coords: {x: 3.5, y: 2, z: 0}
+    Coords: {x: 3.5, y: 4, z: 0}

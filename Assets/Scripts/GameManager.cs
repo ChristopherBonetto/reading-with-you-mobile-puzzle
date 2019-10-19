@@ -19,7 +19,7 @@ public class GameManager : Singleton<GameManager>
 
 	private Level m_currentLevelInfo;
 	private int m_currentLevel;
-	private int m_currentWorld;
+	public int m_currentWorld; //@TEMP @ALE I change the accesibility to testing other world's levels.
 	private GameObject m_currentMap;
 
 	/// <summary>

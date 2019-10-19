@@ -883,6 +883,70 @@ MonoBehaviour:
     MaxPoolSize: 0
     uniqueID: {fileID: 0}
     CurrentCount: 0
+  - ObjectPrefab: {fileID: 4819560073768567928, guid: 16f6cb1c1b55ec4468c930a31bd8609f,
+      type: 3}
+    BasePoolSize: 1
+    CanExpand: 0
+    PoolExpandSize: 0
+    MaxPoolSize: 0
+    uniqueID: {fileID: 11400000, guid: c779c7d4aeeb4e84ebb280d1a0e94e7f, type: 2}
+    CurrentCount: 0
+  - ObjectPrefab: {fileID: 5362827176817890877, guid: c081f1e356fa3bd4ab4e2116c2b0ae0e,
+      type: 3}
+    BasePoolSize: 1
+    CanExpand: 0
+    PoolExpandSize: 0
+    MaxPoolSize: 0
+    uniqueID: {fileID: 11400000, guid: f662d532c9949d147a26e75ec0c46a38, type: 2}
+    CurrentCount: 0
+  - ObjectPrefab: {fileID: 1604344106896734215, guid: f1ee3c202eb442a4c8e64afd3f5e6931,
+      type: 3}
+    BasePoolSize: 1
+    CanExpand: 0
+    PoolExpandSize: 0
+    MaxPoolSize: 0
+    uniqueID: {fileID: 11400000, guid: 3c12dccb13db28b4482bd84503e8ed90, type: 2}
+    CurrentCount: 0
+  - ObjectPrefab: {fileID: 3071067259727079978, guid: 2af890a9cf87bde438ef5e60f86f7a89,
+      type: 3}
+    BasePoolSize: 1
+    CanExpand: 0
+    PoolExpandSize: 0
+    MaxPoolSize: 0
+    uniqueID: {fileID: 11400000, guid: db2fead277174944fbe3d5e889cc2640, type: 2}
+    CurrentCount: 0
+  - ObjectPrefab: {fileID: 745595829678559263, guid: dbbc1131e49367747bab966f5f7db5bb,
+      type: 3}
+    BasePoolSize: 1
+    CanExpand: 0
+    PoolExpandSize: 0
+    MaxPoolSize: 0
+    uniqueID: {fileID: 11400000, guid: b8cd3eac0b992764789c1ff5d1328e52, type: 2}
+    CurrentCount: 0
+  - ObjectPrefab: {fileID: 4173531903873572832, guid: 63ece1f0aab538840b1c3e4d3be0bfb4,
+      type: 3}
+    BasePoolSize: 1
+    CanExpand: 0
+    PoolExpandSize: 0
+    MaxPoolSize: 0
+    uniqueID: {fileID: 11400000, guid: 4e0f3bcdc8fc9ee4d8e6a64d5f7fa1ef, type: 2}
+    CurrentCount: 0
+  - ObjectPrefab: {fileID: 3494232412781514742, guid: 0e9598b0681e2a142882e46aa6e387f6,
+      type: 3}
+    BasePoolSize: 1
+    CanExpand: 0
+    PoolExpandSize: 0
+    MaxPoolSize: 0
+    uniqueID: {fileID: 11400000, guid: a49fcc563d99fb04e864ea5a637c4e0a, type: 2}
+    CurrentCount: 0
+  - ObjectPrefab: {fileID: 3385754512318125554, guid: 6976ceef5b158764998ac61258d58ca6,
+      type: 3}
+    BasePoolSize: 1
+    CanExpand: 0
+    PoolExpandSize: 0
+    MaxPoolSize: 0
+    uniqueID: {fileID: 11400000, guid: 39f4fb651d895c944b3a7c171292404f, type: 2}
+    CurrentCount: 0
 --- !u!4 &778298042
 Transform:
   m_ObjectHideFlags: 0
@@ -1406,6 +1470,8 @@ MonoBehaviour:
   FinalObject: {fileID: 915840053}
   Worlds:
   - {fileID: 11400000, guid: a12d5203da19c344ab35fcb109bd6553, type: 2}
+  - {fileID: 11400000, guid: d65af9660e6742f4cb58fc04cc6ff24f, type: 2}
+  m_currentWorld: 0
 --- !u!4 &1942291698
 Transform:
   m_ObjectHideFlags: 0

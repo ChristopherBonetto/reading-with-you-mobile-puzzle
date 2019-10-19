@@ -12,7 +12,7 @@ public class LevelSelectionWindow : UIControl
     //[Header("Worlds")]
 	private World[] Worlds => GameManager.Instance.Worlds;
 	private int WorldsLength => Worlds.Length;
-	private int CurrentWorld;
+	public int CurrentWorld { get { return GameManager.Instance.m_currentWorld; } private set { GameManager.Instance.m_currentWorld = value; } } //@TEMP @ALE change this variable.
 
     [Header("WorldPreview")]
     [SerializeField]
