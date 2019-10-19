@@ -44,7 +44,7 @@ public class PlayerActions : MonoBehaviour
 
 	void Update()
 	{
-        
+        Debug.Log(m_currentPlayerState);
 		if (m_canMove)
 		{
 			PlayerMovement();
@@ -91,13 +91,13 @@ public class PlayerActions : MonoBehaviour
 		{
 			if (m_frontRaycastHit.transform.GetComponent<FinalObjectActions>())
 			{
-				GameManager.Instance.EndLevel(true);
 				SetPlayerState(PlayerState.Win);
+				GameManager.Instance.EndLevel(true);
 			}
 			else
 			{
-				GameManager.Instance.EndLevel(false);
 				SetPlayerState(PlayerState.Lose);
+				GameManager.Instance.EndLevel(false);
 			}
 			m_canMove = false;
 		}
@@ -116,27 +116,39 @@ public class PlayerActions : MonoBehaviour
 	{
 		if (inNewState != m_currentPlayerState)
 		{
+
+            switch (inNewState)
+            {
+                case PlayerState.Idle:
+                    StopParticles();
+                    break;
+
+                case PlayerState.Walk:
+                    m_effectivePlayerSpeed = m_playerSpeed;
+                    PlayWalkParticle();
+                    break;
+
+                case PlayerState.Climb:
+                    StopParticles();
+                    m_effectivePlayerSpeed = m_playerSpeed / 2;
+                    break;
+
+                case PlayerState.Slide:
+                    m_effectivePlayerSpeed = m_playerSpeed / 2;
+                    PlaySlideParticle();
+                    break;
+
+                case PlayerState.Win:
+
+                    break;
+
+                case PlayerState.Lose:
+
+                    break;
+            }
+
 			m_currentPlayerState = inNewState;
 
-			if (inNewState == PlayerState.Climb)
-			{
-                StopParticles();
-				m_effectivePlayerSpeed = m_playerSpeed / 2;
-			}
-            else if (inNewState == PlayerState.Slide)
-            {
-                m_effectivePlayerSpeed = m_playerSpeed / 2;
-                PlaySlideParticle();
-            }
-            else if (inNewState == PlayerState.Walk)
-            {
-                m_effectivePlayerSpeed = m_playerSpeed;
-                PlayWalkParticle();
-            }
-            else if (inNewState == PlayerState.Idle)
-			{
-                StopParticles();
-			}
 		}
 	}
 

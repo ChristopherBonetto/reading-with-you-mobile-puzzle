@@ -116,13 +116,13 @@ public class GameManager : Singleton<GameManager>
 			if (m_currentLevel < Worlds[m_currentWorld].Levels.Length - 1)
 			{
 				LoadLevel(m_currentLevel + 1);
-			}
+            }
 			else if (m_currentWorld < Worlds.Length - 1)
 			{
 				//@TODO Handle end world animations
 				LoadLevel(m_currentWorld + 1, 0);
 			}
-		}
+        }
 		else
 		{
 			//@TODO Handle reload animation
