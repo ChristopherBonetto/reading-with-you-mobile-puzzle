@@ -7,10 +7,6 @@ using UnityEngine.UI;
 public class LevelButton : MonoBehaviour
 {
     /// <summary>
-    /// Level assigne to this button.
-    /// </summary>
-    public Level Level { get; set; }
-    /// <summary>
     /// Level's progressive number in current world
     /// </summary>
     public int LevelNumber { get; set; }
