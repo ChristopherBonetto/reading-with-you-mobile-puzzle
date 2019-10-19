@@ -92,8 +92,9 @@ public class PlayerActions : MonoBehaviour
 			if (m_frontRaycastHit.transform.GetComponent<FinalObjectActions>())
 			{
 				SetPlayerState(PlayerState.Win);
-				GameManager.Instance.EndLevel(true);
-			}
+                m_frontRaycastHit.transform.GetComponent<FinalObjectActions>().Collected();
+                //GameManager.Instance.EndLevel(true);
+            }
 			else
 			{
 				SetPlayerState(PlayerState.Lose);
@@ -139,7 +140,8 @@ public class PlayerActions : MonoBehaviour
                     break;
 
                 case PlayerState.Win:
-
+                    StopParticles();
+                    CollectionableItemReached();
                     break;
 
                 case PlayerState.Lose:
@@ -153,7 +155,7 @@ public class PlayerActions : MonoBehaviour
 
     public void CollectionableItemReached()
     {
-        
+        Debug.Log("wow");
     }
 
 
