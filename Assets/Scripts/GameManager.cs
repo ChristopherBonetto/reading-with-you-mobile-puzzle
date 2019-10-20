@@ -84,7 +84,7 @@ public class GameManager : Singleton<GameManager>
 				Debug.LogWarning("Can't unpool map. ID " + levelID + " not found.");
 			}
 			Player.ResetLevel(m_currentLevelInfo.PlayerCoords);
-			FinalObject.ResetLevel(m_currentLevelInfo.GoalObject.Coords);
+			FinalObject.ResetLevel(m_currentLevelInfo.GoalObject.Coords, m_currentLevelInfo.Icon);
 			BlockManager.Instance.LoadBlocks(m_currentLevelInfo.Blocks);
 			//@TODO Set objective
 			SetGameState(GameState.Playing);

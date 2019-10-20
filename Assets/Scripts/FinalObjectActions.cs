@@ -6,13 +6,17 @@ public class FinalObjectActions : MonoBehaviour
     [SerializeField] private Transform m_objectIcon;
     private Vector3 m_startingIconPosition;
 
+    [SerializeField] private SpriteRenderer m_finalObjectSprite;
+
     private void Start()
     {
         m_startingIconPosition = m_objectIcon.transform.localPosition;
+        DisableEndLevelParticle();
     }
 
-    public void ResetLevel(Vector3 startPosition)
+    public void ResetLevel(Vector3 startPosition, Sprite newFinalObjectSprite)
 	{
+        m_finalObjectSprite.sprite = newFinalObjectSprite;
         transform.parent.transform.position = startPosition;
         m_objectIcon.transform.localPosition = m_startingIconPosition;
         DisableEndLevelParticle();

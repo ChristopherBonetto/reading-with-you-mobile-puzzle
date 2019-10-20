@@ -113,6 +113,7 @@ MonoBehaviour:
   m_raycastDownDistance: 0.55
   m_walkParticle: {fileID: 5162427513161534002}
   m_slideParticle: {fileID: 7601334591169840040}
+  m_timeToResetChangeLevel: 5
 --- !u!1001 &6922949758345173080
 PrefabInstance:
   m_ObjectHideFlags: 0
