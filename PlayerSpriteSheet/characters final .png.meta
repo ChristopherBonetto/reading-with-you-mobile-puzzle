@@ -1,70 +1,73 @@
 fileFormatVersion: 2
-guid: d68ea613e70d1d94d90156fcf304ca62
+guid: e67e19e883b4b6c4f8ead9bf1e4a45b6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7162396252113024443
-    second: PlayerAnimation_Idle_1
+      213: 2876899503009254950
+    second: Player_Idle_0
   - first:
-      213: -4840945116884768704
-    second: PlayerAnimation_Walk_1
+      213: 2648045101369339003
+    second: Player_Walk_1
   - first:
-      213: -5968635504050616953
-    second: PlayerAnimation_Walk_2
+      213: -2639662459144663246
+    second: Player_Walk_2
   - first:
-      213: -6227116153139719946
-    second: PlayerAnimation_Walk_3
+      213: -7885437511618501204
+    second: Player_Walk_3
   - first:
-      213: 335422221807332845
-    second: PlayerAnimation_Walk_4
+      213: -4412663776990107749
+    second: Player_Walk_4
   - first:
-      213: -3036905266822819313
-    second: characters final_5
+      213: 5866367987790662953
+    second: characters final _5
   - first:
-      213: 3816880768176115289
-    second: characters final_6
+      213: -1105657988418284259
+    second: characters final _6
   - first:
-      213: -6894835787956276480
-    second: characters final_7
+      213: 9103542102095118381
+    second: characters final _7
   - first:
-      213: 5594636903336135736
-    second: characters final_8
+      213: 3213927401423766234
+    second: characters final _8
   - first:
-      213: -5337608897862831707
-    second: characters final_9
+      213: 6526524323120658441
+    second: characters final _9
   - first:
-      213: -1638139524843320105
-    second: characters final_10
+      213: -1583268143231572755
+    second: characters final _10
   - first:
-      213: -6576711423934851964
-    second: characters final_11
+      213: 8792013089396510981
+    second: characters final _11
   - first:
-      213: -9034557616391073153
-    second: characters final_12
+      213: -6009766745152952301
+    second: characters final _12
   - first:
-      213: -6755203684218216455
-    second: characters final_13
+      213: -224138301278738690
+    second: characters final _13
   - first:
-      213: -482280472243377120
-    second: PlayerAnimation_Win_1
+      213: 2680834998641884226
+    second: characters final _14
   - first:
-      213: 857379992019197251
-    second: PlayerAnimation_Win_2
+      213: 7088463156402113592
+    second: Player_Win_1
   - first:
-      213: -2963619215458574998
-    second: PlayerAnimation_NoGroundLose_1
+      213: -3279060906453713914
+    second: Player_Win_2
   - first:
-      213: 8263908279347213033
-    second: PlayerAnimation_NoGroundLose_2
+      213: 3471192966801826308
+    second: characters final _17
   - first:
-      213: -4980553735259940948
-    second: PlayerAnimation_Climb_1
+      213: 7430948808366550190
+    second: characters final _18
   - first:
-      213: 4481483925260739018
-    second: PlayerAnimation_Climb_2
+      213: -8250125222951810952
+    second: Player_Climb_1
   - first:
-      213: 8206564472776591217
-    second: PlayerAnimation_Slide_1
+      213: 3652743182506355202
+    second: Player_Climb_2
+  - first:
+      213: -1946747543468376188
+    second: Player_Slide_1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -123,10 +126,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -135,10 +138,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -147,10 +150,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -161,13 +164,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerAnimation_Idle_1
+      name: Player_Idle_0
       rect:
         serializedVersion: 2
-        x: 50
-        y: 825
-        width: 370
-        height: 590
+        x: 62
+        y: 827
+        width: 353
+        height: 588
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,41 +178,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5640df49b3191d74da99a03ea9fe64d5
-      internalID: 7162396252113024443
+      spriteID: 80d4d92a56186214281d31658d09290c
+      internalID: 2876899503009254950
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerAnimation_Walk_1
+      name: Player_Walk_1
       rect:
         serializedVersion: 2
-        x: 440
-        y: 825
-        width: 370
-        height: 590
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1762be5fade902942bd54d2a7389b1b4
-      internalID: -4840945116884768704
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAnimation_Walk_2
-      rect:
-        serializedVersion: 2
-        x: 830
+        x: 501
         y: 823
-        width: 370
-        height: 590
+        width: 354
+        height: 589
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -217,41 +199,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30ba9da77910a974b894e26284d7fd0f
-      internalID: -5968635504050616953
+      spriteID: 8d0e31d3a1426c44ebb40854f3f990d2
+      internalID: 2648045101369339003
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerAnimation_Walk_3
+      name: Player_Walk_2
       rect:
         serializedVersion: 2
-        x: 1220
-        y: 825
-        width: 370
-        height: 590
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 945024902d45f29478fde8f0c2142773
-      internalID: -6227116153139719946
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAnimation_Walk_4
-      rect:
-        serializedVersion: 2
-        x: 1610
+        x: 952
         y: 823
-        width: 370
-        height: 590
+        width: 351
+        height: 586
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,20 +220,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 193a054200727cb44a3ebc2422062ae7
-      internalID: 335422221807332845
+      spriteID: 16203421e04f29243af7e7265aca8a23
+      internalID: -2639662459144663246
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerAnimation_Win_1
+      name: Player_Walk_3
       rect:
         serializedVersion: 2
-        x: 1609
-        y: 135
-        width: 345
-        height: 630
+        x: 1393
+        y: 823
+        width: 353
+        height: 593
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -280,20 +241,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f4f092714e4ba674da8897a687190d1b
-      internalID: -482280472243377120
+      spriteID: 4bcf3ad6a9b95b54db52894762f85969
+      internalID: -7885437511618501204
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerAnimation_Win_2
+      name: Player_Walk_4
       rect:
         serializedVersion: 2
-        x: 1987
-        y: 135
-        width: 345
-        height: 630
+        x: 1858
+        y: 819
+        width: 353
+        height: 582
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -301,20 +262,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d2c2c5568e11a34a8aa49bafe2cb428
-      internalID: 857379992019197251
+      spriteID: b599e66635058924ba7bb31ca61e4eb1
+      internalID: -4412663776990107749
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerAnimation_NoGroundLose_1
+      name: characters final _11
       rect:
         serializedVersion: 2
-        x: 2604
-        y: 127
-        width: 385
-        height: 595
+        x: 6804
+        y: 823
+        width: 343
+        height: 586
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -322,20 +283,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94433b8fa2c3695458d170063771f5ff
-      internalID: -2963619215458574998
+      spriteID: 64a7452fb4afa0b46b9efdcfc41fe2ab
+      internalID: 8792013089396510981
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerAnimation_NoGroundLose_2
+      name: Player_Win_1
       rect:
         serializedVersion: 2
-        x: 3022
-        y: 115
-        width: 385
-        height: 595
+        x: 1851
+        y: 166
+        width: 353
+        height: 604
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -343,41 +304,125 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15e359d3750350f4d86d2efadd677cb0
-      internalID: 8263908279347213033
+      spriteID: 5d3ea9757a47aa54c9d95e6685556d73
+      internalID: 7088463156402113592
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerAnimation_Climb_1
+      name: Player_Win_2
       rect:
         serializedVersion: 2
-        x: 3630
-        y: 55
-        width: 360
+        x: 2316
+        y: 166
+        width: 351
+        height: 530
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5616a1e704d09ae4d8e1e153b3816a05
+      internalID: -3279060906453713914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: characters final _17
+      rect:
+        serializedVersion: 2
+        x: 3203
+        y: 161
+        width: 388
+        height: 598
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a1281df45c77914790be288f6b56f04
+      internalID: 3471192966801826308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: characters final _18
+      rect:
+        serializedVersion: 2
+        x: 3655
+        y: 161
+        width: 379
+        height: 598
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18f49c653e9e1f24ca2698cd48944c05
+      internalID: 7430948808366550190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Climb_1
+      rect:
+        serializedVersion: 2
+        x: 4542
+        y: 241
+        width: 353
+        height: 570
+      alignment: 9
+      pivot: {x: 0.15, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6fd6db72ff517e4aa0028fe7a8f9c47
+      internalID: -8250125222951810952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Climb_2
+      rect:
+        serializedVersion: 2
+        x: 5003
+        y: 237
+        width: 353
         height: 585
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.15, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b89dbc8843f7d6b4c9aa98a8c77ef840
-      internalID: -4980553735259940948
+      spriteID: c0abfb2619011244d96b473bbabd1999
+      internalID: 3652743182506355202
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerAnimation_Climb_2
+      name: Player_Slide_1
       rect:
         serializedVersion: 2
-        x: 4071
-        y: 55
-        width: 360
-        height: 585
+        x: 5887
+        y: 170
+        width: 350
+        height: 544
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -385,29 +430,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f49eda350eca6e44a0fda9d25dbd8e0
-      internalID: 4481483925260739018
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAnimation_Slide_1
-      rect:
-        serializedVersion: 2
-        x: 4658
-        y: 126
-        width: 360
-        height: 535
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9bc18665a2b8c684fa2e4aafbcb4e7a2
-      internalID: 8206564472776591217
+      spriteID: 77bb5b12dcc860c4886fa38b89cbaae1
+      internalID: -1946747543468376188
       vertices: []
       indices: 
       edges: []
@@ -415,7 +439,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 2a00ebb75c9c7bc4dbb6218bef852d0f
     internalID: 0
     vertices: []
     indices: 
