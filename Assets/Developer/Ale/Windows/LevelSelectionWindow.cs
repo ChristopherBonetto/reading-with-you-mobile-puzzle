@@ -12,7 +12,6 @@ public class LevelSelectionWindow : UIControl
     //[Header("Worlds")]
 	private World[] Worlds => GameManager.Instance.Worlds;
 	private int WorldsLength => Worlds.Length;
-	private int CurrentWorld;
 
     [Header("WorldPreview")]
     [SerializeField]
@@ -44,10 +43,10 @@ public class LevelSelectionWindow : UIControl
     /// </summary>
     public void SwitchRigth()
     {
-        CurrentWorld++;
-        CurrentWorld = Mathf.Clamp(CurrentWorld, 0, WorldsLength - 1);
+        GameManager.Instance.CurrentWorld++;
+        GameManager.Instance.CurrentWorld = Mathf.Clamp(GameManager.Instance.CurrentWorld, 0, WorldsLength - 1);
 
-        Debug.Log(CurrentWorld);
+        Debug.Log(GameManager.Instance.CurrentWorld);
 
         UpdateWorldAndLevelInfo();
     }
@@ -57,10 +56,10 @@ public class LevelSelectionWindow : UIControl
     /// </summary>
     public void SwitchLeft()
     {
-        CurrentWorld--;
-        CurrentWorld = Mathf.Clamp(CurrentWorld, 0, WorldsLength - 1);
+        GameManager.Instance.CurrentWorld--;
+        GameManager.Instance.CurrentWorld = Mathf.Clamp(GameManager.Instance.CurrentWorld, 0, WorldsLength - 1);
 
-        Debug.Log(CurrentWorld);
+        Debug.Log(GameManager.Instance.CurrentWorld);
 
         UpdateWorldAndLevelInfo();
     }
@@ -69,30 +68,54 @@ public class LevelSelectionWindow : UIControl
     /// <summary>
     /// Update when switch world
     /// </summary>
-    private void UpdateWorldAndLevelInfo()
+    public void UpdateWorldAndLevelInfo()
     {
+        Mode mode = GameManager.Instance.Mode;
+
 		//@TEMP Not enough worlds in the list
 		// Refactor world update
-		if (WorldsLength <= CurrentWorld)
+		if (WorldsLength <= GameManager.Instance.CurrentWorld)
 		{
 			return;
 		}
 
-        m_worldPreview.sprite = Worlds[CurrentWorld].Preview;
+        m_worldPreview.sprite = Worlds[GameManager.Instance.CurrentWorld].Preview;
 
         for (int i = 0; i < m_buttons.Length; i++)
         {
-            if (i >= Worlds[CurrentWorld].Levels.Length)
+            if (mode == Mode.Easy)
             {
-                m_buttons[i].gameObject.SetActive(false);
-            }
+                Debug.Log("easy");
 
-            if (i < Worlds[CurrentWorld].Levels.Length && Worlds[CurrentWorld].Levels[i] != null)
+                if (i >= Worlds[GameManager.Instance.CurrentWorld].EasyLevels.Length)
+                {
+                    m_buttons[i].gameObject.SetActive(false);
+                }
+
+                if (i < Worlds[GameManager.Instance.CurrentWorld].EasyLevels.Length && Worlds[GameManager.Instance.CurrentWorld].EasyLevels[i] != null)
+                {
+				    // Set a level for each button
+				    m_buttons[i].LevelNumber = i;
+				    m_buttons[i].Image.sprite = Worlds[GameManager.Instance.CurrentWorld].EasyLevels[i].Icon;
+				    m_buttons[i].gameObject.SetActive(true);
+                }
+            }
+            else if (mode == Mode.Hard)
             {
-				// Set a level for each button
-				m_buttons[i].LevelNumber = i;
-				m_buttons[i].Image.sprite = Worlds[CurrentWorld].Levels[i].Icon;
-				m_buttons[i].gameObject.SetActive(true);
+                Debug.Log("hard");
+
+                if (i >= Worlds[GameManager.Instance.CurrentWorld].HardLevels.Length)
+                {
+                    m_buttons[i].gameObject.SetActive(false);
+                }
+
+                if (i < Worlds[GameManager.Instance.CurrentWorld].HardLevels.Length && Worlds[GameManager.Instance.CurrentWorld].HardLevels[i] != null)
+                {
+                    // Set a level for each button
+                    m_buttons[i].LevelNumber = i;
+                    m_buttons[i].Image.sprite = Worlds[GameManager.Instance.CurrentWorld].HardLevels[i].Icon;
+                    m_buttons[i].gameObject.SetActive(true);
+                }
             }
         }
     }

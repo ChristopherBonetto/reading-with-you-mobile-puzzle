@@ -42,6 +42,11 @@ public class MainElementsWindow : UIControl
         the default mode is easy. */
 
         TextMode.text = m_easyModeText;
+
+        GameManager.Instance.SetMode(Mode.Easy);
+
+        LevelSelectionWindow levelWindow = UIManager.Instance.Controls[UIControlName.LevelSelection] as LevelSelectionWindow;
+        levelWindow.UpdateWorldAndLevelInfo();
     }
 
     /// <summary>
@@ -53,5 +58,10 @@ public class MainElementsWindow : UIControl
         the default mode is easy. */
 
         TextMode.text = m_hardModeText;
+
+        GameManager.Instance.SetMode(Mode.Hard);
+
+        LevelSelectionWindow levelWindow = UIManager.Instance.Controls[UIControlName.LevelSelection] as LevelSelectionWindow;
+        levelWindow.UpdateWorldAndLevelInfo();
     }
 }
