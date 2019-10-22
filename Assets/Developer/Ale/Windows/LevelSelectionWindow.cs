@@ -27,6 +27,8 @@ public class LevelSelectionWindow : UIControl
     {
         base.Start();
 
+        GameManager.Instance.OnUpdateLevel += UpdateWorldAndLevelInfo;
+
         UpdateWorldAndLevelInfo();
     }
 

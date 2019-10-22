@@ -36,6 +36,11 @@ public class GameManager : Singleton<GameManager>
 	/// </summary>
 	public Action OnMovement;
 
+    /// <summary>
+    /// Event on load level
+    /// </summary>
+    public Action OnUpdateLevel;
+
 	private GameState m_currentState;
     private Mode m_Mode;
 
@@ -44,8 +49,6 @@ public class GameManager : Singleton<GameManager>
 
 	private void Start()
 	{
-        Application.targetFrameRate = 30;
-
         //@TEMP @ALE
         for (int i = 0; i < Worlds.Length; i++)
         {

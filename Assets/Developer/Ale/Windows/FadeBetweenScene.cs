@@ -11,22 +11,13 @@ public class FadeBetweenScene : UIControl
     /// Store every void method.
     /// Execute when fade in is completed.
     /// </summary>
-    private Action m_OnFadeInComplete;
-    public Action OnFadeInComplete
-    {
-        get { return m_OnFadeInComplete; }
-        set { m_OnFadeInComplete = value; }
-    }
+    public Action FadeInCompleted;
+
     /// <summary>
     /// Store every void method.
     /// Execute when fade out is completed.
     /// </summary>
-    private Action m_OnFadeOutComplete;
-    public Action OnFadeOutComplete
-    {
-        get { return m_OnFadeOutComplete; }
-        set { m_OnFadeOutComplete = value; }
-    }
+    public Action FadeOutCompleted;
     #endregion
 
     private Animator m_anim;
@@ -44,8 +35,8 @@ public class FadeBetweenScene : UIControl
     public void OnFadeInCompleted()
     {
         // execute a method putted in (when fade in is completed)
-        OnFadeInComplete?.Invoke();
-        OnFadeInComplete = null;
+        FadeInCompleted?.Invoke();
+        FadeInCompleted -= FadeInCompleted;
 
         m_anim.SetBool("isSceneLoaded", true);
     }
@@ -55,8 +46,8 @@ public class FadeBetweenScene : UIControl
     /// </summary>
     public void OnFadeOutCompleted()
     {
-        OnFadeOutComplete?.Invoke();
-        OnFadeOutComplete = null;
+        FadeOutCompleted?.Invoke();
+        FadeOutCompleted -= FadeOutCompleted;
     }
     #endregion
 }
