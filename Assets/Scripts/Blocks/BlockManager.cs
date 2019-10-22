@@ -23,7 +23,7 @@ public class BlockManager : Singleton<BlockManager>
 	private Vector3 m_holdOffset;
 
 	[SerializeField]
-	private float m_InvY = -0.4f;
+	private float m_InvY = -0.2f;
 
 	[SerializeField]
 	private float m_InvZ = -1.7f;
