@@ -46,14 +46,32 @@ public class GameManager : Singleton<GameManager>
 	{
         Application.targetFrameRate = 30;
 
-		ObjectPooler.Instance.StartPooling();
-
         //@TEMP @ALE
         for (int i = 0; i < Worlds.Length; i++)
         {
             Worlds[i].EasyLevels[0].IsPlayable = true;
             Worlds[i].HardLevels[0].IsPlayable = true;
-        }
+
+			for (int j = 0; j < Worlds[i].EasyLevels.Length; j++)
+			{
+				PoolableObject map = Worlds[i].EasyLevels[j].LevelToPool;
+				if (map)
+				{
+					ObjectPooler.Instance.AddPoolItem(map, 1, false); 
+				}
+			}
+
+			for (int j = 0; j < Worlds[i].HardLevels.Length; j++)
+			{
+				PoolableObject map = Worlds[i].HardLevels[j].LevelToPool;
+				if (map)
+				{
+					ObjectPooler.Instance.AddPoolItem(map, 1, false);
+				}
+			}
+		}
+
+		ObjectPooler.Instance.StartPooling();
 	}
 
 	public void SetGameState(GameState inGameState)
