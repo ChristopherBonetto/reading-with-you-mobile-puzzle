@@ -23,4 +23,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8c0146b313347cf4087319d259ad4d1c, type: 2}
   - {fileID: 11400000, guid: 49473df6539bd6343be28ab9ad9f3bdd, type: 2}
   - {fileID: 11400000, guid: e27154818dc169b4eb3889d2b0be2a7a, type: 2}
-  HardLevels: []
+  HardLevels:
+  - {fileID: 11400000, guid: e30b2136288d2af469dae6179ddd63e8, type: 2}
+  - {fileID: 11400000, guid: 373cd2385d483504888b41f3392050cb, type: 2}
+  - {fileID: 11400000, guid: e0cbe187631568a46a5691bc97534d54, type: 2}
+  - {fileID: 11400000, guid: 176f39f8f0d6fb64bb9e83e45b7da280, type: 2}
+  - {fileID: 11400000, guid: 847e94ffdec2e9a49a1473d7d53de995, type: 2}
+  - {fileID: 11400000, guid: 821fed24e333b4c4db4bcb5ecfe68dfc, type: 2}
+  - {fileID: 11400000, guid: 8c5fa114e40ece0458139c56741cd754, type: 2}
+  - {fileID: 11400000, guid: cd9598ec3fc03174baacbcd98c328077, type: 2}
