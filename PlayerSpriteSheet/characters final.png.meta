@@ -46,10 +46,10 @@ TextureImporter:
     second: characters final_13
   - first:
       213: -482280472243377120
-    second: characters final_14
+    second: PlayerAnimation_Win_1
   - first:
       213: 857379992019197251
-    second: characters final_15
+    second: PlayerAnimation_Win_2
   - first:
       213: -2963619215458574998
     second: characters final_16
@@ -266,13 +266,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters final_14
+      name: PlayerAnimation_Win_1
       rect:
         serializedVersion: 2
         x: 1609
-        y: 150
+        y: 135
         width: 345
-        height: 596
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,13 +287,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters final_15
+      name: PlayerAnimation_Win_2
       rect:
         serializedVersion: 2
         x: 1987
-        y: 137
+        y: 135
         width: 345
-        height: 520
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
