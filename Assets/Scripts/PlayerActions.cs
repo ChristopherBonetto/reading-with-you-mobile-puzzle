@@ -180,6 +180,7 @@ public class PlayerActions : MonoBehaviour
                     break;
 
                 case PlayerState.Walk:
+                    m_playerAnimator.SetBool("isInIdle", false);
                     m_playerAnimator.SetBool("isInSlide", false);
                     m_playerAnimator.SetBool("isInClimb", false);
                     m_playerAnimator.SetBool("isInWalk", true);
@@ -189,6 +190,7 @@ public class PlayerActions : MonoBehaviour
                     break;
 
                 case PlayerState.Climb:
+                    m_playerAnimator.SetBool("isInIdle", false);
                     m_playerAnimator.SetBool("isInWalk", false);
                     m_playerAnimator.SetBool("isInSlide", false);
                     m_playerAnimator.SetBool("isInClimb", true);
@@ -197,6 +199,7 @@ public class PlayerActions : MonoBehaviour
                     break;
 
                 case PlayerState.Slide:
+                    m_playerAnimator.SetBool("isInIdle", false);
                     m_playerAnimator.SetBool("isInWalk", false);
                     m_playerAnimator.SetBool("isInClimb", false);
                     m_playerAnimator.SetBool("isInSlide", true);
