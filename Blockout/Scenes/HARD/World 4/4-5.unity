@@ -434,7 +434,7 @@ PrefabInstance:
     - target: {fileID: 7569231807892799015, guid: 022d2438fbec1f147acc319093357ce9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.44
+      value: -0.9
       objectReference: {fileID: 0}
     - target: {fileID: 7569231807892799015, guid: 022d2438fbec1f147acc319093357ce9,
         type: 3}
@@ -1439,7 +1439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2048116044}
   m_Layer: 0
-  m_Name: Moving_Meshes
+  m_Name: Moving Meshes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1469,16 +1469,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1702031048}
     m_Modifications:
-    - target: {fileID: 2164253533157684791, guid: 9450d23f3b247654193b6efef614b9e1,
-        type: 3}
-      propertyPath: m_Name
-      value: PF_SM_BasePlatform
-      objectReference: {fileID: 0}
-    - target: {fileID: 2164253533157684791, guid: 9450d23f3b247654193b6efef614b9e1,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 2905842964501201956, guid: 9450d23f3b247654193b6efef614b9e1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1533,6 +1523,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164253533157684791, guid: 9450d23f3b247654193b6efef614b9e1,
+        type: 3}
+      propertyPath: m_Name
+      value: PF_SM_BasePlatform
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164253533157684791, guid: 9450d23f3b247654193b6efef614b9e1,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9450d23f3b247654193b6efef614b9e1, type: 3}
