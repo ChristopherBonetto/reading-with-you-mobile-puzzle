@@ -804,11 +804,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 5877691281391520283, guid: 93f3cbc488ae87247bb4270804e90eeb,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 49523784}
     - target: {fileID: 8326377220887215369, guid: 93f3cbc488ae87247bb4270804e90eeb,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -854,6 +849,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background
       objectReference: {fileID: 0}
+    - target: {fileID: 5877691281391520283, guid: 93f3cbc488ae87247bb4270804e90eeb,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 49523784}
     - target: {fileID: 3560068122920509064, guid: 93f3cbc488ae87247bb4270804e90eeb,
         type: 3}
       propertyPath: m_Sprite
@@ -1190,6 +1190,32 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5643739231280222957, guid: 74ab3c7bc43f9d644a2229f5fd749a45,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 3.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643739231280222957, guid: 74ab3c7bc43f9d644a2229f5fd749a45,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 5.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643739231280222957, guid: 74ab3c7bc43f9d644a2229f5fd749a45,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952792610201276848, guid: 74ab3c7bc43f9d644a2229f5fd749a45,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952792610201276848, guid: 74ab3c7bc43f9d644a2229f5fd749a45,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7162396252113024443, guid: d68ea613e70d1d94d90156fcf304ca62,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74ab3c7bc43f9d644a2229f5fd749a45, type: 3}
 --- !u!114 &915840053 stripped
@@ -1598,7 +1624,6 @@ MonoBehaviour:
   Worlds:
   - {fileID: 11400000, guid: a12d5203da19c344ab35fcb109bd6553, type: 2}
   - {fileID: 11400000, guid: d65af9660e6742f4cb58fc04cc6ff24f, type: 2}
-  m_currentWorld: 0
 --- !u!4 &1942291698
 Transform:
   m_ObjectHideFlags: 0

@@ -35,10 +35,18 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private ParticleSystem m_slideParticle;
 
     [SerializeField] private float m_timeToResetChangeLevel;
+
+    private Animator m_playerAnimator;
+
     private float m_timer;
 
     #endregion
 
+
+    private void Awake()
+    {
+        m_playerAnimator = GetComponentInChildren<Animator>();
+    }
     private void Start()
 	{
         SetPlayerState(PlayerState.Idle);
@@ -197,6 +205,11 @@ public class PlayerActions : MonoBehaviour
 			m_currentPlayerState = inNewState;
 		}
 	}
+
+    public void SetPlayerAnimation()
+    {
+        
+    }
 
 	public void EnableMovement(bool bEnable)
 	{
