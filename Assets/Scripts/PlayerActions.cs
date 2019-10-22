@@ -212,19 +212,19 @@ public class PlayerActions : MonoBehaviour
 
     public void PlaySlideParticle()
     {
-        m_walkParticle.Pause(true);
+        m_walkParticle.Stop(true);
         m_slideParticle.Play(true);
     }
 
     public void PlayWalkParticle()
     {
-        m_slideParticle.Pause(true);
+        m_slideParticle.Stop(true);
         m_walkParticle.Play(true);
     }
 
     private bool Timer(float destinationTime)
     {
-        m_timer += Time.deltaTime;
+        m_timer += Time.fixedDeltaTime;
 
         if (m_timer >= destinationTime)
         {
