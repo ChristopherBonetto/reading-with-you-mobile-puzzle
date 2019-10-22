@@ -131,23 +131,55 @@ public class PlayerActions : MonoBehaviour
 				// Move 0.5f above the found floor
 				nextPointPosition = m_nextFrameCollisionPoint.point + Vector3.up * 0.5f;
 
-				if (m_nextFrameCollisionPoint.transform.gameObject.layer != LayerMask.NameToLayer("Ramp"))
-				{
-					SetPlayerState(PlayerState.Walk);
-					transform.position = gameObject.transform.position + m_movement;
-				}
-				// If on a ramp/trapezoid allow 0.1f offset
-				else if (nextPointPosition.y > transform.position.y - 0.1f)
-				{
-					SetPlayerState(PlayerState.Climb);
-					transform.position = nextPointPosition;
-				}
-				else if (nextPointPosition.y < transform.position.y + 0.1f)
-				{
-					SetPlayerState(PlayerState.Slide);
-					transform.position = nextPointPosition;
-				}
-			}
+
+                if (m_nextFrameCollisionPoint.transform.gameObject.layer == LayerMask.NameToLayer("Ramp"))
+                {
+                    if (nextPointPosition.y > transform.position.y)
+                    {
+                        SetPlayerState(PlayerState.Climb);
+                        transform.position = nextPointPosition;
+                    }
+                    else if (nextPointPosition.y < transform.position.y)
+                    {
+                        SetPlayerState(PlayerState.Slide);
+                        transform.position = nextPointPosition;
+                    }
+                }
+
+                else if(m_nextFrameCollisionPoint.transform.gameObject.layer == LayerMask.NameToLayer("Trapezoid"))
+                {
+
+                }
+                else
+                {
+                    SetPlayerState(PlayerState.Walk);
+                    transform.position = gameObject.transform.position + m_movement;
+                }
+                // If on a ramp/trapezoid allow 0.1f offset
+                
+
+
+
+
+
+
+                //if (m_nextFrameCollisionPoint.transform.gameObject.layer != LayerMask.NameToLayer("Ramp"))
+                //{
+                //    SetPlayerState(PlayerState.Walk);
+                //    transform.position = gameObject.transform.position + m_movement;
+                //}
+                //// If on a ramp/trapezoid allow 0.1f offset
+                //else if (nextPointPosition.y > transform.position.y)
+                //{
+                //    SetPlayerState(PlayerState.Climb);
+                //    transform.position = nextPointPosition;
+                //}
+                //else if (nextPointPosition.y < transform.position.y)
+                //{
+                //    SetPlayerState(PlayerState.Slide);
+                //    transform.position = nextPointPosition;
+                //}
+            }
 			// No floor
 			else
 			{
