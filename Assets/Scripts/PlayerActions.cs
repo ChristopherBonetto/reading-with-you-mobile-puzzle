@@ -161,7 +161,8 @@ public class PlayerActions : MonoBehaviour
 	public void ResetLevel(Vector3 startPosition)
 	{
         StopParticles();
-		EnableMovement(false);
+        
+        EnableMovement(false);
 		transform.position = startPosition;
         SetPlayerState(PlayerState.Idle);
         
@@ -179,25 +180,43 @@ public class PlayerActions : MonoBehaviour
                     break;
 
                 case PlayerState.Walk:
+                    m_playerAnimator.SetBool("isInSlide", false);
+                    m_playerAnimator.SetBool("isInClimb", false);
+                    m_playerAnimator.SetBool("isInWalk", true);
+
                     m_effectivePlayerSpeed = m_playerSpeed;
                     PlayWalkParticle();
                     break;
 
                 case PlayerState.Climb:
+                    m_playerAnimator.SetBool("isInWalk", false);
+                    m_playerAnimator.SetBool("isInSlide", false);
+                    m_playerAnimator.SetBool("isInClimb", true);
                     StopParticles();
                     m_effectivePlayerSpeed = m_playerSpeed / 2;
                     break;
 
                 case PlayerState.Slide:
+                    m_playerAnimator.SetBool("isInWalk", false);
+                    m_playerAnimator.SetBool("isInClimb", false);
+                    m_playerAnimator.SetBool("isInSlide", true);
                     m_effectivePlayerSpeed = m_playerSpeed / 2;
                     PlaySlideParticle();
                     break;
 
                 case PlayerState.Win:
+                    m_playerAnimator.SetBool("isInSlide", false);
+                    m_playerAnimator.SetBool("isInClimb", false);
+                    m_playerAnimator.SetBool("isInWalk", false);
+                    m_playerAnimator.SetBool("isInIdle", true);
                     StopParticles();
                     break;
 
                 case PlayerState.Lose:
+                    m_playerAnimator.SetBool("isInSlide", false);
+                    m_playerAnimator.SetBool("isInClimb", false);
+                    m_playerAnimator.SetBool("isInWalk", false);
+                    m_playerAnimator.SetBool("isInIdle", true);
                     StopParticles();
                     break;
             }
@@ -205,11 +224,7 @@ public class PlayerActions : MonoBehaviour
 			m_currentPlayerState = inNewState;
 		}
 	}
-
-    public void SetPlayerAnimation()
-    {
-        
-    }
+    
 
 	public void EnableMovement(bool bEnable)
 	{
