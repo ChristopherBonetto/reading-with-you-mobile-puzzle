@@ -114,10 +114,13 @@ public class PlayerActions : MonoBehaviour
 
 		Vector3 nextPointPosition;
 
+		// If no collider in front
 		if (!Physics.Raycast(transform.position + Vector3.right * m_raycastFrontDistance, m_movement.normalized, out m_frontRaycastHit, m_movement.magnitude))
 		{
+			// If on a floor || 0.15f behind a floor
 			if (Physics.Raycast(gameObject.transform.position + m_movement, Vector3.down, out m_nextFrameCollisionPoint, m_raycastDownDistance) || Physics.Raycast(gameObject.transform.position + m_movement + new Vector3(0.15f, 0, 0), Vector3.down, out m_nextFrameCollisionPoint, m_raycastDownDistance))
 			{
+				// Move 0.5f above the found floor
 				nextPointPosition = m_nextFrameCollisionPoint.point + Vector3.up * 0.5f;
 
 				if (m_nextFrameCollisionPoint.transform.gameObject.layer != LayerMask.NameToLayer("Ramp"))
@@ -125,23 +128,26 @@ public class PlayerActions : MonoBehaviour
 					SetPlayerState(PlayerState.Walk);
 					transform.position = gameObject.transform.position + m_movement;
 				}
-				else if (nextPointPosition.y > transform.position.y)
+				// If on a ramp/trapezoid allow 0.1f offset
+				else if (nextPointPosition.y > transform.position.y - 0.1f)
 				{
 					SetPlayerState(PlayerState.Climb);
 					transform.position = nextPointPosition;
 				}
-				else if (nextPointPosition.y < transform.position.y)
+				else if (nextPointPosition.y < transform.position.y + 0.1f)
 				{
 					SetPlayerState(PlayerState.Slide);
 					transform.position = nextPointPosition;
 				}
 			}
+			// No floor
 			else
 			{
 				SetPlayerState(PlayerState.Lose);
 				m_canMove = false;
 			}
 		}
+		// Wall or objective
 		else
 		{
 			if (m_frontRaycastHit.transform.GetComponent<FinalObjectActions>())
