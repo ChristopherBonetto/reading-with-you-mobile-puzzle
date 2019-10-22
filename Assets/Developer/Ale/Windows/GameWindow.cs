@@ -1,6 +1,11 @@
-﻿public class GameWindow : UIControl
+﻿using UnityEngine;
+
+public class GameWindow : UIControl
 {
     public override UIControlName Name => UIControlName.InGame;
+
+    public Sprite Background;
+
 	
     /// <summary>
     /// Called when click home button

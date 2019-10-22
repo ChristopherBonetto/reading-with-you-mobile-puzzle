@@ -9,6 +9,15 @@ public enum GameState
     Moving = 3
 }
 
+/// <summary>
+/// Difficult of the game.
+/// </summary>
+public enum Mode
+{
+    Easy,
+    Hard,
+}
+
 public class GameManager : Singleton<GameManager>
 {
 	public PlayerActions Player;
@@ -19,7 +28,7 @@ public class GameManager : Singleton<GameManager>
 
 	private Level m_currentLevelInfo;
 	private int m_currentLevel;
-	public int m_currentWorld; //@TEMP @ALE I change the accesibility to testing other world's levels.
+	public int CurrentWorld { get; set; }
 	private GameObject m_currentMap;
 
 	/// <summary>
@@ -28,8 +37,10 @@ public class GameManager : Singleton<GameManager>
 	public Action OnMovement;
 
 	private GameState m_currentState;
+    private Mode m_Mode;
 
 	public GameState CurrentState => m_currentState;
+    public Mode Mode => m_Mode;
 
 	private void Start()
 	{
@@ -46,6 +57,16 @@ public class GameManager : Singleton<GameManager>
         m_currentState = inGameState;
     }
 
+    public void SetMode(Mode inMode)
+    {
+        if (m_Mode == inMode)
+        {
+            return;
+        }
+
+        m_Mode = inMode;
+    }
+
     public void StartWalkingPlayer()
     {
         Player.EnableMovement(true);
@@ -55,7 +76,7 @@ public class GameManager : Singleton<GameManager>
 
 	public void LoadLevel(int levelNo)
 	{
-		LoadLevel(m_currentWorld, levelNo);
+		LoadLevel(CurrentWorld, levelNo);
 	}
 
 	private void LoadLevel(int worldNo, int levelNo)
@@ -68,7 +89,7 @@ public class GameManager : Singleton<GameManager>
 		}
 
 		// Load level
-		m_currentWorld = worldNo;
+		CurrentWorld = worldNo;
 		m_currentLevel = levelNo;
 		int levelID = GetLevelID();
 		if (levelID >= 0)
@@ -84,7 +105,7 @@ public class GameManager : Singleton<GameManager>
 				Debug.LogWarning("Can't unpool map. ID " + levelID + " not found.");
 			}
 			Player.ResetLevel(m_currentLevelInfo.PlayerCoords);
-			FinalObject.ResetLevel(m_currentLevelInfo.GoalObject.Coords, m_currentLevelInfo.Icon);
+			FinalObject.ResetLevel(m_currentLevelInfo.GoalObject.Coords);
 			BlockManager.Instance.LoadBlocks(m_currentLevelInfo.Blocks);
 			//@TODO Set objective
 			SetGameState(GameState.Playing);
@@ -97,31 +118,66 @@ public class GameManager : Singleton<GameManager>
 
 	private int GetLevelID()
 	{
-		if (m_currentWorld < Worlds.Length && m_currentLevel < Worlds[m_currentWorld].Levels.Length)
-		{
-			m_currentLevelInfo = Worlds[m_currentWorld].Levels[m_currentLevel];
-			return m_currentLevelInfo.LevelID;
-		}
-		else
-		{
-			return -1;
-		}
+        if (Mode == Mode.Easy)
+        {
+		    if (CurrentWorld < Worlds.Length && m_currentLevel < Worlds[CurrentWorld].EasyLevels.Length)
+		    {
+			    m_currentLevelInfo = Worlds[CurrentWorld].EasyLevels[m_currentLevel];
+			    return m_currentLevelInfo.LevelID;
+		    }
+		    else
+		    {
+			    return -1;
+		    }
+        }
+
+        else if (Mode == Mode.Hard)
+        {
+            if (CurrentWorld < Worlds.Length && m_currentLevel < Worlds[CurrentWorld].HardLevels.Length)
+            {
+                m_currentLevelInfo = Worlds[CurrentWorld].HardLevels[m_currentLevel];
+                return m_currentLevelInfo.LevelID;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        return -1;
 	}
 
 	public void EndLevel(bool bWin)
 	{
 		if (bWin)
 		{
-			// Load next level
-			if (m_currentLevel < Worlds[m_currentWorld].Levels.Length - 1)
-			{
-				LoadLevel(m_currentLevel + 1);
+            if (Mode == Mode.Easy)
+            {
+			    // Load next level
+			    if (m_currentLevel < Worlds[CurrentWorld].EasyLevels.Length - 1)
+			    {
+				    LoadLevel(m_currentLevel + 1);
+                }
+			    else if (CurrentWorld < Worlds.Length - 1)
+			    {
+				    //@TODO Handle end world animations
+				    LoadLevel(CurrentWorld + 1, 0);
+			    }
             }
-			else if (m_currentWorld < Worlds.Length - 1)
-			{
-				//@TODO Handle end world animations
-				LoadLevel(m_currentWorld + 1, 0);
-			}
+
+            else if (Mode == Mode.Hard)
+            {
+                // Load next level
+                if (m_currentLevel < Worlds[CurrentWorld].HardLevels.Length - 1)
+                {
+                    LoadLevel(m_currentLevel + 1);
+                }
+                else if (CurrentWorld < Worlds.Length - 1)
+                {
+                    //@TODO Handle end world animations
+                    LoadLevel(CurrentWorld + 1, 0);
+                }
+            }
         }
 		else
 		{

@@ -7,12 +7,16 @@ public class World : ScriptableObject
     /// <summary>
     /// World preview icon
     /// </summary>
-    [Header("World Preciew")]
+    [Header("World Preview")]
     public Sprite Preview;
+
+    [Header("World Background")]
+    public Sprite Background;
 
     /// <summary>
     /// Container for the levels of this world.
     /// </summary>
     [Header("Levels container")]
-    public Level[] Levels;
+    public Level[] EasyLevels;
+    public Level[] HardLevels;
 }
