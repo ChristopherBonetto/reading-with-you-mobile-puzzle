@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ab19795b6fcb446a6753130f17500c, type: 3}
   m_Name: 2-1_Info
   m_EditorClassIdentifier: 
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: d8ff7f3842c6f7943a1aaa3877a583a7, type: 3}
   IconLocked: {fileID: 0}
   LevelPrefab: {fileID: 3149515465454582376, guid: 9a219bb125de14045a40e367b364110a,
     type: 3}
