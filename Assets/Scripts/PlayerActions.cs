@@ -74,6 +74,14 @@ public class PlayerActions : MonoBehaviour
                 // I need void method to store into delegate.
                 void Victory()
                 {
+                    if (GameManager.Instance.Mode == Mode.Easy)
+                        if (GameManager.Instance.Worlds[GameManager.Instance.CurrentWorld].EasyLevels[GameManager.Instance.m_currentLevel + 1] != null)
+                            GameManager.Instance.Worlds[GameManager.Instance.CurrentWorld].EasyLevels[GameManager.Instance.m_currentLevel + 1].IsPlayable = true;
+
+                    if (GameManager.Instance.Mode == Mode.Hard)
+                        if (GameManager.Instance.Worlds[GameManager.Instance.CurrentWorld].HardLevels[GameManager.Instance.m_currentLevel + 1] != null)
+                            GameManager.Instance.Worlds[GameManager.Instance.CurrentWorld].HardLevels[GameManager.Instance.m_currentLevel + 1].IsPlayable = true;
+
                     GameManager.Instance.EndLevel(true);
                 }
 

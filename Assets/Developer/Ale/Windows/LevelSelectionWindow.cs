@@ -12,6 +12,7 @@ public class LevelSelectionWindow : UIControl
     //[Header("Worlds")]
 	private World[] Worlds => GameManager.Instance.Worlds;
 	private int WorldsLength => Worlds.Length;
+    private int CurrentLevel => GameManager.Instance.m_currentLevel;
 
     [Header("WorldPreview")]
     [SerializeField]
@@ -89,15 +90,22 @@ public class LevelSelectionWindow : UIControl
 
                 if (i >= Worlds[GameManager.Instance.CurrentWorld].EasyLevels.Length)
                 {
+                    m_buttons[i].Image.sprite = Worlds[GameManager.Instance.CurrentWorld].EasyLevels[CurrentLevel].IconLocked;
                     m_buttons[i].gameObject.SetActive(false);
+                    m_buttons[i].Button.enabled = false;
                 }
 
                 if (i < Worlds[GameManager.Instance.CurrentWorld].EasyLevels.Length && Worlds[GameManager.Instance.CurrentWorld].EasyLevels[i] != null)
                 {
 				    // Set a level for each button
 				    m_buttons[i].LevelNumber = i;
-				    m_buttons[i].Image.sprite = Worlds[GameManager.Instance.CurrentWorld].EasyLevels[i].Icon;
+                    m_buttons[i].Button.enabled = true;
 				    m_buttons[i].gameObject.SetActive(true);
+
+				    m_buttons[i].IsPlayable = Worlds[GameManager.Instance.CurrentWorld].EasyLevels[i].IsPlayable;
+
+                    if (m_buttons[i].IsPlayable)
+				        m_buttons[i].Image.sprite = Worlds[GameManager.Instance.CurrentWorld].EasyLevels[i].Icon;
                 }
             }
             else if (mode == Mode.Hard)
@@ -107,14 +115,21 @@ public class LevelSelectionWindow : UIControl
                 if (i >= Worlds[GameManager.Instance.CurrentWorld].HardLevels.Length)
                 {
                     m_buttons[i].gameObject.SetActive(false);
+                    m_buttons[i].Image.sprite = Worlds[GameManager.Instance.CurrentWorld].HardLevels[CurrentLevel].IconLocked;
+                    m_buttons[i].Button.enabled = false;
                 }
 
                 if (i < Worlds[GameManager.Instance.CurrentWorld].HardLevels.Length && Worlds[GameManager.Instance.CurrentWorld].HardLevels[i] != null)
                 {
                     // Set a level for each button
                     m_buttons[i].LevelNumber = i;
-                    m_buttons[i].Image.sprite = Worlds[GameManager.Instance.CurrentWorld].HardLevels[i].Icon;
+                    m_buttons[i].Button.enabled = true;
                     m_buttons[i].gameObject.SetActive(true);
+
+				    m_buttons[i].IsPlayable = Worlds[GameManager.Instance.CurrentWorld].HardLevels[i].IsPlayable;
+
+                    if (m_buttons[i].IsPlayable)
+                        m_buttons[i].Image.sprite = Worlds[GameManager.Instance.CurrentWorld].HardLevels[i].Icon;
                 }
             }
         }

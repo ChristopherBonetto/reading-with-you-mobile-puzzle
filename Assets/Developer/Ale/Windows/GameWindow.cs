@@ -14,6 +14,7 @@ public class GameWindow : UIControl
     {
         // Store fade class
         FadeBetweenScene fade = UIManager.Instance.Controls[UIControlName.Fade] as FadeBetweenScene;
+        LevelSelectionWindow level = UIManager.Instance.Controls[UIControlName.LevelSelection] as LevelSelectionWindow;
 
         #region Local Method
         // Show level panel.
@@ -32,6 +33,8 @@ public class GameWindow : UIControl
         // Store into delegate.
         fade.OnFadeOutComplete = HideFade;
         fade.OnFadeInComplete = ShowLevel;
+
+        level.UpdateWorldAndLevelInfo();
 
         // Turn on fade panel and disable this.
         UIManager.Instance.ShowAndHide(UIControlName.Fade, this);

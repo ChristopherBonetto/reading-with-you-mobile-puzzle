@@ -27,7 +27,7 @@ public class GameManager : Singleton<GameManager>
 	public World[] Worlds;
 
 	private Level m_currentLevelInfo;
-	private int m_currentLevel;
+	public int m_currentLevel { get; private set; }
 	public int CurrentWorld { get; set; }
 	private GameObject m_currentMap;
 
@@ -44,7 +44,16 @@ public class GameManager : Singleton<GameManager>
 
 	private void Start()
 	{
+        Application.targetFrameRate = 30;
+
 		ObjectPooler.Instance.StartPooling();
+
+        //@TEMP @ALE
+        for (int i = 0; i < Worlds.Length; i++)
+        {
+            Worlds[i].EasyLevels[0].IsPlayable = true;
+            Worlds[i].HardLevels[0].IsPlayable = true;
+        }
 	}
 
 	public void SetGameState(GameState inGameState)

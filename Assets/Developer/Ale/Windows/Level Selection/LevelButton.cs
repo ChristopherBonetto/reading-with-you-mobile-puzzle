@@ -12,6 +12,11 @@ public class LevelButton : MonoBehaviour
     public int LevelNumber { get; set; }
 
     /// <summary>
+    /// if it's locked u can't play this level.
+    /// </summary>
+    public bool IsPlayable { get; set; }
+
+    /// <summary>
     /// Button component
     /// </summary>
     public Button Button { get; private set; }
@@ -35,30 +40,33 @@ public class LevelButton : MonoBehaviour
     /// </summary>
     public void OnLoadLevel()
     {
-        FadeBetweenScene fade = UIManager.Instance.Controls[UIControlName.Fade] as FadeBetweenScene;
-
-        #region Local Method
-        // Show game panel and turn off level panel (or this).
-        void ShowAndHideGameAndThis()
+        if (IsPlayable)
         {
-            UIManager.Instance.ShowAndHide(UIControlName.InGame, UIManager.Instance.Controls[UIControlName.LevelSelection]);
+            FadeBetweenScene fade = UIManager.Instance.Controls[UIControlName.Fade] as FadeBetweenScene;
 
-            // load level assigned to this button.
-            GameManager.Instance.LoadLevel(LevelNumber);
+            #region Local Method
+            // Show game panel and turn off level panel (or this).
+            void ShowAndHideGameAndThis()
+            {
+                UIManager.Instance.ShowAndHide(UIControlName.InGame, UIManager.Instance.Controls[UIControlName.LevelSelection]);
+
+                // load level assigned to this button.
+                GameManager.Instance.LoadLevel(LevelNumber);
+            }
+
+            // Turn off fade panel
+            void HideFade()
+            {
+                UIManager.Instance.Hide(UIControlName.Fade);
+            }
+            #endregion
+
+            //Store into delegate
+            fade.OnFadeInComplete = ShowAndHideGameAndThis;
+            fade.OnFadeOutComplete = HideFade;
+
+            // Turn on fade panel
+            UIManager.Instance.Show(UIControlName.Fade);
         }
-
-        // Turn off fade panel
-        void HideFade()
-        {
-            UIManager.Instance.Hide(UIControlName.Fade);
-        }
-        #endregion
-
-        //Store into delegate
-        fade.OnFadeInComplete = ShowAndHideGameAndThis;
-        fade.OnFadeOutComplete = HideFade;
-
-        // Turn on fade panel
-        UIManager.Instance.Show(UIControlName.Fade);
     }
 }

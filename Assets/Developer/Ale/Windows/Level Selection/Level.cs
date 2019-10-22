@@ -34,6 +34,7 @@ public class Level : ScriptableObject
 	public GameObject LevelPrefab;
     public PoolableObject LevelToPool => LevelPrefab.GetComponent<PoolableObject>();
     public int LevelID => LevelToPool.uniqueID.ID;
+    public bool IsPlayable;
 
     [Header("Player")]
     public Vector3 PlayerCoords;
@@ -43,4 +44,11 @@ public class Level : ScriptableObject
 
     [Header("Goal")]
     public GoalInfo GoalObject;
+
+
+    // Methods
+    public void Reset()
+    {
+        IsPlayable = false;
+    }
 }
