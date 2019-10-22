@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: World2
   m_EditorClassIdentifier: 
   Preview: {fileID: 0}
-  Levels:
+  Background: {fileID: 0}
+  EasyLevels:
   - {fileID: 11400000, guid: 5b124358a9562824c9aeaaed87a21bf9, type: 2}
   - {fileID: 11400000, guid: 21723b9b1e7fe504ca003eb9a66f49be, type: 2}
   - {fileID: 11400000, guid: 191a05967661246439473d74b9bddaaf, type: 2}
@@ -22,3 +23,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dd56254fedc5ecc4a9325fad748b3e6c, type: 2}
   - {fileID: 11400000, guid: 68eb99bde90b26e4fb4d65c4ccc32286, type: 2}
   - {fileID: 11400000, guid: 8e091376e0a613746a38b90163b5d8f6, type: 2}
+  HardLevels: []
