@@ -52,10 +52,10 @@ TextureImporter:
     second: PlayerAnimation_Win_2
   - first:
       213: -2963619215458574998
-    second: characters final_16
+    second: PlayerAnimation_NoGroundLose_1
   - first:
       213: 8263908279347213033
-    second: characters final_17
+    second: PlayerAnimation_NoGroundLose_2
   - first:
       213: -4980553735259940948
     second: PlayerAnimation_Climb_1
@@ -308,7 +308,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters final_16
+      name: PlayerAnimation_NoGroundLose_1
       rect:
         serializedVersion: 2
         x: 2604
@@ -329,7 +329,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters final_17
+      name: PlayerAnimation_NoGroundLose_2
       rect:
         serializedVersion: 2
         x: 3022
