@@ -12,6 +12,11 @@ public class TouchManager : Singleton<TouchManager>
 
 	void Update()
 	{
+		if (GameManager.Instance.CurrentState != GameState.Playing)
+		{
+			return;
+		}
+
 		if (Input.GetMouseButtonDown(0))
 		{
 			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit testHit))
