@@ -1,0 +1,430 @@
+fileFormatVersion: 2
+guid: d68ea613e70d1d94d90156fcf304ca62
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7162396252113024443
+    second: PlayerAnimation_Idle_1
+  - first:
+      213: -4840945116884768704
+    second: PlayerAnimation_Walk_1
+  - first:
+      213: -5968635504050616953
+    second: PlayerAnimation_Walk_2
+  - first:
+      213: -6227116153139719946
+    second: PlayerAnimation_Walk_3
+  - first:
+      213: 335422221807332845
+    second: PlayerAnimation_Walk_4
+  - first:
+      213: -3036905266822819313
+    second: characters final_5
+  - first:
+      213: 3816880768176115289
+    second: characters final_6
+  - first:
+      213: -6894835787956276480
+    second: characters final_7
+  - first:
+      213: 5594636903336135736
+    second: characters final_8
+  - first:
+      213: -5337608897862831707
+    second: characters final_9
+  - first:
+      213: -1638139524843320105
+    second: characters final_10
+  - first:
+      213: -6576711423934851964
+    second: characters final_11
+  - first:
+      213: -9034557616391073153
+    second: characters final_12
+  - first:
+      213: -6755203684218216455
+    second: characters final_13
+  - first:
+      213: -482280472243377120
+    second: characters final_14
+  - first:
+      213: 857379992019197251
+    second: characters final_15
+  - first:
+      213: -2963619215458574998
+    second: characters final_16
+  - first:
+      213: 8263908279347213033
+    second: characters final_17
+  - first:
+      213: -4980553735259940948
+    second: PlayerAnimation_Climb_1
+  - first:
+      213: 4481483925260739018
+    second: PlayerAnimation_Climb_2
+  - first:
+      213: 8206564472776591217
+    second: PlayerAnimation_Slide_1
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PlayerAnimation_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 825
+        width: 370
+        height: 590
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5640df49b3191d74da99a03ea9fe64d5
+      internalID: 7162396252113024443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerAnimation_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 825
+        width: 370
+        height: 590
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1762be5fade902942bd54d2a7389b1b4
+      internalID: -4840945116884768704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerAnimation_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 830
+        y: 823
+        width: 370
+        height: 590
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30ba9da77910a974b894e26284d7fd0f
+      internalID: -5968635504050616953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerAnimation_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 825
+        width: 370
+        height: 590
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 945024902d45f29478fde8f0c2142773
+      internalID: -6227116153139719946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerAnimation_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 1610
+        y: 823
+        width: 370
+        height: 590
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 193a054200727cb44a3ebc2422062ae7
+      internalID: 335422221807332845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: characters final_14
+      rect:
+        serializedVersion: 2
+        x: 1609
+        y: 150
+        width: 345
+        height: 596
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4f092714e4ba674da8897a687190d1b
+      internalID: -482280472243377120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: characters final_15
+      rect:
+        serializedVersion: 2
+        x: 1987
+        y: 137
+        width: 345
+        height: 520
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d2c2c5568e11a34a8aa49bafe2cb428
+      internalID: 857379992019197251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: characters final_16
+      rect:
+        serializedVersion: 2
+        x: 2604
+        y: 127
+        width: 385
+        height: 595
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94433b8fa2c3695458d170063771f5ff
+      internalID: -2963619215458574998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: characters final_17
+      rect:
+        serializedVersion: 2
+        x: 3022
+        y: 115
+        width: 385
+        height: 595
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15e359d3750350f4d86d2efadd677cb0
+      internalID: 8263908279347213033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerAnimation_Climb_1
+      rect:
+        serializedVersion: 2
+        x: 3630
+        y: 55
+        width: 360
+        height: 585
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b89dbc8843f7d6b4c9aa98a8c77ef840
+      internalID: -4980553735259940948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerAnimation_Climb_2
+      rect:
+        serializedVersion: 2
+        x: 4071
+        y: 55
+        width: 360
+        height: 585
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f49eda350eca6e44a0fda9d25dbd8e0
+      internalID: 4481483925260739018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerAnimation_Slide_1
+      rect:
+        serializedVersion: 2
+        x: 4658
+        y: 126
+        width: 360
+        height: 535
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bc18665a2b8c684fa2e4aafbcb4e7a2
+      internalID: 8206564472776591217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
