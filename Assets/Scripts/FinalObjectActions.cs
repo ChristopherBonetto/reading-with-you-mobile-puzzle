@@ -26,7 +26,7 @@ public class FinalObjectActions : MonoBehaviour
     public void Collected()
     {
         EnableEndLevelParticle();
-        m_objectIcon.transform.position = new Vector3(m_objectIcon.transform.position.x, m_objectIcon.transform.position.y + 1, m_objectIcon.transform.position.z);
+        m_objectIcon.transform.position = new Vector3(m_objectIcon.transform.position.x, m_objectIcon.transform.position.y + 1.5f, m_objectIcon.transform.position.z);
     }
 
 
