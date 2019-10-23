@@ -37,7 +37,7 @@ TextureImporter:
     second: characters final _10
   - first:
       213: 8792013089396510981
-    second: characters final _11
+    second: Player_BlockInFront_1
   - first:
       213: -6009766745152952301
     second: characters final _12
@@ -55,10 +55,10 @@ TextureImporter:
     second: Player_Win_2
   - first:
       213: 3471192966801826308
-    second: characters final _17
+    second: Player_NoGround_1
   - first:
       213: 7430948808366550190
-    second: characters final _18
+    second: Player_NoGround_2
   - first:
       213: -8250125222951810952
     second: Player_Climb_1
@@ -269,15 +269,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters final _11
+      name: Player_BlockInFront_1
       rect:
         serializedVersion: 2
         x: 6804
         y: 823
         width: 343
         height: 586
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.6, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -332,7 +332,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters final _17
+      name: Player_NoGround_1
       rect:
         serializedVersion: 2
         x: 3203
@@ -353,7 +353,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characters final _18
+      name: Player_NoGround_2
       rect:
         serializedVersion: 2
         x: 3655
@@ -424,7 +424,7 @@ TextureImporter:
         width: 350
         height: 544
       alignment: 9
-      pivot: {x: 0.5, y: 0.55}
+      pivot: {x: 0.5, y: 0.57}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
