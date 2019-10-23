@@ -148,8 +148,7 @@ public class PlayerActions : MonoBehaviour
                 else if(m_nextFrameCollisionPoint.transform.gameObject.layer == LayerMask.NameToLayer("Trapezoid"))
                 {
                     float dot = Vector3.Dot(Vector3.down, m_nextFrameCollisionPoint.normal);
-                    //Vector3 trapezoidNormal = m_nextFrameCollisionPoint.normal;
-                    //Debug.DrawRay(m_nextFrameCollisionPoint.point, trapezoidNormal, Color.blue, 100f);
+                    
                     if(dot == -1)
                     {
                         SetPlayerState(PlayerState.Walk);
@@ -175,36 +174,13 @@ public class PlayerActions : MonoBehaviour
                     SetPlayerState(PlayerState.Walk);
                     transform.position = gameObject.transform.position + m_movement;
                 }
-               
-                
-
-
-
-
-
-
-                //if (m_nextFrameCollisionPoint.transform.gameObject.layer != LayerMask.NameToLayer("Ramp"))
-                //{
-                //    SetPlayerState(PlayerState.Walk);
-                //    transform.position = gameObject.transform.position + m_movement;
-                //}
-                //// If on a ramp/trapezoid allow 0.1f offset
-                //else if (nextPointPosition.y > transform.position.y)
-                //{
-                //    SetPlayerState(PlayerState.Climb);
-                //    transform.position = nextPointPosition;
-                //}
-                //else if (nextPointPosition.y < transform.position.y)
-                //{
-                //    SetPlayerState(PlayerState.Slide);
-                //    transform.position = nextPointPosition;
-                //}
             }
 			// No floor
 			else
 			{
 				SetPlayerState(PlayerState.Lose);
-				m_canMove = false;
+                m_playerAnimator.SetBool("noGround", true);
+                m_canMove = false;
 			}
 		}
 		// Wall or objective
@@ -218,7 +194,8 @@ public class PlayerActions : MonoBehaviour
             }
             else
 			{
-				SetPlayerState(PlayerState.Lose);
+                m_playerAnimator.SetBool("blockInFront", true);
+                SetPlayerState(PlayerState.Lose);
 			}
 			m_canMove = false;
 		}
@@ -242,6 +219,8 @@ public class PlayerActions : MonoBehaviour
             switch (inNewState)
             {
                 case PlayerState.Idle:
+                    m_playerAnimator.SetBool("blockInFront", false);
+                    m_playerAnimator.SetBool("noGround", false);
                     m_playerAnimator.SetBool("hasWon", false);
                     m_playerAnimator.SetBool("isInSlide", false);
                     m_playerAnimator.SetBool("isInClimb", false);
@@ -251,6 +230,8 @@ public class PlayerActions : MonoBehaviour
                     break;
 
                 case PlayerState.Walk:
+                    m_playerAnimator.SetBool("blockInFront", false);
+                    m_playerAnimator.SetBool("noGround", false);
                     m_playerAnimator.SetBool("hasWon", false);
                     m_playerAnimator.SetBool("isInIdle", false);
                     m_playerAnimator.SetBool("isInSlide", false);
@@ -262,6 +243,8 @@ public class PlayerActions : MonoBehaviour
                     break;
 
                 case PlayerState.Climb:
+                    m_playerAnimator.SetBool("blockInFront", false);
+                    m_playerAnimator.SetBool("noGround", false);
                     m_playerAnimator.SetBool("hasWon", false);
                     m_playerAnimator.SetBool("isInIdle", false);
                     m_playerAnimator.SetBool("isInWalk", false);
@@ -272,6 +255,8 @@ public class PlayerActions : MonoBehaviour
                     break;
 
                 case PlayerState.Slide:
+                    m_playerAnimator.SetBool("blockInFront", false);
+                    m_playerAnimator.SetBool("noGround", false);
                     m_playerAnimator.SetBool("hasWon", false);
                     m_playerAnimator.SetBool("isInIdle", false);
                     m_playerAnimator.SetBool("isInWalk", false);
@@ -282,6 +267,8 @@ public class PlayerActions : MonoBehaviour
                     break;
 
                 case PlayerState.Win:
+                    m_playerAnimator.SetBool("blockInFront", false);
+                    m_playerAnimator.SetBool("noGround", false);
                     m_playerAnimator.SetBool("isInSlide", false);
                     m_playerAnimator.SetBool("isInClimb", false);
                     m_playerAnimator.SetBool("isInWalk", false);
@@ -295,7 +282,7 @@ public class PlayerActions : MonoBehaviour
                     m_playerAnimator.SetBool("isInSlide", false);
                     m_playerAnimator.SetBool("isInClimb", false);
                     m_playerAnimator.SetBool("isInWalk", false);
-                    m_playerAnimator.SetBool("isInIdle", true);
+                    m_playerAnimator.SetBool("isInIdle", false);
                     StopParticles();
                     break;
             }
