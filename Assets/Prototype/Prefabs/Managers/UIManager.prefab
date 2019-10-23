@@ -2899,7 +2899,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6262942015332104004}
-        m_MethodName: ReturnToMainMenu
+        m_MethodName: OnReturnToMainMenuButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

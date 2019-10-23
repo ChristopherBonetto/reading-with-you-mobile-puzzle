@@ -11,12 +11,11 @@ public class MainMenuWindow : UIControl
     {
         base.Start();
 
-        // Show always at the start of the game
         this.gameObject.SetActive(true);
     }
 
     /// <summary>
-    /// Executed when Start button is pressed
+    /// Action invoked when start button is pressed.
     /// </summary>
     public void OnStartButton()
     {

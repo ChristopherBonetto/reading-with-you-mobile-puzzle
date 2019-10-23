@@ -46,6 +46,11 @@ public class Level : ScriptableObject
     public GoalInfo GoalObject;
 
 
+    private void Awake()
+    {
+        Reset();
+    }
+
     // Methods
     public void Reset()
     {

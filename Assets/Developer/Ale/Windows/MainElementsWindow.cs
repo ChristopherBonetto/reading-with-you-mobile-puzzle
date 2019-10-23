@@ -5,14 +5,12 @@ using UnityEngine.UI;
 
 public class MainElementsWindow : UIControl
 {
-    public override UIControlName Name => UIControlName.MainElements;
-
-    // Serializefield
     [SerializeField] private Text m_TextMode;
     [SerializeField] private string m_easyModeText;
     [SerializeField] private string m_hardModeText;
 
-    // Properties
+    public override UIControlName Name => UIControlName.MainElements;
+
     /// <summary>
     /// text of difficult mode in main menu.
     /// </summary>
@@ -22,11 +20,12 @@ public class MainElementsWindow : UIControl
     protected override void Start()
     {
         base.Start();
+
         this.gameObject.SetActive(true);
     }
 
     /// <summary>
-    /// Execute when credit button is pressed
+    /// Action invoked when credit button is pressed.
     /// </summary>
     public void OnCreditsButton()
     {
@@ -38,13 +37,10 @@ public class MainElementsWindow : UIControl
     /// </summary>
     public void ChangeToEasyMode()
     {
-        /*@TODO set in game manager the easy mode.
-        the default mode is easy. */
-
         TextMode.text = m_easyModeText;
 
         GameManager.Instance.SetMode(Mode.Easy);
-        GameManager.Instance.OnUpdateLevel?.Invoke();
+        GameManager.Instance.OnUpdateLevel?.Invoke();   //@TEMP
     }
 
     /// <summary>
@@ -52,12 +48,9 @@ public class MainElementsWindow : UIControl
     /// </summary>
     public void ChangeToHardMode()
     {
-        /*@TODO set in game manager the hard mode.
-        the default mode is easy. */
-
         TextMode.text = m_hardModeText;
 
         GameManager.Instance.SetMode(Mode.Hard);
-        GameManager.Instance.OnUpdateLevel?.Invoke();
+        GameManager.Instance.OnUpdateLevel?.Invoke();   //@TEMP
     }
 }

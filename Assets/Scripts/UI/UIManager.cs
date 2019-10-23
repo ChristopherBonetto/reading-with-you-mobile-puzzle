@@ -22,6 +22,7 @@ public class UIManager : Singleton<UIManager>
     /// </summary>
     public Dictionary<UIControlName, UIControl> Controls = new Dictionary<UIControlName, UIControl>();
 
+
     #region Methods
     /// <summary>
     /// Register a ui control

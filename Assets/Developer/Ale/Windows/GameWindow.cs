@@ -3,12 +3,15 @@
 public class GameWindow : UIControl
 {
     public override UIControlName Name => UIControlName.InGame;
-
+    
+    /// <summary>
+    /// World's background image
+    /// </summary>
     public Sprite Background;
 
-	
+
     /// <summary>
-    /// Called when click home button
+    /// Action invoked when home button is pressed.
     /// </summary>
     public void OnHomeButton()
     {

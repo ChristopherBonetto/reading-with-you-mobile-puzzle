@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 462a49722d871654097d81c1ba3141ed, type: 3}
   m_Name: World1
   m_EditorClassIdentifier: 
-  Preview: {fileID: 21300000, guid: 942086b09aef3874c9a184950e2d91e9, type: 3}
-  Background: {fileID: 0}
+  Preview: {fileID: 21300000, guid: a9c8a625054535f42a72712ac1a07b0a, type: 3}
+  Background: {fileID: 21300000, guid: a9c8a625054535f42a72712ac1a07b0a, type: 3}
   EasyLevels:
   - {fileID: 11400000, guid: 98c04f612f7678c40ba1a3ea11d6c7d1, type: 2}
   - {fileID: 11400000, guid: 8be33e868185fe54e814c1ad2cd68c70, type: 2}
