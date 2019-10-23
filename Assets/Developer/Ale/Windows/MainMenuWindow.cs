@@ -20,5 +20,7 @@ public class MainMenuWindow : UIControl
     public void OnStartButton()
     {
         UIManager.Instance.ShowAndHide(UIControlName.LevelSelection, this);
+
+        GameManager.Instance.OnUpdateLevel?.Invoke();
     }
 }
