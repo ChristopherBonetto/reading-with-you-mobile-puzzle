@@ -58,7 +58,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
 		newItem.BasePoolSize = basePoolsize;
 		newItem.CanExpand = bCanExpand;
 		m_poolItems.Add(newItem);
-		Debug.Log(newItem.ObjectPrefab);
+
 		// Pool has been previously initialized, add new item
 		if (m_objectPool.Count > 0)
 		{
