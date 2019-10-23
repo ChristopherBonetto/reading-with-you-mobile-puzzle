@@ -86,7 +86,7 @@ public class PlayerActions : MonoBehaviour
                 }
 
                 // Store method into delegate
-                fade.OnFadeInComplete = Victory;
+                fade.FadeInCompleted = Victory;
                 // Call levelCompleted.
                 gameWindow.OnLevelCompleted();
             }
@@ -108,7 +108,7 @@ public class PlayerActions : MonoBehaviour
                 }
 
                 // Store method into delegate
-                fade.OnFadeInComplete = Lose;
+                fade.FadeInCompleted = Lose;
                 // Call levelCompleted.
                 gameWindow.OnLevelCompleted();
             }
@@ -148,7 +148,7 @@ public class PlayerActions : MonoBehaviour
 
                 else if(m_nextFrameCollisionPoint.transform.gameObject.layer == LayerMask.NameToLayer("Trapezoid"))
                 {
-
+                    Debug.Log("ciao");
                 }
                 else
                 {
