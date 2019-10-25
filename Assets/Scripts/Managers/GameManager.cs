@@ -49,32 +49,38 @@ public class GameManager : Singleton<GameManager>
 
 	private void Start()
 	{
-        //@TEMP @ALE
-        for (int i = 0; i < Worlds.Length; i++)
-        {
-            Worlds[i].EasyLevels[0].IsPlayable = true;
-            Worlds[i].HardLevels[0].IsPlayable = true;
+		PoolWorlds();
 
+		ObjectPooler.Instance.StartPooling();
+	}
+
+	private void PoolWorlds()
+	{
+		for (int i = 0; i < Worlds.Length; i++)
+		{
 			for (int j = 0; j < Worlds[i].EasyLevels.Length; j++)
 			{
+				Worlds[i].EasyLevels[j].IsPlayable = false;
 				PoolableObject map = Worlds[i].EasyLevels[j].LevelToPool;
 				if (map)
 				{
-					ObjectPooler.Instance.AddPoolItem(map, 1, false); 
+					ObjectPooler.Instance.AddPoolItem(map, 1, false);
 				}
 			}
 
 			for (int j = 0; j < Worlds[i].HardLevels.Length; j++)
 			{
+				Worlds[i].HardLevels[j].IsPlayable = false;
 				PoolableObject map = Worlds[i].HardLevels[j].LevelToPool;
 				if (map)
 				{
 					ObjectPooler.Instance.AddPoolItem(map, 1, false);
 				}
 			}
-		}
 
-		ObjectPooler.Instance.StartPooling();
+			Worlds[i].EasyLevels[0].IsPlayable = true;
+			Worlds[i].HardLevels[0].IsPlayable = true;
+		}
 	}
 
 	public void SetGameState(GameState inGameState)
