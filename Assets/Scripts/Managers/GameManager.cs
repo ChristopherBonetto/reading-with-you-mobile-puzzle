@@ -10,12 +10,12 @@ public enum GameState
 }
 
 /// <summary>
-/// Difficult of the game.
+/// Difficulty of the game
 /// </summary>
 public enum Mode
 {
     Easy,
-    Hard,
+    Hard
 }
 
 public class GameManager : Singleton<GameManager>
@@ -148,31 +148,24 @@ public class GameManager : Singleton<GameManager>
 
 	private int GetLevelID()
 	{
-        if (Mode == Mode.Easy)
-        {
-		    if (CurrentWorld < Worlds.Length && m_currentLevel < Worlds[CurrentWorld].EasyLevels.Length)
-		    {
-			    m_currentLevelInfo = Worlds[CurrentWorld].EasyLevels[m_currentLevel];
-			    return m_currentLevelInfo.LevelID;
-		    }
-		    else
-		    {
-			    return -1;
-		    }
-        }
-
-        else if (Mode == Mode.Hard)
-        {
-            if (CurrentWorld < Worlds.Length && m_currentLevel < Worlds[CurrentWorld].HardLevels.Length)
-            {
-                m_currentLevelInfo = Worlds[CurrentWorld].HardLevels[m_currentLevel];
-                return m_currentLevelInfo.LevelID;
-            }
-            else
-            {
-                return -1;
-            }
-        }
+		Level[] ModeLevels = new Level[0];
+		if (CurrentWorld < Worlds.Length)
+		{
+			if (Mode == Mode.Easy)
+			{
+				ModeLevels = Worlds[CurrentWorld].EasyLevels;
+			}
+			else if (Mode == Mode.Hard)
+			{
+				ModeLevels = Worlds[CurrentWorld].HardLevels;
+			}
+		}
+		
+		if (m_currentLevel < ModeLevels.Length)
+		{
+			m_currentLevelInfo = ModeLevels[m_currentLevel];
+			return m_currentLevelInfo.LevelID;
+		}
 
         return -1;
 	}

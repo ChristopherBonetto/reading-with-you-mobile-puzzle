@@ -179,7 +179,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8415867389406793374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 3.5, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8847598001743104193}
@@ -195,11 +195,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8415867389406793362}
     m_Modifications:
-    - target: {fileID: 6936590887442684701, guid: 394375b2991f6084c85c165cbaf49d02,
-        type: 3}
-      propertyPath: m_Name
-      value: Stars
-      objectReference: {fileID: 0}
     - target: {fileID: 6936590887442684698, guid: 394375b2991f6084c85c165cbaf49d02,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -264,6 +259,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6936590887442684701, guid: 394375b2991f6084c85c165cbaf49d02,
+        type: 3}
+      propertyPath: m_Name
+      value: Stars
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 394375b2991f6084c85c165cbaf49d02, type: 3}

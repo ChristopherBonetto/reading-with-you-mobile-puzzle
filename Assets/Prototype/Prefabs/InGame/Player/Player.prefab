@@ -140,7 +140,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5759551514271352039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.495, y: 2, z: 0}
+  m_LocalPosition: {x: -3.5, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5162427513161534003}
@@ -161,12 +161,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c93e2efe3b321459b42dd46f2c2797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playerSpeed: 1
+  m_playerSpeed: 2
   m_raycastFrontDistance: 0.25
-  m_raycastDownDistance: 0.55
+  m_raycastDownDistance: 0.7
   m_walkParticle: {fileID: 5162427513161534002}
   m_slideParticle: {fileID: 7601334591169840040}
-  m_timeToResetChangeLevel: 5
+  m_timeToResetChangeLevel: 1
 --- !u!65 &5407567153888716886
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -278,11 +278,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5759551514271352044}
     m_Modifications:
-    - target: {fileID: 2442396669234732150, guid: 4f18180f0f657c4479b80ccace8d2443,
-        type: 3}
-      propertyPath: m_Name
-      value: Walk_Smoke
-      objectReference: {fileID: 0}
     - target: {fileID: 2442396669234732137, guid: 4f18180f0f657c4479b80ccace8d2443,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -347,6 +342,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442396669234732150, guid: 4f18180f0f657c4479b80ccace8d2443,
+        type: 3}
+      propertyPath: m_Name
+      value: Walk_Smoke
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f18180f0f657c4479b80ccace8d2443, type: 3}
