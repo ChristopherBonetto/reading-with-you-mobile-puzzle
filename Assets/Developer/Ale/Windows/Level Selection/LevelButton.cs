@@ -63,8 +63,8 @@ public class LevelButton : MonoBehaviour
             #endregion
 
             //Store into delegate
-            fade.FadeInCompleted += ShowAndHideGameAndThis;
-            fade.FadeOutCompleted += HideFade;
+            fade.FadeInCompleted = ShowAndHideGameAndThis;
+            fade.FadeOutCompleted = HideFade;
 
             // Turn on fade panel
             UIManager.Instance.Show(UIControlName.Fade);

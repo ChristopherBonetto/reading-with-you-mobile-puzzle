@@ -36,7 +36,6 @@ public class FadeBetweenScene : UIControl
     {
         // execute a method putted in (when fade in is completed)
         FadeInCompleted?.Invoke();
-        FadeInCompleted -= FadeInCompleted;
 
         m_anim.SetBool("isSceneLoaded", true);
     }
@@ -47,7 +46,6 @@ public class FadeBetweenScene : UIControl
     public void OnFadeOutCompleted()
     {
         FadeOutCompleted?.Invoke();
-        FadeOutCompleted -= FadeOutCompleted;
     }
     #endregion
 }

@@ -33,8 +33,8 @@ public class GameWindow : UIControl
         #endregion
 
         // Store into delegate.
-        fade.FadeOutCompleted += HideFade;
-        fade.FadeInCompleted += ShowLevel;
+        fade.FadeOutCompleted = HideFade;
+        fade.FadeInCompleted = ShowLevel;
 
         GameManager.Instance.OnUpdateLevel?.Invoke();
 

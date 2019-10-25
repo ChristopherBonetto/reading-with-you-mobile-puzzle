@@ -64,53 +64,15 @@ public class PlayerActions : MonoBehaviour
         {
             if (Timer(m_timeToResetChangeLevel))
             {
-                //@TEMP
-                //@ALE
-                // Store UI controls ref
-                FadeBetweenScene fade = UIManager.Instance.Controls[UIControlName.Fade] as FadeBetweenScene;
-                GameWindow gameWindow = UIManager.Instance.Controls[UIControlName.InGame] as GameWindow;
-
-                 
-                // I need void method to store into delegate.
-                void Victory()
-                {
-                    if (GameManager.Instance.Mode == Mode.Easy)
-                        if (GameManager.Instance.Worlds[GameManager.Instance.CurrentWorld].EasyLevels[GameManager.Instance.m_currentLevel + 1] != null)
-                            GameManager.Instance.Worlds[GameManager.Instance.CurrentWorld].EasyLevels[GameManager.Instance.m_currentLevel + 1].IsPlayable = true;
-
-                    if (GameManager.Instance.Mode == Mode.Hard)
-                        if (GameManager.Instance.Worlds[GameManager.Instance.CurrentWorld].HardLevels[GameManager.Instance.m_currentLevel + 1] != null)
-                            GameManager.Instance.Worlds[GameManager.Instance.CurrentWorld].HardLevels[GameManager.Instance.m_currentLevel + 1].IsPlayable = true;
-
-                    GameManager.Instance.EndLevel(true);
-                }
-
-                // Store method into delegate
-                fade.FadeInCompleted = Victory;
-                // Call levelCompleted.
-                gameWindow.OnLevelCompleted();
+                GameManager.Instance.EndLevel(true);
             }
         }
         else if(m_currentPlayerState == PlayerState.Lose)
         {
             if (Timer(m_timeToResetChangeLevel))
             {
-                //@TEMP
-                //@ALE
-                // Store Ui controls ref
-                FadeBetweenScene fade = UIManager.Instance.Controls[UIControlName.Fade] as FadeBetweenScene;
-                GameWindow gameWindow = UIManager.Instance.Controls[UIControlName.InGame] as GameWindow;
 
-                // I need a void method to store into delegate.
-                void Lose()
-                {
-                    GameManager.Instance.EndLevel(false);
-                }
-
-                // Store method into delegate
-                fade.FadeInCompleted = Lose;
-                // Call levelCompleted.
-                gameWindow.OnLevelCompleted();
+                GameManager.Instance.EndLevel(false);
             }
         }
 	}
