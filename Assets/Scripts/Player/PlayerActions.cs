@@ -14,6 +14,7 @@ public class PlayerActions : MonoBehaviour
 {
 
 	#region Variables
+
 	[SerializeField] private float m_playerSpeed = 2f;
 	private float m_effectivePlayerSpeed;
 
@@ -31,14 +32,14 @@ public class PlayerActions : MonoBehaviour
 
 	public PlayerState m_currentPlayerState { get; private set; }
 
-    [SerializeField] private ParticleSystem m_walkParticle;
-    [SerializeField] private ParticleSystem m_slideParticle;
+    [SerializeField] private ParticleSystem m_walkParticle = null;
+    [SerializeField] private ParticleSystem m_slideParticle = null;
 
-    [SerializeField] private float m_timeToResetChangeLevel;
+    [SerializeField] private float m_timeToResetChangeLevel = 1f;
 
-    private Animator m_playerAnimator;
+	private float m_endLevelTime;
 
-    private float m_timer;
+	private Animator m_playerAnimator;
 
     #endregion
 
@@ -62,14 +63,14 @@ public class PlayerActions : MonoBehaviour
         Debug.Log(m_currentPlayerState);
         if(m_currentPlayerState == PlayerState.Win)
         {
-            if (Timer(m_timeToResetChangeLevel))
+            if (EndTimer(m_timeToResetChangeLevel))
             {
                 GameManager.Instance.EndLevel(true);
             }
         }
         else if(m_currentPlayerState == PlayerState.Lose)
         {
-            if (Timer(m_timeToResetChangeLevel))
+            if (EndTimer(m_timeToResetChangeLevel))
             {
 
                 GameManager.Instance.EndLevel(false);
@@ -237,6 +238,7 @@ public class PlayerActions : MonoBehaviour
                     m_playerAnimator.SetBool("isInIdle", false);
                     m_playerAnimator.SetBool("hasWon", true);
                     StopParticles();
+					m_endLevelTime = Time.time;
                     break;
 
                 case PlayerState.Lose:
@@ -246,6 +248,7 @@ public class PlayerActions : MonoBehaviour
                     m_playerAnimator.SetBool("isInWalk", false);
                     m_playerAnimator.SetBool("isInIdle", false);
                     StopParticles();
+					m_endLevelTime = Time.time;
                     break;
             }
 
@@ -278,21 +281,8 @@ public class PlayerActions : MonoBehaviour
         m_walkParticle.Play(true);
     }
 
-    private bool Timer(float destinationTime)
+    private bool EndTimer(float destinationTime)
     {
-        m_timer += Time.fixedDeltaTime;
-
-        if (m_timer >= destinationTime)
-        {
-            m_timer = 0f;
-
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
-
+		return (Time.time >= m_endLevelTime + destinationTime);
     }
 }
