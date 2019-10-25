@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ab19795b6fcb446a6753130f17500c, type: 3}
+  m_Name: 4-2_Info
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
+  IconLocked: {fileID: 0}
+  LevelPrefab: {fileID: 4784075341427516158, guid: ce8bb1efee7b11d46a895a9d1c4660f7,
+    type: 3}
+  IsPlayable: 0
+  PlayerCoords: {x: -3.5, y: 3, z: 0}
+  Blocks:
+  - ID: 912
+    XCoord: 4.06
+    Scale: {x: -0.95, y: 1, z: 1}
+  - ID: 912
+    XCoord: 0.71
+    Scale: {x: 0.95, y: 1, z: 1}
+  - ID: 725
+    XCoord: -3.473
+    Scale: {x: 0.95, y: 1, z: 1}
+  - ID: 725
+    XCoord: -1.56
+    Scale: {x: 0.95, y: 1, z: 1}
+  - ID: 912
+    XCoord: 2.47
+    Scale: {x: 0.95, y: 1, z: 1}
+  GoalObject:
+    ID: 0
+    Coords: {x: 3.5, y: 2, z: 0}
