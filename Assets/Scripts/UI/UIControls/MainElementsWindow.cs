@@ -5,16 +5,7 @@ using UnityEngine.UI;
 
 public class MainElementsWindow : UIControl
 {
-    [SerializeField] private Text m_TextMode;
-    [SerializeField] private string m_easyModeText;
-    [SerializeField] private string m_hardModeText;
-
     public override UIControlName Name => UIControlName.MainElements;
-
-    /// <summary>
-    /// text of difficult mode in main menu.
-    /// </summary>
-    public Text TextMode => m_TextMode;
 
 
     protected override void Start()
@@ -33,24 +24,18 @@ public class MainElementsWindow : UIControl
     }
 
     /// <summary>
-    /// Set the game to easy mode
+    /// Action invoked when account button is pressed.
     /// </summary>
-    public void ChangeToEasyMode()
+    public void OnAccountInfoButton()
     {
-        TextMode.text = m_easyModeText;
-
-        GameManager.Instance.SetMode(Mode.Easy);
-        GameManager.Instance.OnUpdateLevel?.Invoke();   //@TEMP
+        UIManager.Instance.ShowAndHide(UIControlName.AccountElements, this);
     }
 
     /// <summary>
-    /// Set the game to hard mode.
+    /// Switch from the current account to the next one.
     /// </summary>
-    public void ChangeToHardMode()
+    public void SwitchAccount()
     {
-        TextMode.text = m_hardModeText;
-
-        GameManager.Instance.SetMode(Mode.Hard);
-        GameManager.Instance.OnUpdateLevel?.Invoke();   //@TEMP
+        // call switch account function from elsewhere.
     }
 }

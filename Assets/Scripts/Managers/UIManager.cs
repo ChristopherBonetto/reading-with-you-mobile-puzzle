@@ -10,7 +10,8 @@ public enum UIControlName
     LevelSelection,
     InGame,
     Fade,
-    WorldBackground
+    WorldBackground,
+    AccountElements
 }
 
 /// <summary>
