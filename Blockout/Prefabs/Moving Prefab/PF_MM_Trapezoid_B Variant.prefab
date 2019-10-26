@@ -28,6 +28,16 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 415431124952162979, guid: 87815dea77ad1984b998f2903b526410,
+        type: 3}
+      propertyPath: m_Drag
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 415431124952162979, guid: 87815dea77ad1984b998f2903b526410,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 632242626708085559, guid: 87815dea77ad1984b998f2903b526410,
         type: 3}
       propertyPath: m_LocalPosition.x
