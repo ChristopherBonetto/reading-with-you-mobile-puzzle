@@ -1424,6 +1424,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d65af9660e6742f4cb58fc04cc6ff24f, type: 2}
   - {fileID: 11400000, guid: c7150f7cb03dbc1459b3758973ade23c, type: 2}
   - {fileID: 11400000, guid: f5035680d4a023744ac6a451a2dc6f62, type: 2}
+  m_debugUnlockLevels: 1
 --- !u!4 &1942291698
 Transform:
   m_ObjectHideFlags: 0

@@ -11,6 +11,9 @@ public class Block : MonoBehaviour
 	private Transform m_transform = null;
 
 	[SerializeField]
+	private Transform m_meshTransform = null;
+
+	[SerializeField]
 	private LerpMover m_lerpMover = null;
 
     private readonly RigidbodyConstraints m_moveConstraints = RigidbodyConstraints.FreezeAll;
@@ -22,8 +25,6 @@ public class Block : MonoBehaviour
 	public BlockShape Shape;
 
 	private float m_lastCollisionTime;
-
-	private float m_collisionTimeout;
 
     private bool m_isUnstable = false;
 
@@ -43,8 +44,6 @@ public class Block : MonoBehaviour
 #if UNITY_EDITOR
 		NullChecks();
 #endif
-
-        m_collisionTimeout = Time.fixedDeltaTime * 20;
     }
 
     private void Register()
@@ -87,6 +86,11 @@ public class Block : MonoBehaviour
 			Debug.LogError(name + " has no transform reference!", this);
 		}
 
+		if (!m_meshTransform)
+		{
+			Debug.LogError(name + " has no mesh transform reference!", this);
+		}
+
 		if (!m_lerpMover)
 		{
 			Debug.LogError(name + " has no lerp mover reference!", this);
@@ -100,7 +104,10 @@ public class Block : MonoBehaviour
 	public void LoadBlock(float inInventoryX, Vector3 scale)
 	{
 		m_inventoryX = inInventoryX;
+		scale.x = (Mathf.Round(Mathf.Abs(scale.x)) - 0.05f / Size) * Mathf.Sign(scale.x);
 		m_transform.localScale = scale;
+		Vector3 meshScale = new Vector3(1 / Mathf.Abs(scale.x), 1f, 1f);
+		m_meshTransform.localScale = meshScale;
 		ResetBlock(true);
 	}
 
@@ -130,13 +137,17 @@ public class Block : MonoBehaviour
 	{
 		m_rigidbody.useGravity = !bInactive;
 		m_rigidbody.constraints = !bInactive ? m_dropConstraints : m_moveConstraints;
+		if (!bInactive)
+		{
+			SetUnstable(true);
+		}
 	}
 
     private void CheckStability()
     {
-        if (m_rigidbody.velocity.sqrMagnitude <= 0.01f &&
-			m_rigidbody.angularVelocity.sqrMagnitude <=0.01f &&
-			Time.time >= m_lastCollisionTime + m_collisionTimeout)
+        if (m_rigidbody.velocity.sqrMagnitude <= BlockManager.Instance.VelocityThreshold &&
+			m_rigidbody.angularVelocity.sqrMagnitude <= BlockManager.Instance.AngularVelocityThreshold &&
+			Time.time >= m_lastCollisionTime + Time.fixedDeltaTime * BlockManager.Instance.FixedTimeout)
 		{            
 			SetUnstable(false);
 		}
@@ -163,13 +174,16 @@ public class Block : MonoBehaviour
 		else
 		{
 			transform.rotation.ToAngleAxis(out float angle, out Vector3 axis);
-			if (angle >= 0.1f)
+			if (angle >= BlockManager.Instance.AngleThreshold)
 			{
+				Debug.Log(angle + " " + gameObject.name);
 				ResetBlock();
 			}
 			else
 			{
+				Debug.Log("Resnap " + gameObject.name);
                 Resnap();
+				SetPhysicsInactive(true);
 			}
 		}
     }
@@ -177,7 +191,6 @@ public class Block : MonoBehaviour
     private void Resnap()
     {
         Vector3 unstablePosition = m_transform.position;
-
         Vector3 snapPosition = new Vector3();
         float halfXSize = Size / 2f;
         snapPosition.x = Mathf.Round(unstablePosition.x - halfXSize) + halfXSize;

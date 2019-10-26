@@ -46,4 +46,9 @@ MonoBehaviour:
   m_InvY: -0.2
   m_InvZ: -1.7
   m_GameZ: 0
+  m_XScale: 0.95
+  m_GravityMultiplier: 2
+  m_VelocityThreshold: 0.01
+  m_AngularVelocityThreshold: 0.01
+  m_AngleThreshold: 0.5
   UnstableBlocks: 0

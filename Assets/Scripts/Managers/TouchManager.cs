@@ -66,7 +66,7 @@ public class TouchManager : Singleton<TouchManager>
 	{
 		return (!m_isHolding &&
 				GameManager.Instance.CurrentState != GameState.Moving &&
-				BlockManager.Instance.UnstableBlocks == 0);
+				BlockManager.Instance.UnstableBlocks <= 0);
 	}
 
 	#endregion

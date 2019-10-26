@@ -2,13 +2,13 @@
 
 public class FinalObjectActions : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem m_particleEndLevel;
-    [SerializeField] private Transform m_objectIcon;
+    [SerializeField] private ParticleSystem m_particleEndLevel = null;
+    [SerializeField] private Transform m_objectIcon = null;
     private Vector3 m_startingIconPosition;
 
-    [SerializeField] private Collider m_finalObjectCollider;
+    [SerializeField] private Collider m_finalObjectCollider = null;
 
-    [SerializeField] private SpriteRenderer m_finalObjectSprite;
+    [SerializeField] private SpriteRenderer m_finalObjectSprite = null;
 
     private void Start()
     {

@@ -50,9 +50,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_rigidbody: {fileID: 415431124952162979}
   m_transform: {fileID: 632242626708085559}
+  m_meshTransform: {fileID: 1257677841020463834}
   m_lerpMover: {fileID: 117553253643735438}
   Size: 1
-  InventoryX: 0
+  Shape: 0
 --- !u!114 &117553253643735438
 MonoBehaviour:
   m_ObjectHideFlags: 0
