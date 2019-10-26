@@ -23,7 +23,7 @@ public class BlockManager : Singleton<BlockManager>
 	private Vector3 m_holdOffset;
 
 	[SerializeField]
-	private float m_InvY = -0.4f;
+	private float m_InvY = -0.2f;
 
 	[SerializeField]
 	private float m_InvZ = -1.7f;
@@ -31,12 +31,42 @@ public class BlockManager : Singleton<BlockManager>
 	[SerializeField]
 	private float m_GameZ = 0f;
 
+	[SerializeField]
+	private float m_XScale = 0.95f;
+
+	[SerializeField]
+	private float m_GravityMultiplier = 2f;
+
+	[SerializeField]
+	private float m_VelocityThreshold = 0.01f;
+
+	[SerializeField]
+	private float m_AngularVelocityThreshold = 0.01f;
+
+	[SerializeField]
+	private float m_AngleThreshold = 10f;
+
+	[SerializeField]
+	private int m_FixedTimeout = 5;
+
 	public float InvY => m_InvY;
 
 	public float InvZ => m_InvZ;
 
 	public float GameZ => m_GameZ;
-	
+
+	public float XScale => m_XScale;
+
+	public float GravityMultiplier => m_GravityMultiplier;
+
+	public float VelocityThreshold => m_VelocityThreshold;
+
+	public float AngularVelocityThreshold => m_AngularVelocityThreshold;
+
+	public float AngleThreshold => m_AngleThreshold;
+
+	public int FixedTimeout => m_FixedTimeout;
+
 	/// <summary>
 	/// Event on grabbing (true) and releasing (false)
 	/// </summary>
@@ -46,13 +76,18 @@ public class BlockManager : Singleton<BlockManager>
 
 	public int UnstableBlocks;
 
-    #endregion
+	#endregion
+
+	private void Start()
+	{
+		Physics.gravity *= GravityMultiplier;
+	}
 
 	#region Level
 
-    /// <summary>
-    /// Reset level blocks to inventory
-    /// </summary>
+	/// <summary>
+	/// Reset level blocks to inventory
+	/// </summary>
 	public void ResetAllBlocks()
 	{
 		foreach (Block block in m_levelBlocks)
@@ -136,11 +171,12 @@ public class BlockManager : Singleton<BlockManager>
 		// Check collisions
 		else
 		{
-			Collider[] testHits = Physics.OverlapBox(m_holdBlock.transform.position, new Vector3(m_holdBlock.Size * 0.95f, 1f, 3f) / 2f);
+			Collider[] testHits = Physics.OverlapBox(m_holdBlock.transform.position, new Vector3(m_holdBlock.Size * 0.95f, 0.9f, 3f) / 2f);
 			if (testHits.Length > 0)
 			{
 				for (int i = 0; i < testHits.Length; i++)
 				{
+					Debug.Log(testHits[i]);
 					if (testHits[i].gameObject != m_holdBlock.gameObject)
 					{
                         m_holdBlock.ResetBlock();

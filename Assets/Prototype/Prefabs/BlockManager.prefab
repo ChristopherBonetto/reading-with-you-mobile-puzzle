@@ -43,6 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee09c5aa8072944f93c60ac73873709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DragZ: -1.7
+  m_InvY: -0.2
+  m_InvZ: -1.7
   m_GameZ: 0
+  m_XScale: 0.95
+  m_GravityMultiplier: 2
+  m_VelocityThreshold: 0.01
+  m_AngularVelocityThreshold: 0.01
+  m_AngleThreshold: 0.5
   UnstableBlocks: 0

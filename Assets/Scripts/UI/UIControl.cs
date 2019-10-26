@@ -17,6 +17,7 @@ public abstract class UIControl : MonoBehaviour
     protected virtual void Start()
     {
         UIManager.Instance.Register(this);
+
         this.gameObject.SetActive(false);
     }
 
@@ -28,7 +29,7 @@ public abstract class UIControl : MonoBehaviour
 
     #region Control method
     /// <summary>
-    /// SetActive(true)
+    /// Show gameObject
     /// </summary>
     public virtual void OnShow()
     {
@@ -36,7 +37,7 @@ public abstract class UIControl : MonoBehaviour
     }
 
     /// <summary>
-    /// SetActive(false)
+    /// Hide gameObject
     /// </summary>
     public virtual void OnHide()
     {

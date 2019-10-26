@@ -44,171 +44,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_poolItems:
-  - ObjectPrefab: {fileID: 8372178098273202781, guid: 598d90d1a14e04445b1c718904c8aa45,
-      type: 3}
-    BasePoolSize: 1
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: 8e56dc7ee8cb50043b13e249bd22608a, type: 2}
-    CurrentCount: 0
-  - ObjectPrefab: {fileID: 1661601275603452083, guid: f65af5ff059756d43920d8a21dd26ffa,
-      type: 3}
-    BasePoolSize: 1
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: 9126eb87741e56348afe13500de124bc, type: 2}
-    CurrentCount: 0
-  - ObjectPrefab: {fileID: 2852063400754392615, guid: 9b56fd8cade123d409ac29f08404ea83,
-      type: 3}
-    BasePoolSize: 1
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: b635ee4a2440e45429582f4d1e9dfa7a, type: 2}
-    CurrentCount: 0
-  - ObjectPrefab: {fileID: 8193892455120031521, guid: 5a66d567505a28b4c826aaf8ecf65764,
-      type: 3}
-    BasePoolSize: 1
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: b2e0dbace79a1d142a7256885b066868, type: 2}
-    CurrentCount: 0
-  - ObjectPrefab: {fileID: 4410991282231264490, guid: a9bd648f3e133d6499e0eb80f49bef7d,
-      type: 3}
-    BasePoolSize: 1
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: d097f85f0e255224cad8792604f79ccc, type: 2}
-    CurrentCount: 0
-  - ObjectPrefab: {fileID: 4033787517455814202, guid: 676a39bd671ed5942828f5d8070fd779,
-      type: 3}
-    BasePoolSize: 1
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: ea33f02ca063b0945a35d12e59e63a78, type: 2}
-    CurrentCount: 0
-  - ObjectPrefab: {fileID: 2062999318295519112, guid: 7860959abd4f0634882e82a0defce287,
-      type: 3}
-    BasePoolSize: 1
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: 719eb8ecd32d0fa48b821fe8deae4dfc, type: 2}
-    CurrentCount: 0
-  - ObjectPrefab: {fileID: 434958890703230651, guid: 27bf1c450c8966e45b6082ebdfb84ebd,
-      type: 3}
-    BasePoolSize: 1
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: 0bd0b7dcbe0e86946b7466d11ed18f26, type: 2}
-    CurrentCount: 0
   - ObjectPrefab: {fileID: 2420269314220305148, guid: 20d640d97a8b4384e98149fb3d69abf3,
       type: 3}
     BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
+    CanExpand: 1
+    PoolExpandSize: 1
+    MaxPoolSize: 5
     uniqueID: {fileID: 11400000, guid: 5131b084feafb7e438ed785f9772f86b, type: 2}
     CurrentCount: 0
   - ObjectPrefab: {fileID: 7386995186256540093, guid: 4b8a41c5240a45c4c8d3d0b6dbd1b134,
       type: 3}
     BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
+    CanExpand: 1
+    PoolExpandSize: 1
+    MaxPoolSize: 5
     uniqueID: {fileID: 11400000, guid: 8946c020537717145bb49ec5c0209e38, type: 2}
     CurrentCount: 0
   - ObjectPrefab: {fileID: 8542349888628405069, guid: d2682cc150c9f064daec0661b06d3b30,
       type: 3}
     BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
+    CanExpand: 1
+    PoolExpandSize: 1
+    MaxPoolSize: 5
     uniqueID: {fileID: 11400000, guid: 57d48fc0a5a36d54cb69025fbe875c96, type: 2}
     CurrentCount: 0
   - ObjectPrefab: {fileID: 370274301789041068, guid: 296b9af7257b4264d9fa535f38dcac46,
       type: 3}
     BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
+    CanExpand: 1
+    PoolExpandSize: 1
+    MaxPoolSize: 5
     uniqueID: {fileID: 11400000, guid: e58df60d181d2b748ba87c29b35c8f5d, type: 2}
     CurrentCount: 0
   - ObjectPrefab: {fileID: 5987449970458131264, guid: 022d2438fbec1f147acc319093357ce9,
       type: 3}
     BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
+    CanExpand: 1
+    PoolExpandSize: 1
+    MaxPoolSize: 5
     uniqueID: {fileID: 11400000, guid: fb919247ef1eb584f8b716ec6965b3b4, type: 2}
-    CurrentCount: 0
-  - ObjectPrefab: {fileID: 1024307630284794992, guid: 2ebd5ce4298d85a4495aa38bf91177f6,
-      type: 3}
-    BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: 276ea1d82b3531349b61d901cf4bfdcc, type: 2}
-    CurrentCount: 0
-  - ObjectPrefab: {fileID: 4777095020222728383, guid: 6973ae25612f93a43bd0a8f331656298,
-      type: 3}
-    BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: 9885b2b7abd913b408f1e9c6890a545c, type: 2}
-    CurrentCount: 0
-  - ObjectPrefab: {fileID: 3167290900661679148, guid: dac469404977a56438c3067850c177b3,
-      type: 3}
-    BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: 927fe137d4fca444b99407355b1768fc, type: 2}
-    CurrentCount: 0
-  - ObjectPrefab: {fileID: 6547281193131544944, guid: 6cf4abbaba56ae24f8de3137817e29b2,
-      type: 3}
-    BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: 875861749653b1e47b95f1fe2234932c, type: 2}
-    CurrentCount: 0
-  - ObjectPrefab: {fileID: 534321784473332061, guid: 64cba1f9b70aa354ba6c0939c3c6d3c6,
-      type: 3}
-    BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: 2d6012088acf27e4caaac835336d640d, type: 2}
-    CurrentCount: 0
-  - ObjectPrefab: {fileID: 7645163109694973265, guid: b28be742e38663446a511fb9b5aed33f,
-      type: 3}
-    BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: 031efe3014c304d4d9bd15f21f60af64, type: 2}
-    CurrentCount: 0
-  - ObjectPrefab: {fileID: 5118119762372119363, guid: 1d7ac115dbf1ecd4fbbefe93425e11a2,
-      type: 3}
-    BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: 38a207693fb506b4da3460637602a986, type: 2}
-    CurrentCount: 0
-  - ObjectPrefab: {fileID: 1468674947745846018, guid: d07f0609e9079564aa4fd63122919a27,
-      type: 3}
-    BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
-    uniqueID: {fileID: 11400000, guid: 8b4c49a243a31ae40a37dbbed8de7a59, type: 2}
     CurrentCount: 0

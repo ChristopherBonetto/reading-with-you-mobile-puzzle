@@ -44,6 +44,41 @@ public class ObjectPooler : Singleton<ObjectPooler>
 			}
 		}
 	}
+
+	public bool AddPoolItem(PoolableObject newPoolObject, int basePoolsize, bool bCanExpand = true)
+	{
+		if (!newPoolObject || ContainsPoolItem(newPoolObject.uniqueID.ID))
+		{
+			return false;
+		}
+
+		ObjectPoolItem newItem = new ObjectPoolItem();
+		newItem.ObjectPrefab = newPoolObject;
+		newItem.uniqueID = newPoolObject.uniqueID;
+		newItem.BasePoolSize = basePoolsize;
+		newItem.CanExpand = bCanExpand;
+		m_poolItems.Add(newItem);
+
+		// Pool has been previously initialized, add new item
+		if (m_objectPool.Count > 0)
+		{
+			CreateNewObject(newItem);
+		}
+
+		return true;
+	}
+
+	private bool ContainsPoolItem(int poolID)
+	{
+		foreach (ObjectPoolItem item in m_poolItems)
+		{
+			if (item.uniqueID.ID == poolID)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
     
     /* Pooled objects might have an interface to Reset when they aren't needed any more */
 
