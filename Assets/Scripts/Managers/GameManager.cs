@@ -24,6 +24,8 @@ public class GameManager : Singleton<GameManager>
 
 	public FinalObjectActions FinalObject;
 
+	public GameObject Grid;
+
 	public World[] Worlds;
 
 	private Level m_currentLevelInfo;
@@ -110,6 +112,10 @@ public class GameManager : Singleton<GameManager>
     {
         Player.EnableMovement(true);
         SetGameState(GameState.Moving);
+		if (Grid)
+		{
+			Grid.SetActive(false);
+		}
         OnMovement?.Invoke();
 	}
 
@@ -144,6 +150,10 @@ public class GameManager : Singleton<GameManager>
 			}
 			Player.ResetLevel(m_currentLevelInfo.PlayerCoords);
 			FinalObject.ResetLevel(m_currentLevelInfo.GoalObject.Coords, m_currentLevelInfo.Icon);
+			if (Grid)
+			{
+				Grid.SetActive(true);
+			}
 			BlockManager.Instance.LoadBlocks(m_currentLevelInfo.Blocks);
 			SetGameState(GameState.Playing);
 		}
