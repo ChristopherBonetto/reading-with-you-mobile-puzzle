@@ -16,8 +16,8 @@ MonoBehaviour:
   IconLocked: {fileID: 0}
   LevelPrefab: {fileID: 749376308503739188, guid: fc52bd6cf4d4d594eb8112777fe3dd8e,
     type: 3}
-  IsPlayable: 0
-  PlayerCoords: {x: 3.5, y: 2, z: 0}
+  IsPlayable: 1
+  PlayerCoords: {x: -3.5, y: 2, z: 0}
   Blocks:
   - ID: 639
     XCoord: 2.6
@@ -30,4 +30,4 @@ MonoBehaviour:
     Scale: {x: -0.95, y: 1, z: 1}
   GoalObject:
     ID: 0
-    Coords: {x: -3.5, y: 2, z: 0}
+    Coords: {x: 3.5, y: 2, z: 0}
