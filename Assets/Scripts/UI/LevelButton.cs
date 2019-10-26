@@ -43,6 +43,10 @@ public class LevelButton : MonoBehaviour
     {
         if (IsPlayable)
         {
+            // Set world background
+            WorldBackgroundWindow backGround = UIManager.Instance.Controls[UIControlName.WorldBackground] as WorldBackgroundWindow;
+            backGround.SetBackgroundImage(GameManager.Instance.Worlds[GameManager.Instance.CurrentWorld].Background);
+
             FadeBetweenScene fade = UIManager.Instance.Controls[UIControlName.Fade] as FadeBetweenScene;
 
             #region Local Method
