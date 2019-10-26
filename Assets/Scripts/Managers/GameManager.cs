@@ -133,7 +133,6 @@ public class GameManager : Singleton<GameManager>
 		int levelID = GetLevelID();
 		if (levelID >= 0)
 		{
-			//@TODO Handle load level animation
 			m_currentMap = ObjectPooler.Instance.GetPooledObject(levelID);
 			if (m_currentMap)
 			{
@@ -146,7 +145,6 @@ public class GameManager : Singleton<GameManager>
 			Player.ResetLevel(m_currentLevelInfo.PlayerCoords);
 			FinalObject.ResetLevel(m_currentLevelInfo.GoalObject.Coords, m_currentLevelInfo.Icon);
 			BlockManager.Instance.LoadBlocks(m_currentLevelInfo.Blocks);
-			//@TODO Set objective
 			SetGameState(GameState.Playing);
 		}
 		else
@@ -156,6 +154,19 @@ public class GameManager : Singleton<GameManager>
 	}
 
 	private int GetLevelID()
+	{
+		Level[] ModeLevels = GetCurrentWorldLevels();
+		
+		if (m_currentLevel < ModeLevels.Length)
+		{
+			m_currentLevelInfo = ModeLevels[m_currentLevel];
+			return m_currentLevelInfo.LevelID;
+		}
+
+        return -1;
+	}
+
+	private Level[] GetCurrentWorldLevels()
 	{
 		Level[] ModeLevels = new Level[0];
 		if (CurrentWorld < Worlds.Length)
@@ -169,119 +180,63 @@ public class GameManager : Singleton<GameManager>
 				ModeLevels = Worlds[CurrentWorld].HardLevels;
 			}
 		}
-		
-		if (m_currentLevel < ModeLevels.Length)
-		{
-			m_currentLevelInfo = ModeLevels[m_currentLevel];
-			return m_currentLevelInfo.LevelID;
-		}
-
-        return -1;
+		return ModeLevels;
 	}
 
 	public void EndLevel(bool bWin)
 	{
-        //@TEMP
-        //@ALE
         // Store UI controls ref
         FadeBetweenScene fade = UIManager.Instance.Controls[UIControlName.Fade] as FadeBetweenScene;
         GameWindow gameWindow = UIManager.Instance.Controls[UIControlName.InGame] as GameWindow;
 
 		if (bWin)
 		{
-            if (Mode == Mode.Easy)
-            {
-			    // Load next level
-			    if (m_currentLevel < Worlds[CurrentWorld].EasyLevels.Length - 1)
-			    {
-                    void LoadAfterFade()
-                    {
-                        Worlds[CurrentWorld].EasyLevels[m_currentLevel + 1].IsPlayable = true;
-				        LoadLevel(m_currentLevel + 1);
-                    }
+			Level[] ModeLevels = GetCurrentWorldLevels();
 
-                    fade.FadeInCompleted = LoadAfterFade;
-
-                    // remake visible game window and turn off fade.
-                    gameWindow.OnLevelCompleted();
-                }
-			    else if (CurrentWorld < Worlds.Length - 1)
-			    {
-                    void LoadAfterFade()
-                    {
-                        //@TODO Handle end world animations
-                        LoadLevel(CurrentWorld + 1, 0);
-                    }
-
-                    fade.FadeInCompleted = LoadAfterFade;
-
-                    // remake visible game window and turn off fade.
-                    gameWindow.OnLevelCompleted();
-                }
-                else if (CurrentWorld >= Worlds.Length - 1)
+			// Load next level
+			if (m_currentLevel < ModeLevels.Length - 1)
+			{
+                void LoadAfterFade()
                 {
-                    // return to level selection
-                    void ReturnToLevelSelection()
-                    {
-                        Player.ResetLevel(m_currentLevelInfo.PlayerCoords);
-                        UIManager.Instance.Show(UIControlName.LevelSelection);
-                    }
-
-                    fade.FadeInCompleted = ReturnToLevelSelection;
-                    fade.FadeOutCompleted = fade.OnHide;
+					ModeLevels[m_currentLevel + 1].IsPlayable = true;
+				    LoadLevel(m_currentLevel + 1);
                 }
-                UIManager.Instance.ShowAndHide(UIControlName.Fade, UIManager.Instance.Controls[UIControlName.InGame]);
+
+                fade.FadeInCompleted = LoadAfterFade;
+
+                // remake visible game window and turn off fade.
+                gameWindow.OnLevelCompleted();
             }
-
-            else if (Mode == Mode.Hard)
-            {
-                // Load next level
-                if (m_currentLevel < Worlds[CurrentWorld].HardLevels.Length - 1)
+			else if (CurrentWorld < Worlds.Length - 1)
+			{
+                void LoadAfterFade()
                 {
-                    void LoadAfterFade()
-                    {
-                        Worlds[CurrentWorld].HardLevels[m_currentLevel + 1].IsPlayable = true;
-                        LoadLevel(m_currentLevel + 1);
-                    }
-
-                    fade.FadeInCompleted = LoadAfterFade;
-
-                    // remake visible game window and turn off fade.
-                    gameWindow.OnLevelCompleted();
+                    LoadLevel(CurrentWorld + 1, 0);
                 }
-                else if (CurrentWorld < Worlds.Length - 1)
-                {
-                    void LoadAfterFade()
-                    {
-                        //@TODO Handle end world animations
-                        LoadLevel(CurrentWorld + 1, 0);
-                    }
 
-                    fade.FadeInCompleted = LoadAfterFade;
+                fade.FadeInCompleted = LoadAfterFade;
 
-                    // remake visible game window and turn off fade.
-                    gameWindow.OnLevelCompleted();
-                }
-                else if (CurrentWorld >= Worlds.Length - 1)
-                {
-                    // return to level selection
-                    void ReturnToLevelSelection()
-                    {
-                        Player.ResetLevel(m_currentLevelInfo.PlayerCoords);
-                        UIManager.Instance.Show(UIControlName.LevelSelection);
-                    }
-
-                    fade.FadeInCompleted = ReturnToLevelSelection;
-                    fade.FadeOutCompleted = fade.OnHide;
-                }
-                 UIManager.Instance.ShowAndHide(UIControlName.Fade, UIManager.Instance.Controls[UIControlName.InGame]);
+                // remake visible game window and turn off fade.
+                gameWindow.OnLevelCompleted();
             }
+            else if (CurrentWorld >= Worlds.Length - 1)
+            {
+                // return to level selection
+                void ReturnToLevelSelection()
+                {
+                    Player.ResetLevel(m_currentLevelInfo.PlayerCoords);
+                    UIManager.Instance.Show(UIControlName.LevelSelection);
+                }
+
+                fade.FadeInCompleted = ReturnToLevelSelection;
+                fade.FadeOutCompleted = fade.OnHide;
+            }
+            UIManager.Instance.ShowAndHide(UIControlName.Fade, UIManager.Instance.Controls[UIControlName.InGame]);
         }
 		else
 		{
             void LoadAfterFade()
             {
-			    //@TODO Handle reload animation
 			    Player.ResetLevel(m_currentLevelInfo.PlayerCoords);
                 FinalObject.EnableDisableCollider(true);
 			    SetGameState(GameState.Playing);
