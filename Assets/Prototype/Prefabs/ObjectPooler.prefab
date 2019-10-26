@@ -47,40 +47,40 @@ MonoBehaviour:
   - ObjectPrefab: {fileID: 2420269314220305148, guid: 20d640d97a8b4384e98149fb3d69abf3,
       type: 3}
     BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
+    CanExpand: 1
+    PoolExpandSize: 1
+    MaxPoolSize: 5
     uniqueID: {fileID: 11400000, guid: 5131b084feafb7e438ed785f9772f86b, type: 2}
     CurrentCount: 0
   - ObjectPrefab: {fileID: 7386995186256540093, guid: 4b8a41c5240a45c4c8d3d0b6dbd1b134,
       type: 3}
     BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
+    CanExpand: 1
+    PoolExpandSize: 1
+    MaxPoolSize: 5
     uniqueID: {fileID: 11400000, guid: 8946c020537717145bb49ec5c0209e38, type: 2}
     CurrentCount: 0
   - ObjectPrefab: {fileID: 8542349888628405069, guid: d2682cc150c9f064daec0661b06d3b30,
       type: 3}
     BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
+    CanExpand: 1
+    PoolExpandSize: 1
+    MaxPoolSize: 5
     uniqueID: {fileID: 11400000, guid: 57d48fc0a5a36d54cb69025fbe875c96, type: 2}
     CurrentCount: 0
   - ObjectPrefab: {fileID: 370274301789041068, guid: 296b9af7257b4264d9fa535f38dcac46,
       type: 3}
     BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
+    CanExpand: 1
+    PoolExpandSize: 1
+    MaxPoolSize: 5
     uniqueID: {fileID: 11400000, guid: e58df60d181d2b748ba87c29b35c8f5d, type: 2}
     CurrentCount: 0
   - ObjectPrefab: {fileID: 5987449970458131264, guid: 022d2438fbec1f147acc319093357ce9,
       type: 3}
     BasePoolSize: 3
-    CanExpand: 0
-    PoolExpandSize: 0
-    MaxPoolSize: 0
+    CanExpand: 1
+    PoolExpandSize: 1
+    MaxPoolSize: 5
     uniqueID: {fileID: 11400000, guid: fb919247ef1eb584f8b716ec6965b3b4, type: 2}
     CurrentCount: 0
