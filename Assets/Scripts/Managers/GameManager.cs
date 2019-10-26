@@ -31,6 +31,9 @@ public class GameManager : Singleton<GameManager>
 	public int CurrentWorld { get; set; }
 	private GameObject m_currentMap;
 
+	[SerializeField]
+	private bool m_debugUnlockLevels = false;
+
 	/// <summary>
 	/// Event on player movement start
 	/// </summary>
@@ -60,7 +63,7 @@ public class GameManager : Singleton<GameManager>
 		{
 			for (int j = 0; j < Worlds[i].EasyLevels.Length; j++)
 			{
-				Worlds[i].EasyLevels[j].IsPlayable = false;
+				Worlds[i].EasyLevels[j].IsPlayable = m_debugUnlockLevels;
 				PoolableObject map = Worlds[i].EasyLevels[j].LevelToPool;
 				if (map)
 				{
@@ -70,7 +73,7 @@ public class GameManager : Singleton<GameManager>
 
 			for (int j = 0; j < Worlds[i].HardLevels.Length; j++)
 			{
-				Worlds[i].HardLevels[j].IsPlayable = false;
+				Worlds[i].HardLevels[j].IsPlayable = m_debugUnlockLevels;
 				PoolableObject map = Worlds[i].HardLevels[j].LevelToPool;
 				if (map)
 				{
