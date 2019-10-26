@@ -1,8 +1,18 @@
-﻿[System.Serializable]
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
 public class PlayerData
-{
-    // variables
+{    
+    public bool[] LOL;
 
+    public PlayerData(SavingTest player)
+    {
+        LOL = new bool[10];
 
-    // Constructor
+        LOL[0] = player.ciao;
+        LOL[1] = player.miao;
+        LOL[2] = player.wow;
+    }
 }

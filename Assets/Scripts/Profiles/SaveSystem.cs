@@ -4,35 +4,37 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
-    public static void Save()
+    public static void Save(SavingTest player)
     {
-        try
-        {
-            // Create new file or existed file
-        }
-        catch
-        {
-            // catch errors
-        }
-        finally
-        {
-            // close the file.
-        }
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        string path = Application.persistentDataPath + "/player.fun";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        PlayerData data = new PlayerData(player);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
     }
 
-    public static void Load()
+    public static PlayerData Load()
     {
-        try
+        string path = Application.persistentDataPath + "/player.fun";
+
+        if (File.Exists(path))
         {
-            // Open the file
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            PlayerData data = formatter.Deserialize(stream) as PlayerData;
+            stream.Close();
+
+            return data;
         }
-        catch
+        else
         {
-            // catch errors
-        }
-        finally
-        {
-            // close the file.
+            Debug.Log("save file not found");
+            return null;
         }
     }
 }
