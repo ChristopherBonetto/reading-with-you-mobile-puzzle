@@ -1,5 +1,9 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
+using System.Linq;
 
 public enum GameState
 {
@@ -33,8 +37,12 @@ public class GameManager : Singleton<GameManager>
 	public int CurrentWorld { get; set; }
 	private GameObject m_currentMap;
 
-	[SerializeField]
+    public List<bool> easyLevels = new List<bool>();
+    public List<bool> hardLevels = new List<bool>();
+
+    [SerializeField]
 	private bool m_debugUnlockLevels = false;
+    
 
 	/// <summary>
 	/// Event on player movement start
@@ -52,14 +60,40 @@ public class GameManager : Singleton<GameManager>
 	public GameState CurrentState => m_currentState;
     public Mode Mode => m_Mode;
 
+    public GameObject m_playerAcccount;
+
+    public PlayerData m_savePlayerData;
+
+    public string m_playerName = "";
+    
+
 	private void Start()
 	{
 		PoolWorlds();
 
-		ObjectPooler.Instance.StartPooling();
+        SetWorldBooleans();
+
+        ObjectPooler.Instance.StartPooling();
+        
 	}
 
-	private void PoolWorlds()
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+
+            SaveGame();
+            
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+
+            LoadGame();
+
+        }
+    }
+
+    private void PoolWorlds()
 	{
 		for (int i = 0; i < Worlds.Length; i++)
 		{
@@ -258,4 +292,111 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.ShowAndHide(UIControlName.Fade, UIManager.Instance.Controls[UIControlName.InGame]);
         }
 	}
+
+    public void SaveGame()
+    {
+        SaveSystemNew.Save(this);
+    }
+    
+    public void LoadGame()
+    {
+        PlayerDataNew data = SaveSystemNew.Load();
+
+        m_playerName = data.playerName;
+        easyLevels = data.easyLevels.ToList();
+        hardLevels = data.hardLevels.ToList();
+        
+    }
+
+
+    //public void SaveGame()
+    //{
+    //    easyLevels.Clear();
+    //    hardLevels.Clear();
+
+    //    SetWorldBooleans();
+
+    //    m_savePlayerData = new PlayerData();
+
+    //    m_savePlayerData.playerName = m_playerName;        
+    //    m_savePlayerData.easyLevels = easyLevels.ToArray();
+    //    m_savePlayerData.hardLevels = hardLevels.ToArray();
+
+    //    m_currentPlayer.GetComponent<AccountStats>().accountSaved = m_savePlayerData;
+    //}
+
+
+    //public void CreateNewAccount(string newAccountName)
+    //{
+    //    easyLevels.Clear();
+    //    hardLevels.Clear();
+
+    //    SetWorldBooleans();
+
+    //    m_savePlayerData = new PlayerData();
+
+    //    m_savePlayerData.playerName = newAccountName;
+    //    m_playerName = newAccountName;
+    //    m_savePlayerData.easyLevels = easyLevels.ToArray();
+    //    m_savePlayerData.hardLevels = hardLevels.ToArray();
+
+
+    //    CreateAccountPrefab(newAccountName);
+    //}
+
+    
+    public void SetWorldBooleans()
+    {
+        for(int i = 0; i < Worlds.Length; i++)
+        {
+            CheckWorldEasyLevelsBooleans(Worlds[i]);
+        }
+    }
+
+    public void CheckWorldEasyLevelsBooleans(World currentWorld)
+    {
+        
+        for(int i = 0; i < currentWorld.EasyLevels.Length; i++)
+        {
+            if (currentWorld.EasyLevels[i].IsPlayable)
+            {
+                easyLevels.Add(true);
+            }
+            else
+            {
+                easyLevels.Add(false);
+            }
+        }
+
+        for (int i = 0; i < currentWorld.HardLevels.Length; i++)
+        {
+            if (currentWorld.HardLevels[i].IsPlayable)
+            {
+                hardLevels.Add(true);
+            }
+            else
+            {
+                hardLevels.Add(false);
+            }
+        }
+    }
+
+    //// Creates a new menu item 'Examples > Create Prefab' in the main menu.
+    //[MenuItem("Examples/Create Prefab")]
+    //public void CreateAccountPrefab(string newAccountName)
+    //{
+        
+    //    GameObject tempAccount = m_playerAcccount;
+    //    tempAccount.GetComponent<AccountStats>().accountSaved = m_savePlayerData;
+        
+
+    //    string localPath = "Assets/Resources/Accounts/" + "Account" + newAccountName + ".prefab";
+    //    localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
+
+    //    // Create the new Prefab.
+    //    PrefabUtility.SaveAsPrefabAssetAndConnect(tempAccount, localPath, InteractionMode.UserAction);
+    //    m_currentPlayer = tempAccount;
+    //}
 }
+
+

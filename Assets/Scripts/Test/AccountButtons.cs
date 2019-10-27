@@ -5,31 +5,31 @@ using UnityEngine.UI;
 
 public class AccountButtons : MonoBehaviour
 {
-    public PlayerData accountSaved = null;
+    //public PlayerData accountSaved = null;
     
 
 
-    private void Awake()
-    {
-        gameObject.GetComponentInChildren<Text>();
-    }
-    private void Start()
-    {
-        accountSaved = null;
+    //private void Awake()
+    //{
+    //    gameObject.GetComponentInChildren<Text>();
+    //}
+    //private void Start()
+    //{
+    //    accountSaved = null;
 
-        if(accountSaved == null)
-        {
-            Debug.Log("no account");
-        }
-        else
-        {
-            Debug.Log(accountSaved);
-        }        
-    }
+    //    if(accountSaved == null)
+    //    {
+    //        Debug.Log("no account");
+    //    }
+    //    else
+    //    {
+    //        Debug.Log(accountSaved);
+    //    }        
+    //}
 
-    public void changeTextButton(string buttonName)
-    {
-        gameObject.GetComponentInChildren<Text>().text = buttonName;
-    }
+    //public void changeTextButton(string buttonName)
+    //{
+    //    gameObject.GetComponentInChildren<Text>().text = buttonName;
+    //}
 
 }
