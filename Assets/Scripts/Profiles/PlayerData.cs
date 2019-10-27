@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
+[Serializable]
+public abstract class SaveGame
+{
+
+}
+
+
 [System.Serializable]
-public class PlayerData
-{    
-    public bool[] LOL;
+public class PlayerData : SaveGame
+{
+    public string playerName = "";
 
-    public PlayerData(SavingTest player)
-    {
-        LOL = new bool[10];
+    public int HighScore { get; set; }
 
-        LOL[0] = player.ciao;
-        LOL[1] = player.miao;
-        LOL[2] = player.wow;
-    }
+    public AccountButtons buttonRef = null;
+
+    [NonSerialized]
+    public string secret = "Nope";
 }
