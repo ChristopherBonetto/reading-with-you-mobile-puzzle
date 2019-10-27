@@ -1,42 +1,74 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SavingTest : MonoBehaviour
 {
-    public bool ciao = false;
-    public bool miao = false;
-    public bool wow = false;
+    PlayerData mySaveGame1 = new PlayerData();
 
-    public void Update()
+    public AccountButtons[] savedAccount;
+
+    public string Nome;
+    public bool[] easyLevels = new bool[100];
+    public bool[] hardLevels = new bool[100];
+
+    public void SaveAccount()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if(savedAccount[0].accountSaved == null)
         {
-            SaveTest();
+            savedAccount[0].accountSaved = new PlayerData();
+            savedAccount[0].accountSaved.playerName = Nome;
+            savedAccount[0].accountSaved.easyLevels = easyLevels;
+            savedAccount[0].accountSaved.hardLevels = hardLevels;
+            savedAccount[0].changeTextButton(Nome);
+            SaveSystem.SaveGame(savedAccount[0].accountSaved, Nome);
         }
-
-        if (Input.GetKeyDown(KeyCode.C))
+        else if(savedAccount[1].accountSaved == null)
         {
-            LoadTest();
+            savedAccount[1].accountSaved = new PlayerData();
+            savedAccount[1].accountSaved.playerName = Nome;
+            savedAccount[1].accountSaved.easyLevels = easyLevels;
+            savedAccount[1].accountSaved.hardLevels = hardLevels;
+            savedAccount[1].changeTextButton(Nome);
+            SaveSystem.SaveGame(savedAccount[1].accountSaved, Nome);
         }
+        else if(savedAccount[2].accountSaved == null)
+        {
+            savedAccount[2].accountSaved = new PlayerData();
+            savedAccount[2].accountSaved.playerName = Nome;
+            savedAccount[2].accountSaved.easyLevels = easyLevels;
+            savedAccount[2].accountSaved.hardLevels = hardLevels;
+            savedAccount[2].changeTextButton(Nome);
+            SaveSystem.SaveGame(savedAccount[2].accountSaved, Nome);
+        }
+        else
+        {
+            Debug.Log("no more slot");
+        }
+        
     }
 
-
-    public void SaveTest()
+    public void LoadAccount(int accountPosition)
     {
-        SaveSystem.Save(this);
-        Debug.Log(ciao + " " + miao + " " + wow);
+        PlayerData loadGame = SaveSystem.LoadGame(savedAccount[accountPosition].accountSaved.playerName) as PlayerData;
+
+        if(loadGame != null)
+        {
+            Nome = loadGame.playerName;
+            easyLevels = loadGame.easyLevels;
+            hardLevels = loadGame.hardLevels;
+        }
+        else
+        {
+            Debug.Log("u must create account to load");
+        }
+        
     }
 
-    public void LoadTest()
+    public void DeleteAccount()
     {
-        PlayerData data = SaveSystem.Load();
-
-        ciao = data.LOL[0];
-        miao = data.LOL[1];
-        wow = data.LOL[2];
-
-        Debug.Log(ciao + " " + miao + " " + wow);
-
+        
+         SaveSystem.DeleteSaveGame("MySaveGame");
     }
 }
