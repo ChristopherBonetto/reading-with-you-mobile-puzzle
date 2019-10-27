@@ -15,10 +15,7 @@ public class PlayerData : SaveGame
 {
     public string playerName = "";
 
-    public int HighScore { get; set; }
-
-    public AccountButtons buttonRef = null;
-
-    [NonSerialized]
-    public string secret = "Nope";
+    public bool[] easyLevels;
+    public bool[] hardLevels;
+        
 }
