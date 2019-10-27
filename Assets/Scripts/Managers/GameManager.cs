@@ -59,10 +59,7 @@ public class GameManager : Singleton<GameManager>
 
 	public GameState CurrentState => m_currentState;
     public Mode Mode => m_Mode;
-
-    public GameObject m_playerAcccount;
-
-    public PlayerData m_savePlayerData;
+    
 
     public string m_playerName = "";
     
@@ -72,7 +69,8 @@ public class GameManager : Singleton<GameManager>
 		PoolWorlds();
 
         SetWorldBooleans();
-
+        Debug.Log(easyLevels.Count);
+        Debug.Log(hardLevels.Count);
         ObjectPooler.Instance.StartPooling();
         
 	}
@@ -305,7 +303,10 @@ public class GameManager : Singleton<GameManager>
         m_playerName = data.playerName;
         easyLevels = data.easyLevels.ToList();
         hardLevels = data.hardLevels.ToList();
-        
+
+
+        Debug.Log(easyLevels.Count);
+        Debug.Log(hardLevels.Count);
     }
 
 
