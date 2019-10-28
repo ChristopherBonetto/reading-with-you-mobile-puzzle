@@ -10,6 +10,8 @@ public class FinalObjectActions : MonoBehaviour
 
     [SerializeField] private SpriteRenderer m_finalObjectSprite = null;
 
+	[SerializeField] private Floater m_floater = null;
+
     private void Start()
     {
         m_startingIconPosition = m_objectIcon.transform.localPosition;
@@ -23,6 +25,8 @@ public class FinalObjectActions : MonoBehaviour
         transform.parent.transform.position = startPosition;
         m_objectIcon.transform.localPosition = m_startingIconPosition;
         DisableEndLevelParticle();
+		m_floater.enabled = true;
+		m_floater.ResetPosition();
 	}
 
 
@@ -30,6 +34,8 @@ public class FinalObjectActions : MonoBehaviour
     {
         EnableEndLevelParticle();
         m_objectIcon.transform.position = new Vector3(m_objectIcon.transform.position.x, m_objectIcon.transform.position.y + 1.5f, m_objectIcon.transform.position.z);
+		m_floater.enabled = false;
+		m_floater.ResetPosition();
     }
 
 
