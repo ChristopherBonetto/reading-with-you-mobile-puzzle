@@ -35,7 +35,7 @@ public class AccountWindow : UIControl
     /// </summary>
     public void ChangeToEasyMode()
     {
-        //TextMode.sprite = m_easyMode;
+        TextMode.sprite = m_easyMode;
 
         if (GameManager.Instance.Mode != Mode.Easy)
         {
@@ -49,7 +49,7 @@ public class AccountWindow : UIControl
     /// </summary>
     public void ChangeToHardMode()
     {
-        //TextMode.sprite = m_hardMode;
+        TextMode.sprite = m_hardMode;
 
         if (GameManager.Instance.Mode != Mode.Hard)
         {

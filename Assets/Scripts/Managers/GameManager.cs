@@ -59,8 +59,8 @@ public class GameManager : Singleton<GameManager>
 
 	public GameState CurrentState => m_currentState;
     public Mode Mode => m_Mode;
-    
 
+    public MobileKeyboard keyboard;
     public string m_playerName = "";
     
 
@@ -68,7 +68,10 @@ public class GameManager : Singleton<GameManager>
 	{
 		PoolWorlds();
 
-        SetWorldBooleans();
+        LoadGame();
+        LoadLevel();
+        //SetWorldBooleans();
+
         Debug.Log(easyLevels.Count);
         Debug.Log(hardLevels.Count);
         ObjectPooler.Instance.StartPooling();
@@ -77,18 +80,18 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
 
-            SaveGame();
+        //    SaveGame();
             
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
+        //}
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
 
-            LoadGame();
+        //    LoadGame();
 
-        }
+        //}
     }
 
     private void PoolWorlds()
@@ -169,7 +172,12 @@ public class GameManager : Singleton<GameManager>
 		CurrentWorld = worldNo;
 		m_currentLevel = levelNo;
 		int levelID = GetLevelID();
-		if (levelID >= 0)
+
+        // @TEMP
+        SetWorldBooleans();
+        SaveGame();
+
+        if (levelID >= 0)
 		{
 			m_currentMap = ObjectPooler.Instance.GetPooledObject(levelID);
 			if (m_currentMap)
@@ -293,6 +301,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SaveGame()
     {
+
         SaveSystemNew.Save(this);
     }
     
@@ -300,13 +309,55 @@ public class GameManager : Singleton<GameManager>
     {
         PlayerDataNew data = SaveSystemNew.Load();
 
+        if (data == null)
+        {
+            m_playerName = "";
+            return;
+        }
+
         m_playerName = data.playerName;
         easyLevels = data.easyLevels.ToList();
         hardLevels = data.hardLevels.ToList();
 
 
+        keyboard.m_playerName.text = m_playerName;
+        keyboard.field.text = m_playerName;
+
         Debug.Log(easyLevels.Count);
         Debug.Log(hardLevels.Count);
+    }
+
+    public void LoadLevel()
+    {
+        PlayerDataNew data = SaveSystemNew.Load();
+
+        if (data == null)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                Worlds[i].EasyLevels[0].IsPlayable = true;
+                Worlds[i].HardLevels[0].IsPlayable = true;
+            }
+
+            SaveGame();
+            return;
+        }
+
+        for (int i = 0; i < 8; i++)
+        {
+            Worlds[0].EasyLevels[i].IsPlayable = data.easyLevels[i];
+            Worlds[1].EasyLevels[i].IsPlayable = data.easyLevels[i + 8];
+            Worlds[2].EasyLevels[i].IsPlayable = data.easyLevels[i + 16];
+            Worlds[3].EasyLevels[i].IsPlayable = data.easyLevels[i + 24];
+        }
+
+        for (int i = 0; i < 8; i++)
+        {
+            Worlds[0].HardLevels[i].IsPlayable = data.hardLevels[i];
+            Worlds[1].HardLevels[i].IsPlayable = data.hardLevels[i + 8];
+            Worlds[2].HardLevels[i].IsPlayable = data.hardLevels[i + 16];
+            Worlds[3].HardLevels[i].IsPlayable = data.hardLevels[i + 24];
+        }
     }
 
 
@@ -348,6 +399,9 @@ public class GameManager : Singleton<GameManager>
     
     public void SetWorldBooleans()
     {
+        easyLevels.Clear();
+        hardLevels.Clear();
+
         for(int i = 0; i < Worlds.Length; i++)
         {
             CheckWorldEasyLevelsBooleans(Worlds[i]);
