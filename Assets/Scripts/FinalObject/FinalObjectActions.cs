@@ -20,13 +20,13 @@ public class FinalObjectActions : MonoBehaviour
 
     public void ResetLevel(Vector3 startPosition, Sprite newFinalObjectSprite)
 	{
-        EnableDisableCollider(true);
+        ToggleCollider(true);
         m_finalObjectSprite.sprite = newFinalObjectSprite;
         transform.parent.transform.position = startPosition;
         m_objectIcon.transform.localPosition = m_startingIconPosition;
         DisableEndLevelParticle();
 		m_floater.enabled = true;
-		m_floater.ResetPosition();
+		m_floater.ResetPosition(startPosition);
 	}
 
 
@@ -49,9 +49,9 @@ public class FinalObjectActions : MonoBehaviour
         m_particleEndLevel.Play(true);
     }
 
-    public void EnableDisableCollider(bool newValue)
+    public void ToggleCollider(bool bInEnabled)
     {
-        m_finalObjectCollider.enabled = newValue;
+        m_finalObjectCollider.enabled = bInEnabled;
     }
 
 }

@@ -29,4 +29,10 @@ public class Floater : MonoBehaviour
 		resetPosition.y = m_startY;
 		m_transform.position = resetPosition;
 	}
+
+	public void ResetPosition(Vector3 startPosition)
+	{
+		m_startY = startPosition.y;
+		ResetPosition();
+	}
 }

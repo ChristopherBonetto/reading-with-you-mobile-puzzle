@@ -239,6 +239,7 @@ public class GameManager : Singleton<GameManager>
         FadeBetweenScene fade = UIManager.Instance.Controls[UIControlName.Fade] as FadeBetweenScene;
         GameWindow gameWindow = UIManager.Instance.Controls[UIControlName.InGame] as GameWindow;
 
+		// Win level and load new
 		if (bWin)
 		{
 			Level[] ModeLevels = GetCurrentWorldLevels();
@@ -283,13 +284,18 @@ public class GameManager : Singleton<GameManager>
             }
             UIManager.Instance.ShowAndHide(UIControlName.Fade, UIManager.Instance.Controls[UIControlName.InGame]);
         }
+		// Lose level and restore positions
 		else
 		{
             void LoadAfterFade()
             {
 			    Player.ResetLevel(m_currentLevelInfo.PlayerCoords);
-                FinalObject.EnableDisableCollider(true);
-			    SetGameState(GameState.Playing);
+                FinalObject.ToggleCollider(true);
+				if (Grid)
+				{
+					Grid.SetActive(true);
+				}
+				SetGameState(GameState.Playing);
             }
 
             fade.FadeInCompleted = LoadAfterFade;

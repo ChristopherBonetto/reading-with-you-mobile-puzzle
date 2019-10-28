@@ -57,7 +57,7 @@ public class TouchManager : Singleton<TouchManager>
             if (CanStart())
             {
                 GameManager.Instance.StartWalkingPlayer();
-                GameManager.Instance.FinalObject.EnableDisableCollider(false);
+                GameManager.Instance.FinalObject.ToggleCollider(false);
             }
         }
 	}
