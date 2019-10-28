@@ -50,5 +50,6 @@ MonoBehaviour:
   m_GravityMultiplier: 2
   m_VelocityThreshold: 0.01
   m_AngularVelocityThreshold: 0.01
-  m_AngleThreshold: 0.5
+  m_AngleThreshold: 10
+  m_FixedTimeout: 5
   UnstableBlocks: 0

@@ -176,7 +176,6 @@ public class BlockManager : Singleton<BlockManager>
 			{
 				for (int i = 0; i < testHits.Length; i++)
 				{
-					Debug.Log(testHits[i]);
 					if (testHits[i].gameObject != m_holdBlock.gameObject)
 					{
                         m_holdBlock.ResetBlock();

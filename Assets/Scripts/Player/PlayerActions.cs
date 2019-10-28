@@ -60,7 +60,7 @@ public class PlayerActions : MonoBehaviour
 		{
 			PlayerMovement();
 		}
-        Debug.Log(m_currentPlayerState);
+        
         if(m_currentPlayerState == PlayerState.Win)
         {
             if (EndTimer(m_timeToResetChangeLevel))
