@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 5-6_Info
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: b722735107331cb4fbb201347a778768, type: 3}
-  IconLocked: {fileID: 0}
+  IconLocked: {fileID: 21300000, guid: 527b21b65ab2cdf4da3b540d18ed0bf9, type: 3}
   LevelPrefab: {fileID: 4933904975195481564, guid: a8a7255ce9958e6448c65681c015a057,
     type: 3}
   IsPlayable: 0
@@ -24,7 +24,7 @@ MonoBehaviour:
     Scale: {x: -0.95, y: 1, z: 1}
   - ID: 912
     XCoord: 3.85
-    Scale: {x: 0.95, y: 1, z: 1}
+    Scale: {x: -0.95, y: 1, z: 1}
   - ID: 696
     XCoord: -1.25
     Scale: {x: 0.95, y: 1, z: 1}

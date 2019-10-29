@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CheatLevelsButton : MonoBehaviour
 {
-    public Image Image;
+    private Image Image;
 
     public Sprite Unlock;
     public Sprite Lock;
