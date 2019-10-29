@@ -13,13 +13,8 @@ MonoBehaviour:
   m_Name: 5-6_Info
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: b722735107331cb4fbb201347a778768, type: 3}
-<<<<<<< HEAD
-  IconLocked: {fileID: 0}
-  LevelPrefab: {fileID: 5929800415284848508, guid: a8a7255ce9958e6448c65681c015a057,
-=======
   IconLocked: {fileID: 21300000, guid: 527b21b65ab2cdf4da3b540d18ed0bf9, type: 3}
   LevelPrefab: {fileID: 4933904975195481564, guid: a8a7255ce9958e6448c65681c015a057,
->>>>>>> 0750cadc1090c0efa0e3399dda09dc00ab4c3488
     type: 3}
   IsPlayable: 0
   PlayerCoords: {x: -3.5, y: 2, z: 0}
