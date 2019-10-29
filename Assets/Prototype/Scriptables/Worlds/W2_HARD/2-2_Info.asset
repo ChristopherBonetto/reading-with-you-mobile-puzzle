@@ -16,7 +16,7 @@ MonoBehaviour:
   IconLocked: {fileID: 0}
   LevelPrefab: {fileID: 6652939347214985997, guid: da21f108aeafdb24296d2451ba3e4459,
     type: 3}
-  IsPlayable: 0
+  IsPlayable: 1
   PlayerCoords: {x: -3.5, y: 3, z: 0}
   Blocks:
   - ID: 912
