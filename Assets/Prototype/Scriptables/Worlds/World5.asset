@@ -15,14 +15,7 @@ MonoBehaviour:
   Preview: {fileID: 21300000, guid: fc547bd21d4810f40a584804f70ff802, type: 3}
   Background: {fileID: 21300000, guid: 5a0c4c7b2253ca24ba167744d79ddb33, type: 3}
   EasyLevels:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 388a26aac17dc40489956782d6e2c534, type: 2}
   HardLevels:
   - {fileID: 11400000, guid: 0030ee8df5b0a884782af9925ca8f6dd, type: 2}
   - {fileID: 11400000, guid: 2da3e17e07e807b42a11f7c05c51b44b, type: 2}
