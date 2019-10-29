@@ -55,7 +55,7 @@ public class GameManager : Singleton<GameManager>
     public Action OnUpdateLevel;
 
 	private GameState m_currentState;
-    private Mode m_Mode;
+    private Mode m_Mode = Mode.Easy;
 
 	public GameState CurrentState => m_currentState;
     public Mode Mode => m_Mode;
@@ -403,6 +403,31 @@ public class GameManager : Singleton<GameManager>
             {
                 hardLevels.Add(false);
             }
+        }
+    }
+
+    /// <summary>
+    /// USe for unlock or lock all levels.
+    /// </summary>
+    public void LockOrUnlockLevels(bool value)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            Worlds[0].EasyLevels[i].IsPlayable = value;
+            Worlds[1].EasyLevels[i].IsPlayable = value;
+            Worlds[2].EasyLevels[i].IsPlayable = value;
+            Worlds[3].EasyLevels[i].IsPlayable = value;
+
+            Worlds[0].HardLevels[i].IsPlayable = value;
+            Worlds[1].HardLevels[i].IsPlayable = value;
+            Worlds[2].HardLevels[i].IsPlayable = value;
+            Worlds[3].HardLevels[i].IsPlayable = value;
+        }
+
+        for (int i = 0; i < Worlds.Length; i++)
+        {
+            Worlds[i].EasyLevels[0].IsPlayable = true;
+            Worlds[i].HardLevels[0].IsPlayable = true;
         }
     }
 
