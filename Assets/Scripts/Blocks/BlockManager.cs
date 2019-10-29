@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BlockManager : Singleton<BlockManager>
 {
-    #region Variables
+	#region Variables
 
 	private Block m_holdBlock;
 
@@ -62,7 +62,7 @@ public class BlockManager : Singleton<BlockManager>
 
 	private List<Block> m_levelBlocks = new List<Block>();
 
-	public int UnstableBlocks;
+	public int UnstableBlocks => GetUnstableCount();
 
 	#endregion
 
@@ -72,6 +72,21 @@ public class BlockManager : Singleton<BlockManager>
 	}
 
 	#region Level
+
+	private int GetUnstableCount()
+	{
+		int unstableCount = 0;
+		{
+			foreach (Block block in m_levelBlocks)
+			{
+				if (block.Unstable)
+				{
+					unstableCount++;
+				}
+			}
+		}
+		return unstableCount;
+	}
 
 	/// <summary>
 	/// Reset level blocks to inventory
@@ -96,7 +111,7 @@ public class BlockManager : Singleton<BlockManager>
 				m_levelBlocks.Add(newBlock);
 			}
 		}
-		UnstableBlocks = 0;
+		//UnstableBlocks = 0;
 	}
 
 	public void UnloadBlocks()
@@ -149,6 +164,7 @@ public class BlockManager : Singleton<BlockManager>
 		releasePosition.z = m_GameZ;
 		float halfXSize = m_holdBlock.Size / 2f;
 		releasePosition.x = Mathf.Round(releasePosition.x - halfXSize) + halfXSize;
+		releasePosition.y = Mathf.Round(releasePosition.y);
 		m_holdBlock.transform.position = releasePosition;
 
 		// Check out of grid
