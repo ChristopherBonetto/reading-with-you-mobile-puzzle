@@ -37,8 +37,8 @@ public class GameManager : Singleton<GameManager>
 	public int CurrentWorld { get; set; }
 	private GameObject m_currentMap;
 
-    public List<bool> easyLevels = new List<bool>();
-    public List<bool> hardLevels = new List<bool>();
+    public List<bool> easyLevels { get; private set; } = new List<bool>();
+    public List<bool> hardLevels { get; private set; } = new List<bool>();
 
     [SerializeField]
 	private bool m_debugUnlockLevels = false;
@@ -78,21 +78,6 @@ public class GameManager : Singleton<GameManager>
         
 	}
 
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.C))
-        //{
-
-        //    SaveGame();
-            
-        //}
-        //if (Input.GetKeyDown(KeyCode.D))
-        //{
-
-        //    LoadGame();
-
-        //}
-    }
 
     private void PoolWorlds()
 	{
