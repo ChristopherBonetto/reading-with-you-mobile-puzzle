@@ -8,7 +8,7 @@ public class WorldBackgroundWindow : UIControl
     public override UIControlName Name => UIControlName.WorldBackground;
 
     public RectTransform Size { get; private set; }
-    public Image Image { get; private set; }
+    public Image Image { get; set; }
 
 
     private void Awake()

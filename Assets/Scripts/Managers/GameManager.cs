@@ -247,6 +247,8 @@ public class GameManager : Singleton<GameManager>
                 void LoadAfterFade()
                 {
                     LoadLevel(CurrentWorld + 1, 0);
+                    WorldBackgroundWindow background = UIManager.Instance.Controls[UIControlName.WorldBackground] as WorldBackgroundWindow;
+                    background.Image.sprite = Worlds[CurrentWorld].Background;
                 }
 
                 fade.FadeInCompleted = LoadAfterFade;
@@ -342,11 +344,13 @@ public class GameManager : Singleton<GameManager>
                 Worlds[1].EasyLevels[i].IsPlayable = data.easyLevels[i + 8];
                 Worlds[2].EasyLevels[i].IsPlayable = data.easyLevels[i + 16];
                 Worlds[3].EasyLevels[i].IsPlayable = data.easyLevels[i + 24];
+                Worlds[4].EasyLevels[i].IsPlayable = data.easyLevels[i + 32];
 
                 Worlds[0].HardLevels[i].IsPlayable = data.hardLevels[i];
                 Worlds[1].HardLevels[i].IsPlayable = data.hardLevels[i + 8];
                 Worlds[2].HardLevels[i].IsPlayable = data.hardLevels[i + 16];
                 Worlds[3].HardLevels[i].IsPlayable = data.hardLevels[i + 24];
+                Worlds[4].HardLevels[i].IsPlayable = data.hardLevels[i + 32];
             }
         }
     }
@@ -402,11 +406,13 @@ public class GameManager : Singleton<GameManager>
             Worlds[1].EasyLevels[i].IsPlayable = value;
             Worlds[2].EasyLevels[i].IsPlayable = value;
             Worlds[3].EasyLevels[i].IsPlayable = value;
+            Worlds[4].EasyLevels[i].IsPlayable = value;
 
             Worlds[0].HardLevels[i].IsPlayable = value;
             Worlds[1].HardLevels[i].IsPlayable = value;
             Worlds[2].HardLevels[i].IsPlayable = value;
             Worlds[3].HardLevels[i].IsPlayable = value;
+            Worlds[4].HardLevels[i].IsPlayable = value;
         }
 
         for (int i = 0; i < Worlds.Length; i++)
