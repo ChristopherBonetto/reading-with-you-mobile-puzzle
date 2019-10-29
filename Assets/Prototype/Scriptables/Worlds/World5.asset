@@ -15,7 +15,14 @@ MonoBehaviour:
   Preview: {fileID: 21300000, guid: c6861024b2f4aeb4097031b28f95412e, type: 3}
   Background: {fileID: 21300000, guid: 17cb898799b7c9346bb60df3611d1758, type: 3}
   EasyLevels:
-  - {fileID: 11400000, guid: 388a26aac17dc40489956782d6e2c534, type: 2}
+  - {fileID: 11400000, guid: 9d11123b6a5f1414d956228a0ddb9a66, type: 2}
+  - {fileID: 11400000, guid: 2165d6566c4113449b4456d772461248, type: 2}
+  - {fileID: 11400000, guid: c870d8b546b4b4248a5302fce500eb80, type: 2}
+  - {fileID: 11400000, guid: b338a7e1dbe17dc41b7205a5c244ff74, type: 2}
+  - {fileID: 11400000, guid: a6bf621f9c6f05b4db8dbc57b9a84005, type: 2}
+  - {fileID: 11400000, guid: 81e5db574c950904984350efadce1f7a, type: 2}
+  - {fileID: 11400000, guid: b429ec3dc5776c641ab176a9eda3d751, type: 2}
+  - {fileID: 11400000, guid: bca26c4a9d525954ebb56b8e374a6415, type: 2}
   HardLevels:
   - {fileID: 11400000, guid: 0030ee8df5b0a884782af9925ca8f6dd, type: 2}
   - {fileID: 11400000, guid: 2da3e17e07e807b42a11f7c05c51b44b, type: 2}
