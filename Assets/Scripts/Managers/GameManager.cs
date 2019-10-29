@@ -69,14 +69,11 @@ public class GameManager : Singleton<GameManager>
     private void Start()
 	{
 		PoolWorlds();
-
+        
         LoadGame();
         LoadLevel();
-
-        Debug.Log(easyLevels.Count);
-        Debug.Log(hardLevels.Count);
-        ObjectPooler.Instance.StartPooling();
         
+        ObjectPooler.Instance.StartPooling();
 	}
 
 
@@ -159,8 +156,6 @@ public class GameManager : Singleton<GameManager>
 		m_currentLevel = levelNo;
 		int levelID = GetLevelID();
 
-        
-
         if (levelID >= 0)
 		{
 			m_currentMap = ObjectPooler.Instance.GetPooledObject(levelID);
@@ -185,9 +180,12 @@ public class GameManager : Singleton<GameManager>
 		{
 			Debug.Log("Level number out of bounds");
 		}
-	}
 
-	private int GetLevelID()
+        SetWorldBooleans();
+        SaveGame();
+    }
+
+    private int GetLevelID()
 	{
 		Level[] ModeLevels = GetCurrentWorldLevels();
 		
@@ -269,8 +267,6 @@ public class GameManager : Singleton<GameManager>
                 fade.FadeOutCompleted = fade.OnHide;
             }
             UIManager.Instance.ShowAndHide(UIControlName.Fade, UIManager.Instance.Controls[UIControlName.InGame]);
-            SetWorldBooleans();
-            SaveGame();
         }
 		// Lose level and restore positions
 		else
@@ -324,7 +320,7 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadLevel()
     {
-        
+
         if (data == null)
         {
             for (int i = 0; i < 4; i++)
@@ -338,21 +334,16 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < Worlds.Length; i++)
             {
-                Worlds[0].EasyLevels[i].IsPlayable = data.easyLevels[i];
-                Worlds[1].EasyLevels[i].IsPlayable = data.easyLevels[i + 8];
-                Worlds[2].EasyLevels[i].IsPlayable = data.easyLevels[i + 16];
-                Worlds[3].EasyLevels[i].IsPlayable = data.easyLevels[i + 24];
-                Worlds[4].EasyLevels[i].IsPlayable = data.easyLevels[i + 32];
-
-                Worlds[0].HardLevels[i].IsPlayable = data.hardLevels[i];
-                Worlds[1].HardLevels[i].IsPlayable = data.hardLevels[i + 8];
-                Worlds[2].HardLevels[i].IsPlayable = data.hardLevels[i + 16];
-                Worlds[3].HardLevels[i].IsPlayable = data.hardLevels[i + 24];
-                Worlds[4].HardLevels[i].IsPlayable = data.hardLevels[i + 32];
+                for (int j = 0; j < Worlds[i].EasyLevels.Length; j++)
+                {
+                    Worlds[i].EasyLevels[j].IsPlayable = data.easyLevels[j];
+                    Worlds[i].HardLevels[j].IsPlayable = data.hardLevels[j];
+                }
             }
         }
+        
     }
 
     
@@ -400,23 +391,15 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     public void LockOrUnlockLevels(bool value)
     {
-        for (int i = 0; i < 8; i++)
-        {
-            Worlds[0].EasyLevels[i].IsPlayable = value;
-            Worlds[1].EasyLevels[i].IsPlayable = value;
-            Worlds[2].EasyLevels[i].IsPlayable = value;
-            Worlds[3].EasyLevels[i].IsPlayable = value;
-            Worlds[4].EasyLevels[i].IsPlayable = value;
-
-            Worlds[0].HardLevels[i].IsPlayable = value;
-            Worlds[1].HardLevels[i].IsPlayable = value;
-            Worlds[2].HardLevels[i].IsPlayable = value;
-            Worlds[3].HardLevels[i].IsPlayable = value;
-            Worlds[4].HardLevels[i].IsPlayable = value;
-        }
-
         for (int i = 0; i < Worlds.Length; i++)
         {
+            for (int j = 0; j < Worlds[i].EasyLevels.Length; j++)
+            {
+                Worlds[i].EasyLevels[j].IsPlayable = value;
+                Worlds[i].HardLevels[j].IsPlayable = value;
+
+            }
+            // Unlock first level ofevery world.
             Worlds[i].EasyLevels[0].IsPlayable = true;
             Worlds[i].HardLevels[0].IsPlayable = true;
         }
