@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: World3
   m_EditorClassIdentifier: 
   Preview: {fileID: 21300000, guid: 6e52113a7e41f0e4eb3164ae69e02ae3, type: 3}
-  Background: {fileID: 21300000, guid: 6e52113a7e41f0e4eb3164ae69e02ae3, type: 3}
+  Background: {fileID: 21300000, guid: 49f61e76ba91fee4499575bbd0bb9021, type: 3}
   EasyLevels:
   - {fileID: 11400000, guid: d0325793cfd495a4a94e6d6755ce4eb3, type: 2}
   - {fileID: 11400000, guid: caecceb6db706124d8447a0423879493, type: 2}
