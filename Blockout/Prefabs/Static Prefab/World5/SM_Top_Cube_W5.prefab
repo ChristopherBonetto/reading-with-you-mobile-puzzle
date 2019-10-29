@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4176251553402254167}
   - component: {fileID: 7527925208471232640}
   m_Layer: 0
-  m_Name: SM_Top_Cube_W4
+  m_Name: SM_Top_Cube_W5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: b52e255a88aa64846b93eab80222d484, type: 3}
+  - {fileID: 2100000, guid: e315e40d1f369014195cd65b38b42ef0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
