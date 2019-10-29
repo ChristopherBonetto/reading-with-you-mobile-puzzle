@@ -10,6 +10,7 @@ public static class SaveSystemNew
         BinaryFormatter formatter = new BinaryFormatter();
 
         string path = Application.persistentDataPath + "/player.fun";
+        
         FileStream stream = new FileStream(path, FileMode.Create);
 
         PlayerDataNew data = new PlayerDataNew(player);
@@ -24,6 +25,7 @@ public static class SaveSystemNew
 
         if (File.Exists(path))
         {
+            Debug.Log("exist saved file" + path);
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
@@ -34,7 +36,8 @@ public static class SaveSystemNew
         }
         else
         {
-            Debug.Log("save file not found");
+            GameManager.Instance.SetWorldBooleans();
+            Save(GameManager.Instance);
             return null;
         }
     }
