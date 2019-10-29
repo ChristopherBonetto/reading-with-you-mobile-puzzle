@@ -156,6 +156,8 @@ public class GameManager : Singleton<GameManager>
 		m_currentLevel = levelNo;
 		int levelID = GetLevelID();
 
+        SoundManager.Instance.PlayBackgoundSound(CurrentWorld);
+
         if (levelID >= 0)
 		{
 			m_currentMap = ObjectPooler.Instance.GetPooledObject(levelID);
@@ -305,9 +307,9 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            m_playerName = data.playerName;
-            easyLevels = data.easyLevels.ToList();
-            hardLevels = data.hardLevels.ToList();
+            m_playerName = data.PlayerName;
+            easyLevels = data.EasyLevels.ToList();
+            hardLevels = data.HardLevels.ToList();
 
 
             keyboard.m_playerName.text = m_playerName;
@@ -338,8 +340,8 @@ public class GameManager : Singleton<GameManager>
             {
                 for (int j = 0; j < Worlds[i].EasyLevels.Length; j++)
                 {
-                    Worlds[i].EasyLevels[j].IsPlayable = data.easyLevels[j];
-                    Worlds[i].HardLevels[j].IsPlayable = data.hardLevels[j];
+                    Worlds[i].EasyLevels[j].IsPlayable = data.EasyLevels[j];
+                    Worlds[i].HardLevels[j].IsPlayable = data.HardLevels[j];
                 }
             }
         }

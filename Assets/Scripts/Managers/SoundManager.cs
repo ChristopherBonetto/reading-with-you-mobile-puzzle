@@ -66,10 +66,5 @@ public class SoundManager : Singleton<SoundManager>
         m_finalObjectAudioSource.PlayOneShot(shootClip);
     }
 
-
-    //final ob
-    //SoundManager.Instance.FinalObjectPlaySound(SoundManager.Instance.m_victorySound);
-
-        //gm
-    //SoundManager.Instance.PlayBackgoundSound(CurrentWorld);
+    
 }
