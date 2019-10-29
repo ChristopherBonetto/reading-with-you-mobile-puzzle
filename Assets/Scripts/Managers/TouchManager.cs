@@ -17,12 +17,12 @@ public class TouchManager : Singleton<TouchManager>
 			return;
 		}
 
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(0) && !m_isHolding)
 		{
 			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit testHit))
 			{
 				Block testBlock = testHit.collider.GetComponent<Block>();
-				if (testBlock)
+				if (testBlock && BlockManager.Instance.UnstableBlocks <= 0)
 				{
 					m_isHolding = true;
 					BlockManager.Instance.StartDrag(testBlock);

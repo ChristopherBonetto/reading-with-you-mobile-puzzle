@@ -2,18 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BlockShape
-{
-	Void = 0,
-	Cube = 1,
-	Ramp = 2,
-	Rectangle = 3,
-	TrapezoidA = 4,
-	TrapezoidB = 5,
-	TrapezoidAVar = 6,
-	TrapezoidBVar = 7
-}
-
 public class BlockManager : Singleton<BlockManager>
 {
     #region Variables

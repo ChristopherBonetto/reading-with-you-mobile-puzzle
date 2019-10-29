@@ -22,8 +22,6 @@ public class Block : MonoBehaviour
 
 	public float Size = 1f;
 
-	public BlockShape Shape;
-
 	private float m_lastCollisionTime;
 
     private bool m_isUnstable = false;
