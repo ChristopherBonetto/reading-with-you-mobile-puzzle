@@ -56,6 +56,7 @@ public class TouchManager : Singleton<TouchManager>
         {
             if (CanStart())
             {
+                UIManager.Instance.Controls[UIControlName.InGame].OnHide();
                 GameManager.Instance.StartWalkingPlayer();
                 GameManager.Instance.FinalObject.ToggleCollider(false);
             }
