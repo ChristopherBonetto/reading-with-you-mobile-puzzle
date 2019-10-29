@@ -174,12 +174,10 @@ public class Block : MonoBehaviour
 			transform.rotation.ToAngleAxis(out float angle, out Vector3 axis);
 			if (angle >= BlockManager.Instance.AngleThreshold)
 			{
-				Debug.Log(angle + " " + gameObject.name);
 				ResetBlock();
 			}
 			else
 			{
-				Debug.Log("Resnap " + gameObject.name);
                 Resnap();
 				SetPhysicsInactive(true);
 			}
