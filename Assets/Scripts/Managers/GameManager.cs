@@ -37,8 +37,8 @@ public class GameManager : Singleton<GameManager>
 	public int CurrentWorld { get; set; }
 	private GameObject m_currentMap;
 
-    public List<bool> easyLevels { get; private set; } = new List<bool>();
-    public List<bool> hardLevels { get; private set; } = new List<bool>();
+    public List<bool> easyLevels = new List<bool>();
+    public List<bool> hardLevels = new List<bool>();
 
     [SerializeField]
 	private bool m_debugUnlockLevels = false;
@@ -62,15 +62,16 @@ public class GameManager : Singleton<GameManager>
 
     public MobileKeyboard keyboard;
     public string m_playerName = "";
-    
 
-	private void Start()
+    private PlayerDataNew data;
+
+
+    private void Start()
 	{
 		PoolWorlds();
 
         LoadGame();
         LoadLevel();
-        //SetWorldBooleans();
 
         Debug.Log(easyLevels.Count);
         Debug.Log(hardLevels.Count);
@@ -158,9 +159,7 @@ public class GameManager : Singleton<GameManager>
 		m_currentLevel = levelNo;
 		int levelID = GetLevelID();
 
-        // @TEMP
-        SetWorldBooleans();
-        SaveGame();
+        
 
         if (levelID >= 0)
 		{
@@ -268,6 +267,8 @@ public class GameManager : Singleton<GameManager>
                 fade.FadeOutCompleted = fade.OnHide;
             }
             UIManager.Instance.ShowAndHide(UIControlName.Fade, UIManager.Instance.Controls[UIControlName.InGame]);
+            SetWorldBooleans();
+            SaveGame();
         }
 		// Lose level and restore positions
 		else
@@ -297,7 +298,7 @@ public class GameManager : Singleton<GameManager>
     
     public void LoadGame()
     {
-        PlayerDataNew data = SaveSystemNew.Load();
+        data = SaveSystemNew.Load();
 
         if (data == null)
         {
@@ -321,8 +322,7 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadLevel()
     {
-        PlayerDataNew data = SaveSystemNew.Load();
-
+        
         if (data == null)
         {
             for (int i = 0; i < 4; i++)

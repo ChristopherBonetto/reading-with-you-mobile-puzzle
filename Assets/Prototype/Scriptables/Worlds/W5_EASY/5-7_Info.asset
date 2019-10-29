@@ -17,7 +17,7 @@ MonoBehaviour:
   LevelPrefab: {fileID: 3185571370793609336, guid: d2e1a0aea85024b4b8bff36a83aac56c,
     type: 3}
   IsPlayable: 0
-  PlayerCoords: {x: 0, y: 0, z: 0}
+  PlayerCoords: {x: -3.5, y: 4, z: 0}
   Blocks:
   - ID: 912
     XCoord: -1.2
@@ -45,4 +45,4 @@ MonoBehaviour:
     Scale: {x: 0.95, y: 1, z: 1}
   GoalObject:
     ID: 0
-    Coords: {x: 0, y: 0, z: 0}
+    Coords: {x: 3.5, y: 4, z: 0}
