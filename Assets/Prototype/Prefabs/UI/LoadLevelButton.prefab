@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 9148681258265104649}
   - component: {fileID: 3270658810837731592}
   - component: {fileID: 5974157585617177062}
-  - component: {fileID: 4760115901586616625}
   m_Layer: 0
   m_Name: LoadLevelButtonIcon
   m_TagString: Untagged
@@ -29,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 2161200143574913997}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children: []
   m_Father: {fileID: 4064361724607390511}
   m_RootOrder: 0
@@ -120,7 +119,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4760115901586616625}
+      - m_Target: {fileID: 5850894866596556447}
         m_MethodName: OnLoadLevel
         m_Mode: 1
         m_Arguments:
@@ -133,18 +132,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &4760115901586616625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2161200143574913997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d832cd4e2170c364685f48ed69db03fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6153610705417251744
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,6 +143,7 @@ GameObject:
   - component: {fileID: 4064361724607390511}
   - component: {fileID: 7035739709675077653}
   - component: {fileID: 5646294287058446613}
+  - component: {fileID: 5850894866596556447}
   m_Layer: 0
   m_Name: LoadLevelButton
   m_TagString: Untagged
@@ -181,7 +169,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 256, y: 256}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7035739709675077653
 CanvasRenderer:
@@ -221,3 +209,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5850894866596556447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6153610705417251744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d832cd4e2170c364685f48ed69db03fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Button: {fileID: 5974157585617177062}
+  m_Image: {fileID: 3270658810837731592}
+  m_BackgroundImage: {fileID: 5646294287058446613}

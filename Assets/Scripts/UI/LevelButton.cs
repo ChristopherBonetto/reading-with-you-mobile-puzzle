@@ -29,25 +29,29 @@ public class LevelButton : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Button component
-    /// </summary>
-    public Button Button { get; private set; }
+	[SerializeField]
+	private Button m_Button;
 
-    /// <summary>
-    /// Image component
-    /// </summary>
-    public Image Image { get; private set; }
+	[SerializeField]
+	private Image m_Image;
 
-    #region Monobehaviour
+	[SerializeField]
+	private Image m_BackgroundImage;
 
-    private void Awake()
-    {
-        Button = GetComponent<Button>();
-        Image = GetComponentInChildren<Image>();
-    }
-	
-    #endregion
+	/// <summary>
+	/// Button component
+	/// </summary>
+	public Button Button => m_Button;
+
+	/// <summary>
+	/// Image component
+	/// </summary>
+	public Image Image => m_Image;
+
+	/// <summary>
+	/// Background image component
+	/// </summary>
+	public Image BackgroundImage => m_BackgroundImage;
 
     /// <summary>
     /// Called when click a button in level selection.
