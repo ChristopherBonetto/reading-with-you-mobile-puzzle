@@ -357,10 +357,7 @@ public class GameManager : Singleton<GameManager>
                 Worlds[1].EasyLevels[i].IsPlayable = data.easyLevels[i + 8];
                 Worlds[2].EasyLevels[i].IsPlayable = data.easyLevels[i + 16];
                 Worlds[3].EasyLevels[i].IsPlayable = data.easyLevels[i + 24];
-            }
 
-            for (int i = 0; i < 8; i++)
-            {
                 Worlds[0].HardLevels[i].IsPlayable = data.hardLevels[i];
                 Worlds[1].HardLevels[i].IsPlayable = data.hardLevels[i + 8];
                 Worlds[2].HardLevels[i].IsPlayable = data.hardLevels[i + 16];

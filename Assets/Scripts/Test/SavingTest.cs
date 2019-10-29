@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SavingTest : MonoBehaviour
 {
     
-    public AccountButtons[] savedAccount;
+    //public AccountButtons[] savedAccount;
 
     public string Nome;
     
