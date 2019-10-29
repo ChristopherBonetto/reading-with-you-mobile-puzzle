@@ -307,7 +307,6 @@ public class GameManager : Singleton<GameManager>
 
     public void SaveGame()
     {
-
         SaveSystemNew.Save(this);
     }
     
@@ -320,17 +319,19 @@ public class GameManager : Singleton<GameManager>
             m_playerName = "";
             return;
         }
+        else
+        {
+            m_playerName = data.playerName;
+            easyLevels = data.easyLevels.ToList();
+            hardLevels = data.hardLevels.ToList();
 
-        m_playerName = data.playerName;
-        easyLevels = data.easyLevels.ToList();
-        hardLevels = data.hardLevels.ToList();
 
+            keyboard.m_playerName.text = m_playerName;
+            keyboard.field.text = m_playerName;
 
-        keyboard.m_playerName.text = m_playerName;
-        keyboard.field.text = m_playerName;
-
-        Debug.Log(easyLevels.Count);
-        Debug.Log(hardLevels.Count);
+            Debug.Log(easyLevels.Count);
+            Debug.Log(hardLevels.Count);
+        }
     }
 
     public void LoadLevel()
@@ -348,59 +349,25 @@ public class GameManager : Singleton<GameManager>
             SaveGame();
             return;
         }
-
-        for (int i = 0; i < 8; i++)
+        else
         {
-            Worlds[0].EasyLevels[i].IsPlayable = data.easyLevels[i];
-            Worlds[1].EasyLevels[i].IsPlayable = data.easyLevels[i + 8];
-            Worlds[2].EasyLevels[i].IsPlayable = data.easyLevels[i + 16];
-            Worlds[3].EasyLevels[i].IsPlayable = data.easyLevels[i + 24];
-        }
+            for (int i = 0; i < 8; i++)
+            {
+                Worlds[0].EasyLevels[i].IsPlayable = data.easyLevels[i];
+                Worlds[1].EasyLevels[i].IsPlayable = data.easyLevels[i + 8];
+                Worlds[2].EasyLevels[i].IsPlayable = data.easyLevels[i + 16];
+                Worlds[3].EasyLevels[i].IsPlayable = data.easyLevels[i + 24];
+            }
 
-        for (int i = 0; i < 8; i++)
-        {
-            Worlds[0].HardLevels[i].IsPlayable = data.hardLevels[i];
-            Worlds[1].HardLevels[i].IsPlayable = data.hardLevels[i + 8];
-            Worlds[2].HardLevels[i].IsPlayable = data.hardLevels[i + 16];
-            Worlds[3].HardLevels[i].IsPlayable = data.hardLevels[i + 24];
+            for (int i = 0; i < 8; i++)
+            {
+                Worlds[0].HardLevels[i].IsPlayable = data.hardLevels[i];
+                Worlds[1].HardLevels[i].IsPlayable = data.hardLevels[i + 8];
+                Worlds[2].HardLevels[i].IsPlayable = data.hardLevels[i + 16];
+                Worlds[3].HardLevels[i].IsPlayable = data.hardLevels[i + 24];
+            }
         }
     }
-
-
-    //public void SaveGame()
-    //{
-    //    easyLevels.Clear();
-    //    hardLevels.Clear();
-
-    //    SetWorldBooleans();
-
-    //    m_savePlayerData = new PlayerData();
-
-    //    m_savePlayerData.playerName = m_playerName;        
-    //    m_savePlayerData.easyLevels = easyLevels.ToArray();
-    //    m_savePlayerData.hardLevels = hardLevels.ToArray();
-
-    //    m_currentPlayer.GetComponent<AccountStats>().accountSaved = m_savePlayerData;
-    //}
-
-
-    //public void CreateNewAccount(string newAccountName)
-    //{
-    //    easyLevels.Clear();
-    //    hardLevels.Clear();
-
-    //    SetWorldBooleans();
-
-    //    m_savePlayerData = new PlayerData();
-
-    //    m_savePlayerData.playerName = newAccountName;
-    //    m_playerName = newAccountName;
-    //    m_savePlayerData.easyLevels = easyLevels.ToArray();
-    //    m_savePlayerData.hardLevels = hardLevels.ToArray();
-
-
-    //    CreateAccountPrefab(newAccountName);
-    //}
 
     
     public void SetWorldBooleans()
@@ -442,14 +409,49 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    //public void SaveGame()
+    //{
+    //    easyLevels.Clear();
+    //    hardLevels.Clear();
+
+    //    SetWorldBooleans();
+
+    //    m_savePlayerData = new PlayerData();
+
+    //    m_savePlayerData.playerName = m_playerName;        
+    //    m_savePlayerData.easyLevels = easyLevels.ToArray();
+    //    m_savePlayerData.hardLevels = hardLevels.ToArray();
+
+    //    m_currentPlayer.GetComponent<AccountStats>().accountSaved = m_savePlayerData;
+    //}
+
+
+    //public void CreateNewAccount(string newAccountName)
+    //{
+    //    easyLevels.Clear();
+    //    hardLevels.Clear();
+
+    //    SetWorldBooleans();
+
+    //    m_savePlayerData = new PlayerData();
+
+    //    m_savePlayerData.playerName = newAccountName;
+    //    m_playerName = newAccountName;
+    //    m_savePlayerData.easyLevels = easyLevels.ToArray();
+    //    m_savePlayerData.hardLevels = hardLevels.ToArray();
+
+
+    //    CreateAccountPrefab(newAccountName);
+    //}
+
     //// Creates a new menu item 'Examples > Create Prefab' in the main menu.
     //[MenuItem("Examples/Create Prefab")]
     //public void CreateAccountPrefab(string newAccountName)
     //{
-        
+
     //    GameObject tempAccount = m_playerAcccount;
     //    tempAccount.GetComponent<AccountStats>().accountSaved = m_savePlayerData;
-        
+
 
     //    string localPath = "Assets/Resources/Accounts/" + "Account" + newAccountName + ".prefab";
     //    localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
