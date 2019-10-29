@@ -21,7 +21,7 @@ public class WorldBackgroundWindow : UIControl
     {
         UIManager.Instance.Register(this);
 
-        Size.sizeDelta = new Vector2(Camera.main.orthographicSize * 2 * Camera.main.aspect, Camera.main.orthographicSize * 2);
+        Size.localScale = new Vector3(Camera.main.orthographicSize * 2 * Camera.main.aspect, Camera.main.orthographicSize * 2 * Camera.main.aspect, 1f);
     }
 
     public void SetBackgroundImage(Sprite sprite)
