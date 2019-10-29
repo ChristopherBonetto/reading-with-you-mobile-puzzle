@@ -5,21 +5,21 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerDataNew
 {
-    public string playerName = "";
+    public string PlayerName = "";
 
-    public bool[] easyLevels;
-    public bool[] hardLevels;
+    public bool[] EasyLevels;
+    public bool[] HardLevels;
 
 
 
     public PlayerDataNew(GameManager player)
     {
-        playerName = player.m_playerName;
+        PlayerName = player.m_playerName;
 
-        easyLevels = player.easyLevels.ToArray();
-        Debug.Log(easyLevels.Length);
-        hardLevels = player.hardLevels.ToArray();
-        Debug.Log(hardLevels.Length);
+        EasyLevels = player.easyLevels.ToArray();
+        Debug.Log(EasyLevels.Length);
+        HardLevels = player.hardLevels.ToArray();
+        Debug.Log(HardLevels.Length);
     }
 
     

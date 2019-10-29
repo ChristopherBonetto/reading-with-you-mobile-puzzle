@@ -143,6 +143,9 @@ public class PlayerActions : MonoBehaviour
 			{
 				SetPlayerState(PlayerState.Lose);
                 m_playerAnimator.SetBool("noGround", true);
+
+                SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.m_playerFallGaspAudioClip);
+
                 m_canMove = false;
 			}
 		}
@@ -206,6 +209,9 @@ public class PlayerActions : MonoBehaviour
                     break;
 
                 case PlayerState.Climb:
+
+                    SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.m_playerClimbAudioClip);
+
                     m_playerAnimator.SetBool("blockInFront", false);
                     m_playerAnimator.SetBool("noGround", false);
                     m_playerAnimator.SetBool("hasWon", false);
@@ -218,6 +224,9 @@ public class PlayerActions : MonoBehaviour
                     break;
 
                 case PlayerState.Slide:
+
+                    SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.m_playerSlideAudioClip);
+
                     m_playerAnimator.SetBool("blockInFront", false);
                     m_playerAnimator.SetBool("noGround", false);
                     m_playerAnimator.SetBool("hasWon", false);

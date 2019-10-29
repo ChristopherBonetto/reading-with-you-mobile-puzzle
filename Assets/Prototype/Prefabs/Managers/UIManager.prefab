@@ -892,6 +892,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11500000, guid: 4462d7adb28412a47bbb40b140124ff8, type: 3}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &4246982116271859167
@@ -4143,6 +4154,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6262942015332104004}
         m_MethodName: OnReturnToMainMenuButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3479482637040403072, guid: dfa5377883d4cdd40a5dc86b5d55a7dc,
+          type: 3}
+        m_MethodName: StopBackgroundSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
