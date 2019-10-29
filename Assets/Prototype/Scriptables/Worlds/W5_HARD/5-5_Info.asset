@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 5-5_Info
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 8f1767d49615c2f4fa5357ab6e7e8a27, type: 3}
-  IconLocked: {fileID: 0}
+  IconLocked: {fileID: 21300000, guid: 5b0fec442828a4046bd4c284ede80ea7, type: 3}
   LevelPrefab: {fileID: 1929206308470326032, guid: 18ff374844d78644fb809bd4d197225d,
     type: 3}
   IsPlayable: 0
