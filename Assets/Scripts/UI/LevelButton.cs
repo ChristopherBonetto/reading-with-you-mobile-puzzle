@@ -11,10 +11,23 @@ public class LevelButton : MonoBehaviour
     /// </summary>
     public int LevelNumber { get; set; }
 
+    private bool m_IsPlayable;
     /// <summary>
     /// if it's locked u can't play this level.
     /// </summary>
-    public bool IsPlayable { get; set; }
+    public bool IsPlayable
+    {
+        get { return m_IsPlayable; }
+        set
+        {
+            m_IsPlayable = value;
+
+            if (m_IsPlayable)
+                Image.color = Color.white;
+            else
+                Image.color = Color.black;
+        }
+    }
 
     /// <summary>
     /// Button component

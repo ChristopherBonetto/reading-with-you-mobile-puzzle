@@ -36,6 +36,7 @@ public class LevelSelectionWindow : UIControl
     /// </summary>
     public void OnReturnToMainMenuButton()
     {
+        GameManager.Instance.CurrentWorld = 0;
         UIManager.Instance.ShowAndHide(UIControlName.MainMenu, this);
     }
 
