@@ -26,6 +26,8 @@ public class Block : MonoBehaviour
 
     private bool m_isUnstable = false;
 
+	public bool Unstable => m_isUnstable;
+
 	private float m_inventoryX;
     
 	#endregion
@@ -67,6 +69,7 @@ public class Block : MonoBehaviour
     private void OnDisable()
 	{
         UnRegister();
+		m_isUnstable = false;
 	}
 
 	/// <summary>
@@ -159,8 +162,8 @@ public class Block : MonoBehaviour
 		}
 
 		m_isUnstable = bInIsUnstable;
-		int blockCount = BlockManager.Instance.UnstableBlocks;
-		BlockManager.Instance.UnstableBlocks = bInIsUnstable ? blockCount + 1 : blockCount - 1;
+		//int blockCount = BlockManager.Instance.UnstableBlocks;
+		//BlockManager.Instance.UnstableBlocks = bInIsUnstable ? blockCount + 1 : blockCount - 1;
 
 		// On start
 		if (m_isUnstable)
