@@ -23,7 +23,8 @@ public class LevelSelectionWindow : UIControl
 
     private void OnEnable()
     {
-        UpdateWorldAndLevelInfo();
+        if (GameManager.Instance != null)
+            UpdateWorldAndLevelInfo();
     }
 
     protected override void Start()
