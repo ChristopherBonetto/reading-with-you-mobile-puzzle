@@ -48,8 +48,7 @@ MonoBehaviour:
   m_GameZ: 0
   m_XScale: 0.95
   m_GravityMultiplier: 2
-  m_VelocityThreshold: 0.01
+  m_VelocityThreshold: 0.2
   m_AngularVelocityThreshold: 0.01
   m_AngleThreshold: 10
   m_FixedTimeout: 5
-  UnstableBlocks: 0

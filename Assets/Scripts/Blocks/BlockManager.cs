@@ -26,7 +26,7 @@ public class BlockManager : Singleton<BlockManager>
 	private float m_GravityMultiplier = 2f;
 
 	[SerializeField]
-	private float m_VelocityThreshold = 0.01f;
+	private float m_VelocityThreshold = 0.2f;
 
 	[SerializeField]
 	private float m_AngularVelocityThreshold = 0.01f;
@@ -127,12 +127,18 @@ public class BlockManager : Singleton<BlockManager>
 
 	#region Dragging
 
-	public void StartDrag(Block holdBlock)
+	public bool StartDrag(Block holdBlock)
 	{
 		// Holding state
 		m_holdBlock = holdBlock;
 		if (!m_holdBlock.enabled)
 		{
+			if (m_holdBlock.transform.position.y != InvY)
+			{
+				// Block is moving to inventory
+				m_holdBlock = null;
+				return false;
+			}
 			m_holdBlock.transform.localScale *= 1.25f;
 			m_holdBlock.enabled = true;
 		}
@@ -147,6 +153,8 @@ public class BlockManager : Singleton<BlockManager>
 		Vector3 dragPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		dragPosition.z = m_holdBlock.transform.position.z;
 		m_holdOffset = dragPosition - m_holdBlock.transform.position;
+
+		return true;
 	}
 
 	public void Move()
