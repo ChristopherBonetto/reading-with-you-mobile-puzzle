@@ -25,7 +25,7 @@ public class LevelButton : MonoBehaviour
             if (m_IsPlayable)
                 Image.color = Color.white;
             else
-                Image.color = Color.black;
+                Image.color = Color.clear;
         }
     }
 

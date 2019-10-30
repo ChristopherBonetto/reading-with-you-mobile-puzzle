@@ -21,14 +21,16 @@ public class LevelSelectionWindow : UIControl
 
     private int CurrentLevel => GameManager.Instance.m_currentLevel;
 
+    private void OnEnable()
+    {
+        UpdateWorldAndLevelInfo();
+    }
 
     protected override void Start()
     {
         base.Start();
 
         GameManager.Instance.OnUpdateLevel += UpdateWorldAndLevelInfo;
-
-        UpdateWorldAndLevelInfo();
     }
 
     /// <summary>
@@ -108,11 +110,6 @@ public class LevelSelectionWindow : UIControl
                         // Set sprite
                         m_buttons[i].BackgroundImage.sprite = Worlds[GameManager.Instance.CurrentWorld].EasyLevels[i].IconLocked;
 						m_buttons[i].Image.sprite = Worlds[GameManager.Instance.CurrentWorld].EasyLevels[i].Icon;
-
-                        if (m_buttons[i].IsPlayable)
-                            m_buttons[i].Image.color = Color.white;
-                        else
-                            m_buttons[i].Image.color = Color.clear;
 
                         // Turn on
                         m_buttons[i].gameObject.SetActive(true);
