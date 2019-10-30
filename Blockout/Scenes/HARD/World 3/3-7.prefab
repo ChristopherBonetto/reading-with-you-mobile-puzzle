@@ -57,6 +57,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3587395452852213030}
     m_Modifications:
+    - target: {fileID: 2434706482951145355, guid: e4b9579ea58e7f54c9214d6bae4efb71,
+        type: 3}
+      propertyPath: m_Name
+      value: SM_Top_Cube_W3 (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 1698571181167359384, guid: e4b9579ea58e7f54c9214d6bae4efb71,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -112,11 +117,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2434706482951145355, guid: e4b9579ea58e7f54c9214d6bae4efb71,
-        type: 3}
-      propertyPath: m_Name
-      value: SM_Top_Cube_W3 (3)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4b9579ea58e7f54c9214d6bae4efb71, type: 3}
 --- !u!4 &2763649231697613043 stripped
@@ -140,7 +140,7 @@ PrefabInstance:
     - target: {fileID: 8474830495891492783, guid: adb59850d012f0e46b30585e1de1da7b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.5
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8474830495891492783, guid: adb59850d012f0e46b30585e1de1da7b,
         type: 3}
@@ -362,10 +362,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3587395452852213030}
     m_Modifications:
+    - target: {fileID: 2434706482951145355, guid: e4b9579ea58e7f54c9214d6bae4efb71,
+        type: 3}
+      propertyPath: m_Name
+      value: SM_Top_Cube_W3 (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 1698571181167359384, guid: e4b9579ea58e7f54c9214d6bae4efb71,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.5
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1698571181167359384, guid: e4b9579ea58e7f54c9214d6bae4efb71,
         type: 3}
@@ -417,11 +422,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2434706482951145355, guid: e4b9579ea58e7f54c9214d6bae4efb71,
-        type: 3}
-      propertyPath: m_Name
-      value: SM_Top_Cube_W3 (2)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4b9579ea58e7f54c9214d6bae4efb71, type: 3}
 --- !u!4 &2763649229867579668 stripped
@@ -445,7 +445,7 @@ PrefabInstance:
     - target: {fileID: 8474830495891492783, guid: adb59850d012f0e46b30585e1de1da7b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.5
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8474830495891492783, guid: adb59850d012f0e46b30585e1de1da7b,
         type: 3}
