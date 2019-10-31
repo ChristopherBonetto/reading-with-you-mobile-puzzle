@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: f2818b35eb36ea740a5858e2c725c6ca, type: 3}
   IconLocked: {fileID: 21300000, guid: c36c3cbc31d83b044aa07e6dbe94480d, type: 3}
+  InGameIcon: {fileID: 21300000, guid: 5ac6a937b9283f5448a4299bdeedd08c, type: 3}
   LevelPrefab: {fileID: 5339845901900832330, guid: 676a39bd671ed5942828f5d8070fd779,
     type: 3}
-  IsPlayable: 0
+  IsPlayable: 1
   PlayerCoords: {x: -2.5, y: 3, z: 0}
   Blocks:
   - ID: 725

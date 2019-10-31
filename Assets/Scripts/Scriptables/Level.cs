@@ -29,6 +29,7 @@ public class Level : ScriptableObject
     [Header("UI field")]
     public Sprite Icon;
     public Sprite IconLocked;
+    public Sprite InGameIcon;
 
     [Header("Level reference")]
 	public GameObject LevelPrefab;

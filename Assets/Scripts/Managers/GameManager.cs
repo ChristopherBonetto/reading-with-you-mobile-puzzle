@@ -177,7 +177,7 @@ public class GameManager : Singleton<GameManager>
 				Debug.LogWarning("Can't unpool map. ID " + levelID + " not found.");
 			}
 			Player.ResetLevel(m_currentLevelInfo.PlayerCoords);
-			FinalObject.ResetLevel(m_currentLevelInfo.GoalObject.Coords, m_currentLevelInfo.Icon);
+			FinalObject.ResetLevel(m_currentLevelInfo.GoalObject.Coords, m_currentLevelInfo.InGameIcon);
 			if (Grid)
 			{
 				Grid.SetActive(true);
