@@ -120,6 +120,81 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &76135649
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1545452799}
+    m_Modifications:
+    - target: {fileID: 2467390086772244437, guid: e16f30df2d3bfd74586a8647fc7e1836,
+        type: 3}
+      propertyPath: m_Name
+      value: Lights_World2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2467390086772244436, guid: e16f30df2d3bfd74586a8647fc7e1836,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2467390086772244436, guid: e16f30df2d3bfd74586a8647fc7e1836,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2467390086772244436, guid: e16f30df2d3bfd74586a8647fc7e1836,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2467390086772244436, guid: e16f30df2d3bfd74586a8647fc7e1836,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2467390086772244436, guid: e16f30df2d3bfd74586a8647fc7e1836,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2467390086772244436, guid: e16f30df2d3bfd74586a8647fc7e1836,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2467390086772244436, guid: e16f30df2d3bfd74586a8647fc7e1836,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2467390086772244436, guid: e16f30df2d3bfd74586a8647fc7e1836,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2467390086772244436, guid: e16f30df2d3bfd74586a8647fc7e1836,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2467390086772244436, guid: e16f30df2d3bfd74586a8647fc7e1836,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2467390086772244436, guid: e16f30df2d3bfd74586a8647fc7e1836,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e16f30df2d3bfd74586a8647fc7e1836, type: 3}
+--- !u!4 &76135650 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2467390086772244436, guid: e16f30df2d3bfd74586a8647fc7e1836,
+    type: 3}
+  m_PrefabInstance: {fileID: 76135649}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &106106667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -720,6 +795,7 @@ Transform:
   - {fileID: 1954563477}
   - {fileID: 914831120}
   - {fileID: 258629712}
+  - {fileID: 76135650}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1312,16 +1388,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1545452799}
     m_Modifications:
-    - target: {fileID: 2164253533157684791, guid: 9450d23f3b247654193b6efef614b9e1,
-        type: 3}
-      propertyPath: m_Name
-      value: PF_SM_BasePlatform
-      objectReference: {fileID: 0}
-    - target: {fileID: 2164253533157684791, guid: 9450d23f3b247654193b6efef614b9e1,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 2905842964501201956, guid: 9450d23f3b247654193b6efef614b9e1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1376,6 +1442,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164253533157684791, guid: 9450d23f3b247654193b6efef614b9e1,
+        type: 3}
+      propertyPath: m_Name
+      value: PF_SM_BasePlatform
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164253533157684791, guid: 9450d23f3b247654193b6efef614b9e1,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9450d23f3b247654193b6efef614b9e1, type: 3}
