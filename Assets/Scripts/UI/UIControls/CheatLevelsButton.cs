@@ -17,63 +17,35 @@ public class CheatLevelsButton : MonoBehaviour
         Image = GetComponent<Image>();
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        if (GameManager.Instance != null)
-        {
-            if (GameManager.Instance.Mode == Mode.Easy)
-            {
-                for (int i = 0; i < GameManager.Instance.Worlds.Length; i++)
-                {
-                    for (int j = 0; j < GameManager.Instance.Worlds[i].EasyLevels.Length; j++)
-                    {
-                        if (!GameManager.Instance.Worlds[i].EasyLevels[j].IsPlayable)
-                        {
-                            Image.sprite = Lock;
-                            return;
-                        }
-                        else
-                        {
-                            Image.sprite = Unlock;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                for (int i = 0; i < GameManager.Instance.Worlds.Length; i++)
-                {
-                    for (int j = 0; j < GameManager.Instance.Worlds[i].HardLevels.Length; j++)
-                    {
-                        if (!GameManager.Instance.Worlds[i].HardLevels[j].IsPlayable)
-                        {
-                            Image.sprite = Lock;
-                            return;
-                        }
-                        else
-                        {
-                            Image.sprite = Unlock;
-                        }
-                    }
-                }
-            }
-        }
+        if (GameManager.Instance.CheckAllLevelsPlayable())
+            Image.sprite = Unlock;
+        else
+            Image.sprite = Lock;
+
+        m_isLocked = Image.sprite == Lock ? true : false;
+
+        SetImage();
+
+        Debug.Log(m_isLocked);
     }
 
     public void LockUnlockLevels()
     {
         m_isLocked = !m_isLocked;
 
-        if (m_isLocked)
-        {
-            Image.sprite = Lock;
-        }
-        else
-        {
-            Image.sprite = Unlock;
-        }
+        SetImage();
 
-        GameManager.Instance.LockOrUnlockLevels(!m_isLocked);
         SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapTwoAudioClip);
+        GameManager.Instance.LockOrUnlockLevels(!m_isLocked);
+    }
+
+    private void SetImage()
+    {
+        if (m_isLocked)
+            Image.sprite = Lock;
+        else
+            Image.sprite = Unlock;
     }
 }

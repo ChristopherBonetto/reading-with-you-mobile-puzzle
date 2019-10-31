@@ -407,7 +407,6 @@ public class GameManager : Singleton<GameManager>
             {
                 Worlds[i].EasyLevels[j].IsPlayable = value;
                 Worlds[i].HardLevels[j].IsPlayable = value;
-
             }
             // Unlock first level ofevery world.
             Worlds[i].EasyLevels[0].IsPlayable = true;
@@ -415,7 +414,23 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    
+    public bool CheckAllLevelsPlayable()
+    {
+        bool isPlayable = true;
+
+        for (int i = 0; i < Worlds.Length; i++)
+        {
+            for (int j = 0; j < Worlds[i].EasyLevels.Length; j++)
+            {
+                if (!Worlds[i].EasyLevels[j].IsPlayable)
+                    return isPlayable = false;
+
+                if (!Worlds[i].HardLevels[j].IsPlayable)
+                    return isPlayable = false;
+            }
+        }
+        return isPlayable;
+    }
 }
 
 

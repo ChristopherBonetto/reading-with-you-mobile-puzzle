@@ -2065,10 +2065,10 @@ RectTransform:
   m_Father: {fileID: 7493197810711631567}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: 200}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 60, y: -170}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5100476247410223150
 CanvasRenderer:
@@ -2098,7 +2098,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 10beb7e0abebc4e42a8313b1d0ae7b38, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2455,7 +2455,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -40, y: -40}
-  m_SizeDelta: {x: 80, y: 80}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7493197809541549261
 CanvasRenderer:
@@ -2612,7 +2612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2796,8 +2796,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -24.8}
-  m_SizeDelta: {x: 549.1, y: 232.6}
+  m_AnchoredPosition: {x: 0.000011444, y: -72.9}
+  m_SizeDelta: {x: 656, y: 310.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7493197809810333026
 CanvasRenderer:
@@ -2829,32 +2829,21 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'The Team:
-
-    Design: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-    Programmer:
-
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-    2D:
-
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-    3D:
-
-    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+  m_Text: "Design: \t\nPaolo Padello, Lorenzo Malara, Luigi Alessandria, \tFabio Mellone\n\nProgrammer:\nFilippo
+    del Greco, Christopher Bonetto, alessandro Pantano\n\n2D:\nEdoardo Astegiano,
+    Stefano Capuzzo, Emily Viglione\n\n3D:\nLuca Pavesi, Stefano Tisci, Alberto Vassallo,
+    Alessandro Mondello, Kevin Catania"
 --- !u!1 &7493197809975848544
 GameObject:
   m_ObjectHideFlags: 0
@@ -2988,14 +2977,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.5647059}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 8947717893171542574, guid: 6ff92f6b931188b4792707600169f6b7,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3607,7 +3597,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 80, y: -80}
-  m_SizeDelta: {x: 80, y: 80}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7493197811159775190
 CanvasRenderer:
@@ -4497,6 +4487,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4551,16 +4551,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
@@ -4589,6 +4579,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4644,16 +4644,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
 --- !u!114 &4804688965442909369 stripped
@@ -4681,6 +4671,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4736,16 +4736,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
 --- !u!114 &5631433238976963973 stripped
@@ -4773,6 +4763,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4828,16 +4828,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
 --- !u!114 &5622654400277051220 stripped
@@ -4865,6 +4855,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4920,16 +4920,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
 --- !u!224 &1292038499329900519 stripped
@@ -4957,6 +4947,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5012,16 +5012,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
 --- !u!114 &8981373026753403837 stripped
@@ -5049,6 +5039,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5104,16 +5104,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton (7)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
 --- !u!114 &7517739591582944939 stripped
@@ -5141,6 +5131,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5195,16 +5195,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
