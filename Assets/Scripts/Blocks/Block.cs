@@ -128,8 +128,10 @@ public class Block : MonoBehaviour
 		{
             m_isMovingToInventory = true;
 			m_lerpMover.SetDestination(destination, () => m_isMovingToInventory = false);
-            PlayMissplacementSound();
-        }
+
+			// Play reset sound
+			SoundManager.Instance.BlockManagerPlaySound(SoundManager.Instance.BlockMissplacementAudioClip);
+		}
 		m_transform.localScale *= 0.8f;
 		SetPhysicsInactive(true);
 		enabled = false;
@@ -228,11 +230,6 @@ public class Block : MonoBehaviour
 			} 
 		}
 	}
-
-
-    private void PlayMissplacementSound()
-    {
-        SoundManager.Instance.BlockManagerPlaySound(SoundManager.Instance.BlockMissplacementAudioClip);
-    }
+	
 	#endregion
 }
