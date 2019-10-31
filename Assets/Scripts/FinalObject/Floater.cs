@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// A simple transform floater (Y direction)
+/// </summary>
 public class Floater : MonoBehaviour
 {
 	private float m_startY;
