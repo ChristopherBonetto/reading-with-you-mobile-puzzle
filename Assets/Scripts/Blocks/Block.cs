@@ -33,7 +33,7 @@ public class Block : MonoBehaviour
 	public bool IsMovingToInventory => m_isMovingToInventory;
 
 	private float m_inventoryX;
-    
+
 	#endregion
 
 	#region Core loop
@@ -41,25 +41,14 @@ public class Block : MonoBehaviour
 	private void OnEnable()
     {
         Register();
-    }
+		m_transform.localScale /= BlockManager.Instance.InvScale;
+	}
 
 	private void Start()
 	{
 #if UNITY_EDITOR
 		NullChecks();
 #endif
-    }
-
-    private void Register()
-    {
-		BlockManager.Instance.OnGrab += SetPhysicsInactive;
-		GameManager.Instance.OnMovement += FreezeBlocks;
-    }
-
-    private void UnRegister()
-    {
-		BlockManager.Instance.OnGrab -= SetPhysicsInactive;
-		GameManager.Instance.OnMovement -= FreezeBlocks;
     }
 
     private void Update()
@@ -73,9 +62,23 @@ public class Block : MonoBehaviour
     private void OnDisable()
 	{
         UnRegister();
+		m_transform.localScale *= BlockManager.Instance.InvScale;
 		m_isUnstable = false;
 	}
 
+	private void Register()
+	{
+		BlockManager.Instance.OnGrab += SetPhysicsInactive;
+		GameManager.Instance.OnMovement += FreezeBlocks;
+	}
+
+	private void UnRegister()
+	{
+		BlockManager.Instance.OnGrab -= SetPhysicsInactive;
+		GameManager.Instance.OnMovement -= FreezeBlocks;
+	}
+
+#if UNITY_EDITOR
 	/// <summary>
 	/// Editor only
 	/// </summary>
@@ -101,11 +104,17 @@ public class Block : MonoBehaviour
 			Debug.LogError(name + " has no lerp mover reference!", this);
 		}
 	}
+#endif
 
-	#endregion
+#endregion
 
 	#region Physics
 
+	/// <summary>
+	/// Prepare block for map
+	/// </summary>
+	/// <param name="inInventoryX">Block position in the inventory</param>
+	/// <param name="scale">Block scale for reflections</param>
 	public void LoadBlock(float inInventoryX, Vector3 scale)
 	{
 		m_inventoryX = inInventoryX;
@@ -113,9 +122,14 @@ public class Block : MonoBehaviour
 		m_transform.localScale = scale;
 		Vector3 meshScale = new Vector3(1 / Mathf.Abs(scale.x), 1f, 1f);
 		m_meshTransform.localScale = meshScale;
+		m_transform.localScale *= BlockManager.Instance.InvScale;
 		ResetBlock(true);
 	}
 
+	/// <summary>
+	/// Move block to inventory
+	/// </summary>
+	/// <param name="bFast">True to move immediately, false to play animation and sound</param>
 	public void ResetBlock(bool bFast = false)
 	{
 		m_transform.position = new Vector3(m_transform.position.x, m_transform.position.y, BlockManager.Instance.InvZ);
@@ -126,22 +140,30 @@ public class Block : MonoBehaviour
 		}
 		else
 		{
+			// Moving animation
             m_isMovingToInventory = true;
 			m_lerpMover.SetDestination(destination, () => m_isMovingToInventory = false);
 
 			// Play reset sound
 			SoundManager.Instance.BlockManagerPlaySound(SoundManager.Instance.BlockMissplacementAudioClip);
 		}
-		m_transform.localScale *= 0.8f;
+
 		SetPhysicsInactive(true);
 		enabled = false;
 	}
 
+	/// <summary>
+	/// Stop all physics on player movement
+	/// </summary>
 	private void FreezeBlocks()
 	{
 		SetPhysicsInactive(true);
 	}
 
+	/// <summary>
+	/// Toggle physics and stability
+	/// </summary>
+	/// <param name="bInactive">True to stop</param>
 	private void SetPhysicsInactive(bool bInactive)
 	{
 		m_rigidbody.useGravity = !bInactive;
@@ -152,6 +174,9 @@ public class Block : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Check stability conditions
+	/// </summary>
     private void CheckStability()
     {
         if (m_rigidbody.velocity.sqrMagnitude <= BlockManager.Instance.VelocityThreshold &&
@@ -162,6 +187,10 @@ public class Block : MonoBehaviour
 		}
     }
 
+	/// <summary>
+	/// Toggle stability and clear conditions
+	/// </summary>
+	/// <param name="bInIsUnstable">True to start physics</param>
 	private void SetUnstable(bool bInIsUnstable)
 	{
 		if (m_isUnstable == bInIsUnstable)
@@ -170,16 +199,14 @@ public class Block : MonoBehaviour
 		}
 
 		m_isUnstable = bInIsUnstable;
-		//int blockCount = BlockManager.Instance.UnstableBlocks;
-		//BlockManager.Instance.UnstableBlocks = bInIsUnstable ? blockCount + 1 : blockCount - 1;
 
-		// On start
+		// On physics start
 		if (m_isUnstable)
 		{
 			m_lastCollisionTime = Time.time;
             Resnap();
 		}
-		// On stop
+		// On physics stop
 		else
 		{
 			transform.rotation.ToAngleAxis(out float angle, out Vector3 axis);
@@ -194,9 +221,11 @@ public class Block : MonoBehaviour
 				SetPhysicsInactive(true);
 			}
 		}
-        
     }
 
+	/// <summary>
+	/// Snap to grid and reset rigidbody
+	/// </summary>
     private void Resnap()
     {
         Vector3 unstablePosition = m_transform.position;
@@ -217,12 +246,17 @@ public class Block : MonoBehaviour
 	{
 		if (m_rigidbody.useGravity)
 		{
+			// Reset if touched player or objective
 			if (collision.gameObject.GetComponent<PlayerActions>() || collision.gameObject.GetComponent<FinalObjectActions>())
 			{
 				ResetBlock();
 				return;
 			}
+
+			// Start stability check
 			SetUnstable(true);
+
+			// Propagate instability if touched other block
 			Block otherBlock = collision.gameObject.GetComponent<Block>();
 			if (otherBlock)
 			{

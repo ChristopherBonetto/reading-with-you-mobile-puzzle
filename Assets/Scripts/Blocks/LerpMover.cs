@@ -6,6 +6,8 @@ using UnityEngine;
 /// </summary>
 public class LerpMover : MonoBehaviour
 {
+	#region Variables
+
 	[Tooltip("Max speed reached when moving")]
 	[SerializeField]
 	private float m_maxSpeed = 20f;
@@ -23,6 +25,8 @@ public class LerpMover : MonoBehaviour
 	private bool m_isRotating;
 
 	private Action m_destinationCallback;
+
+	#endregion
 
 	/// <summary>
 	/// Set destination position and start moving and rotating

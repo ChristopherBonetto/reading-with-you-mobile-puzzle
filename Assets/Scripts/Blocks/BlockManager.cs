@@ -6,9 +6,17 @@ public class BlockManager : Singleton<BlockManager>
 {
 	#region Variables
 
+	/*** Current map references */
+
 	private Block m_holdBlock;
 
 	private Vector3 m_holdOffset;
+
+	private List<Block> m_levelBlocks = new List<Block>();
+
+	public int UnstableBlocks => GetUnstableCount();
+
+	/*** General geometry parameters */
 
 	[SerializeField]
 	private float m_InvY = -0.2f;
@@ -21,6 +29,21 @@ public class BlockManager : Singleton<BlockManager>
 
 	[SerializeField]
 	private float m_XScale = 0.95f;
+
+	[SerializeField]
+	private float m_InvScale = 0.8f;
+
+	public float InvY => m_InvY;
+
+	public float InvZ => m_InvZ;
+
+	public float GameZ => m_GameZ;
+
+	public float XScale => m_XScale;
+
+	public float InvScale => m_InvScale;
+
+	/*** General physics parameters */
 
 	[SerializeField]
 	private float m_GravityMultiplier = 2f;
@@ -37,14 +60,6 @@ public class BlockManager : Singleton<BlockManager>
 	[SerializeField]
 	private int m_FixedTimeout = 5;
 
-	public float InvY => m_InvY;
-
-	public float InvZ => m_InvZ;
-
-	public float GameZ => m_GameZ;
-
-	public float XScale => m_XScale;
-
 	public float GravityMultiplier => m_GravityMultiplier;
 
 	public float VelocityThreshold => m_VelocityThreshold;
@@ -60,10 +75,6 @@ public class BlockManager : Singleton<BlockManager>
 	/// </summary>
 	public Action<bool> OnGrab;
 
-	private List<Block> m_levelBlocks = new List<Block>();
-
-	public int UnstableBlocks => GetUnstableCount();
-
 	#endregion
 
 	private void Start()
@@ -73,6 +84,10 @@ public class BlockManager : Singleton<BlockManager>
 
 	#region Level
 
+	/// <summary>
+	/// Get count of unstable blocks
+	/// </summary>
+	/// <returns>Number of unstable blocks</returns>
 	private int GetUnstableCount()
 	{
 		int unstableCount = 0;
@@ -89,16 +104,9 @@ public class BlockManager : Singleton<BlockManager>
 	}
 
 	/// <summary>
-	/// Reset level blocks to inventory
+	/// Get blocks from pool for current map
 	/// </summary>
-	public void ResetAllBlocks()
-	{
-		foreach (Block block in m_levelBlocks)
-		{
-			block.ResetBlock(true);
-		}
-	}
-
+	/// <param name="blockInfo">Current map block info</param>
 	public void LoadBlocks(Level.BlockInfo[] blockInfo)
 	{
 		foreach (Level.BlockInfo block in blockInfo)
@@ -111,9 +119,11 @@ public class BlockManager : Singleton<BlockManager>
 				m_levelBlocks.Add(newBlock);
 			}
 		}
-		//UnstableBlocks = 0;
 	}
 
+	/// <summary>
+	/// Return blocks to pool
+	/// </summary>
 	public void UnloadBlocks()
 	{
 		foreach (Block block in m_levelBlocks)
@@ -138,12 +148,13 @@ public class BlockManager : Singleton<BlockManager>
 		m_holdBlock = holdBlock;
 		if (!m_holdBlock.enabled)
 		{
+			// Don't pick if block is moving to inventory
 			if (m_holdBlock.IsMovingToInventory)
 			{
 				m_holdBlock = null;
 				return false;
 			}
-			m_holdBlock.transform.localScale *= 1.25f;
+			//m_holdBlock.transform.localScale *= 1.25f;
 			m_holdBlock.enabled = true;
 		}
 
@@ -188,9 +199,10 @@ public class BlockManager : Singleton<BlockManager>
 		releasePosition.z = m_GameZ;
 		m_holdBlock.transform.position = releasePosition;
 
-		// Check out of grid misplacement
+		// Check out of grid horizontal misplacement
 		if (releasePosition.x - halfXSize < -4f || releasePosition.x + halfXSize > 4f)
 		{
+			// Return block to inventory if out of grid
             m_holdBlock.ResetBlock();
 		}
 		// Check collisions (reduced collider for a 5% allowance)
@@ -201,6 +213,7 @@ public class BlockManager : Singleton<BlockManager>
 			{
 				for (int i = 0; i < testHits.Length; i++)
 				{
+					// Return block to inventory if any collider different from self
 					if (testHits[i].gameObject != m_holdBlock.gameObject)
 					{
                         m_holdBlock.ResetBlock();
