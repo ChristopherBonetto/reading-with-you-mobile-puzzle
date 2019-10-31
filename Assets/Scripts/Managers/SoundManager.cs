@@ -51,6 +51,13 @@ public class SoundManager : Singleton<SoundManager>
     public CustomAudioClip PickUpBlockAudioClip;
 
 
+    [Space]
+
+
+    [SerializeField] private AudioSource m_UIAudioSource = null;
+
+    public CustomAudioClip TapOneAudioClip;
+    public CustomAudioClip TapTwoAudioClip;
 
 
 
@@ -104,4 +111,9 @@ public class SoundManager : Singleton<SoundManager>
         m_blockManagerAudioSource.PlayOneShot(inClip.ClipAudio, inClip.Intensity);
     }
     
+
+    public void UIPlaySound(CustomAudioClip inClip)
+    {
+        m_UIAudioSource.PlayOneShot(inClip.ClipAudio, inClip.Intensity);
+    }
 }

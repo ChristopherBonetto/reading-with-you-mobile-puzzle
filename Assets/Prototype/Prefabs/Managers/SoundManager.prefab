@@ -59,23 +59,30 @@ MonoBehaviour:
   m_backgroundAudioSource: {fileID: 0}
   BackgroundAudioClips:
   - ClipAudio: {fileID: 8300000, guid: 9b7f72f1b48ec2a489189c311531e25e, type: 3}
-    Intensity: 1
+    Intensity: 0.1
   - ClipAudio: {fileID: 8300000, guid: 5966f395f99e66f4bb24e029ec46ee89, type: 3}
-    Intensity: 1
+    Intensity: 0.1
   - ClipAudio: {fileID: 8300000, guid: 07b913182b4b93b47b28e5def4ee5b13, type: 3}
-    Intensity: 1
+    Intensity: 0.1
   - ClipAudio: {fileID: 8300000, guid: 8e53798f05e426e46aeaaaab00ba2b31, type: 3}
-    Intensity: 1
+    Intensity: 0.1
   - ClipAudio: {fileID: 8300000, guid: 19a79368400da8340915a9142aaf6606, type: 3}
-    Intensity: 1
+    Intensity: 0.1
   m_finalObjectAudioSource: {fileID: 0}
   VictoryAudioClip:
     ClipAudio: {fileID: 8300000, guid: ee4486dd8918f8e4bb0cf7218042c380, type: 3}
     Intensity: 1
-  m_touchManagerAudioSource: {fileID: 0}
+  m_blockManagerAudioSource: {fileID: 0}
   BlockMissplacementAudioClip:
     ClipAudio: {fileID: 8300000, guid: 4174ef61554641f4481a0e1bbda08652, type: 3}
     Intensity: 1
   PickUpBlockAudioClip:
     ClipAudio: {fileID: 8300000, guid: 1fc75c53485f6c74b97658f41a15464f, type: 3}
+    Intensity: 1
+  m_UIAudioSource: {fileID: 0}
+  TapOneAudioClip:
+    ClipAudio: {fileID: 8300000, guid: ff2b9b2a072e1ab4dab2531c9a81c739, type: 3}
+    Intensity: 1
+  TapTwoAudioClip:
+    ClipAudio: {fileID: 8300000, guid: ff63b593131292a428c021e93455e2d3, type: 3}
     Intensity: 1

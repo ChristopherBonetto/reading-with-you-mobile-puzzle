@@ -40,6 +40,7 @@ public class GameWindow : UIControl
 
         // Turn on fade panel and disable this.
         UIManager.Instance.ShowAndHide(UIControlName.Fade, this);
+        SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapTwoAudioClip);
     }
 
     /// <summary>

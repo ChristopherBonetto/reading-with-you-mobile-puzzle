@@ -23,6 +23,7 @@ public class AccountWindow : UIControl
     public void OnCloseAccountWindow()
     {
         UIManager.Instance.ShowAndHide(UIControlName.MainElements, this);
+        SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapTwoAudioClip);
     }
 
     public void ConfirmNewAccountCreation()
@@ -42,6 +43,7 @@ public class AccountWindow : UIControl
             GameManager.Instance.SetMode(Mode.Easy);
             GameManager.Instance.OnUpdateLevel?.Invoke();   //@TEMP
         }
+        SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapTwoAudioClip);
     }
 
     /// <summary>
@@ -56,5 +58,6 @@ public class AccountWindow : UIControl
             GameManager.Instance.SetMode(Mode.Hard);
             GameManager.Instance.OnUpdateLevel?.Invoke();   //@TEMP
         }
+        SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapTwoAudioClip);
     }
 }

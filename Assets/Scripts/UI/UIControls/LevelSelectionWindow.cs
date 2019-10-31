@@ -41,6 +41,7 @@ public class LevelSelectionWindow : UIControl
     {
         GameManager.Instance.CurrentWorld = 0;
         UIManager.Instance.ShowAndHide(UIControlName.MainMenu, this);
+        SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapTwoAudioClip);
     }
 
     #region Switch level (OnClick)
@@ -53,7 +54,7 @@ public class LevelSelectionWindow : UIControl
         GameManager.Instance.CurrentWorld = Mathf.Clamp(GameManager.Instance.CurrentWorld, 0, WorldsLength - 1);
 
         Debug.Log(GameManager.Instance.CurrentWorld);
-
+        SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapOneAudioClip);
         UpdateWorldAndLevelInfo();
     }
 
@@ -66,7 +67,7 @@ public class LevelSelectionWindow : UIControl
         GameManager.Instance.CurrentWorld = Mathf.Clamp(GameManager.Instance.CurrentWorld, 0, WorldsLength - 1);
 
         Debug.Log(GameManager.Instance.CurrentWorld);
-
+        SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapOneAudioClip);
         UpdateWorldAndLevelInfo();
     }
     #endregion

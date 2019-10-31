@@ -22,5 +22,6 @@ public class MainMenuWindow : UIControl
         UIManager.Instance.ShowAndHide(UIControlName.LevelSelection, this);
 
         GameManager.Instance.OnUpdateLevel?.Invoke();
+        SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapTwoAudioClip);
     }
 }

@@ -13,5 +13,6 @@ public class CreditsElementWindow : UIControl
     public void OnCreditsExitButton()
     {
         UIManager.Instance.ShowAndHide(UIControlName.MainElements, this);
+        SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapTwoAudioClip);
     }
 }

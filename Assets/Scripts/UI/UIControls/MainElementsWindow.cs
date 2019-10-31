@@ -21,6 +21,7 @@ public class MainElementsWindow : UIControl
     public void OnCreditsButton()
     {
         UIManager.Instance.ShowAndHide(UIControlName.CreditsElements, this);
+        SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapTwoAudioClip);
     }
 
     /// <summary>
@@ -29,6 +30,7 @@ public class MainElementsWindow : UIControl
     public void OnAccountInfoButton()
     {
         UIManager.Instance.ShowAndHide(UIControlName.AccountElements, this);
+        SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapTwoAudioClip);
     }
 
     /// <summary>
@@ -37,5 +39,6 @@ public class MainElementsWindow : UIControl
     public void SwitchAccount()
     {
         // call switch account function from elsewhere.
+        SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapTwoAudioClip);
     }
 }

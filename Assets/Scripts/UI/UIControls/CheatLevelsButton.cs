@@ -74,5 +74,6 @@ public class CheatLevelsButton : MonoBehaviour
         }
 
         GameManager.Instance.LockOrUnlockLevels(!m_isLocked);
+        SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapTwoAudioClip);
     }
 }

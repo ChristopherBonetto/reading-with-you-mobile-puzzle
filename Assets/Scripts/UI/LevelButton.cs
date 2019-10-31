@@ -89,6 +89,7 @@ public class LevelButton : MonoBehaviour
 
             // Turn on fade panel
             UIManager.Instance.Show(UIControlName.Fade);
+            SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapTwoAudioClip);
         }
     }
 }
