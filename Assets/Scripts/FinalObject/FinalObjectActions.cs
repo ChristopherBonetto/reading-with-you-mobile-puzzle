@@ -32,7 +32,7 @@ public class FinalObjectActions : MonoBehaviour
 
     public void Collected()
     {
-        SoundManager.Instance.FinalObjectPlaySound(SoundManager.Instance.m_victorySound);
+        SoundManager.Instance.FinalObjectPlaySound(SoundManager.Instance.VictoryAudioClip);
         EnableEndLevelParticle();
 		m_floater.transform.position = new Vector3(m_objectIcon.transform.position.x, m_objectIcon.transform.position.y + 1.5f, m_objectIcon.transform.position.z);
 		m_floater.enabled = false;

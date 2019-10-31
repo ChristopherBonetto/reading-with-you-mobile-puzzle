@@ -271,7 +271,8 @@ public class GameManager : Singleton<GameManager>
                     Player.ResetLevel(m_currentLevelInfo.PlayerCoords);
                     UIManager.Instance.Show(UIControlName.LevelSelection);
                 }
-
+                
+                SoundManager.Instance.StopAllSounds();
                 fade.FadeInCompleted = ReturnToLevelSelection;
                 fade.FadeOutCompleted = fade.OnHide;
             }
@@ -414,57 +415,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    //public void SaveGame()
-    //{
-    //    easyLevels.Clear();
-    //    hardLevels.Clear();
-
-    //    SetWorldBooleans();
-
-    //    m_savePlayerData = new PlayerData();
-
-    //    m_savePlayerData.playerName = m_playerName;        
-    //    m_savePlayerData.easyLevels = easyLevels.ToArray();
-    //    m_savePlayerData.hardLevels = hardLevels.ToArray();
-
-    //    m_currentPlayer.GetComponent<AccountStats>().accountSaved = m_savePlayerData;
-    //}
-
-
-    //public void CreateNewAccount(string newAccountName)
-    //{
-    //    easyLevels.Clear();
-    //    hardLevels.Clear();
-
-    //    SetWorldBooleans();
-
-    //    m_savePlayerData = new PlayerData();
-
-    //    m_savePlayerData.playerName = newAccountName;
-    //    m_playerName = newAccountName;
-    //    m_savePlayerData.easyLevels = easyLevels.ToArray();
-    //    m_savePlayerData.hardLevels = hardLevels.ToArray();
-
-
-    //    CreateAccountPrefab(newAccountName);
-    //}
-
-    //// Creates a new menu item 'Examples > Create Prefab' in the main menu.
-    //[MenuItem("Examples/Create Prefab")]
-    //public void CreateAccountPrefab(string newAccountName)
-    //{
-
-    //    GameObject tempAccount = m_playerAcccount;
-    //    tempAccount.GetComponent<AccountStats>().accountSaved = m_savePlayerData;
-
-
-    //    string localPath = "Assets/Resources/Accounts/" + "Account" + newAccountName + ".prefab";
-    //    localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
-
-    //    // Create the new Prefab.
-    //    PrefabUtility.SaveAsPrefabAssetAndConnect(tempAccount, localPath, InteractionMode.UserAction);
-    //    m_currentPlayer = tempAccount;
-    //}
+    
 }
 
 

@@ -145,6 +145,7 @@ public class BlockManager : Singleton<BlockManager>
 			}
 			m_holdBlock.transform.localScale *= 1.25f;
 			m_holdBlock.enabled = true;
+            SoundManager.Instance.BlockManagerPlaySound(SoundManager.Instance.PickUpBlockAudioClip);
 		}
 
         // Disable all rigidbodies

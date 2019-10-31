@@ -122,13 +122,14 @@ public class Block : MonoBehaviour
 		Vector3 destination = new Vector3(m_inventoryX, BlockManager.Instance.InvY, BlockManager.Instance.InvZ);
 		if (bFast)
 		{
-			m_transform.position = destination;
+            m_transform.position = destination;
 		}
 		else
 		{
-			m_isMovingToInventory = true;
+            m_isMovingToInventory = true;
 			m_lerpMover.SetDestination(destination, () => m_isMovingToInventory = false);
-		}
+            PlayMissplacementSound();
+        }
 		m_transform.localScale *= 0.8f;
 		SetPhysicsInactive(true);
 		enabled = false;
@@ -183,6 +184,7 @@ public class Block : MonoBehaviour
 			if (angle >= BlockManager.Instance.AngleThreshold)
 			{
 				ResetBlock();
+                
 			}
 			else
 			{
@@ -190,6 +192,7 @@ public class Block : MonoBehaviour
 				SetPhysicsInactive(true);
 			}
 		}
+        
     }
 
     private void Resnap()
@@ -226,5 +229,10 @@ public class Block : MonoBehaviour
 		}
 	}
 
+
+    private void PlayMissplacementSound()
+    {
+        SoundManager.Instance.BlockManagerPlaySound(SoundManager.Instance.BlockMissplacementAudioClip);
+    }
 	#endregion
 }

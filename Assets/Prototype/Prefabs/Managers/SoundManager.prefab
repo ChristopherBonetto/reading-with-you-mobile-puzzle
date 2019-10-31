@@ -44,20 +44,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerAudioSource: {fileID: 0}
-  m_playerWalkAudioClip: {fileID: 8300000, guid: f2e386a2966552341b56a72324b9732f,
-    type: 3}
-  m_playerSlideAudioClip: {fileID: 8300000, guid: a12bb2538a599ab4696487ef3400cfe8,
-    type: 3}
-  m_playerClimbAudioClip: {fileID: 8300000, guid: 833eb7dd934478a4e9595d06a300e597,
-    type: 3}
-  m_playerFallGaspAudioClip: {fileID: 8300000, guid: 4c98b765a91040947abae57e1a3027e8,
-    type: 3}
+  PlayerWalkAudioClip:
+    ClipAudio: {fileID: 8300000, guid: f2e386a2966552341b56a72324b9732f, type: 3}
+    Intensity: 1
+  PlayerSlideAudioClip:
+    ClipAudio: {fileID: 8300000, guid: a12bb2538a599ab4696487ef3400cfe8, type: 3}
+    Intensity: 1
+  PlayerClimbAudioClip:
+    ClipAudio: {fileID: 8300000, guid: 833eb7dd934478a4e9595d06a300e597, type: 3}
+    Intensity: 1
+  PlayerFallGaspAudioClip:
+    ClipAudio: {fileID: 8300000, guid: 4c98b765a91040947abae57e1a3027e8, type: 3}
+    Intensity: 1
   m_backgroundAudioSource: {fileID: 0}
-  m_backgroundAudioClips:
-  - {fileID: 8300000, guid: 9b7f72f1b48ec2a489189c311531e25e, type: 3}
-  - {fileID: 8300000, guid: 5966f395f99e66f4bb24e029ec46ee89, type: 3}
-  - {fileID: 8300000, guid: 07b913182b4b93b47b28e5def4ee5b13, type: 3}
-  - {fileID: 8300000, guid: 8e53798f05e426e46aeaaaab00ba2b31, type: 3}
-  - {fileID: 8300000, guid: 19a79368400da8340915a9142aaf6606, type: 3}
+  BackgroundAudioClips:
+  - ClipAudio: {fileID: 8300000, guid: 9b7f72f1b48ec2a489189c311531e25e, type: 3}
+    Intensity: 1
+  - ClipAudio: {fileID: 8300000, guid: 5966f395f99e66f4bb24e029ec46ee89, type: 3}
+    Intensity: 1
+  - ClipAudio: {fileID: 8300000, guid: 07b913182b4b93b47b28e5def4ee5b13, type: 3}
+    Intensity: 1
+  - ClipAudio: {fileID: 8300000, guid: 8e53798f05e426e46aeaaaab00ba2b31, type: 3}
+    Intensity: 1
+  - ClipAudio: {fileID: 8300000, guid: 19a79368400da8340915a9142aaf6606, type: 3}
+    Intensity: 1
   m_finalObjectAudioSource: {fileID: 0}
-  m_victorySound: {fileID: 8300000, guid: ee4486dd8918f8e4bb0cf7218042c380, type: 3}
+  VictoryAudioClip:
+    ClipAudio: {fileID: 8300000, guid: ee4486dd8918f8e4bb0cf7218042c380, type: 3}
+    Intensity: 1
+  m_touchManagerAudioSource: {fileID: 0}
+  BlockMissplacementAudioClip:
+    ClipAudio: {fileID: 8300000, guid: 4174ef61554641f4481a0e1bbda08652, type: 3}
+    Intensity: 1
+  PickUpBlockAudioClip:
+    ClipAudio: {fileID: 8300000, guid: 1fc75c53485f6c74b97658f41a15464f, type: 3}
+    Intensity: 1
