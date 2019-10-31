@@ -74,6 +74,8 @@ public class GameManager : Singleton<GameManager>
         LoadLevel();
         
         ObjectPooler.Instance.StartPooling();
+
+		OnUpdateLevel += DisableWalkingPlayer;
 	}
 
 
@@ -135,6 +137,11 @@ public class GameManager : Singleton<GameManager>
 			Grid.SetActive(false);
 		}
         OnMovement?.Invoke();
+	}
+
+	private void DisableWalkingPlayer()
+	{
+		SetGameState(GameState.Menu);
 	}
 
 	public void LoadLevel(int levelNo)

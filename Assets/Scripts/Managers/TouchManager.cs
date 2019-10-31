@@ -24,8 +24,7 @@ public class TouchManager : Singleton<TouchManager>
 				Block testBlock = testHit.collider.GetComponent<Block>();
 				if (testBlock && BlockManager.Instance.UnstableBlocks <= 0)
 				{
-					m_isHolding = true;
-					BlockManager.Instance.StartDrag(testBlock);
+					m_isHolding = BlockManager.Instance.StartDrag(testBlock);
 				}
 				else
 				{
