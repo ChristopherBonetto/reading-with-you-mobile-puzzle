@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+/// <summary>
+/// A parser to read blockout scenes and store all relevant map info
+/// </summary>
 public class BlockoutReader : MonoBehaviour
 {
 #if UNITY_EDITOR
@@ -99,6 +102,8 @@ public class BlockoutReader : MonoBehaviour
 		}
 
 		/*** Blocks */
+
+		// Find block type and position
 		Block[] blocks = FindObjectsOfType<Block>();
 		Level.BlockInfo[] blockInfos = new Level.BlockInfo[blocks.Length];
 		for (int i = 0; i < blocks.Length; i++)
