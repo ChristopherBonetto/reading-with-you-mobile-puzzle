@@ -47,10 +47,10 @@ MonoBehaviour:
   PlayerWalkAudioClip:
     ClipAudio: {fileID: 8300000, guid: f2e386a2966552341b56a72324b9732f, type: 3}
     Intensity: 1
-  DelayWalkSound: 1
+  DelayWalkSound: 0.33
   PlayerSlideAudioClip:
     ClipAudio: {fileID: 8300000, guid: a12bb2538a599ab4696487ef3400cfe8, type: 3}
-    Intensity: 1
+    Intensity: 0.45
   PlayerClimbAudioClip:
     ClipAudio: {fileID: 8300000, guid: 833eb7dd934478a4e9595d06a300e597, type: 3}
     Intensity: 1
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_finalObjectAudioSource: {fileID: 0}
   VictoryAudioClip:
     ClipAudio: {fileID: 8300000, guid: ee4486dd8918f8e4bb0cf7218042c380, type: 3}
-    Intensity: 1
+    Intensity: 0.33
   m_blockManagerAudioSource: {fileID: 0}
   BlockMissplacementAudioClip:
     ClipAudio: {fileID: 8300000, guid: 4174ef61554641f4481a0e1bbda08652, type: 3}
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_UIAudioSource: {fileID: 0}
   TapOneAudioClip:
     ClipAudio: {fileID: 8300000, guid: ff2b9b2a072e1ab4dab2531c9a81c739, type: 3}
-    Intensity: 1
+    Intensity: 0.33
   TapTwoAudioClip:
     ClipAudio: {fileID: 8300000, guid: ff63b593131292a428c021e93455e2d3, type: 3}
-    Intensity: 1
+    Intensity: 0.45
