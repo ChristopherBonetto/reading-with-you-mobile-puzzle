@@ -79,7 +79,7 @@ public class BlockManager : Singleton<BlockManager>
 		{
 			foreach (Block block in m_levelBlocks)
 			{
-				if (block.Unstable)
+				if (block.IsUnstable)
 				{
 					unstableCount++;
 				}
@@ -127,15 +127,19 @@ public class BlockManager : Singleton<BlockManager>
 
 	#region Dragging
 
+	/// <summary>
+	/// Try and pick a block to drag
+	/// </summary>
+	/// <param name="holdBlock">Touched block</param>
+	/// <returns>True if block can be dragged</returns>
 	public bool StartDrag(Block holdBlock)
 	{
 		// Holding state
 		m_holdBlock = holdBlock;
 		if (!m_holdBlock.enabled)
 		{
-			if (m_holdBlock.transform.position.y != InvY)
+			if (m_holdBlock.IsMovingToInventory)
 			{
-				// Block is moving to inventory
 				m_holdBlock = null;
 				return false;
 			}
@@ -157,6 +161,9 @@ public class BlockManager : Singleton<BlockManager>
 		return true;
 	}
 
+	/// <summary>
+	/// Move a dragged block to follow input position
+	/// </summary>
 	public void Move()
 	{
 		// Follow touch position maintaining grab point offset
@@ -165,22 +172,25 @@ public class BlockManager : Singleton<BlockManager>
 		m_holdBlock.transform.position = dragPosition - m_holdOffset;
 	}
 
+	/// <summary>
+	/// Release a dragged block resolving collisions
+	/// </summary>
 	public void Release()
 	{
 		// Snap to grid based on block size
 		Vector3 releasePosition = m_holdBlock.transform.position;
-		releasePosition.z = m_GameZ;
 		float halfXSize = m_holdBlock.Size / 2f;
 		releasePosition.x = Mathf.Round(releasePosition.x - halfXSize) + halfXSize;
 		releasePosition.y = Mathf.Round(releasePosition.y);
+		releasePosition.z = m_GameZ;
 		m_holdBlock.transform.position = releasePosition;
 
-		// Check out of grid
+		// Check out of grid misplacement
 		if (releasePosition.x - halfXSize < -4f || releasePosition.x + halfXSize > 4f)
 		{
             m_holdBlock.ResetBlock();
 		}
-		// Check collisions
+		// Check collisions (reduced collider for a 5% allowance)
 		else
 		{
 			Collider[] testHits = Physics.OverlapBox(m_holdBlock.transform.position, new Vector3(m_holdBlock.Size * 0.95f, 0.9f, 3f) / 2f);

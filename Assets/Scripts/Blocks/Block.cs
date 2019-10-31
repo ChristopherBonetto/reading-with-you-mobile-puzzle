@@ -26,7 +26,11 @@ public class Block : MonoBehaviour
 
     private bool m_isUnstable = false;
 
-	public bool Unstable => m_isUnstable;
+	private bool m_isMovingToInventory;
+
+	public bool IsUnstable => m_isUnstable;
+
+	public bool IsMovingToInventory => m_isMovingToInventory;
 
 	private float m_inventoryX;
     
@@ -122,7 +126,8 @@ public class Block : MonoBehaviour
 		}
 		else
 		{
-			m_lerpMover.SetDestination(destination);
+			m_isMovingToInventory = true;
+			m_lerpMover.SetDestination(destination, () => m_isMovingToInventory = false);
 		}
 		m_transform.localScale *= 0.8f;
 		SetPhysicsInactive(true);
