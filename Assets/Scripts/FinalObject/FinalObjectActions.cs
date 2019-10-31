@@ -34,9 +34,8 @@ public class FinalObjectActions : MonoBehaviour
     {
         SoundManager.Instance.FinalObjectPlaySound(SoundManager.Instance.m_victorySound);
         EnableEndLevelParticle();
-        m_objectIcon.transform.position = new Vector3(m_objectIcon.transform.position.x, m_objectIcon.transform.position.y + 1.5f, m_objectIcon.transform.position.z);
+		m_floater.transform.position = new Vector3(m_objectIcon.transform.position.x, m_objectIcon.transform.position.y + 1.5f, m_objectIcon.transform.position.z);
 		m_floater.enabled = false;
-		m_floater.ResetPosition();
     }
 
 
