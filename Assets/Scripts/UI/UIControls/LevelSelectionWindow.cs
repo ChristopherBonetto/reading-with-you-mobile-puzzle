@@ -19,7 +19,7 @@ public class LevelSelectionWindow : UIControl
     [SerializeField]
     private LevelButton[] m_buttons = new LevelButton[0];
 
-    private int CurrentLevel => GameManager.Instance.m_currentLevel;
+    private int CurrentLevel => GameManager.Instance.CurrentLevel;
 
     private void OnEnable()
     {

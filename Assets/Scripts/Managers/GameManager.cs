@@ -1,16 +1,16 @@
 ﻿using System;
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using System.Linq;
 
+/// <summary>
+/// Game state
+/// </summary>
 public enum GameState
 {
-    Menu = 0,
-    Loading = 1,
-    Playing = 2,
-    Moving = 3
+    Menu = 0,		// Out of level
+    Playing = 1,	// In level, placing blocks
+    Moving = 2		// In level, player walking
 }
 
 /// <summary>
@@ -18,12 +18,14 @@ public enum GameState
 /// </summary>
 public enum Mode
 {
-    Easy,
-    Hard
+    Easy = 0,
+    Hard = 1
 }
 
 public class GameManager : Singleton<GameManager>
 {
+	#region Variables
+
 	public PlayerActions Player;
 
 	public FinalObjectActions FinalObject;
@@ -33,17 +35,16 @@ public class GameManager : Singleton<GameManager>
 	public World[] Worlds;
 
 	private Level m_currentLevelInfo;
-	public int m_currentLevel { get; private set; }
+	public int CurrentLevel { get; private set; }
 	public int CurrentWorld { get; set; }
 	private GameObject m_currentMap;
 
-    public List<bool> easyLevels = new List<bool>();
-    public List<bool> hardLevels = new List<bool>();
+	private GameState m_currentState;
+	private Mode m_Mode;
 
-    [SerializeField]
-	private bool m_debugUnlockLevels = false;
+	public GameState CurrentState => m_currentState;
+	public Mode Mode => m_Mode;
     
-
 	/// <summary>
 	/// Event on player movement start
 	/// </summary>
@@ -54,59 +55,29 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     public Action OnUpdateLevel;
 
-	private GameState m_currentState;
-    private Mode m_Mode = Mode.Easy;
-
-	public GameState CurrentState => m_currentState;
-    public Mode Mode => m_Mode;
-
     public MobileKeyboard keyboard;
     public string m_playerName = "";
 
     private PlayerDataNew data;
 
+	public List<bool> easyLevels = new List<bool>();
+	public List<bool> hardLevels = new List<bool>();
 
-    private void Start()
+	#endregion
+
+	private void Start()
 	{
 		PoolWorlds();
         
         LoadGame();
-        LoadLevel();
+        LoadLevelProgress();
         
         ObjectPooler.Instance.StartPooling();
 
 		OnUpdateLevel += DisableWalkingPlayer;
 	}
 
-
-    private void PoolWorlds()
-	{
-		for (int i = 0; i < Worlds.Length; i++)
-		{
-			for (int j = 0; j < Worlds[i].EasyLevels.Length; j++)
-			{
-				Worlds[i].EasyLevels[j].IsPlayable = m_debugUnlockLevels;
-				PoolableObject map = Worlds[i].EasyLevels[j].LevelToPool;
-				if (map)
-				{
-					ObjectPooler.Instance.AddPoolItem(map, 1, false);
-				}
-			}
-
-			for (int j = 0; j < Worlds[i].HardLevels.Length; j++)
-			{
-				Worlds[i].HardLevels[j].IsPlayable = m_debugUnlockLevels;
-				PoolableObject map = Worlds[i].HardLevels[j].LevelToPool;
-				if (map)
-				{
-					ObjectPooler.Instance.AddPoolItem(map, 1, false);
-				}
-			}
-
-			Worlds[i].EasyLevels[0].IsPlayable = true;
-			Worlds[i].HardLevels[0].IsPlayable = true;
-		}
-	}
+	#region States
 
 	public void SetGameState(GameState inGameState)
     {
@@ -144,11 +115,51 @@ public class GameManager : Singleton<GameManager>
 		SetGameState(GameState.Menu);
 	}
 
+	#endregion
+
+	#region Level loading
+
+	/// <summary>
+	/// Add all levels to pool
+	/// </summary>
+	private void PoolWorlds()
+	{
+		for (int i = 0; i < Worlds.Length; i++)
+		{
+			for (int j = 0; j < Worlds[i].EasyLevels.Length; j++)
+			{
+				PoolableObject map = Worlds[i].EasyLevels[j].LevelToPool;
+				if (map)
+				{
+					ObjectPooler.Instance.AddPoolItem(map, 1, false);
+				}
+			}
+
+			for (int j = 0; j < Worlds[i].HardLevels.Length; j++)
+			{
+				PoolableObject map = Worlds[i].HardLevels[j].LevelToPool;
+				if (map)
+				{
+					ObjectPooler.Instance.AddPoolItem(map, 1, false);
+				}
+			}
+		}
+	}
+
+	/// <summary>
+	/// Public interface to prepare a map
+	/// </summary>
+	/// <param name="levelNo">Selected level from current world</param>
 	public void LoadLevel(int levelNo)
 	{
 		LoadLevel(CurrentWorld, levelNo);
 	}
 
+	/// <summary>
+	/// Prepare map elements for selected level
+	/// </summary>
+	/// <param name="worldNo">Selected world from current mode</param>
+	/// <param name="levelNo">Selected level</param>
 	private void LoadLevel(int worldNo, int levelNo)
 	{
 		// Unload current level
@@ -158,13 +169,14 @@ public class GameManager : Singleton<GameManager>
 			BlockManager.Instance.UnloadBlocks();
 		}
 
-		// Load level
+		// Update current level info
 		CurrentWorld = worldNo;
-		m_currentLevel = levelNo;
+		CurrentLevel = levelNo;
 		int levelID = GetLevelID();
 
         SoundManager.Instance.PlayBackgoundSound(CurrentWorld);
 
+		// Load map elements
         if (levelID >= 0)
 		{
 			m_currentMap = ObjectPooler.Instance.GetPooledObject(levelID);
@@ -190,23 +202,32 @@ public class GameManager : Singleton<GameManager>
 			Debug.Log("Level number out of bounds");
 		}
 
+		// Update save info
         SetWorldBooleans();
         SaveGame();
     }
 
+	/// <summary>
+	/// Read pool id from level and store level info
+	/// </summary>
+	/// <returns>Pool id for current level</returns>
     private int GetLevelID()
 	{
 		Level[] ModeLevels = GetCurrentWorldLevels();
 		
-		if (m_currentLevel < ModeLevels.Length)
+		if (CurrentLevel < ModeLevels.Length)
 		{
-			m_currentLevelInfo = ModeLevels[m_currentLevel];
+			m_currentLevelInfo = ModeLevels[CurrentLevel];
 			return m_currentLevelInfo.LevelID;
 		}
 
         return -1;
 	}
 
+	/// <summary>
+	/// Read level list from world
+	/// </summary>
+	/// <returns>Level list for current world</returns>
 	private Level[] GetCurrentWorldLevels()
 	{
 		Level[] ModeLevels = new Level[0];
@@ -224,6 +245,10 @@ public class GameManager : Singleton<GameManager>
 		return ModeLevels;
 	}
 
+	/// <summary>
+	/// Called when player completes movement
+	/// </summary>
+	/// <param name="bWin">True if player has reached the objective</param>
 	public void EndLevel(bool bWin)
 	{
         // Store UI controls ref
@@ -235,13 +260,13 @@ public class GameManager : Singleton<GameManager>
 		{
 			Level[] ModeLevels = GetCurrentWorldLevels();
 
-			// Load next level
-			if (m_currentLevel < ModeLevels.Length - 1)
+			// Load next level in same world
+			if (CurrentLevel < ModeLevels.Length - 1)
 			{
                 void LoadAfterFade()
                 {
-					ModeLevels[m_currentLevel + 1].IsPlayable = true;
-				    LoadLevel(m_currentLevel + 1);
+					ModeLevels[CurrentLevel + 1].IsPlayable = true;
+				    LoadLevel(CurrentLevel + 1);
                 }
 
                 fade.FadeInCompleted = LoadAfterFade;
@@ -249,6 +274,7 @@ public class GameManager : Singleton<GameManager>
                 // remake visible game window and turn off fade.
                 gameWindow.OnLevelCompleted();
             }
+			// Load first level in next world
 			else if (CurrentWorld < Worlds.Length - 1)
 			{
                 void LoadAfterFade()
@@ -263,19 +289,21 @@ public class GameManager : Singleton<GameManager>
                 // remake visible game window and turn off fade.
                 gameWindow.OnLevelCompleted();
             }
+			// End game
             else if (CurrentWorld >= Worlds.Length - 1)
             {
                 // return to level selection
                 void ReturnToLevelSelection()
                 {
-                    Player.ResetLevel(m_currentLevelInfo.PlayerCoords);
                     UIManager.Instance.Show(UIControlName.LevelSelection);
                 }
                 
-                SoundManager.Instance.StopAllSounds();
                 fade.FadeInCompleted = ReturnToLevelSelection;
                 fade.FadeOutCompleted = fade.OnHide;
+
+				SoundManager.Instance.StopAllSounds();
             }
+			// start fade
             UIManager.Instance.ShowAndHide(UIControlName.Fade, UIManager.Instance.Controls[UIControlName.InGame]);
         }
 		// Lose level and restore positions
@@ -293,13 +321,20 @@ public class GameManager : Singleton<GameManager>
             }
 
             fade.FadeInCompleted = LoadAfterFade;
-            gameWindow.OnLevelCompleted();
 
+			// remake visible game window and turn off fade.
+			gameWindow.OnLevelCompleted();
+
+			// start fade
             UIManager.Instance.ShowAndHide(UIControlName.Fade, UIManager.Instance.Controls[UIControlName.InGame]);
         }
 	}
 
-    public void SaveGame()
+	#endregion
+
+	#region Save
+
+	public void SaveGame()
     {
         SaveSystemNew.Save(this);
     }
@@ -328,9 +363,8 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void LoadLevel()
+    public void LoadLevelProgress()
     {
-
         if (data == null)
         {
             for (int i = 0; i < 4; i++)
@@ -433,4 +467,4 @@ public class GameManager : Singleton<GameManager>
     }
 }
 
-
+#endregion

@@ -9,7 +9,7 @@ public class LevelInfo : MonoBehaviour
 	{
 		if (GameManager.Instance)
 		{
-			Text.text = "WORLD: " + GameManager.Instance.CurrentWorld.ToString() + " | LEVEL: " + GameManager.Instance.m_currentLevel.ToString(); 
+			Text.text = "WORLD: " + GameManager.Instance.CurrentWorld.ToString() + " | LEVEL: " + GameManager.Instance.CurrentLevel.ToString(); 
 		}
 	}
 }
