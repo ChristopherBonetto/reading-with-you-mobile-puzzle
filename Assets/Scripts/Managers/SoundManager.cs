@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SoundManager : Singleton<SoundManager>
 {
    
-    [SerializeField] private AudioSource m_playerAudioSource;
+    [SerializeField]
+	private AudioSource m_playerAudioSource = null;
     public AudioClip m_playerWalkAudioClip;
     public AudioClip m_playerSlideAudioClip;
     public AudioClip m_playerClimbAudioClip;
@@ -14,11 +13,13 @@ public class SoundManager : Singleton<SoundManager>
 
     [Space]
 
-    [SerializeField] private AudioSource m_backgroundAudioSource;
+    [SerializeField]
+	private AudioSource m_backgroundAudioSource = null;
     public AudioClip[] m_backgroundAudioClips;
 
     [Space]
-    [SerializeField] private AudioSource m_finalObjectAudioSource;
+    [SerializeField]
+	private AudioSource m_finalObjectAudioSource = null;
     public AudioClip m_victorySound;
 
 

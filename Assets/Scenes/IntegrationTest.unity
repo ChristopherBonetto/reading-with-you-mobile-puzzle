@@ -1212,6 +1212,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6203388028685008127, guid: 93f3cbc488ae87247bb4270804e90eeb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 114987220}
+    - target: {fileID: 6203388028685008127, guid: 93f3cbc488ae87247bb4270804e90eeb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: StopBackgroundSound
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93f3cbc488ae87247bb4270804e90eeb, type: 3}
 --- !u!1001 &781132385
@@ -2034,6 +2044,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3479482637040403079, guid: dfa5377883d4cdd40a5dc86b5d55a7dc,
+        type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
     - target: {fileID: 3479482637040403072, guid: dfa5377883d4cdd40a5dc86b5d55a7dc,
         type: 3}
       propertyPath: m_playerAudioSource
@@ -2041,19 +2056,14 @@ PrefabInstance:
       objectReference: {fileID: 781132386}
     - target: {fileID: 3479482637040403072, guid: dfa5377883d4cdd40a5dc86b5d55a7dc,
         type: 3}
-      propertyPath: m_backgroundAudioSource
-      value: 
-      objectReference: {fileID: 877657476}
-    - target: {fileID: 3479482637040403072, guid: dfa5377883d4cdd40a5dc86b5d55a7dc,
-        type: 3}
       propertyPath: m_finalObjectAudioSource
       value: 
       objectReference: {fileID: 1062184757}
-    - target: {fileID: 3479482637040403079, guid: dfa5377883d4cdd40a5dc86b5d55a7dc,
+    - target: {fileID: 3479482637040403072, guid: dfa5377883d4cdd40a5dc86b5d55a7dc,
         type: 3}
-      propertyPath: m_Name
-      value: SoundManager
-      objectReference: {fileID: 0}
+      propertyPath: m_backgroundAudioSource
+      value: 
+      objectReference: {fileID: 877657476}
     - target: {fileID: 3479482637040403073, guid: dfa5377883d4cdd40a5dc86b5d55a7dc,
         type: 3}
       propertyPath: m_RootOrder
