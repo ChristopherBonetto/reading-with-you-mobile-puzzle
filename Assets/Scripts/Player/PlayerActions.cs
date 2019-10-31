@@ -39,7 +39,9 @@ public class PlayerActions : MonoBehaviour
 
 	private float m_endLevelTime;
 
-	private Animator m_playerAnimator;
+    private float m_lastSoundShotted;
+
+    private Animator m_playerAnimator;
 
     #endregion
 
@@ -59,24 +61,42 @@ public class PlayerActions : MonoBehaviour
 		if (m_canMove)
 		{
 			PlayerMovement();
-		}
-        
+
+            if (m_currentPlayerState == PlayerState.Walk)
+            {
+                PlayWalkAudioClipWithDelay();
+            }
+        }
+        else
+        {
+            CheckAndSetWinOrLose();
+        }
+	}
+    
+
+    private void CheckAndSetWinOrLose()
+    {
+        bool Winned;
+
         if(m_currentPlayerState == PlayerState.Win)
         {
+            Winned = true;
+
             if (EndTimer(m_timeToResetChangeLevel))
             {
-                GameManager.Instance.EndLevel(true);
+                GameManager.Instance.EndLevel(Winned);
             }
         }
         else if(m_currentPlayerState == PlayerState.Lose)
         {
+            Winned = false;
+
             if (EndTimer(m_timeToResetChangeLevel))
             {
-
-                GameManager.Instance.EndLevel(false);
+                GameManager.Instance.EndLevel(Winned);
             }
         }
-	}
+    }
 
 	private void PlayerMovement()
 	{
@@ -181,10 +201,10 @@ public class PlayerActions : MonoBehaviour
 	{
 		if (inNewState != m_currentPlayerState)
 		{
-
             switch (inNewState)
             {
                 case PlayerState.Idle:
+
                     m_playerAnimator.SetBool("blockInFront", false);
                     m_playerAnimator.SetBool("noGround", false);
                     m_playerAnimator.SetBool("hasWon", false);
@@ -192,10 +212,12 @@ public class PlayerActions : MonoBehaviour
                     m_playerAnimator.SetBool("isInClimb", false);
                     m_playerAnimator.SetBool("isInWalk", false);
                     m_playerAnimator.SetBool("isInIdle", true);
+
                     StopParticles();
                     break;
 
                 case PlayerState.Walk:
+
                     m_playerAnimator.SetBool("blockInFront", false);
                     m_playerAnimator.SetBool("noGround", false);
                     m_playerAnimator.SetBool("hasWon", false);
@@ -205,6 +227,7 @@ public class PlayerActions : MonoBehaviour
                     m_playerAnimator.SetBool("isInWalk", true);
 
                     m_effectivePlayerSpeed = m_playerSpeed;
+
                     PlayWalkParticle();
                     break;
 
@@ -219,7 +242,9 @@ public class PlayerActions : MonoBehaviour
                     m_playerAnimator.SetBool("isInWalk", false);
                     m_playerAnimator.SetBool("isInSlide", false);
                     m_playerAnimator.SetBool("isInClimb", true);
+
                     StopParticles();
+
                     m_effectivePlayerSpeed = m_playerSpeed / 2;
                     break;
 
@@ -234,11 +259,14 @@ public class PlayerActions : MonoBehaviour
                     m_playerAnimator.SetBool("isInWalk", false);
                     m_playerAnimator.SetBool("isInClimb", false);
                     m_playerAnimator.SetBool("isInSlide", true);
+
                     m_effectivePlayerSpeed = m_playerSpeed / 2;
+
                     PlaySlideParticle();
                     break;
 
                 case PlayerState.Win:
+
                     m_playerAnimator.SetBool("blockInFront", false);
                     m_playerAnimator.SetBool("noGround", false);
                     m_playerAnimator.SetBool("isInSlide", false);
@@ -246,17 +274,22 @@ public class PlayerActions : MonoBehaviour
                     m_playerAnimator.SetBool("isInWalk", false);
                     m_playerAnimator.SetBool("isInIdle", false);
                     m_playerAnimator.SetBool("hasWon", true);
+
                     StopParticles();
+
 					m_endLevelTime = Time.time;
                     break;
 
                 case PlayerState.Lose:
+
                     m_playerAnimator.SetBool("hasWon", false);
                     m_playerAnimator.SetBool("isInSlide", false);
                     m_playerAnimator.SetBool("isInClimb", false);
                     m_playerAnimator.SetBool("isInWalk", false);
                     m_playerAnimator.SetBool("isInIdle", false);
+
                     StopParticles();
+
 					m_endLevelTime = Time.time;
                     break;
             }
@@ -293,5 +326,19 @@ public class PlayerActions : MonoBehaviour
     private bool EndTimer(float destinationTime)
     {
 		return (Time.time >= m_endLevelTime + destinationTime);
+    }
+
+    private bool TimerToWalkSound(float destinationTime)
+    {
+        return (Time.time >= m_lastSoundShotted + destinationTime);
+    }
+
+    private void PlayWalkAudioClipWithDelay()
+    {
+        if (TimerToWalkSound(SoundManager.Instance.DelayWalkSound))
+        {
+            SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.PlayerWalkAudioClip);
+            m_lastSoundShotted = Time.time;
+        }
     }
 }

@@ -20,7 +20,11 @@ public class SoundManager : Singleton<SoundManager>
 {
     [SerializeField] private AudioSource m_playerAudioSource = null;
 
+    [Space]
     public CustomAudioClip PlayerWalkAudioClip;
+    public float DelayWalkSound;
+    [Space]
+
     public CustomAudioClip PlayerSlideAudioClip;
     public CustomAudioClip PlayerClimbAudioClip;
     public CustomAudioClip PlayerFallGaspAudioClip;

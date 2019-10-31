@@ -47,6 +47,7 @@ MonoBehaviour:
   PlayerWalkAudioClip:
     ClipAudio: {fileID: 8300000, guid: f2e386a2966552341b56a72324b9732f, type: 3}
     Intensity: 1
+  DelayWalkSound: 1
   PlayerSlideAudioClip:
     ClipAudio: {fileID: 8300000, guid: a12bb2538a599ab4696487ef3400cfe8, type: 3}
     Intensity: 1
