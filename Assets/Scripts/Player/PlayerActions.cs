@@ -59,6 +59,7 @@ public class PlayerActions : MonoBehaviour
 
 	void Update()
 	{
+        Debug.Log(m_currentPlayerState);
 		if (m_canMove)
 		{
 			PlayerMovement();

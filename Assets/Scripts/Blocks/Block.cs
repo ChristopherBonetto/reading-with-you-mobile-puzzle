@@ -158,6 +158,7 @@ public class Block : MonoBehaviour
 	private void FreezeBlocks()
 	{
 		SetPhysicsInactive(true);
+        transform.localScale = new Vector3(1,1,1);
 	}
 
 	/// <summary>
