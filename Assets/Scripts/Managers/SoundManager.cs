@@ -18,50 +18,74 @@ public struct CustomAudioClip
 
 public class SoundManager : Singleton<SoundManager>
 {
-    [SerializeField] private AudioSource m_playerAudioSource = null;
-
-    [Space]
+    #region Player Sounds
+    [Header("Player Sound Options"), Space]
+    
     public CustomAudioClip PlayerWalkAudioClip;
     public float DelayWalkSound;
-    [Space]
+
+    [Space,Space]
 
     public CustomAudioClip PlayerSlideAudioClip;
     public CustomAudioClip PlayerClimbAudioClip;
     public CustomAudioClip PlayerFallGaspAudioClip;
+    public CustomAudioClip PlayerHitObstacle;
 
+    [Space, Space, Space]
 
-    [Space]
+    [SerializeField] private AudioSource m_playerAudioSource = null;
+    #endregion
 
+    
 
-    [SerializeField] private AudioSource m_backgroundAudioSource = null;
+    #region Background Sounds
+    [Header("Backgound Sound Options"), Space, Space, Space, Space, Space]
+        
+    public CustomAudioClip StartSceneAudioClip;
+
+    [Space, Space]
 
     public CustomAudioClip[] BackgroundAudioClips;
 
+    [Space, Space,Space]
 
-    [Space]
-    
+    [SerializeField] private AudioSource m_backgroundAudioSource = null;
+    #endregion
 
-    [SerializeField] private AudioSource m_finalObjectAudioSource = null;
+
+
+    #region Other Sounds (End level, block placement, UI taps)
+
+    [Header("Victory Sound Options"), Space, Space, Space, Space, Space]
 
     public CustomAudioClip VictoryAudioClip;
 
+    [Space, Space]
 
-    [Space]
+    [SerializeField] private AudioSource m_finalObjectAudioSource = null;
 
 
-    [SerializeField] private AudioSource m_blockManagerAudioSource = null;
+
+    [Header("Blocks Sound Options"), Space, Space, Space, Space, Space]
 
     public CustomAudioClip BlockMissplacementAudioClip;
     public CustomAudioClip PickUpBlockAudioClip;
 
+    [Space, Space]
 
-    [Space]
+    [SerializeField] private AudioSource m_blockManagerAudioSource = null;
 
+    
 
-    [SerializeField] private AudioSource m_UIAudioSource = null;
+    [Header("UI Sound Options"), Space, Space, Space, Space, Space]
 
     public CustomAudioClip TapOneAudioClip;
     public CustomAudioClip TapTwoAudioClip;
+
+    [Space, Space]
+
+    [SerializeField] private AudioSource m_UIAudioSource = null;
+    #endregion
 
 
 
@@ -69,7 +93,24 @@ public class SoundManager : Singleton<SoundManager>
     {
         m_playerAudioSource.PlayOneShot(inClip.ClipAudio, inClip.Intensity);
     }
-        
+    
+    public void PlayStartMenùAudio()
+    {
+        if (m_backgroundAudioSource.clip != StartSceneAudioClip.ClipAudio)
+        {
+            m_backgroundAudioSource.Stop();
+
+            if (!m_backgroundAudioSource.loop)
+            {
+                m_backgroundAudioSource.loop = true;
+            }
+
+            m_backgroundAudioSource.clip = StartSceneAudioClip.ClipAudio;
+            m_backgroundAudioSource.Play();
+        }  
+    }
+
+
     public void PlayBackgoundSound(int loopClip)
     {
         if (!m_backgroundAudioSource.loop)

@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4462d7adb28412a47bbb40b140124ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playerAudioSource: {fileID: 0}
   PlayerWalkAudioClip:
     ClipAudio: {fileID: 8300000, guid: f2e386a2966552341b56a72324b9732f, type: 3}
     Intensity: 1
@@ -57,7 +56,13 @@ MonoBehaviour:
   PlayerFallGaspAudioClip:
     ClipAudio: {fileID: 8300000, guid: 4c98b765a91040947abae57e1a3027e8, type: 3}
     Intensity: 1
-  m_backgroundAudioSource: {fileID: 0}
+  PlayerHitObstacle:
+    ClipAudio: {fileID: 8300000, guid: 0600f295780740e48b2c9bb8f867a728, type: 3}
+    Intensity: 0.5
+  m_playerAudioSource: {fileID: 0}
+  StartSceneAudioClip:
+    ClipAudio: {fileID: 8300000, guid: 27c060f456a252345b717565eece1f0e, type: 3}
+    Intensity: 0.1
   BackgroundAudioClips:
   - ClipAudio: {fileID: 8300000, guid: 9b7f72f1b48ec2a489189c311531e25e, type: 3}
     Intensity: 0.1
@@ -69,6 +74,7 @@ MonoBehaviour:
     Intensity: 0.1
   - ClipAudio: {fileID: 8300000, guid: 19a79368400da8340915a9142aaf6606, type: 3}
     Intensity: 0.1
+  m_backgroundAudioSource: {fileID: 0}
   m_finalObjectAudioSource: {fileID: 0}
   VictoryAudioClip:
     ClipAudio: {fileID: 8300000, guid: ee4486dd8918f8e4bb0cf7218042c380, type: 3}

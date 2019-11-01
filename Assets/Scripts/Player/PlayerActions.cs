@@ -52,6 +52,7 @@ public class PlayerActions : MonoBehaviour
     }
     private void Start()
 	{
+        
         SetPlayerState(PlayerState.Idle);
 		m_effectivePlayerSpeed = m_playerSpeed;
 	}
@@ -162,6 +163,7 @@ public class PlayerActions : MonoBehaviour
 			else
 			{
 				SetPlayerState(PlayerState.Lose);
+
                 m_playerAnimator.SetBool("noGround", true);
 
                 SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.PlayerFallGaspAudioClip);
@@ -180,9 +182,12 @@ public class PlayerActions : MonoBehaviour
             }
             else
 			{
-                m_playerAnimator.SetBool("blockInFront", true);
                 SetPlayerState(PlayerState.Lose);
-			}
+
+                m_playerAnimator.SetBool("blockInFront", true);
+
+                SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.PlayerHitObstacle);
+            }
 			m_canMove = false;
 		}
 	}

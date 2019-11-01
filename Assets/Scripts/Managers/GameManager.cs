@@ -75,11 +75,14 @@ public class GameManager : Singleton<GameManager>
         ObjectPooler.Instance.StartPooling();
 
 		OnUpdateLevel += DisableWalkingPlayer;
-	}
 
-	#region States
+        SoundManager.Instance.PlayStartMenùAudio();
+    }
+    
 
-	public void SetGameState(GameState inGameState)
+    #region States
+
+    public void SetGameState(GameState inGameState)
     {
         if (m_currentState == inGameState)
         {
