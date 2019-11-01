@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 44e030827ef0aa349a66fd449c35411e, type: 3}
   IconLocked: {fileID: 21300000, guid: 7ec78a57a3507394385426175de346d0, type: 3}
-  InGameIcon: {fileID: 21300000, guid: 71277fbb50800954fb2fcfd21b092bd5, type: 3}
+  InGameIcon: {fileID: 21300000, guid: 44e030827ef0aa349a66fd449c35411e, type: 3}
   LevelPrefab: {fileID: 4287722411655859855, guid: 5a66d567505a28b4c826aaf8ecf65764,
     type: 3}
   IsPlayable: 1
