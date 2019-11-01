@@ -174,14 +174,29 @@ public class Block : MonoBehaviour
     {
         m_meshTransform.localScale = new Vector3(1, 1, 1);
 
-        if (transform.localScale.x < 0)
+        Vector3 tempScale = transform.localScale;
+
+        if(tempScale.x < 0)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            tempScale.x = -1;
         }
         else
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            tempScale.x = 1;
         }
+
+
+        if(tempScale.y < 0)
+        {
+            tempScale.y = -1;
+        }
+        else
+        {
+            tempScale.y = 1;
+        }
+
+        transform.localScale = tempScale;
+        
     }
 
 
