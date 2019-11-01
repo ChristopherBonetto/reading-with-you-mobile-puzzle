@@ -110,9 +110,9 @@ public class LevelSelectionWindow : UIControl
                         m_buttons[i].IsPlayable = Worlds[GameManager.Instance.CurrentWorld].EasyLevels[i].IsPlayable;
 
                         // Set sprite
-                        m_buttons[i].BackgroundImage.sprite = Worlds[GameManager.Instance.CurrentWorld].EasyLevels[i].IconLocked;
-						//m_buttons[i].BackgroundImage.color = Color.black;
-						m_buttons[i].Image.sprite = Worlds[GameManager.Instance.CurrentWorld].EasyLevels[i].Icon;
+                        m_buttons[i].BackgroundImage.sprite = Worlds[GameManager.Instance.CurrentWorld].EasyLevels[i].Icon;
+						m_buttons[i].BackgroundImage.color = Color.black;
+						m_buttons[i].Image.sprite = Worlds[GameManager.Instance.CurrentWorld].EasyLevels[i].InGameIcon;
 
 						if (m_buttons[i].IsPlayable)
 							m_buttons[i].Image.color = Color.white;
@@ -145,9 +145,9 @@ public class LevelSelectionWindow : UIControl
                         m_buttons[i].IsPlayable = Worlds[GameManager.Instance.CurrentWorld].HardLevels[i].IsPlayable;
 
                         // Set sprite
-                        m_buttons[i].BackgroundImage.sprite = Worlds[GameManager.Instance.CurrentWorld].HardLevels[i].IconLocked;
-						//m_buttons[i].BackgroundImage.color = Color.black;
-                        m_buttons[i].Image.sprite = Worlds[GameManager.Instance.CurrentWorld].HardLevels[i].Icon;
+                        m_buttons[i].BackgroundImage.sprite = Worlds[GameManager.Instance.CurrentWorld].HardLevels[i].Icon;
+						m_buttons[i].BackgroundImage.color = Color.black;
+                        m_buttons[i].Image.sprite = Worlds[GameManager.Instance.CurrentWorld].HardLevels[i].InGameIcon;
 
                         if (m_buttons[i].IsPlayable)
                             m_buttons[i].Image.color = Color.white;
