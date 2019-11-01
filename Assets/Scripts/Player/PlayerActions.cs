@@ -63,11 +63,7 @@ public class PlayerActions : MonoBehaviour
 		if (m_canMove)
 		{
 			PlayerMovement();
-
-            if (m_currentPlayerState == PlayerState.Walk)
-            {
-                PlayWalkAudioClipWithDelay();
-            }
+            PlayerAudioDelaySystem();
         }
         else
         {
@@ -75,6 +71,17 @@ public class PlayerActions : MonoBehaviour
         }
 	}
     
+    public void PlayerAudioDelaySystem()
+    {
+        if (m_currentPlayerState == PlayerState.Walk)
+        {
+            PlayAudioClipWithDelay(SoundManager.Instance.PlayerWalkAudioClip, SoundManager.Instance.DelayWalkSound);
+        }
+        else if (m_currentPlayerState == PlayerState.Climb)
+        {
+            PlayAudioClipWithDelay(SoundManager.Instance.PlayerClimbAudioClip, SoundManager.Instance.DelayClimbSound);
+        }
+    }
 
     private void CheckAndSetWinOrLose()
     {
@@ -339,12 +346,14 @@ public class PlayerActions : MonoBehaviour
         return (Time.time >= m_lastSoundShotted + destinationTime);
     }
 
-    private void PlayWalkAudioClipWithDelay()
+    private void PlayAudioClipWithDelay(CustomAudioClip clipToSound, float delay)
     {
-        if (TimerToWalkSound(SoundManager.Instance.DelayWalkSound))
+        if (TimerToWalkSound(delay))
         {
-            SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.PlayerWalkAudioClip);
+            SoundManager.Instance.PlayerPlaySound(clipToSound);
             m_lastSoundShotted = Time.time;
         }
     }
+
+    
 }

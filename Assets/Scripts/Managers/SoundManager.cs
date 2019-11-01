@@ -26,8 +26,12 @@ public class SoundManager : Singleton<SoundManager>
 
     [Space,Space]
 
-    public CustomAudioClip PlayerSlideAudioClip;
     public CustomAudioClip PlayerClimbAudioClip;
+    public float DelayClimbSound;
+
+    [Space, Space]
+
+    public CustomAudioClip PlayerSlideAudioClip;
     public CustomAudioClip PlayerFallGaspAudioClip;
     public CustomAudioClip PlayerHitObstacle;
 
@@ -91,6 +95,10 @@ public class SoundManager : Singleton<SoundManager>
 
     public void PlayerPlaySound(CustomAudioClip inClip)
     {
+        if (m_playerAudioSource.isPlaying)
+        {
+            m_playerAudioSource.Stop();
+        }
         m_playerAudioSource.PlayOneShot(inClip.ClipAudio, inClip.Intensity);
     }
     
@@ -106,6 +114,7 @@ public class SoundManager : Singleton<SoundManager>
             }
 
             m_backgroundAudioSource.clip = StartSceneAudioClip.ClipAudio;
+            m_backgroundAudioSource.volume = StartSceneAudioClip.Intensity;
             m_backgroundAudioSource.Play();
         }  
     }
@@ -129,21 +138,6 @@ public class SoundManager : Singleton<SoundManager>
         }
     }
 
-    public void StopAllSounds()
-    {
-        m_backgroundAudioSource.Stop();
-        m_finalObjectAudioSource.Stop();
-        m_playerAudioSource.Stop();
-    }
-
-    public void StopBackgroundSound()
-    {
-        if (m_backgroundAudioSource.isPlaying)
-        {
-            m_backgroundAudioSource.Stop();
-            m_backgroundAudioSource.clip = null;
-        }
-    }
 
     public void FinalObjectPlaySound(CustomAudioClip inClip)
     {
@@ -160,5 +154,22 @@ public class SoundManager : Singleton<SoundManager>
     public void UIPlaySound(CustomAudioClip inClip)
     {
         m_UIAudioSource.PlayOneShot(inClip.ClipAudio, inClip.Intensity);
+    }
+
+
+    public void StopAllSounds()
+    {
+        m_backgroundAudioSource.Stop();
+        m_finalObjectAudioSource.Stop();
+        m_playerAudioSource.Stop();
+    }
+
+    public void StopBackgroundSound()
+    {
+        if (m_backgroundAudioSource.isPlaying)
+        {
+            m_backgroundAudioSource.Stop();
+            m_backgroundAudioSource.clip = null;
+        }
     }
 }
