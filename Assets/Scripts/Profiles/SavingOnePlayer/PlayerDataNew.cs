@@ -17,9 +17,9 @@ public class PlayerDataNew
         PlayerName = player.m_playerName;
 
         EasyLevels = player.easyLevels.ToArray();
-        Debug.Log(EasyLevels.Length);
+
         HardLevels = player.hardLevels.ToArray();
-        Debug.Log(HardLevels.Length);
+        
     }
 
     

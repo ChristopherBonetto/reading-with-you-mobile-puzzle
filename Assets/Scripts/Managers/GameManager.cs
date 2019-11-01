@@ -360,9 +360,7 @@ public class GameManager : Singleton<GameManager>
 
             keyboard.m_playerName.text = m_playerName;
             keyboard.field.text = m_playerName;
-
-            Debug.Log(easyLevels.Count);
-            Debug.Log(hardLevels.Count);
+            
         }
     }
 

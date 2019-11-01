@@ -12,6 +12,7 @@ public class Block : MonoBehaviour
 
 	[SerializeField]
 	private Transform m_meshTransform = null;
+    
 
 	[SerializeField]
 	private LerpMover m_lerpMover = null;
@@ -46,6 +47,9 @@ public class Block : MonoBehaviour
 
 	private void Start()
 	{
+       
+        
+
 #if UNITY_EDITOR
 		NullChecks();
 #endif
@@ -158,8 +162,28 @@ public class Block : MonoBehaviour
 	private void FreezeBlocks()
 	{
 		SetPhysicsInactive(true);
-        transform.localScale = new Vector3(1,1,1);
-	}
+
+        SetTemporaryScale();        
+    }
+
+
+    /// <summary>
+	/// Set block and children scale = 1
+	/// </summary>
+    public void SetTemporaryScale()
+    {
+        m_meshTransform.localScale = new Vector3(1, 1, 1);
+
+        if (transform.localScale.x < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+    }
+
 
 	/// <summary>
 	/// Toggle physics and stability
