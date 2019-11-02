@@ -44,53 +44,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerWalkAudioClip:
-    ClipAudio: {fileID: 8300000, guid: f2e386a2966552341b56a72324b9732f, type: 3}
-    Intensity: 1
+    ClipAudio: {fileID: 8300000, guid: f1af3812326a6594d9221d0357a7ffaf, type: 3}
+    Intensity: 0.6
   DelayWalkSound: 0.33
   PlayerClimbAudioClip:
-    ClipAudio: {fileID: 8300000, guid: 833eb7dd934478a4e9595d06a300e597, type: 3}
-    Intensity: 1
-  DelayClimbSound: 0.33
+    ClipAudio: {fileID: 8300000, guid: 76bd5c93e0b5c0849844522d3e8a06ff, type: 3}
+    Intensity: 0.3
+  DelayClimbSound: 0.5
   PlayerSlideAudioClip:
-    ClipAudio: {fileID: 8300000, guid: a12bb2538a599ab4696487ef3400cfe8, type: 3}
+    ClipAudio: {fileID: 8300000, guid: dbcaed0ec9ecdfc4e9b0f8c5dc46a0c3, type: 3}
     Intensity: 0.45
   PlayerFallGaspAudioClip:
     ClipAudio: {fileID: 8300000, guid: 4c98b765a91040947abae57e1a3027e8, type: 3}
     Intensity: 1
   PlayerHitObstacle:
-    ClipAudio: {fileID: 8300000, guid: 0600f295780740e48b2c9bb8f867a728, type: 3}
+    ClipAudio: {fileID: 8300000, guid: 73e5907e60977bd44bcc532aef456d81, type: 3}
     Intensity: 0.5
   m_playerAudioSource: {fileID: 0}
   StartSceneAudioClip:
-    ClipAudio: {fileID: 8300000, guid: 27c060f456a252345b717565eece1f0e, type: 3}
+    ClipAudio: {fileID: 8300000, guid: fe07cc59f74cee947b222deec4c16c80, type: 3}
     Intensity: 0.1
   BackgroundAudioClips:
-  - ClipAudio: {fileID: 8300000, guid: 9b7f72f1b48ec2a489189c311531e25e, type: 3}
+  - ClipAudio: {fileID: 8300000, guid: ec3a799d89561a74292e1666bb394376, type: 3}
     Intensity: 0.1
-  - ClipAudio: {fileID: 8300000, guid: 5966f395f99e66f4bb24e029ec46ee89, type: 3}
+  - ClipAudio: {fileID: 8300000, guid: 3487a9acca6f8134cbbf876ba7d490a1, type: 3}
     Intensity: 0.1
-  - ClipAudio: {fileID: 8300000, guid: 07b913182b4b93b47b28e5def4ee5b13, type: 3}
+  - ClipAudio: {fileID: 8300000, guid: eca49d1fc4ebc7a4b80055aac3f0287b, type: 3}
     Intensity: 0.1
-  - ClipAudio: {fileID: 8300000, guid: 8e53798f05e426e46aeaaaab00ba2b31, type: 3}
+  - ClipAudio: {fileID: 8300000, guid: 1cdfc1d9bb43030478bcd5347ce6b5fc, type: 3}
     Intensity: 0.1
-  - ClipAudio: {fileID: 8300000, guid: 19a79368400da8340915a9142aaf6606, type: 3}
+  - ClipAudio: {fileID: 8300000, guid: 56a1caee1df56f34b8bf4cd4b5da72e1, type: 3}
     Intensity: 0.1
   m_backgroundAudioSource: {fileID: 0}
   VictoryAudioClip:
-    ClipAudio: {fileID: 8300000, guid: ee4486dd8918f8e4bb0cf7218042c380, type: 3}
+    ClipAudio: {fileID: 8300000, guid: 740a69d1706622b43b35d3c401065c40, type: 3}
     Intensity: 0.33
   m_finalObjectAudioSource: {fileID: 0}
   BlockMissplacementAudioClip:
-    ClipAudio: {fileID: 8300000, guid: 4174ef61554641f4481a0e1bbda08652, type: 3}
-    Intensity: 1
+    ClipAudio: {fileID: 8300000, guid: 575b337ac8f748d4eb3fb5fe3d2af709, type: 3}
+    Intensity: 0.3
   PickUpBlockAudioClip:
-    ClipAudio: {fileID: 8300000, guid: 1fc75c53485f6c74b97658f41a15464f, type: 3}
-    Intensity: 1
+    ClipAudio: {fileID: 8300000, guid: f74daaf46cf92f143a81c54c65ace198, type: 3}
+    Intensity: 0.3
   m_blockManagerAudioSource: {fileID: 0}
   TapOneAudioClip:
-    ClipAudio: {fileID: 8300000, guid: ff2b9b2a072e1ab4dab2531c9a81c739, type: 3}
+    ClipAudio: {fileID: 8300000, guid: 45849b990dc0411448bf3b2eea346de0, type: 3}
     Intensity: 0.33
   TapTwoAudioClip:
-    ClipAudio: {fileID: 8300000, guid: ff63b593131292a428c021e93455e2d3, type: 3}
+    ClipAudio: {fileID: 8300000, guid: c15b4a4005a2a6f4ead505f8bc5a6a56, type: 3}
     Intensity: 0.45
   m_UIAudioSource: {fileID: 0}
