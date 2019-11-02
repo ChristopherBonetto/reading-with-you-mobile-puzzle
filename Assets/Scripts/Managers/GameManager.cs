@@ -299,12 +299,14 @@ public class GameManager : Singleton<GameManager>
                 void ReturnToLevelSelection()
                 {
                     UIManager.Instance.Show(UIControlName.LevelSelection);
+                    Player.ResetLevel(m_currentLevelInfo.PlayerCoords);
                 }
                 
                 fade.FadeInCompleted = ReturnToLevelSelection;
                 fade.FadeOutCompleted = fade.OnHide;
 
 				SoundManager.Instance.StopAllSounds();
+
             }
 			// start fade
             UIManager.Instance.ShowAndHide(UIControlName.Fade, UIManager.Instance.Controls[UIControlName.InGame]);
