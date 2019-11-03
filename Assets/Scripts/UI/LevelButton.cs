@@ -18,15 +18,7 @@ public class LevelButton : MonoBehaviour
     public bool IsPlayable
     {
         get { return m_IsPlayable; }
-        set
-        {
-            m_IsPlayable = value;
-
-            if (m_IsPlayable)
-                Image.color = Color.white;
-            else
-                Image.color = Color.clear;
-        }
+        set { m_IsPlayable = value; }
     }
 
 	[SerializeField]
