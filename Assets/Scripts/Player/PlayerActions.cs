@@ -12,7 +12,6 @@ public enum PlayerState
 
 public class PlayerActions : MonoBehaviour
 {
-
 	#region Variables
 
 	[SerializeField] private float m_playerSpeed = 2f;
@@ -23,7 +22,6 @@ public class PlayerActions : MonoBehaviour
 
 	private Vector3 m_movement;
 	private Vector3 m_direction;
-	private float m_xPlayerPosition;
 
 	private RaycastHit m_nextFrameCollisionPoint;
 	private RaycastHit m_frontRaycastHit;
@@ -50,16 +48,17 @@ public class PlayerActions : MonoBehaviour
     {
         m_playerAnimator = GetComponentInChildren<Animator>();
     }
+
     private void Start()
 	{
-        
+        m_direction = Vector3.right;
+
         SetPlayerState(PlayerState.Idle);
 		m_effectivePlayerSpeed = m_playerSpeed;
 	}
 
 	void Update()
 	{
-        Debug.Log(m_currentPlayerState);
 		if (m_canMove)
 		{
 			PlayerMovement();
@@ -71,23 +70,301 @@ public class PlayerActions : MonoBehaviour
         }
 	}
     
-    public void PlayerAudioDelaySystem()
+
+    #region Character Movement
+
+    // <summary>
+    // Using raycast checks obstacles in front of the player. If the raycast find an obstacle check if that is the final object.
+    // </summary>
+    public bool CheckFront()
     {
-        if (m_currentPlayerState == PlayerState.Walk)
+        if (!Physics.Raycast(transform.position + Vector3.right * m_raycastFrontDistance, m_movement.normalized, out m_frontRaycastHit, m_movement.magnitude))
         {
-            PlayAudioClipWithDelay(SoundManager.Instance.PlayerWalkAudioClip, SoundManager.Instance.DelayWalkSound);
+            return true;
         }
-        else if (m_currentPlayerState == PlayerState.Climb)
+        else
         {
-            PlayAudioClipWithDelay(SoundManager.Instance.PlayerClimbAudioClip, SoundManager.Instance.DelayClimbSound);
+            if (m_frontRaycastHit.transform.GetComponent<FinalObjectActions>())
+            {
+                SetPlayerState(PlayerState.Win);
+                m_frontRaycastHit.transform.GetComponent<FinalObjectActions>().Collected();
+            }
+            else
+            {
+                SetPlayerState(PlayerState.Lose);
+
+                m_playerAnimator.SetBool("blockInFront", true);
+
+                SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.PlayerHitObstacle);
+            }
+            
+            m_canMove = false;
+            return false;
         }
     }
 
+    // <summary>
+    // Using raycast the character checks if there is any platform under him. If there is something below, he does another check to understand which type of terrain/block he must go across, this determine
+    // if him must advance straight or obliquely.
+    // </summary>
+    public Vector3 CheckDown()
+    {
+        Vector3 nextPointPosition;
+
+        if (Physics.Raycast(gameObject.transform.position + m_movement, Vector3.down, out m_nextFrameCollisionPoint, m_raycastDownDistance) || Physics.Raycast(gameObject.transform.position + m_movement + new Vector3(0.15f, 0, 0), Vector3.down, out m_nextFrameCollisionPoint, m_raycastDownDistance))
+        {
+
+            nextPointPosition = m_nextFrameCollisionPoint.point + Vector3.up * 0.5f;
+
+
+            if (m_nextFrameCollisionPoint.transform.gameObject.layer == LayerMask.NameToLayer("Ramp"))
+            {
+                if (nextPointPosition.y > transform.position.y)
+                {
+                    SetPlayerState(PlayerState.Climb);
+                    return nextPointPosition;
+                }
+                else if (nextPointPosition.y < transform.position.y)
+                {
+                    SetPlayerState(PlayerState.Slide);
+                    return nextPointPosition;
+                }
+            }
+            else if (m_nextFrameCollisionPoint.transform.gameObject.layer == LayerMask.NameToLayer("Trapezoid"))
+            {
+                float dot = Vector3.Dot(Vector3.down, m_nextFrameCollisionPoint.normal);
+
+                if (dot == -1)
+                {
+                    SetPlayerState(PlayerState.Walk);
+                    return gameObject.transform.position + m_movement;
+                }
+                else
+                {
+                    if (nextPointPosition.y > transform.position.y)
+                    {
+                        SetPlayerState(PlayerState.Climb);
+                        return nextPointPosition;
+                    }
+                    else if (nextPointPosition.y < transform.position.y)
+                    {
+                        SetPlayerState(PlayerState.Slide);
+                        return nextPointPosition;
+                    }
+                }
+
+            }
+            else
+            {
+                SetPlayerState(PlayerState.Walk);
+                return gameObject.transform.position + m_movement;
+            }
+        }
+        // No floor
+        else
+        {
+            SetPlayerState(PlayerState.Lose);
+                        
+            m_playerAnimator.SetBool("noGround", true);
+
+            SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.PlayerFallGaspAudioClip);
+
+            m_canMove = false;
+        }
+
+        return transform.position;
+    }
+
+    // <summary>
+    // Set the movement's player taking the parameters to the other two methods.
+    // </summary>
+    private void PlayerMovement()
+	{
+		m_movement = m_effectivePlayerSpeed * m_direction * Time.deltaTime;
+        
+        if (CheckFront())
+        {
+            transform.position = CheckDown();
+        }
+        
+
+        #region old movementMethod
+
+        //if (!Physics.Raycast(transform.position + Vector3.right * m_raycastFrontDistance, m_movement.normalized, out m_frontRaycastHit, m_movement.magnitude))
+        //{
+
+        //    if (Physics.Raycast(gameObject.transform.position + m_movement, Vector3.down, out m_nextFrameCollisionPoint, m_raycastDownDistance) || Physics.Raycast(gameObject.transform.position + m_movement + new Vector3(0.15f, 0, 0), Vector3.down, out m_nextFrameCollisionPoint, m_raycastDownDistance))
+        //    {
+
+        //        nextPointPosition = m_nextFrameCollisionPoint.point + Vector3.up * 0.5f;
+
+
+        //        if (m_nextFrameCollisionPoint.transform.gameObject.layer == LayerMask.NameToLayer("Ramp"))
+        //        {
+        //            if (nextPointPosition.y > transform.position.y)
+        //            {
+        //                SetPlayerState(PlayerState.Climb);
+        //                transform.position = nextPointPosition;
+        //            }
+        //            else if (nextPointPosition.y < transform.position.y)
+        //            {
+        //                SetPlayerState(PlayerState.Slide);
+        //                transform.position = nextPointPosition;
+        //            }
+        //        }
+        //        else if (m_nextFrameCollisionPoint.transform.gameObject.layer == LayerMask.NameToLayer("Trapezoid"))
+        //        {
+        //            float dot = Vector3.Dot(Vector3.down, m_nextFrameCollisionPoint.normal);
+
+        //            if (dot == -1)
+        //            {
+        //                SetPlayerState(PlayerState.Walk);
+        //                transform.position = gameObject.transform.position + m_movement;
+        //            }
+        //            else
+        //            {
+        //                if (nextPointPosition.y > transform.position.y)
+        //                {
+        //                    SetPlayerState(PlayerState.Climb);
+        //                    transform.position = nextPointPosition;
+        //                }
+        //                else if (nextPointPosition.y < transform.position.y)
+        //                {
+        //                    SetPlayerState(PlayerState.Slide);
+        //                    transform.position = nextPointPosition;
+        //                }
+        //            }
+
+        //        }
+        //        else
+        //        {
+        //            SetPlayerState(PlayerState.Walk);
+        //            transform.position = gameObject.transform.position + m_movement;
+        //        }
+        //    }
+        //    // No floor
+        //    else
+        //    {
+        //        SetPlayerState(PlayerState.Lose);
+
+        //        m_playerAnimator.SetBool("noGround", true);
+
+        //        SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.PlayerFallGaspAudioClip);
+
+        //        m_canMove = false;
+        //    }
+        //}
+        //// Wall or objective
+        //else
+        //{
+        //    if (m_frontRaycastHit.transform.GetComponent<FinalObjectActions>())
+        //    {
+        //        SetPlayerState(PlayerState.Win);
+        //        m_frontRaycastHit.transform.GetComponent<FinalObjectActions>().Collected();
+
+        //    }
+        //    else
+        //    {
+        //        SetPlayerState(PlayerState.Lose);
+
+        //        m_playerAnimator.SetBool("blockInFront", true);
+
+        //        SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.PlayerHitObstacle);
+        //    }
+        //    m_canMove = false;
+        //}
+        #endregion
+    }
+    #endregion
+
+
+    #region Player States System
+    // </summary>
+    /// <param name="inNewState"></param> Used to set the next PlayerState after checking if the player has currently another state. 
+    private void SetPlayerState(PlayerState inNewState)
+    {
+        if (inNewState != m_currentPlayerState)
+        {
+            switch (inNewState)
+            {
+                case PlayerState.Idle:
+
+                    ResetAllAnimation();
+                    PlayAnimation("isInIdle");
+
+                    StopParticles();
+                    break;
+
+                case PlayerState.Walk:
+
+                    m_effectivePlayerSpeed = m_playerSpeed;
+
+                    ResetAllAnimation();
+                    PlayAnimation("isInWalk");
+
+                    PlayWalkParticle();
+                    break;
+
+                case PlayerState.Climb:
+
+                    m_effectivePlayerSpeed = m_playerSpeed / 2;
+
+                    ResetAllAnimation();
+                    PlayAnimation("isInClimb");
+
+                    SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.PlayerClimbAudioClip);
+
+                    StopParticles();
+                    break;
+
+                case PlayerState.Slide:
+
+                    m_effectivePlayerSpeed = m_playerSpeed / 2;
+
+                    ResetAllAnimation();
+                    PlayAnimation("isInSlide");
+
+                    SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.PlayerSlideAudioClip);
+
+                    PlaySlideParticle();
+                    break;
+
+                case PlayerState.Win:
+
+                    ResetAllAnimation();
+                    PlayAnimation("hasWon");
+
+                    m_endLevelTime = Time.time;
+
+                    StopParticles();
+                    break;
+
+                case PlayerState.Lose:
+
+                    ResetAllAnimation();
+
+                    m_endLevelTime = Time.time;
+
+                    StopParticles();
+                    break;
+            }
+
+            m_currentPlayerState = inNewState;
+        }
+    }
+    #endregion
+
+
+    #region Update/Reset level Methods
+
+    // <summary>
+    // Check the current player's state. If he win or lose recall a method when the timer reach the destination time.
+    // </summary>
     private void CheckAndSetWinOrLose()
     {
         bool Winned;
 
-        if(m_currentPlayerState == PlayerState.Win)
+        if (m_currentPlayerState == PlayerState.Win)
         {
             Winned = true;
 
@@ -96,7 +373,7 @@ public class PlayerActions : MonoBehaviour
                 GameManager.Instance.EndLevel(Winned);
             }
         }
-        else if(m_currentPlayerState == PlayerState.Lose)
+        else if (m_currentPlayerState == PlayerState.Lose)
         {
             Winned = false;
 
@@ -107,216 +384,62 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
-	private void PlayerMovement()
-	{
-		m_direction = Vector3.right;
-		m_movement = m_effectivePlayerSpeed * m_direction * Time.deltaTime;
+    // <summary>
+    // Used to set canMove's bool and the player's collider. Used to let the character go forwards or to reset him.
+    // </summary>
+    public void EnableMovement(bool bEnable)
+    {
+        gameObject.GetComponent<Collider>().enabled = !bEnable;
+        m_canMove = bEnable;
+    }
 
-		Vector3 nextPointPosition;
-
-		// If no collider in front
-		if (!Physics.Raycast(transform.position + Vector3.right * m_raycastFrontDistance, m_movement.normalized, out m_frontRaycastHit, m_movement.magnitude))
-		{
-			// If on a floor || 0.15f behind a floor
-			if (Physics.Raycast(gameObject.transform.position + m_movement, Vector3.down, out m_nextFrameCollisionPoint, m_raycastDownDistance) || Physics.Raycast(gameObject.transform.position + m_movement + new Vector3(0.15f, 0, 0), Vector3.down, out m_nextFrameCollisionPoint, m_raycastDownDistance))
-			{
-				// Move 0.5f above the found floor
-				nextPointPosition = m_nextFrameCollisionPoint.point + Vector3.up * 0.5f;
-
-
-                if (m_nextFrameCollisionPoint.transform.gameObject.layer == LayerMask.NameToLayer("Ramp"))
-                {
-                    if (nextPointPosition.y > transform.position.y)
-                    {
-                        SetPlayerState(PlayerState.Climb);
-                        transform.position = nextPointPosition;
-                    }
-                    else if (nextPointPosition.y < transform.position.y)
-                    {
-                        SetPlayerState(PlayerState.Slide);
-                        transform.position = nextPointPosition;
-                    }
-                }
-                else if(m_nextFrameCollisionPoint.transform.gameObject.layer == LayerMask.NameToLayer("Trapezoid"))
-                {
-                    float dot = Vector3.Dot(Vector3.down, m_nextFrameCollisionPoint.normal);
-                    
-                    if(dot == -1)
-                    {
-                        SetPlayerState(PlayerState.Walk);
-                        transform.position = gameObject.transform.position + m_movement;
-                    }
-                    else
-                    {
-                        if (nextPointPosition.y > transform.position.y)
-                        {
-                            SetPlayerState(PlayerState.Climb);
-                            transform.position = nextPointPosition;
-                        }
-                        else if (nextPointPosition.y < transform.position.y)
-                        {
-                            SetPlayerState(PlayerState.Slide);
-                            transform.position = nextPointPosition;
-                        }
-                    }
-
-                }
-                else
-                {
-                    SetPlayerState(PlayerState.Walk);
-                    transform.position = gameObject.transform.position + m_movement;
-                }
-            }
-			// No floor
-			else
-			{
-				SetPlayerState(PlayerState.Lose);
-
-                m_playerAnimator.SetBool("noGround", true);
-
-                SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.PlayerFallGaspAudioClip);
-
-                m_canMove = false;
-			}
-		}
-		// Wall or objective
-		else
-		{
-			if (m_frontRaycastHit.transform.GetComponent<FinalObjectActions>())
-			{
-				SetPlayerState(PlayerState.Win);
-                m_frontRaycastHit.transform.GetComponent<FinalObjectActions>().Collected();
-                
-            }
-            else
-			{
-                SetPlayerState(PlayerState.Lose);
-
-                m_playerAnimator.SetBool("blockInFront", true);
-
-                SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.PlayerHitObstacle);
-            }
-			m_canMove = false;
-		}
-	}
-
-	public void ResetLevel(Vector3 startPosition)
-	{
+    // <summary>
+    // Method that it will reset all the player's comporaments.
+    // </summary>
+    public void ResetLevel(Vector3 startPosition)
+    {
         StopParticles();
-        
+
         EnableMovement(false);
-		transform.position = startPosition;
+        transform.position = startPosition;
         SetPlayerState(PlayerState.Idle);
-        
-	}
 
-	private void SetPlayerState(PlayerState inNewState)
-	{
-		if (inNewState != m_currentPlayerState)
-		{
-            switch (inNewState)
-            {
-                case PlayerState.Idle:
-
-                    m_playerAnimator.SetBool("blockInFront", false);
-                    m_playerAnimator.SetBool("noGround", false);
-                    m_playerAnimator.SetBool("hasWon", false);
-                    m_playerAnimator.SetBool("isInSlide", false);
-                    m_playerAnimator.SetBool("isInClimb", false);
-                    m_playerAnimator.SetBool("isInWalk", false);
-                    m_playerAnimator.SetBool("isInIdle", true);
-
-                    StopParticles();
-                    break;
-
-                case PlayerState.Walk:
-
-                    m_playerAnimator.SetBool("blockInFront", false);
-                    m_playerAnimator.SetBool("noGround", false);
-                    m_playerAnimator.SetBool("hasWon", false);
-                    m_playerAnimator.SetBool("isInIdle", false);
-                    m_playerAnimator.SetBool("isInSlide", false);
-                    m_playerAnimator.SetBool("isInClimb", false);
-                    m_playerAnimator.SetBool("isInWalk", true);
-
-                    m_effectivePlayerSpeed = m_playerSpeed;
-
-                    PlayWalkParticle();
-                    break;
-
-                case PlayerState.Climb:
-
-                    SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.PlayerClimbAudioClip);
-
-                    m_playerAnimator.SetBool("blockInFront", false);
-                    m_playerAnimator.SetBool("noGround", false);
-                    m_playerAnimator.SetBool("hasWon", false);
-                    m_playerAnimator.SetBool("isInIdle", false);
-                    m_playerAnimator.SetBool("isInWalk", false);
-                    m_playerAnimator.SetBool("isInSlide", false);
-                    m_playerAnimator.SetBool("isInClimb", true);
-
-                    StopParticles();
-
-                    m_effectivePlayerSpeed = m_playerSpeed / 2;
-                    break;
-
-                case PlayerState.Slide:
-
-                    SoundManager.Instance.PlayerPlaySound(SoundManager.Instance.PlayerSlideAudioClip);
-
-                    m_playerAnimator.SetBool("blockInFront", false);
-                    m_playerAnimator.SetBool("noGround", false);
-                    m_playerAnimator.SetBool("hasWon", false);
-                    m_playerAnimator.SetBool("isInIdle", false);
-                    m_playerAnimator.SetBool("isInWalk", false);
-                    m_playerAnimator.SetBool("isInClimb", false);
-                    m_playerAnimator.SetBool("isInSlide", true);
-
-                    m_effectivePlayerSpeed = m_playerSpeed / 2;
-
-                    PlaySlideParticle();
-                    break;
-
-                case PlayerState.Win:
-
-                    m_playerAnimator.SetBool("blockInFront", false);
-                    m_playerAnimator.SetBool("noGround", false);
-                    m_playerAnimator.SetBool("isInSlide", false);
-                    m_playerAnimator.SetBool("isInClimb", false);
-                    m_playerAnimator.SetBool("isInWalk", false);
-                    m_playerAnimator.SetBool("isInIdle", false);
-                    m_playerAnimator.SetBool("hasWon", true);
-
-                    StopParticles();
-
-					m_endLevelTime = Time.time;
-                    break;
-
-                case PlayerState.Lose:
-
-                    m_playerAnimator.SetBool("hasWon", false);
-                    m_playerAnimator.SetBool("isInSlide", false);
-                    m_playerAnimator.SetBool("isInClimb", false);
-                    m_playerAnimator.SetBool("isInWalk", false);
-                    m_playerAnimator.SetBool("isInIdle", false);
-
-                    StopParticles();
-
-					m_endLevelTime = Time.time;
-                    break;
-            }
-
-			m_currentPlayerState = inNewState;
-		}
-	}
+    }
     
+    private bool EndTimer(float destinationTime)
+    {
+        return (Time.time >= m_endLevelTime + destinationTime);
+    }
+    #endregion
 
-	public void EnableMovement(bool bEnable)
-	{
-		gameObject.GetComponent<Collider>().enabled = !bEnable;
-		m_canMove = bEnable;
-	}
+
+    #region Animations Methods
+    // <summary>
+    // Methods to set animation's bool or set all bool to false;
+    // </summary>
+
+    public void PlayAnimation(string inNewAnimation)
+    {
+        m_playerAnimator.SetBool(inNewAnimation, true);
+    }
+
+    public void ResetAllAnimation()
+    {
+        m_playerAnimator.SetBool("blockInFront", false);
+        m_playerAnimator.SetBool("noGround", false);
+        m_playerAnimator.SetBool("isInSlide", false);
+        m_playerAnimator.SetBool("isInClimb", false);
+        m_playerAnimator.SetBool("isInWalk", false);
+        m_playerAnimator.SetBool("isInIdle", false);
+        m_playerAnimator.SetBool("hasWon", false);
+    }
+    #endregion
+
+    
+    #region Particles Methods
+    // <summary>
+	// Methods to activate and disable particles
+	// </summary>
 
     public void StopParticles()
     {
@@ -335,10 +458,24 @@ public class PlayerActions : MonoBehaviour
         m_slideParticle.Stop(true);
         m_walkParticle.Play(true);
     }
+    #endregion
+        
 
-    private bool EndTimer(float destinationTime)
+    #region Sound Methods
+    // <summary>
+    // Check the player's state and play audioclip when the timer reach the destination time.
+    // </summary>
+
+    public void PlayerAudioDelaySystem()
     {
-		return (Time.time >= m_endLevelTime + destinationTime);
+        if (m_currentPlayerState == PlayerState.Walk)
+        {
+            PlayAudioClipWithDelay(SoundManager.Instance.PlayerWalkAudioClip, SoundManager.Instance.DelayWalkSound);
+        }
+        else if (m_currentPlayerState == PlayerState.Climb)
+        {
+            PlayAudioClipWithDelay(SoundManager.Instance.PlayerClimbAudioClip, SoundManager.Instance.DelayClimbSound);
+        }
     }
 
     private bool TimerToWalkSound(float destinationTime)
@@ -354,6 +491,5 @@ public class PlayerActions : MonoBehaviour
             m_lastSoundShotted = Time.time;
         }
     }
-
-    
+    #endregion
 }
