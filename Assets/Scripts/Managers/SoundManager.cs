@@ -92,7 +92,10 @@ public class SoundManager : Singleton<SoundManager>
     #endregion
 
 
-
+    /// <summary>
+    /// This manages all the player sounds. Check if the player is playing a clip (if the bool returns true, stop that), after that play another clip.
+    /// </summary>
+    /// <param name="inClip"></param> the input's clip to reproduce.
     public void PlayerPlaySound(CustomAudioClip inClip)
     {
         if (m_playerAudioSource.isPlaying)
@@ -101,7 +104,10 @@ public class SoundManager : Singleton<SoundManager>
         }
         m_playerAudioSource.PlayOneShot(inClip.ClipAudio, inClip.Intensity);
     }
-    
+
+    /// <summary>
+    /// This manages all the start menù sounds.
+    /// </summary>
     public void PlayStartMenùAudio()
     {
         if (m_backgroundAudioSource.clip != StartSceneAudioClip.ClipAudio)
@@ -119,7 +125,9 @@ public class SoundManager : Singleton<SoundManager>
         }  
     }
 
-
+    /// <summary>
+    /// This manages all the backgound sounds. Check if the audio source have the loop's bool setted true, after this it reproduces the input's clip.
+    /// </summary>
     public void PlayBackgoundSound(int loopClip)
     {
         if (!m_backgroundAudioSource.loop)
@@ -138,25 +146,36 @@ public class SoundManager : Singleton<SoundManager>
         }
     }
 
-
+    /// <summary>
+    /// This manages all the final object sounds.
+    /// </summary>
+    /// <param name="inClip"></param> the input's clip to reproduce.
     public void FinalObjectPlaySound(CustomAudioClip inClip)
     {
         m_finalObjectAudioSource.PlayOneShot(inClip.ClipAudio,inClip.Intensity);
     }
 
-
+    /// <summary>
+    /// This manages all the block manager sounds.
+    /// </summary>
+    /// <param name="inClip"></param> the input's clip to reproduce.
     public void BlockManagerPlaySound(CustomAudioClip inClip)
     {
         m_blockManagerAudioSource.PlayOneShot(inClip.ClipAudio, inClip.Intensity);
     }
-    
 
+    /// <summary>
+    /// This manages all the ui sounds.
+    /// </summary>
+    /// <param name="inClip"></param> the input's clip to reproduce.
     public void UIPlaySound(CustomAudioClip inClip)
     {
         m_UIAudioSource.PlayOneShot(inClip.ClipAudio, inClip.Intensity);
     }
 
-
+    /// <summary>
+    /// This manages all the audio sources.
+    /// </summary>
     public void StopAllSounds()
     {
         m_backgroundAudioSource.Stop();
@@ -164,6 +183,9 @@ public class SoundManager : Singleton<SoundManager>
         m_playerAudioSource.Stop();
     }
 
+    /// <summary>
+    /// Stop the current background clip.
+    /// </summary>
     public void StopBackgroundSound()
     {
         if (m_backgroundAudioSource.isPlaying)

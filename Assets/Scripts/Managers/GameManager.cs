@@ -339,11 +339,17 @@ public class GameManager : Singleton<GameManager>
 
 	#region Save
 
+    /// <summary>
+    /// Save this gamemanager.
+    /// </summary>
 	public void SaveGame()
     {
         SaveSystemNew.Save(this);
     }
-    
+
+    /// <summary>
+    /// Set the easyLevels and hardLevels array bools equal to the loaded file if it exist.
+    /// </summary>
     public void LoadGame()
     {
         data = SaveSystemNew.Load();
@@ -366,6 +372,9 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    /// <summary>
+    /// With the filled easyLevels and hardLevels array set all the levels's bool.
+    /// </summary>
     public void LoadLevelProgress()
     {
         if (data == null)
@@ -393,7 +402,9 @@ public class GameManager : Singleton<GameManager>
         
     }
 
-    
+    /// <summary>
+    /// Take the current bool of each level and store it into the easyLevels or hardLevels array.
+    /// </summary>
     public void SetWorldBooleans()
     {
         easyLevels.Clear();
@@ -405,6 +416,9 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    /// <summary>
+    /// Check all worlds's levels and return true if the current level is playable.
+    /// </summary>
     public void CheckWorldEasyLevelsBooleans(World currentWorld)
     {
         
@@ -432,7 +446,9 @@ public class GameManager : Singleton<GameManager>
             }
         }
     }
-
+#endregion
+    
+    
     /// <summary>
     /// USe for unlock or lock all levels.
     /// </summary>
@@ -450,6 +466,7 @@ public class GameManager : Singleton<GameManager>
             Worlds[i].HardLevels[0].IsPlayable = true;
         }
     }
+
 
     public bool CheckAllLevelsPlayable()
     {
@@ -469,5 +486,3 @@ public class GameManager : Singleton<GameManager>
         return isPlayable;
     }
 }
-
-#endregion

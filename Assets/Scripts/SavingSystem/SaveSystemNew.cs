@@ -5,6 +5,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystemNew
 {
+    /// <summary>
+    /// Save the gamemanager in one new PlayerDataNew into a file in a prefixed location in the memory.
+    /// </summary>
     public static void Save(GameManager player)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -19,6 +22,9 @@ public static class SaveSystemNew
         stream.Close();
     }
 
+    /// <summary>
+    /// Search in the path if exist a rescue. If it finds the file return him, if not take all levels boolean and save them.
+    /// </summary>
     public static PlayerDataNew Load()
     {
         string path = Application.persistentDataPath + "/player.fun";

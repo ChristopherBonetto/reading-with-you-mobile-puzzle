@@ -18,6 +18,9 @@ public class FinalObjectActions : MonoBehaviour
         DisableEndLevelParticle();
     }
 
+    /// <summary>
+    /// Reset the final object when collected.
+    /// </summary>
     public void ResetLevel(Vector3 startPosition, Sprite newFinalObjectSprite)
 	{
         ToggleCollider(true);
@@ -29,7 +32,9 @@ public class FinalObjectActions : MonoBehaviour
 		m_floater.ResetPosition(startPosition);
 	}
 
-
+    /// <summary>
+    /// Method used when the player reach the final object.
+    /// </summary>
     public void Collected()
     {
         SoundManager.Instance.FinalObjectPlaySound(SoundManager.Instance.VictoryAudioClip);
