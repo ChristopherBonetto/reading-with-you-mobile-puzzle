@@ -48,11 +48,12 @@ MonoBehaviour:
   m_InvZ: -1.7
   m_GameZ: 0
   m_XScale: 0.95
+  m_InvScale: 0.8
   m_GravityMultiplier: 2
   m_VelocityThreshold: 0.2
   m_AngularVelocityThreshold: 0.01
   m_AngleThreshold: 10
-  m_FixedTimeout: 5
+  m_FixedTimeout: 2
 --- !u!82 &4314188027652000826
 AudioSource:
   m_ObjectHideFlags: 0

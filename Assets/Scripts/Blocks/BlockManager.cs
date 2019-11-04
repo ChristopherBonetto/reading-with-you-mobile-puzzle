@@ -58,7 +58,7 @@ public class BlockManager : Singleton<BlockManager>
 	private float m_AngleThreshold = 10f;
 
 	[SerializeField]
-	private int m_FixedTimeout = 5;
+	private int m_FixedTimeout = 2;
 
 	public float GravityMultiplier => m_GravityMultiplier;
 
