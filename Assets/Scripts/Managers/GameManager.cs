@@ -359,7 +359,7 @@ public class GameManager : Singleton<GameManager>
 
         if (data == null)
         {
-            m_playerName = "El Tigre";
+            m_playerName = "Enter a name";
             return;
         }
         else

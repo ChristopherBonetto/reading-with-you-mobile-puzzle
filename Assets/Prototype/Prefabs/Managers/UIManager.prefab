@@ -3962,7 +3962,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: El Tigre
+  m_Text: Enter a name
 --- !u!1 &8155383956360227846
 GameObject:
   m_ObjectHideFlags: 0
@@ -4488,6 +4488,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4542,16 +4552,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
@@ -4580,6 +4580,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4635,16 +4645,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
 --- !u!114 &4804688965442909369 stripped
@@ -4672,6 +4672,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4727,16 +4737,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
 --- !u!114 &5631433238976963973 stripped
@@ -4764,6 +4764,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4819,16 +4829,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
 --- !u!114 &5622654400277051220 stripped
@@ -4856,6 +4856,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4911,16 +4921,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
 --- !u!224 &1292038499329900519 stripped
@@ -4948,6 +4948,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5003,16 +5013,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
 --- !u!114 &8981373026753403837 stripped
@@ -5040,6 +5040,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5095,16 +5105,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton (7)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
 --- !u!114 &7517739591582944939 stripped
@@ -5132,6 +5132,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6933816439198110424}
     m_Modifications:
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadLevelButton (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4064361724607390511, guid: bb8596323e47ecc419f6cb8546758917,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5186,16 +5196,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_Name
-      value: LoadLevelButton (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6153610705417251744, guid: bb8596323e47ecc419f6cb8546758917,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8596323e47ecc419f6cb8546758917, type: 3}
