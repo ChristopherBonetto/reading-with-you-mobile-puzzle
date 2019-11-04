@@ -359,7 +359,7 @@ public class GameManager : Singleton<GameManager>
 
         if (data == null)
         {
-            m_playerName = "";
+            m_playerName = "El Tigre";
             return;
         }
         else
@@ -382,7 +382,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (data == null)
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < Worlds.Length; i++)
             {
                 Worlds[i].EasyLevels[0].IsPlayable = true;
                 Worlds[i].HardLevels[0].IsPlayable = true;
@@ -427,6 +427,8 @@ public class GameManager : Singleton<GameManager>
         
         for(int i = 0; i < currentWorld.EasyLevels.Length; i++)
         {
+            currentWorld.EasyLevels[0].IsPlayable = true;
+
             if (currentWorld.EasyLevels[i].IsPlayable)
             {
                 easyLevels.Add(true);
@@ -439,6 +441,8 @@ public class GameManager : Singleton<GameManager>
 
         for (int i = 0; i < currentWorld.HardLevels.Length; i++)
         {
+            currentWorld.HardLevels[0].IsPlayable = true;
+
             if (currentWorld.HardLevels[i].IsPlayable)
             {
                 hardLevels.Add(true);
