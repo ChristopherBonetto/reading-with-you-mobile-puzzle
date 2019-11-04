@@ -28,6 +28,8 @@ public class PlayerActions : MonoBehaviour
 
 	private bool m_canMove;
 
+	private bool m_endLevel;
+
 	public PlayerState m_currentPlayerState { get; private set; }
 
     [SerializeField] private ParticleSystem m_walkParticle = null;
@@ -64,7 +66,7 @@ public class PlayerActions : MonoBehaviour
 			PlayerMovement();
             PlayerAudioDelaySystem();
         }
-        else
+        else if (m_endLevel)
         {
             CheckAndSetWinOrLose();
         }
@@ -335,6 +337,7 @@ public class PlayerActions : MonoBehaviour
                     PlayAnimation("hasWon");
 
                     m_endLevelTime = Time.time;
+					m_endLevel = true;
 
                     StopParticles();
                     break;
@@ -344,6 +347,7 @@ public class PlayerActions : MonoBehaviour
                     ResetAllAnimation();
 
                     m_endLevelTime = Time.time;
+					m_endLevel = true;
 
                     StopParticles();
                     break;
@@ -371,6 +375,7 @@ public class PlayerActions : MonoBehaviour
             if (EndTimer(m_timeToResetChangeLevel))
             {
                 GameManager.Instance.EndLevel(Winned);
+				m_endLevel = false;
             }
         }
         else if (m_currentPlayerState == PlayerState.Lose)
@@ -380,6 +385,7 @@ public class PlayerActions : MonoBehaviour
             if (EndTimer(m_timeToResetChangeLevel))
             {
                 GameManager.Instance.EndLevel(Winned);
+				m_endLevel = false;
             }
         }
     }
