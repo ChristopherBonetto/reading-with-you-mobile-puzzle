@@ -273,6 +273,7 @@ public class GameManager : Singleton<GameManager>
                 }
 
                 fade.FadeInCompleted = LoadAfterFade;
+				fade.FadeTint = Worlds[CurrentWorld].WorldColor;
 
                 // remake visible game window and turn off fade.
                 gameWindow.OnLevelCompleted();
@@ -288,6 +289,7 @@ public class GameManager : Singleton<GameManager>
                 }
 
                 fade.FadeInCompleted = LoadAfterFade;
+				fade.FadeTint = Worlds[CurrentWorld + 1].WorldColor;
 
                 // remake visible game window and turn off fade.
                 gameWindow.OnLevelCompleted();
@@ -304,10 +306,11 @@ public class GameManager : Singleton<GameManager>
                 
                 fade.FadeInCompleted = ReturnToLevelSelection;
                 fade.FadeOutCompleted = fade.OnHide;
+				fade.FadeTint = Worlds[CurrentWorld].WorldColor;
 
 				SoundManager.Instance.StopAllSounds();
-
             }
+
 			// start fade
             UIManager.Instance.ShowAndHide(UIControlName.Fade, UIManager.Instance.Controls[UIControlName.InGame]);
         }

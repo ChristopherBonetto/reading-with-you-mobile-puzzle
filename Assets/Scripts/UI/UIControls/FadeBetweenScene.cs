@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class FadeBetweenScene : UIControl
@@ -17,21 +18,33 @@ public class FadeBetweenScene : UIControl
     /// Execute when fade out is completed.
     /// </summary>
     public Action FadeOutCompleted;
+
+	/// <summary>
+	/// Color tint to apply to fade image.
+	/// </summary>
+	public Color FadeTint;
     #endregion
 
     private Animator m_anim;
 
+	private Image m_image;
 
     protected void Awake()
     {
         m_anim = GetComponent<Animator>();
+		m_image = GetComponent<Image>();
     }
 
-    #region Animation event methods
-    /// <summary>
-    /// Called in animation event
-    /// </summary>
-    public void OnFadeInCompleted()
+	private void OnEnable()
+	{
+		m_image.color = FadeTint;
+	}
+
+	#region Animation event methods
+	/// <summary>
+	/// Called in animation event
+	/// </summary>
+	public void OnFadeInCompleted()
     {
         // execute a method putted in (when fade in is completed)
         FadeInCompleted?.Invoke();

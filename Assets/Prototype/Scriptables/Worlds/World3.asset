@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Preview: {fileID: 21300000, guid: 1b44fe1d10d27f747a9ecb67c770ce0a, type: 3}
   Background: {fileID: 21300000, guid: 49f61e76ba91fee4499575bbd0bb9021, type: 3}
+  WorldColor: {r: 0.84313726, g: 1, b: 0.4392157, a: 1}
   EasyLevels:
   - {fileID: 11400000, guid: d0325793cfd495a4a94e6d6755ce4eb3, type: 2}
   - {fileID: 11400000, guid: caecceb6db706124d8447a0423879493, type: 2}

@@ -13,6 +13,11 @@ public class World : ScriptableObject
     [Header("World Background")]
     public Sprite Background;
 
+	/// <summary>
+	/// World main color tint
+	/// </summary>
+	public Color WorldColor;
+
     /// <summary>
     /// Container for the levels of this world.
     /// </summary>
