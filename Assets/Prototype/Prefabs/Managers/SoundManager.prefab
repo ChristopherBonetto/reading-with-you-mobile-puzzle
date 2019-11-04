@@ -85,7 +85,7 @@ MonoBehaviour:
     Intensity: 0.3
   PickUpBlockAudioClip:
     ClipAudio: {fileID: 8300000, guid: f74daaf46cf92f143a81c54c65ace198, type: 3}
-    Intensity: 0.3
+    Intensity: 0.2
   m_blockManagerAudioSource: {fileID: 0}
   TapOneAudioClip:
     ClipAudio: {fileID: 8300000, guid: 45849b990dc0411448bf3b2eea346de0, type: 3}
