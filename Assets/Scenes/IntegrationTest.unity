@@ -1071,7 +1071,7 @@ PrefabInstance:
     - target: {fileID: 8397793526636080371, guid: 93f3cbc488ae87247bb4270804e90eeb,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: "PlayStartMen\xF9Audio"
+      value: PlayStartMenuAudio
       objectReference: {fileID: 0}
     - target: {fileID: 8397793526636080371, guid: 93f3cbc488ae87247bb4270804e90eeb,
         type: 3}
@@ -1226,7 +1226,7 @@ PrefabInstance:
     - target: {fileID: 6203388028685008127, guid: 93f3cbc488ae87247bb4270804e90eeb,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: StopBackgroundSound
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93f3cbc488ae87247bb4270804e90eeb, type: 3}

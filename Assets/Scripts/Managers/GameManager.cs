@@ -76,7 +76,7 @@ public class GameManager : Singleton<GameManager>
 
 		OnUpdateLevel += DisableWalkingPlayer;
 
-        SoundManager.Instance.PlayStartMenùAudio();
+        SoundManager.Instance.PlayStartMenuAudio();
     }
     
 
@@ -177,7 +177,7 @@ public class GameManager : Singleton<GameManager>
 		CurrentLevel = levelNo;
 		int levelID = GetLevelID();
 
-        SoundManager.Instance.PlayBackgoundSound(CurrentWorld);
+        SoundManager.Instance.PlayBackgroundSound(CurrentWorld);
 
 		// Load map elements
         if (levelID >= 0)
@@ -309,6 +309,7 @@ public class GameManager : Singleton<GameManager>
 				fade.FadeTint = Worlds[CurrentWorld].WorldColor;
 
 				SoundManager.Instance.StopAllSounds();
+				SoundManager.Instance.PlayStartMenuAudio();
             }
 
 			// start fade

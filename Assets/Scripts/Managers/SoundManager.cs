@@ -106,9 +106,9 @@ public class SoundManager : Singleton<SoundManager>
     }
 
     /// <summary>
-    /// This manages all the start menù sounds.
+    /// This manages all the start menu sounds.
     /// </summary>
-    public void PlayStartMenùAudio()
+    public void PlayStartMenuAudio()
     {
         if (m_backgroundAudioSource.clip != StartSceneAudioClip.ClipAudio)
         {
@@ -128,7 +128,7 @@ public class SoundManager : Singleton<SoundManager>
     /// <summary>
     /// This manages all the backgound sounds. Check if the audio source have the loop's bool setted true, after this it reproduces the input's clip.
     /// </summary>
-    public void PlayBackgoundSound(int loopClip)
+    public void PlayBackgroundSound(int loopClip)
     {
         if (!m_backgroundAudioSource.loop)
         {
