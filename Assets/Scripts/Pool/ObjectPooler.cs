@@ -45,6 +45,9 @@ public class ObjectPooler : Singleton<ObjectPooler>
 		}
 	}
 
+    /// <summary>
+    /// Create a new ObjectPoolItem and fill his parameters with input's values. This will be a new list's item that contain all informations of him pool.
+    /// </summary>
 	public bool AddPoolItem(PoolableObject newPoolObject, int basePoolsize, bool bCanExpand = true)
 	{
 		if (!newPoolObject || ContainsPoolItem(newPoolObject.uniqueID.ID))
@@ -68,6 +71,9 @@ public class ObjectPooler : Singleton<ObjectPooler>
 		return true;
 	}
 
+    /// <summary>
+    /// </summary>
+    /// <param name="poolID"></param> Given this parameters in input this method check if exits an elements with this ID.
 	private bool ContainsPoolItem(int poolID)
 	{
 		foreach (ObjectPoolItem item in m_poolItems)
@@ -80,6 +86,13 @@ public class ObjectPooler : Singleton<ObjectPooler>
 		return false;
 	}
     
+
+    /// <summary>
+    /// Mathod used to take a gameobject to the pool, giving to him an int parameter.
+    /// </summary>
+    /// <param name="poolID"></param> Parameter used to compare differents ID.
+    /// <returns></returns> A gameObject with the choosen ID.
+    /// 
     /* Pooled objects might have an interface to Reset when they aren't needed any more */
 
     public GameObject GetPooledObject(int poolID)
@@ -114,6 +127,12 @@ public class ObjectPooler : Singleton<ObjectPooler>
 		return null;
 	}
 
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="poolID"></param> Parameter used to compare differents ID.
+    /// <returns></returns> The size of the pool that contain a value equal poolID;
 	public int GetPoolSize(int poolID)
 	{
 		for (int i = 0; i < m_poolItems.Count; i++)
@@ -126,6 +145,11 @@ public class ObjectPooler : Singleton<ObjectPooler>
 		return 0;
 	}
 
+    /// <summary>
+    /// Used to create new PoolableObject and insert that into a pool.
+    /// </summary>
+    /// <param name="item"></param> Pool used to take the object prefab's reference
+    /// <returns></returns> Returns this new gameObject inserted inside the pool.
 	private PoolableObject CreateNewObject(ObjectPoolItem item)
 	{
 		PoolableObject prefab = item.ObjectPrefab;
