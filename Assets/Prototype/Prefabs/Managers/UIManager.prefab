@@ -1133,7 +1133,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: El Tigre
+  m_Text: Enter a name
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -2841,7 +2841,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Design: \t\nPaolo Padello, Lorenzo Malara, Luigi Alessandria, Fabio Mellone\n\nProgrammers:\nFilippo
+  m_Text: "Design: \t\nPaolo Padello, Lorenzo Malara, Luigi Alessandria, Fabio Mellone\n\nProgramming:\nFilippo
     Del Greco, Christopher Bonetto, Alessandro Pantano\n\n2D:\nEdoardo Astegiano,
     Stefano Capuzzo, Emily Viglione\n\n3D:\nLuca Pavesi, Stefano Tisci, Alberto Vassallo,
     Alessandro Mondello, Kevin Catania"
@@ -2988,7 +2988,7 @@ MonoBehaviour:
   m_Sprite: {fileID: 8947717893171542574, guid: 6ff92f6b931188b4792707600169f6b7,
     type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -4041,7 +4041,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: El Tigre
+  m_Text: Enter a name
 --- !u!1 &9109524877731800973
 GameObject:
   m_ObjectHideFlags: 0
