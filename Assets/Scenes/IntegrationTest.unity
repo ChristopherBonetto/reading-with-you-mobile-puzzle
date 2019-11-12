@@ -1347,11 +1347,6 @@ PrefabInstance:
       propertyPath: checkDelay
       value: 0.1
       objectReference: {fileID: 0}
-    - target: {fileID: 5759551514271352032, guid: 74ab3c7bc43f9d644a2229f5fd749a45,
-        type: 3}
-      propertyPath: CheckDelay
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74ab3c7bc43f9d644a2229f5fd749a45, type: 3}
 --- !u!82 &781132386 stripped
