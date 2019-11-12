@@ -154,6 +154,7 @@ MonoBehaviour:
   m_walkParticle: {fileID: 5162427513161534002}
   m_slideParticle: {fileID: 7601334591169840040}
   m_timeToResetChangeLevel: 1
+  CheckDelay: 0.01
 --- !u!65 &5407567153888716886
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -316,6 +317,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5759551514271352044}
     m_Modifications:
+    - target: {fileID: 2442396669234732150, guid: 4f18180f0f657c4479b80ccace8d2443,
+        type: 3}
+      propertyPath: m_Name
+      value: Walk_Smoke
+      objectReference: {fileID: 0}
     - target: {fileID: 2442396669234732137, guid: 4f18180f0f657c4479b80ccace8d2443,
         type: 3}
       propertyPath: m_RootOrder
@@ -335,11 +341,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2442396669234732150, guid: 4f18180f0f657c4479b80ccace8d2443,
-        type: 3}
-      propertyPath: m_Name
-      value: Walk_Smoke
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f18180f0f657c4479b80ccace8d2443, type: 3}
