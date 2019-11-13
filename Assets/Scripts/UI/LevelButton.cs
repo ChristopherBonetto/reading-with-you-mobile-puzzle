@@ -82,6 +82,7 @@ public class LevelButton : MonoBehaviour
 			// Turn on fade panel
 			fade.FadeTint = GameManager.Instance.Worlds[GameManager.Instance.CurrentWorld].WorldColor;
 			UIManager.Instance.Show(UIControlName.Fade);
+
             SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapTwoAudioClip);
         }
     }

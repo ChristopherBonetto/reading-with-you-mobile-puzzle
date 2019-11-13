@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Collections;
 
 public class FadeBetweenScene : UIControl
 {
@@ -29,6 +30,9 @@ public class FadeBetweenScene : UIControl
 
 	private Image m_image;
 
+    private float m_StartFadingTime;
+    [SerializeField] private float m_FadingDuration;
+
     protected void Awake()
     {
         m_anim = GetComponent<Animator>();
@@ -37,27 +41,49 @@ public class FadeBetweenScene : UIControl
 
 	private void OnEnable()
 	{
-		m_image.color = FadeTint;
-	}
+        m_image.color = FadeTint;
+    }
 
-	#region Animation event methods
-	/// <summary>
-	/// Called in animation event
-	/// </summary>
-	public void OnFadeInCompleted()
+    public override void OnShow()
     {
-        // execute a method putted in (when fade in is completed)
+        gameObject.SetActive(true);
+
+        StartCoroutine("FadeIn");
+    }
+
+    // Use courutine for fade 
+
+    public IEnumerator FadeIn()
+    {
+        m_StartFadingTime = Time.time;
+        float t = 0;
+
+        while (t < 1)
+        {
+            t = (Time.time - m_StartFadingTime) / m_FadingDuration;
+            m_image.color = Color.Lerp(Color.clear, FadeTint, t);
+            yield return null;
+        }
+
         FadeInCompleted?.Invoke();
 
-        m_anim.SetBool("isSceneLoaded", true);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine("FadeOut");
     }
 
-    /// <summary>
-    /// Called in animation event
-    /// </summary>
-    public void OnFadeOutCompleted()
+    public IEnumerator FadeOut()
     {
+        m_StartFadingTime = Time.time;
+        float t = 0;
+
+        while (t < 1)
+        {
+            t = (Time.time - m_StartFadingTime) / m_FadingDuration;
+            m_image.color = Color.Lerp(FadeTint, Color.clear, t);
+            yield return null;
+        }
+
         FadeOutCompleted?.Invoke();
+        yield return null;
     }
-    #endregion
 }
