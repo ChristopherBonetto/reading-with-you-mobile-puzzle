@@ -46,6 +46,8 @@ public class PlayerActions : MonoBehaviour
 
     private Animator m_playerAnimator;
 
+	private string[] m_animatorLayers = { "Base", "W1", "W2", "W3", "W4", "W5" };
+
     #endregion
     
     
@@ -460,6 +462,14 @@ public class PlayerActions : MonoBehaviour
         m_playerAnimator.SetBool("isInIdle", false);
         m_playerAnimator.SetBool("hasWon", false);
     }
+
+	public void SetAnimationLayer(int index)
+	{
+		for (int i = 0; i < m_animatorLayers.Length; i++)
+		{
+			m_playerAnimator.SetLayerWeight(i, (i == index + 1 ? 1 : 0));
+		}
+	}
     #endregion
 
     
