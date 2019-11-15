@@ -31,7 +31,7 @@ public class FadeBetweenScene : UIControl
 	private Image m_image;
 
     private float m_StartFadingTime;
-    [SerializeField] private float m_FadingDuration;
+    [SerializeField] private float m_FadingDuration = 0.75f;
 
     protected void Awake()
     {
