@@ -256,7 +256,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/Student/Desktop/ReadingWithYou.keystore
+  AndroidKeystoreName: '{inproject}: ReadingWithYou.keystore'
   AndroidKeyaliasName: readingwithyou
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 1
