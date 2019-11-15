@@ -7,9 +7,9 @@ public class AccountWindow : UIControl
 {
     public override UIControlName Name => UIControlName.AccountElements;
 
-    [SerializeField] private Image m_TextMode;
-    [SerializeField] private Sprite m_easyMode;
-    [SerializeField] private Sprite m_hardMode;
+    [SerializeField] private Image m_TextMode = null;
+    [SerializeField] private Sprite m_easyMode = null;
+    [SerializeField] private Sprite m_hardMode = null;
 
     /// <summary>
     /// text of difficult mode in main menu.

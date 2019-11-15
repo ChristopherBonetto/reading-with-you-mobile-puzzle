@@ -22,13 +22,13 @@ public class LevelButton : MonoBehaviour
     }
 
 	[SerializeField]
-	private Button m_Button;
+	private Button m_Button = null;
 
 	[SerializeField]
-	private Image m_Image;
+	private Image m_Image = null;
 
 	[SerializeField]
-	private Image m_BackgroundImage;
+	private Image m_BackgroundImage = null;
 
 	/// <summary>
 	/// Button component

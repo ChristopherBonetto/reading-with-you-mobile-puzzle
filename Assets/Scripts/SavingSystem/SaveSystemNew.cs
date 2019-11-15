@@ -31,7 +31,6 @@ public static class SaveSystemNew
 
         if (File.Exists(path))
         {
-            Debug.Log("exist saved file" + path);
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
