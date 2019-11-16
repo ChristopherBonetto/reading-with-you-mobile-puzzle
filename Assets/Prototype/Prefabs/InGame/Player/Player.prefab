@@ -149,12 +149,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerSpeed: 2
+  m_delayToCheckDirection: 0.01
   m_raycastFrontDistance: 0.25
   m_raycastDownDistance: 0.7
   m_walkParticle: {fileID: 5162427513161534002}
   m_slideParticle: {fileID: 7601334591169840040}
   m_timeToResetChangeLevel: 1
-  CheckDelay: 0.01
 --- !u!65 &5407567153888716886
 BoxCollider:
   m_ObjectHideFlags: 0

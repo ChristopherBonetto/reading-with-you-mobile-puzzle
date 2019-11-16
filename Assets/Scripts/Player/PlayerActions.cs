@@ -49,8 +49,8 @@ public class PlayerActions : MonoBehaviour
 	private string[] m_animatorLayers = { "Base", "W1", "W2", "W3", "W4", "W5" };
 
     #endregion
-    
-    
+
+    private FinalObjectActions m_finalObjectRef;
 
     private void Awake()
     {
@@ -64,7 +64,7 @@ public class PlayerActions : MonoBehaviour
         SetPlayerState(PlayerState.Idle);
 		m_effectivePlayerSpeed = m_playerSpeed;
 
-        
+        m_finalObjectRef = GameManager.Instance.FinalObject;
 	}
 
 	void Update()
@@ -89,16 +89,16 @@ public class PlayerActions : MonoBehaviour
     // </summary>
     public bool CheckFront()
     {
-        if (!Physics.Raycast(transform.position + Vector3.right * m_raycastFrontDistance, m_movement.normalized, out m_frontRaycastHit, m_movement.magnitude))
+        if (!Physics.Raycast(transform.position, Vector3.right, out m_frontRaycastHit, m_raycastFrontDistance))
         {
             return true;
         }
         else
         {
-            if (m_frontRaycastHit.transform.GetComponent<FinalObjectActions>())
+            if (m_frontRaycastHit.transform.gameObject == m_finalObjectRef.gameObject)
             {
                 SetPlayerState(PlayerState.Win);
-                m_frontRaycastHit.transform.GetComponent<FinalObjectActions>().Collected();
+                m_finalObjectRef.Collected();
             }
             else
             {
