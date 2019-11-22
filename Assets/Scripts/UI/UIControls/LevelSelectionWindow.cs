@@ -53,7 +53,6 @@ public class LevelSelectionWindow : UIControl
         GameManager.Instance.CurrentWorld++;
         GameManager.Instance.CurrentWorld = Mathf.Clamp(GameManager.Instance.CurrentWorld, 0, WorldsLength - 1);
 
-        Debug.Log(GameManager.Instance.CurrentWorld);
         SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapOneAudioClip);
         UpdateWorldAndLevelInfo();
     }

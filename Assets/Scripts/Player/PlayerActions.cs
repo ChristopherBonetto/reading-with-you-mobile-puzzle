@@ -17,7 +17,10 @@ public class PlayerActions : MonoBehaviour
 	[SerializeField] private float m_playerSpeed = 2f;
 	private float m_effectivePlayerSpeed;
 
-	[SerializeField] private float m_raycastFrontDistance = 0.25f;
+    private float m_lastCheckedDirectionTime;
+    public float m_delayToCheckDirection;
+
+    [SerializeField] private float m_raycastFrontDistance = 0.25f;
 	[SerializeField] private float m_raycastDownDistance = 0.7f;
 
 	private Vector3 m_movement;
@@ -43,8 +46,11 @@ public class PlayerActions : MonoBehaviour
 
     private Animator m_playerAnimator;
 
+	private string[] m_animatorLayers = { "Base", "W1", "W2", "W3", "W4", "W5" };
+
     #endregion
 
+    private FinalObjectActions m_finalObjectRef;
 
     private void Awake()
     {
@@ -53,18 +59,21 @@ public class PlayerActions : MonoBehaviour
 
     private void Start()
 	{
-        m_direction = Vector3.right;
+        ChangeDirection(Vector3.right);
 
         SetPlayerState(PlayerState.Idle);
 		m_effectivePlayerSpeed = m_playerSpeed;
+
+        m_finalObjectRef = GameManager.Instance.FinalObject;
 	}
 
 	void Update()
 	{
 		if (m_canMove)
 		{
-			PlayerMovement();
+            PlayerMovement();
             PlayerAudioDelaySystem();
+            
         }
         else if (m_endLevel)
         {
@@ -80,16 +89,16 @@ public class PlayerActions : MonoBehaviour
     // </summary>
     public bool CheckFront()
     {
-        if (!Physics.Raycast(transform.position + Vector3.right * m_raycastFrontDistance, m_movement.normalized, out m_frontRaycastHit, m_movement.magnitude))
+        if (!Physics.Raycast(transform.position, Vector3.right, out m_frontRaycastHit, m_raycastFrontDistance))
         {
             return true;
         }
         else
         {
-            if (m_frontRaycastHit.transform.GetComponent<FinalObjectActions>())
+            if (m_frontRaycastHit.transform.gameObject == m_finalObjectRef.gameObject)
             {
                 SetPlayerState(PlayerState.Win);
-                m_frontRaycastHit.transform.GetComponent<FinalObjectActions>().Collected();
+                m_finalObjectRef.Collected();
             }
             else
             {
@@ -124,12 +133,12 @@ public class PlayerActions : MonoBehaviour
                 if (nextPointPosition.y > transform.position.y)
                 {
                     SetPlayerState(PlayerState.Climb);
-                    return nextPointPosition;
+                    return Vector3.right + Vector3.up;
                 }
                 else if (nextPointPosition.y < transform.position.y)
                 {
                     SetPlayerState(PlayerState.Slide);
-                    return nextPointPosition;
+                    return Vector3.right - Vector3.up;
                 }
             }
             else if (m_nextFrameCollisionPoint.transform.gameObject.layer == LayerMask.NameToLayer("Trapezoid"))
@@ -139,19 +148,19 @@ public class PlayerActions : MonoBehaviour
                 if (dot == -1)
                 {
                     SetPlayerState(PlayerState.Walk);
-                    return gameObject.transform.position + m_movement;
+                    return Vector3.right;
                 }
                 else
                 {
                     if (nextPointPosition.y > transform.position.y)
                     {
                         SetPlayerState(PlayerState.Climb);
-                        return nextPointPosition;
+                        return Vector3.right + Vector3.up;
                     }
                     else if (nextPointPosition.y < transform.position.y)
                     {
                         SetPlayerState(PlayerState.Slide);
-                        return nextPointPosition;
+                        return Vector3.right - Vector3.up;
                     }
                 }
 
@@ -159,7 +168,7 @@ public class PlayerActions : MonoBehaviour
             else
             {
                 SetPlayerState(PlayerState.Walk);
-                return gameObject.transform.position + m_movement;
+                return Vector3.right;
             }
         }
         // No floor
@@ -183,12 +192,18 @@ public class PlayerActions : MonoBehaviour
     private void PlayerMovement()
 	{
 		m_movement = m_effectivePlayerSpeed * m_direction * Time.deltaTime;
-        
-        if (CheckFront())
+
+        if (TimerToCheckDirection(m_delayToCheckDirection))
         {
-            transform.position = CheckDown();
+            if (CheckFront())
+            {
+                ChangeDirection(CheckDown());
+            }
+            m_lastCheckedDirectionTime = Time.time;
         }
         
+        transform.position += m_movement;
+
 
         #region old movementMethod
 
@@ -276,6 +291,12 @@ public class PlayerActions : MonoBehaviour
         //    m_canMove = false;
         //}
         #endregion
+    }
+
+    public void ChangeDirection(Vector3 newDirection)
+    {
+        m_direction = newDirection;
+        
     }
     #endregion
 
@@ -388,6 +409,7 @@ public class PlayerActions : MonoBehaviour
 				m_endLevel = false;
             }
         }
+        
     }
 
     // <summary>
@@ -409,7 +431,8 @@ public class PlayerActions : MonoBehaviour
         EnableMovement(false);
         transform.position = startPosition;
         SetPlayerState(PlayerState.Idle);
-
+        ChangeDirection(Vector3.right);
+        
     }
     
     private bool EndTimer(float destinationTime)
@@ -439,6 +462,14 @@ public class PlayerActions : MonoBehaviour
         m_playerAnimator.SetBool("isInIdle", false);
         m_playerAnimator.SetBool("hasWon", false);
     }
+
+	public void SetAnimationLayer(int index)
+	{
+		for (int i = 0; i < m_animatorLayers.Length; i++)
+		{
+			m_playerAnimator.SetLayerWeight(i, (i == index + 1 ? 1 : 0));
+		}
+	}
     #endregion
 
     
@@ -498,4 +529,8 @@ public class PlayerActions : MonoBehaviour
         }
     }
     #endregion
+    private bool TimerToCheckDirection(float destinationTime)
+    {
+        return (Time.time >= m_lastCheckedDirectionTime + destinationTime);
+    }
 }

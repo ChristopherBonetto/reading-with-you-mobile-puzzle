@@ -177,6 +177,7 @@ public class GameManager : Singleton<GameManager>
 		CurrentLevel = levelNo;
 		int levelID = GetLevelID();
 
+		Player.SetAnimationLayer(CurrentWorld);
         SoundManager.Instance.PlayBackgroundSound(CurrentWorld);
 
 		// Load map elements

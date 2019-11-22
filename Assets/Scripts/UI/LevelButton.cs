@@ -22,13 +22,13 @@ public class LevelButton : MonoBehaviour
     }
 
 	[SerializeField]
-	private Button m_Button;
+	private Button m_Button = null;
 
 	[SerializeField]
-	private Image m_Image;
+	private Image m_Image = null;
 
 	[SerializeField]
-	private Image m_BackgroundImage;
+	private Image m_BackgroundImage = null;
 
 	/// <summary>
 	/// Button component
@@ -82,6 +82,7 @@ public class LevelButton : MonoBehaviour
 			// Turn on fade panel
 			fade.FadeTint = GameManager.Instance.Worlds[GameManager.Instance.CurrentWorld].WorldColor;
 			UIManager.Instance.Show(UIControlName.Fade);
+
             SoundManager.Instance.UIPlaySound(SoundManager.Instance.TapTwoAudioClip);
         }
     }
