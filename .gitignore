@@ -32,3 +32,7 @@ sysinfo.txt
 *.apk
 *.unitypackage
 crashlytics-build.properties
+
+# Android signing credentials must remain private.
+*.keystore
+*.jks
