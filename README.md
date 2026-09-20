@@ -10,6 +10,10 @@
 </p>
 
 <p align="center">
+  <img src="docs/images/reading-with-you-cover.jpg" alt="Reading With You key art" width="100%">
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Unity-2019.2.0f1-000000?logo=unity&logoColor=white" alt="Unity 2019.2.0f1">
   <img src="https://img.shields.io/badge/C%23-Gameplay_Systems-512BD4?logo=csharp&logoColor=white" alt="C# Gameplay Systems">
   <img src="https://img.shields.io/badge/Platform-Android-3DDC84?logo=android&logoColor=white" alt="Android">
@@ -111,7 +115,14 @@ Each level stores its map prefab, player and goal coordinates, available blocks,
 
 ## 🎬 Media
 
-A portfolio gameplay video is being recovered from the original project archive. The repository already includes the original title artwork and all source assets required by the project.
+[Gameplay trailer](https://drive.google.com/file/d/1XpM-vQnLTtE56-d5IpU8H-gskp-f862U/view)
+
+<p align="center">
+  <img src="docs/images/world-selection.png" alt="Reading With You world-selection screen" width="49%">
+  <img src="docs/images/path-building-gameplay.png" alt="Path-building gameplay in Reading With You" width="49%">
+</p>
+
+The trailer is currently hosted in the original project archive and will be replaced with a YouTube portfolio link once uploaded.
 
 ## 🚀 Running the Project
 
