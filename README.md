@@ -115,14 +115,12 @@ Each level stores its map prefab, player and goal coordinates, available blocks,
 
 ## 🎬 Media
 
-[Gameplay trailer](https://drive.google.com/file/d/1XpM-vQnLTtE56-d5IpU8H-gskp-f862U/view)
+[Gameplay trailer](https://youtu.be/56eTqhivcO8)
 
 <p align="center">
   <img src="docs/images/world-selection.png" alt="Reading With You world-selection screen" width="49%">
   <img src="docs/images/path-building-gameplay.png" alt="Path-building gameplay in Reading With You" width="49%">
 </p>
-
-The trailer is currently hosted in the original project archive and will be replaced with a YouTube portfolio link once uploaded.
 
 ## 🚀 Running the Project
 
